@@ -1,2 +1,11 @@
 # mbed
 mbed_settings.py
+
+# build
+build/
+
+# python
+*.py[cod]
+
+# direnv
+.direnv/
