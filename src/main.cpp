@@ -10,14 +10,22 @@ DigitalOut cs_bme680(D3);
 DigitalOut cs_adc(D6);
 DigitalOut ow_ds18b20(D9);
 
+Thread thread;
+void led_thread() {
+    while (true) {
+        led = !led;
+        Thread::wait(1000);
+    }
+}
+
 int main() {
     printf("\r\nRESET\r\n");
+    thread.start(led_thread);
 
     while(1) {
         logger.printf("LOG\r\n");
         cdh.printf("CDH\r\n");
 
-        led = !led;
-        wait(1);
+        Thread::wait(1000);
     }
 }
