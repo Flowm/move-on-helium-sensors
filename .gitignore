@@ -1,11 +1,14 @@
 # mbed
 mbed_settings.py
+mbed_config.h
+GettingStarted.html
 
 # build
-build/
+/build/
+/Makefile
 
 # python
 *.py[cod]
 
 # direnv
-.direnv/
+/.direnv/
