@@ -4,9 +4,7 @@
  *  Created on: Dec 16, 2017
  *      Author: tkale
  */
-
-#ifndef SRC_MODULES_ADC_MPC320X_H_
-#define SRC_MODULES_ADC_MPC320X_H_
+#pragma once
 
 #include <mbed.h>
 
@@ -20,7 +18,10 @@
  */
 class MPC320X {
 public:
-    MPC320X(SPI *spi, DigitalOut *chipSelect);
+    MPC320X(SPI &spi, DigitalOut &chipSelect) :
+        spi(spi),
+        chipSelect(chipSelect)
+        {};
     /**
      * Read a adcs value from a single channel.
      * @param channel [0-7] : What channel to read.
@@ -39,8 +40,6 @@ public:
      */
     void testAllChannels();
 private:
-    SPI *spi;
-    DigitalOut *chipSelect;
+    SPI& spi;
+    DigitalOut& chipSelect;
 };
-
-#endif /* SRC_MODULES_ADC_MPC320X_H_ */

@@ -17,7 +17,7 @@ public:
         cs_adc(D6),
         ow_ds18b20(D9),
         // Sensors
-        adc(&spi, &cs_adc)
+        adc(spi, cs_adc)
         { setup(); };
 
     void setup();
