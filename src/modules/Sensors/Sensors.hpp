@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mbed.h>
+#include <modules/ADC/MPC320X.h>
 
 class Sensors {
 public:
@@ -14,13 +15,16 @@ public:
         spi(D2, A5, A1),
         cs_bme680(D3),
         cs_adc(D6),
-        ow_ds18b20(D9)
+        ow_ds18b20(D9),
+        // Sensors
+        adc(spi, cs_adc)
         { setup(); };
 
     void setup();
     void loop();
 
 private:
+    //Interfaces
     DigitalOut led;
     Serial logger;
     Serial cdh;
@@ -30,4 +34,7 @@ private:
     DigitalOut cs_bme680;
     DigitalOut cs_adc;
     DigitalOut ow_ds18b20;
+
+    // Sensors
+    MPC320X adc;
 };

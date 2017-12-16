@@ -2,6 +2,7 @@
 mbed_settings.py
 mbed_config.h
 GettingStarted.html
+mbed-os/
 
 # build
 /BUILD/
@@ -12,3 +13,10 @@ GettingStarted.html
 
 # direnv
 /.direnv/
+
+# SW4STM32 generated files.
+NUCLEO-L432KC.xml
+makefile.defs
+makefile.targets
+move-on-helium-sensors Run.cfg
+

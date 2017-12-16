@@ -6,8 +6,8 @@ void Sensors::setup() {
 
 void Sensors::loop() {
     while(1) {
-        logger.printf("LOG\r\n");
-        cdh.printf("CDH\r\n");
-        Thread::wait(1000);
+       logger.printf("LOG\r\n");
+       cdh.printf("CDH\r\n");
+       Thread::wait(1000);
     }
 }
