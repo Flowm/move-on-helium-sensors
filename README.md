@@ -46,6 +46,6 @@ make
 
 ## Developing in SW4STM32(Eclipse)
 
-1. `mbed export -i sw4stm32`
+1. `mbed export -i sw4stm32 --profile config/develop.json`
 2. `File` -> `Open Projects from File System` (In Eclipse)
 3. Choose the `move-on-helium-sensors` project.
