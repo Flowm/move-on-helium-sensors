@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: flowm/move-on-helium-sensors
+    working_directory: /opt/mbed
+    steps:
+      - checkout
+      - run: git config --global user.email "circleci@example.com"
+      - run: git fetch && git reset --hard origin/$CIRCLE_BRANCH
+      - run: make clean
+      - run: make
+      - run: mkdir -p /tmp/artifacts && cp BUILD/mbed.{bin,hex,elf} /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts

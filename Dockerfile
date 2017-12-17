@@ -7,7 +7,7 @@ WORKDIR /opt/mbed
 
 RUN set -x \
     && apt-get update \
-    && apt-get install -qq -y build-essential gcc-arm-none-eabi git \
+    && apt-get install -qq -y build-essential gcc-arm-none-eabi git mercurial \
     && apt-get install -qq --no-install-recommends -y python-pip python-setuptools python-dev \
     && apt-get clean -qq
 RUN set -x \
