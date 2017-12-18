@@ -17,7 +17,7 @@ clean:
 	-rm -r $(BUILD_DIR)
 
 $(GEN_MAKEFILE):
-	cd .. && mbed export -i gcc_arm
+	cd .. && mbed export -i gcc_arm --profile config/develop.json
 
 $(BUILD_DIR)/$(PROJECT).hex: $(GEN_MAKEFILE) $(SOURCES)
 	$(MAKE) -C .. -j 8
