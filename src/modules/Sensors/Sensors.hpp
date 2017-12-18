@@ -2,6 +2,7 @@
 
 #include <mbed.h>
 #include <modules/ADC/MPC320X.h>
+#include <modules/IMU/BNO055.hpp>
 
 class Sensors {
 public:
@@ -17,6 +18,7 @@ public:
         cs_adc(D6),
         ow_ds18b20(D9),
         // Sensors
+        imu(bno),
         adc(spi, cs_adc)
         { setup(); };
 
@@ -36,5 +38,6 @@ private:
     DigitalOut ow_ds18b20;
 
     // Sensors
+    BNO055 imu;
     MPC320X adc;
 };
