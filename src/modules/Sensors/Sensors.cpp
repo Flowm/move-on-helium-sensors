@@ -3,6 +3,7 @@
 void Sensors::setup() {
     printf("\r\nRESET\r\n");
     imu.setup();
+    env.setup();
 }
 
 void Sensors::loop() {
