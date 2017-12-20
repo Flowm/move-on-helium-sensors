@@ -9,7 +9,7 @@
                    "-fomit-frame-pointer", "-Os"],
         "asm": ["-x", "assembler-with-cpp"],
         "c": ["-std=gnu11"],
-        "cxx": ["-std=gnu++17", "-fno-rtti", "-fno-sized-deallocation", "-Wvla"],
+        "cxx": ["-std=gnu++14", "-fno-rtti", "-Wvla"],
         "ld": ["-Wl,--gc-sections", "-Wl,--wrap,main", "-Wl,--wrap,_malloc_r",
                "-Wl,--wrap,_free_r", "-Wl,--wrap,_realloc_r", "-Wl,--wrap,_memalign_r",
                "-Wl,--wrap,_calloc_r", "-Wl,--wrap,exit", "-Wl,--wrap,atexit",
