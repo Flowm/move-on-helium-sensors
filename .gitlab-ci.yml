@@ -1,0 +1,26 @@
+image: flowm/move-on-helium-sensors
+
+variables:
+  REPO_NAME: gitlab.lrz.de/move-on/move-on_helium_sensors
+
+before_script:
+  - cd $CI_PROJECT_DIR
+  - mbed deploy
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - cd src
+    - make clean
+    - make
+    - mkdir ../artifacts
+    - cp ../BUILD/*.{bin,hex,elf} ../artifacts/
+    - ls -la ../artifacts/
+  artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHA:0:8}"
+    expire_in: 4 week
+    paths:
+      - artifacts/

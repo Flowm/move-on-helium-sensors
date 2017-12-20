@@ -13,8 +13,8 @@ flash: $(BUILD_DIR)/$(PROJECT).hex
 	st-flash --format ihex write $<
 
 clean:
-	-rm ../Makefile
-	-rm -r $(BUILD_DIR)
+	-rm -f ../Makefile
+	-rm -f -r $(BUILD_DIR)
 
 $(GEN_MAKEFILE):
 	cd .. && mbed export -i gcc_arm --profile config/develop.json
