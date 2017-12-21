@@ -10,6 +10,6 @@ jobs:
       - run: git fetch && git reset --hard origin/$CIRCLE_BRANCH
       - run: cd src && make clean
       - run: cd src && make
-      - run: mkdir -p /tmp/artifacts && cp BUILD/mbed.{bin,hex,elf} /tmp/artifacts
+      - run: mkdir -p /tmp/artifacts && cp BUILD/*.{bin,hex,elf} /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
