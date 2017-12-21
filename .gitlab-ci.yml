@@ -1,26 +1,48 @@
 image: flowm/move-on-helium-sensors
 
 variables:
-  REPO_NAME: gitlab.lrz.de/move-on/move-on_helium_sensors
+  REPO_NAME: "gitlab.lrz.de/move-on/move-on_helium_sensors"
+  DEPLOY_HOST: "192.168.152.10"
+  DEPLOY_PORT: "40106"
+  DEPLOY_USER: "deploy"
+  DEPLOY_DEVICE: "/dev/sda"
 
 before_script:
   - cd $CI_PROJECT_DIR
-  - mbed deploy
+  # SSH Agent for deploy
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan -p ${DEPLOY_PORT} ${DEPLOY_HOST} >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
   script:
+    - mbed deploy
     - cd src
     - make clean
     - make
     - mkdir ../artifacts
     - cp ../BUILD/*.{bin,hex,elf} ../artifacts/
     - ls -la ../artifacts/
+  cache:
+    paths:
+      - mbed-os/
   artifacts:
     name: "${CI_PROJECT_NAME}_${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHA:0:8}"
     expire_in: 4 week
     paths:
       - artifacts/
+
+deploy:
+  stage: deploy
+  script:
+    - ssh -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} "mount | grep ${DEPLOY_DEVICE} || mount ${DEPLOY_DEVICE}"
+    - scp -P ${DEPLOY_PORT} artifacts/*.bin ${DEPLOY_USER}@${DEPLOY_HOST}:/mnt/
+    - ssh -tt -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} "timeout 60 picocom /dev/ttyACM0 | head -n 200"
