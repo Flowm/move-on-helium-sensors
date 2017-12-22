@@ -4,6 +4,7 @@
 #include <modules/ADC/MPC320X.h>
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055.hpp>
+#include <modules/CDH/CDHUart.hpp>
 
 class Sensors {
 public:
@@ -21,7 +22,8 @@ public:
         // Sensors
         imu(bno),
         env(spi, cs_bme680),
-        adc(spi, cs_adc)
+        adc(spi, cs_adc),
+        cdhuart(cdh)
         { setup(); };
 
     void setup();
@@ -43,4 +45,8 @@ private:
     BNO055 imu;
     BME680 env;
     MPC320X adc;
+
+    // CDH data Handler
+    CDHUart cdhuart;
+
 };

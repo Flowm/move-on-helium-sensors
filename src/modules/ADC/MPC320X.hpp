@@ -40,6 +40,7 @@ public:
      */
     void testAllChannels();
 private:
+    //Interfaces
     SPI& spi;
     DigitalOut& chipSelect;
 };
