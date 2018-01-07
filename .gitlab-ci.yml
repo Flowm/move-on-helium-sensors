@@ -1,4 +1,4 @@
-image: flowm/move-on-helium-sensors
+image: flowm/mbed-cli
 
 variables:
   REPO_NAME: "gitlab.lrz.de/move-on/move-on_helium_sensors"
