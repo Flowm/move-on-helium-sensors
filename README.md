@@ -36,16 +36,27 @@ pip install mbed-cli
 mbed-cli deploy
 ```
 
-## Compiling
+## Development
+### Compile
 In `src` dir:
 ```
 make
 ```
 
-
-
-## Developing in SW4STM32(Eclipse)
-
+### Developing in SW4STM32 (Eclipse)
 1. `mbed export -i sw4stm32 --profile config/develop.json`
 2. `File` -> `Open Projects from File System` (In Eclipse)
 3. Choose the `move-on-helium-sensors` project.
+
+## Reference
+### Build targets
+From the `src` directory:
+
+| Command                 | Description                                             |
+| ----------------------- | ------------------------------------------------------- |
+| make build (default)    | Generate toplevel makefile and build project sources    |
+| make clean              | Remove build artifacts and toplevel makefile            |
+| make flash              | Upload firmware to locally attached uC with st-flash    |
+| make rflash             | Upload firmware to uC attached to remote ci host        |
+| make rtail              | Tail serial output from uC attached to remote ci host   |
+| make deploy             | Combines rflash and rtail                               |
