@@ -10,17 +10,16 @@
 
 void CDHUart::setup(){
     cdh.baud(CDH_BAUD);
+    cdh.rxBufferSetSize(COMMAND_BUF_LEN);
     cdh.attach(this, &CDHUart::rxCallback,MODSERIAL::RxIrq);
 }
 
 
 void CDHUart::rxCallback(MODSERIAL_IRQ_INFO* q){
     MODSERIAL* serial = q->serial;
-    uint8_t size = serial->rxBufferGetCount();
-    size = (size > COMMAND_BUF_LEN)?COMMAND_BUF_LEN:size;
-    serial->move((char*)opCodes, size);
-    numCommands = size;
+    numCommands = serial->move((char*)opCodes, COMMAND_BUF_LEN);
     //Writes to UART in an interrupt cause a lockup!
+    return;
 }
 
 
