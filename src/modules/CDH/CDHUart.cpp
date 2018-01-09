@@ -9,43 +9,39 @@
 
 
 void CDHUart::setup(){
-    cdh.baud(115200);
+    cdh.baud(CDH_BAUD);
+    cdh.attach(this, &CDHUart::rxCallback,MODSERIAL::RxIrq);
 }
 
-void write_callback(int){
-    int a = 0;
-    printf("ok:%d\r\n", a);
+
+void CDHUart::rxCallback(MODSERIAL_IRQ_INFO* q){
+    MODSERIAL* serial = q->serial;
+    uint8_t size = serial->rxBufferGetCount();
+    size = (size > COMMAND_BUF_LEN)?COMMAND_BUF_LEN:size;
+    serial->move((char*)opCodes, size);
+    numCommands = size;
+    //Writes to UART in an interrupt cause a lockup!
 }
+
 
 void CDHUart::transmitData(){
-//    cdh.printf("asd\r\n");
-    CDHPacket data = {  {0xCA,0xFE,sizeof(data)},
-                        {'a','b','c'},
-                        {0xFE,0xCA}};
+    if(numCommands > 0){
+        for(int i = 0; i < numCommands; i++){
+            data.header.status = opCodes[i];
+            calculateChecksum(data);
+            for(uint8_t i = 0; i < sizeof(CDHPacket); i++){
+                cdh.putc(*(((uint8_t*)&data)+i));
+            }
+        }
+        numCommands = 0;
+    }
 
-    printf("data:%d\r\n",sizeof(CDHPacket));
-//
-////       Callback<void()> cb = &write_callback;
-////       const event_callback_t c;
-////       c.attach(*write_callback)
-////////       c.attach(&write_callback);
-//////
-////       cdh.write((uint8_t*)data, sizeof(data), void,Serial::TxIrq);
-////////       cdh.write()
-////
-//////       cdh.write((uint8_t*)data,sizeof(data), callback(&Sensors::cdhWriteCallback , &Sensors));
-/////
-//    const event_callback_t call;
-////       call.attach(this, &Sensors::cdhWriteCallback);
-        cdh.write((uint8_t*)&data, sizeof(CDHPacket), &write_callback, Serial::TxIrq);
-//
-//       for(int i=0;i <10 ; i++){
-//           for(int j=0; j<sizeof(CDHPacket); j++ ){
-//               cdh.putc(*(binary+j));
-//           }
-//           data->data.gyro[0]++;
-           cdh.printf("\r\n");
-//
-//       }
 }
-
+void CDHUart::calculateChecksum(CDHPacket& data){
+    uint8_t* sData = (uint8_t*)(&data.data);
+    uint8_t checksum = 0x00;
+    for(uint8_t i=0; i < sizeof(SensorData); i++){
+        checksum ^= *(sData + i);
+    }
+    data.footer.checksum = checksum;
+}

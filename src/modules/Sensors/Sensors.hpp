@@ -5,6 +5,7 @@
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055.hpp>
 #include <modules/CDH/CDHUart.hpp>
+#include <MODSERIAL/MODSERIAL.h>
 
 class Sensors {
 public:
@@ -33,7 +34,7 @@ private:
     //Interfaces
     DigitalOut led;
     Serial logger;
-    Serial cdh;
+    MODSERIAL cdh;
     I2C gps;
     I2C bno;
     SPI spi;
