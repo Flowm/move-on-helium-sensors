@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include<mbed.h>
-#include<MODSERIAL/MODSERIAL.h>
+#include <mbed.h>
+#include <modserial/MODSERIAL.h>
 
 
 #define CDH_BAUD 115200
@@ -21,19 +21,19 @@ public:
         {setup();};
 
     /**
-     * Callback to process recieved opcodes from CDH
+     * ISR Callback to process recieved opcodes from CDH
      *
      */
     void rxCallback(MODSERIAL_IRQ_INFO*);
 
-    /**
-     * Puts data out to CDH if any data has been requested.
-     */
-    void transmitData();
-
 private:
     //Interfaces
     MODSERIAL& cdh;
+
+    //CDH Event Queue
+    //TODO: Do we want a global event q?
+    EventQueue queue;
+    Thread queue_thread;
 
     //CDH protocol format.
     struct OutProtocolHeader {
@@ -62,8 +62,9 @@ private:
         InProtocolFooter footer;
     };
 
-    uint8_t opCodes[COMMAND_BUF_LEN] = {0};
-
+    volatile uint8_t opCodes[COMMAND_BUF_LEN] = {0};
+    volatile uint8_t lastItem = 0;
+    volatile uint8_t size = 0;
     // Dummy Packet!
     CDHPacket data = {  {0x01,0xFE,sizeof(SensorData)},
                         {'a','b','c'},
@@ -71,6 +72,12 @@ private:
     uint8_t numCommands = 0;
     void setup();
 
+    /**
+     * Calculates checksum and puts data out to CDH if any data has been requested.
+     */
+    void transmitData();
+
+    void processCommand(uint8_t);
     /**
      * Calculates a simple XOR checksum over the SensorData and stores
      * it in the footer checksum field.
