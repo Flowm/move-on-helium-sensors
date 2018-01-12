@@ -65,9 +65,9 @@ private:
     uint8_t opCodes[COMMAND_BUF_LEN] = {0};
 
     // Dummy Packet!
-    CDHPacket data = {  {0xCA,0xFE,sizeof(SensorData)},
+    CDHPacket data = {  {0x01,0xFE,sizeof(SensorData)},
                         {'a','b','c'},
-                        {0xFE,0xCA}};
+                        {0xFE,0x04}};
     uint8_t numCommands = 0;
     void setup();
 
