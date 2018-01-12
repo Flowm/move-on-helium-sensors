@@ -12,7 +12,6 @@
 
 
 #define CDH_BAUD 115200
-#define COMMAND_BUF_LEN 10
 
 class CDHUart {
 public:
@@ -20,18 +19,12 @@ public:
         cdh(cdh)
         {setup();};
 
-    /**
-     * ISR Callback to process recieved opcodes from CDH
-     *
-     */
-    void rxCallback(MODSERIAL_IRQ_INFO*);
 
 private:
     //Interfaces
     MODSERIAL& cdh;
 
     //CDH Event Queue
-    //TODO: Do we want a global event q?
     EventQueue queue;
     Thread queue_thread;
 
@@ -62,14 +55,10 @@ private:
         InProtocolFooter footer;
     };
 
-    volatile uint8_t opCodes[COMMAND_BUF_LEN] = {0};
-    volatile uint8_t lastItem = 0;
-    volatile uint8_t size = 0;
     // Dummy Packet!
     CDHPacket data = {  {0x01,0xFE,sizeof(SensorData)},
                         {'a','b','c'},
                         {0xFE,0x04}};
-    uint8_t numCommands = 0;
     void setup();
 
     /**
@@ -77,7 +66,18 @@ private:
      */
     void transmitData();
 
+    /**
+     * Called by the event queue to process the recieved command.
+     * @param Command as recieved from CDH.
+     */
     void processCommand(uint8_t);
+
+    /**
+     * ISR Callback to process recieved opcodes from CDH
+     *
+     */
+    void rxCallback(MODSERIAL_IRQ_INFO*);
+
     /**
      * Calculates a simple XOR checksum over the SensorData and stores
      * it in the footer checksum field.

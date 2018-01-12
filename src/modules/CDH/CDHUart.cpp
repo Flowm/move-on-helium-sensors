@@ -10,7 +10,6 @@
 
 void CDHUart::setup(){
     cdh.baud(CDH_BAUD);
-    cdh.rxBufferSetSize(COMMAND_BUF_LEN);
     cdh.attach(this, &CDHUart::rxCallback,MODSERIAL::RxIrq);
     queue_thread.start(callback(&queue, &EventQueue::dispatch_forever));
 }
@@ -18,7 +17,7 @@ void CDHUart::setup(){
 
 void CDHUart::rxCallback(MODSERIAL_IRQ_INFO* q){
     MODSERIAL* serial = q->serial;
-    uint8_t command = serial->rxGetLastChar();
+    uint8_t command = serial->getc();
     queue.call(callback(this, &CDHUart::processCommand), command);
     return;
 }
