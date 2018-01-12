@@ -5,7 +5,7 @@
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055.hpp>
 #include <modules/CDH/CDHUart.hpp>
-#include <modserial/MODSERIAL.h>
+#include <lib/modserial/MODSERIAL.h>
 
 class Sensors {
 public:
