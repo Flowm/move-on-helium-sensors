@@ -5,7 +5,7 @@
  *      Author: tkale
  */
 
-#include <MPC320X.hpp>
+#include <modules/ADC/MPC320X.hpp>
 
 uint16_t MPC320X::getValueSingle(uint8_t channel) {
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <mbed.h>
-#include <modules/ADC/MPC320X.h>
+#include <modules/ADC/MPC320X.hpp>
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055.hpp>
 #include <modules/CDH/CDHUart.hpp>
