@@ -1,4 +1,4 @@
-image: flowm/move-on-helium-sensors
+image: flowm/mbed-cli
 
 variables:
   REPO_NAME: "gitlab.lrz.de/move-on/move-on_helium_sensors"
@@ -27,10 +27,7 @@ build:
     - mbed deploy
     - cd src
     - make clean
-    - make
-    - mkdir ../artifacts
-    - cp ../BUILD/*.{bin,hex,elf} ../artifacts/
-    - ls -la ../artifacts/
+    - make artifacts
   cache:
     paths:
       - mbed-os/
@@ -43,6 +40,6 @@ build:
 deploy:
   stage: deploy
   script:
-    - ssh -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} "mount | grep ${DEPLOY_DEVICE} || mount ${DEPLOY_DEVICE}"
-    - scp -P ${DEPLOY_PORT} artifacts/*.bin ${DEPLOY_USER}@${DEPLOY_HOST}:/mnt/
-    - ssh -tt -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} "stty -F /dev/ttyACM0 9600 && timeout 60 head -n 250 /dev/ttyACM0 || true"
+    - cd src
+    - make ciflash
+    - make citail || true
