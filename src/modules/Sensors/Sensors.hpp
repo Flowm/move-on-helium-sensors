@@ -2,6 +2,8 @@
 
 #include <mbed.h>
 #include <modules/ADC/MPC320X.h>
+#include <modules/ENV/BME680.hpp>
+#include <modules/IMU/BNO055.hpp>
 
 class Sensors {
 public:
@@ -13,10 +15,12 @@ public:
         gps(D4, D5),
         bno(D12, A6),
         spi(D2, A5, A1),
-        cs_bme680(D3),
-        cs_adc(D6),
+        cs_bme680(D3, 1),
+        cs_adc(D6, 1),
         ow_ds18b20(D9),
         // Sensors
+        imu(bno),
+        env(spi, cs_bme680),
         adc(spi, cs_adc)
         { setup(); };
 
@@ -36,5 +40,7 @@ private:
     DigitalOut ow_ds18b20;
 
     // Sensors
+    BNO055 imu;
+    BME680 env;
     MPC320X adc;
 };
