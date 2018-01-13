@@ -18,6 +18,8 @@ echo 'eval "$(direnv hook bash)' >> ~/.bashrc
 echo 'eval "$(direnv hook zsh)' >> ~/.zshrc
 ```
 
+If `pip install` does not work try it with the parameter `--user python`.
+
 ### Linux
 ```
 sudo apt install gcc-arm-none-eabi openocd
