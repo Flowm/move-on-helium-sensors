@@ -9,13 +9,13 @@
 
 ### MacOS
 ```
-brew cask install gcc-arm-embedded stlink openocd
-brew install direnv
+brew cask install gcc-arm-embedded
+brew install stlink openocd direnv
 sudo easy_install pip
-pip install virtualenv
+sudo pip install virtualenv
 
-echo 'eval "$(direnv hook bash)' > ~/.bashrc
-echo 'eval "$(direnv hook zsh)' > ~/.zshrc
+echo 'eval "$(direnv hook bash)' >> ~/.bashrc
+echo 'eval "$(direnv hook zsh)' >> ~/.zshrc
 ```
 
 ### Linux
@@ -24,8 +24,8 @@ sudo apt install gcc-arm-none-eabi openocd
 sudo apt install python-pip python-dev build-essential direnv
 pip install virtualenv
 
-echo 'eval "$(direnv hook bash)' > ~/.bashrc
-echo 'eval "$(direnv hook zsh)' > ~/.zshrc
+echo 'eval "$(direnv hook bash)' >> ~/.bashrc
+echo 'eval "$(direnv hook zsh)' >> ~/.zshrc
 ```
 
 ### Mbed-cli
