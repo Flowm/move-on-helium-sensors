@@ -16,6 +16,9 @@ before_script:
   - chmod 700 ~/.ssh
   - ssh-keyscan -p ${DEPLOY_PORT} ${DEPLOY_HOST} >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+
 
 stages:
   - build
