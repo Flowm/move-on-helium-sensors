@@ -7,6 +7,7 @@
 #include <modules/CDH/CDHUart.hpp>
 #include <modules/Storage/Storage.hpp>
 #include <lib/MODSERIAL/MODSERIAL.h>
+#include <lib/DS1820/DS1820.h>
 
 class Sensors {
 public:
@@ -53,4 +54,5 @@ private:
     BNO055IMU imu;
     BME680 env;
     MPC320X adc;
+
 };
