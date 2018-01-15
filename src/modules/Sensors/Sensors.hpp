@@ -5,8 +5,8 @@
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
-#include <modules/Storage/Storage.hpp>
-#include <lib/MODSERIAL/MODSERIAL.h>
+#include <modules/Temperature/DS18B20.hpp>
+#include <lib/modserial/MODSERIAL.h>
 #include <lib/DS1820/DS1820.h>
 
 class Sensors {
@@ -54,5 +54,6 @@ private:
     BNO055IMU imu;
     BME680 env;
     MPC320X adc;
+    DS18B20 temperature;
 
 };

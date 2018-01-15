@@ -6,7 +6,9 @@ void Sensors::setup() {
     env.start();
 }
 
+
 void Sensors::loop() {
+
     while(1) {
         log();
         Thread::wait(1000);
