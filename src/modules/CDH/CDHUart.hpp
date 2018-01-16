@@ -32,13 +32,6 @@ private:
 
     Storage* storage;
 
-    // Dummy Packet!
-    /*
-     *CDHPacket data = {{0x01, 0xFE, sizeof(SensorData)},
-     *                  {},
-     *                  {0xFE,0x04}
-     *                 };
-     */
 
     void setup();
 

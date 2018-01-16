@@ -41,10 +41,32 @@ void CDHUart::transmitData(){
 }
 
 void CDHUart::calculateChecksum(CDHPacket& data){
-    uint8_t* sData = (uint8_t*)(&data.data);
-    uint8_t checksum = 0x00;
-    for(uint8_t i=0; i < sizeof(SensorData); i++){
-        checksum ^= *(sData + i);
+//    uint8_t* sData = (uint8_t*)(&data.data);
+//    uint8_t checksum = 0x00;
+//    for(uint8_t i=0; i < sizeof(SensorData); i++){
+//        checksum ^= *(sData + i);
+//    }
+
+    uint32_t checksum = 0x00;
+
+    __HAL_RCC_CRC_CLK_ENABLE();
+    CRC_HandleTypeDef crc;
+    crc.InputDataFormat = CRC_INPUTDATA_FORMAT_HALFWORDS;
+    crc.Init = {
+            DEFAULT_POLYNOMIAL_DISABLE,
+            DEFAULT_INIT_VALUE_DISABLE,
+            0x1021,
+            CRC_POLYLENGTH_16B,
+            checksum,
+            CRC_OUTPUTDATA_INVERSION_DISABLE
+    };
+    if(HAL_CRC_Init(&crc) == HAL_OK){
+        checksum = HAL_CRC_Calculate(&crc, reinterpret_cast<uint32_t*>(&data.data), sizeof(SensorData)/2);
+    }else {
+        printf("CRC INIT ERROR!");
     }
-    data.footer.checksum = checksum;
+    HAL_CRC_DeInit(&crc);
+    __HAL_RCC_CRC_CLK_DISABLE();
+    printf("%lu\r\n",checksum);
+    data.footer.checksum = (uint16_t)checksum;
 }
