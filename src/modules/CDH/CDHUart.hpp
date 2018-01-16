@@ -8,7 +8,7 @@
 #pragma once
 
 #include <mbed.h>
-#include <lib/modserial/MODSERIAL.h>
+#include <lib/MODSERIAL/MODSERIAL.h>
 
 
 #define CDH_BAUD 115200
