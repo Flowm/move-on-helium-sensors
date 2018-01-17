@@ -47,6 +47,7 @@ make
 1. `mbed export -i sw4stm32 --profile config/develop.json`
 2. `File` -> `Open Projects from File System` (In Eclipse)
 3. Choose the `move-on-helium-sensors` project.
+4. Remember to regenerate the project files everytime you add a new library with `mbed add ...`.
 
 ## Reference
 ### Build targets

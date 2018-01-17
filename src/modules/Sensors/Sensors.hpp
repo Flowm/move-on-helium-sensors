@@ -1,9 +1,11 @@
 #pragma once
 
 #include <mbed.h>
-#include <modules/ADC/MPC320X.h>
+#include <modules/ADC/MPC320X.hpp>
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055.hpp>
+#include <modules/CDH/CDHUart.hpp>
+#include <lib/MODSERIAL/MODSERIAL.h>
 
 class Sensors {
 public:
@@ -21,7 +23,8 @@ public:
         // Sensors
         imu(bno),
         env(spi, cs_bme680),
-        adc(spi, cs_adc)
+        adc(spi, cs_adc),
+        cdhuart(cdh)
         { setup(); };
 
     void setup();
@@ -31,7 +34,7 @@ private:
     //Interfaces
     DigitalOut led;
     Serial logger;
-    Serial cdh;
+    MODSERIAL cdh;
     I2C gps;
     I2C bno;
     SPI spi;
@@ -43,4 +46,8 @@ private:
     BNO055 imu;
     BME680 env;
     MPC320X adc;
+
+    // CDH data Handler
+    CDHUart cdhuart;
+
 };

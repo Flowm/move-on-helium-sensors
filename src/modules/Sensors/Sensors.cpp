@@ -6,10 +6,11 @@ void Sensors::setup() {
     env.setup();
 }
 
+
 void Sensors::loop() {
+
     while(1) {
-       logger.printf("LOG\r\n");
-       cdh.printf("CDH\r\n");
+       logger.printf("LOG1\r\n");
        Thread::wait(1000);
     }
 }
