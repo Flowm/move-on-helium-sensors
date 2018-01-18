@@ -19,7 +19,7 @@ flash: $(FLASH_DIR)/$(PROJECT).hex
 deploy: rflash rtail
 rflash: $(FLASH_DIR)/$(PROJECT).hex
 	scp -P $(DEPLOY_PORT) $< $(DEPLOY_TARGET):
-	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "st-flash --reset --format ihex write $(notdir $<)"
+	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "st-flash --format ihex write $(notdir $<)"
 rtail:
 	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "stty -F /dev/ttyACM0 9600 && cat /dev/ttyACM0"
 clean:

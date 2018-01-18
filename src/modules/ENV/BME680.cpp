@@ -1,18 +1,42 @@
 #include "BME680.hpp"
 
 void BME680::setup() {
-    cs = 0;
-    tx_buffer[0] = 0x50 | 0x80;
-    spi.write(&tx_buffer[0], 1, &rx_buffer[0], 2);
-    if (rx_buffer[1] == chip_id) {
-        printf("BME680 CHIP_ID: 0x%02x valid\r\n", rx_buffer[1]);
-    } else {
-        printf("BME680 CHIP_ID: 0x%02x invalid\r\n", rx_buffer[1]);
-    }
-    cs = 1;
+    bme.init(0);
+    bme.reset();
 
-    memset(rx_buffer, 0, sizeof(rx_buffer));
+    uint8_t chip_id = bme.getChipID();
+    if (chip_id == _chip_id) {
+        printf("BME680 CHIP_ID: 0x%02x valid\r\n", chip_id);
+    } else {
+        printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
+    }
+
+    bme.setOversampling(BME680_OVERSAMPLING_X4, BME680_OVERSAMPLING_X2, BME680_OVERSAMPLING_X16);
+    bme.setIIRFilter(BME680_FILTER_3);
+    bme.setGasOn(320, 150); // 320 degree Celsius and 150 milliseconds
+
+    bme.setForcedMode();
+
+    while(true) {
+        read();
+    }
 }
 
 void BME680::read() {
+    ClosedCube_BME680_Status status = bme.readStatus();
+    //printf("BME680 status: (DataFlag: %d, MeasuringFlag: %d, gasFlag: %d, GasIndex: %d)\r\n", status.newDataFlag, status.measuringStatusFlag, status.gasMeasuringStatusFlag, status.gasMeasurementIndex);
+
+    if (status.newDataFlag) {
+        _temperature = bme.readTemperature();
+        _humidity = bme.readHumidity();
+        _pressure = bme.readPressure();
+        _gasresistance = bme.readGasResistance() / 1000.0;
+
+        printf("BME680 %4.2f *C; %4.2f Pa; %6.2f %%; %6.3f kOhm\r\n", _temperature, _humidity, _pressure, _gasresistance);
+
+        bme.setForcedMode();
+        Thread::wait(1000);
+    } else {
+        Thread::wait(200);
+    }
 }
