@@ -1,25 +1,21 @@
 #pragma once
 
 #include <mbed.h>
+#include <modules/SensorThread/SensorThread.hpp>
 
 /**
  * Driver for the BNO055 IMU
  */
-class BNO055 {
+class BNO055 : public SensorThread {
 public:
     BNO055(I2C &i2c) :
         i2c(i2c)
         {};
 
-    /**
-     * Inital sensor config
-     */
-    void setup();
+    void setup() override;
+    void update() override;
 
-    /**
-     * Read sensor data and print it
-     */
-    void read();
+    void getChipId();
 
 private:
     I2C& i2c;

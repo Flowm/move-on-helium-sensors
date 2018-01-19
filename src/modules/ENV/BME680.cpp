@@ -11,20 +11,19 @@ void BME680::setup() {
         printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
     }
 
+    // Configure sensor
     bme.setOversampling(BME680_OVERSAMPLING_X4, BME680_OVERSAMPLING_X2, BME680_OVERSAMPLING_X16);
     bme.setIIRFilter(BME680_FILTER_3);
     bme.setGasOn(320, 150); // 320 degree Celsius and 150 milliseconds
-
     bme.setForcedMode();
 
-    while(true) {
-        read();
-    }
+    set_update_rate(0);
+    set_priority(osPriorityAboveNormal);
 }
 
-void BME680::read() {
+void BME680::update() {
     ClosedCube_BME680_Status status = bme.readStatus();
-    //printf("BME680 status: (DataFlag: %d, MeasuringFlag: %d, gasFlag: %d, GasIndex: %d)\r\n", status.newDataFlag, status.measuringStatusFlag, status.gasMeasuringStatusFlag, status.gasMeasurementIndex);
+    //printf("BME680 status: DF:%d, MF:%d, GF:%d, GI:%d\r\n", status.newDataFlag, status.measuringStatusFlag, status.gasMeasuringStatusFlag, status.gasMeasurementIndex);
 
     if (status.newDataFlag) {
         _temperature = bme.readTemperature();

@@ -4,6 +4,6 @@
 Sensors sen;
 
 int main() {
+    sen.setup();
     sen.loop();
-
 }

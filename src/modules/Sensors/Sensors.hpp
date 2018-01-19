@@ -25,7 +25,7 @@ public:
         env(spi, cs_bme680),
         adc(spi, cs_adc),
         cdhuart(cdh)
-        { setup(); };
+        {};
 
     void setup();
     void loop();
@@ -49,5 +49,4 @@ private:
 
     // CDH data Handler
     CDHUart cdhuart;
-
 };
