@@ -2,6 +2,7 @@
 
 #include <mbed.h>
 #include <modules/SensorThread/SensorThread.hpp>
+#include <modules/Storage/Storage.hpp>
 
 #include "ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h"
 
@@ -10,8 +11,9 @@
  */
 class BME680 : public SensorThread {
 public:
-    BME680(SPI &spi, DigitalOut &cs) :
-        bme(spi, cs)
+    BME680(SPI& spi, DigitalOut& cs, Storage* storage) :
+        bme(spi, cs),
+        storage(storage)
         {};
 
     void setup() override;
@@ -19,6 +21,7 @@ public:
 
 private:
     ClosedCube_BME680_Mbed bme;
+    Storage* storage;
 
     const int _chip_id = 0x61;
 

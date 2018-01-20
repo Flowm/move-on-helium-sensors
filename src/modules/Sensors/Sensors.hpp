@@ -5,6 +5,7 @@
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055.hpp>
 #include <modules/CDH/CDHUart.hpp>
+#include <modules/Storage/Storage.hpp>
 #include <lib/MODSERIAL/MODSERIAL.h>
 
 class Sensors {
@@ -20,15 +21,17 @@ public:
         cs_bme680(D3, 1),
         cs_adc(D6, 1),
         ow_ds18b20(D9),
+        // CDH data
+        cdhuart(cdh),
         // Sensors
-        imu(bno),
-        env(spi, cs_bme680),
-        adc(spi, cs_adc),
-        cdhuart(cdh)
+        imu(bno, &storage),
+        env(spi, cs_bme680, &storage),
+        adc(spi, cs_adc)
         {};
 
     void setup();
     void loop();
+    void log();
 
 private:
     //Interfaces
@@ -42,11 +45,13 @@ private:
     DigitalOut cs_adc;
     DigitalOut ow_ds18b20;
 
+    // CDH data
+    Storage storage;
+    CDHUart cdhuart;
+
     // Sensors
     BNO055 imu;
     BME680 env;
     MPC320X adc;
 
-    // CDH data Handler
-    CDHUart cdhuart;
 };

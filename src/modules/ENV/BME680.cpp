@@ -24,6 +24,7 @@ void BME680::setup() {
 void BME680::update() {
     ClosedCube_BME680_Status status = bme.readStatus();
     //printf("BME680 status: DF:%d, MF:%d, GF:%d, GI:%d\r\n", status.newDataFlag, status.measuringStatusFlag, status.gasMeasuringStatusFlag, status.gasMeasurementIndex);
+
     if (!status.newDataFlag) {
         Thread::wait(200);
         return;
@@ -33,8 +34,14 @@ void BME680::update() {
     _humidity = bme.readHumidity();
     _pressure = bme.readPressure();
     _gasresistance = bme.readGasResistance() / 1000.0;
+    //printf("BME680 %4.2f *C; %4.2f Pa; %6.2f %%; %6.3f kOhm\r\n", _temperature, _humidity, _pressure, _gasresistance);
 
-    printf("BME680 %4.2f *C; %4.2f Pa; %6.2f %%; %6.3f kOhm\r\n", _temperature, _humidity, _pressure, _gasresistance);
+    storage->lock();
+    storage->data->env.temperature = _temperature;
+    storage->data->env.humidity = _humidity;
+    storage->data->env.pressure = _pressure;
+    storage->data->env.gasresistance = _gasresistance;
+    storage->unlock();
 
     bme.setForcedMode();
     Thread::wait(1000);

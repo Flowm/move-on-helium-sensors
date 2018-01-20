@@ -5,7 +5,6 @@ void BNO055::setup() {
 }
 
 void BNO055::update() {
-    getChipId();
 }
 
 void BNO055::getChipId() {
