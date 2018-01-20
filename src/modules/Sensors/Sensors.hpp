@@ -22,7 +22,7 @@ public:
         cs_adc(D6, 1),
         ow_ds18b20(D9),
         // CDH data
-        cdhuart(cdh),
+        cdhuart(cdh, &storage),
         // Sensors
         imu(bno, &storage),
         env(spi, cs_bme680, &storage),

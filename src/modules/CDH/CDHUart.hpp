@@ -9,15 +9,16 @@
 
 #include <mbed.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
-#include <include/protocol.h>
+#include <modules/Storage/Storage.hpp>
 
 
 #define CDH_BAUD 115200
 
 class CDHUart {
 public:
-    CDHUart(MODSERIAL &cdh) :
-        cdh(cdh)
+    CDHUart(MODSERIAL &cdh, Storage* storage) :
+        cdh(cdh),
+        storage(storage)
         {setup();};
 
 
@@ -29,11 +30,16 @@ private:
     EventQueue queue;
     Thread queue_thread;
 
+    Storage* storage;
+
     // Dummy Packet!
-    CDHPacket data = {{0x01, 0xFE, sizeof(SensorData)},
-                      {},
-                      {0xFE,0x04}
-                     };
+    /*
+     *CDHPacket data = {{0x01, 0xFE, sizeof(SensorData)},
+     *                  {},
+     *                  {0xFE,0x04}
+     *                 };
+     */
+
     void setup();
 
     /**

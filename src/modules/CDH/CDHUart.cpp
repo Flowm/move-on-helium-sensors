@@ -23,17 +23,20 @@ void CDHUart::rxCallback(MODSERIAL_IRQ_INFO* q){
 }
 
 void CDHUart::processCommand(uint8_t command){
-    data.header.status = command;
+    storage->packet.header.status = command;
     transmitData();
 //    printf("Command Processed : %d ", command);
 }
 
 
 void CDHUart::transmitData(){
-    calculateChecksum(data);
+    storage->lock();
+    //TODO: Maybe copy the data to avoid blocking during transmission
+    calculateChecksum(storage->packet);
     for(uint8_t i = 0; i < sizeof(CDHPacket); i++){
-        cdh.putc(*(((uint8_t*)&data)+i));
+        cdh.putc(*(((uint8_t*)&storage->packet)+i));
     }
+    storage->unlock();
 }
 
 void CDHUart::calculateChecksum(CDHPacket& data){
