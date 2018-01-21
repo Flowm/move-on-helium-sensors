@@ -14,8 +14,8 @@ brew install direnv
 sudo easy_install pip
 pip install virtualenv
 
-echo 'eval "$(direnv hook bash)' >> ~/.bashrc
-echo 'eval "$(direnv hook zsh)' >> ~/.zshrc
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
 ```
 
 If `pip install` does not work try it with the parameter `--user python`.
