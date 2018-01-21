@@ -17,7 +17,10 @@ void BME680::setup() {
     bme.setGasOn(320, 150); // 320 degree Celsius and 150 milliseconds
     bme.setForcedMode();
 
+    // Configure thread
+    // No static delay in thread loop as update() waits for variable amount of time itself
     set_update_rate(0);
+    // Increase thread priority to fix spi transmission errors caused by thread scheduling
     set_priority(osPriorityAboveNormal);
 }
 
