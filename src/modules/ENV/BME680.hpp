@@ -1,10 +1,9 @@
 #pragma once
 
 #include <mbed.h>
+#include <lib/ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h>
 #include <modules/SensorThread/SensorThread.hpp>
 #include <modules/Storage/Storage.hpp>
-
-#include "ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h"
 
 /**
  * Driver for the BME680 Environmental sensor
