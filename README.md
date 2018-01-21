@@ -12,7 +12,7 @@
 brew cask install gcc-arm-embedded
 brew install stlink openocd direnv
 sudo easy_install pip
-sudo pip install virtualenv
+pip install virtualenv
 
 echo 'eval "$(direnv hook bash)' >> ~/.bashrc
 echo 'eval "$(direnv hook zsh)' >> ~/.zshrc
