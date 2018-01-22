@@ -245,6 +245,26 @@ DIN A4, landscape with extra doc field</description>
 <text x="-2.54" y="1.27" size="1.27" layer="25">&gt;NAME</text>
 <text x="-2.54" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
 </package>
+<package name="BOSCH-BNO055">
+<wire x1="-13.335" y1="10.16" x2="13.335" y2="10.16" width="0.1524" layer="21"/>
+<wire x1="13.335" y1="10.16" x2="13.335" y2="-10.16" width="0.1524" layer="21"/>
+<wire x1="13.335" y1="-10.16" x2="-13.335" y2="-10.16" width="0.1524" layer="21"/>
+<wire x1="-13.335" y1="-10.16" x2="-13.335" y2="10.16" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="-2.667" x2="2.032" y2="-2.667" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="-2.667" x2="2.032" y2="2.667" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="2.667" x2="-2.032" y2="2.667" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="2.667" x2="-2.032" y2="-2.667" width="0.1524" layer="21"/>
+<pad name="VIN" x="-6.35" y="-8.89" drill="1"/>
+<pad name="3VO" x="-3.81" y="-8.89" drill="1"/>
+<pad name="GND" x="-1.27" y="-8.89" drill="1"/>
+<pad name="SDA" x="1.27" y="-8.89" drill="1"/>
+<pad name="SCL" x="3.81" y="-8.89" drill="1"/>
+<pad name="RST" x="6.35" y="-8.89" drill="1"/>
+<pad name="PS0" x="-3.81" y="8.89" drill="1"/>
+<pad name="PS1" x="-1.27" y="8.89" drill="1"/>
+<pad name="INT" x="1.27" y="8.89" drill="1"/>
+<pad name="ADR" x="3.81" y="8.89" drill="1"/>
+</package>
 </packages>
 <symbols>
 <symbol name="NUCLEO-32">
@@ -285,9 +305,27 @@ DIN A4, landscape with extra doc field</description>
 <text x="-10.16" y="-22.86" size="1.778" layer="96">&gt;VALUE</text>
 <text x="-10.16" y="22.86" size="1.778" layer="95" align="top-left">&gt;NAME</text>
 </symbol>
+<symbol name="BOSCH-BNO055">
+<pin name="VIN" x="-12.7" y="5.08" length="short" direction="pwr"/>
+<pin name="3VO" x="-12.7" y="2.54" length="short"/>
+<pin name="GND" x="-12.7" y="0" length="short" direction="pwr"/>
+<pin name="SDA" x="-12.7" y="-2.54" length="short"/>
+<pin name="SCL" x="-12.7" y="-5.08" length="short"/>
+<pin name="RST" x="-12.7" y="-7.62" length="short"/>
+<pin name="PS0" x="12.7" y="2.54" length="short" rot="R180"/>
+<pin name="PS1" x="12.7" y="0" length="short" rot="R180"/>
+<pin name="INT" x="12.7" y="-2.54" length="short" rot="R180"/>
+<pin name="ADR" x="12.7" y="-5.08" length="short" rot="R180"/>
+<wire x1="-10.16" y1="7.62" x2="10.16" y2="7.62" width="0.254" layer="94"/>
+<wire x1="10.16" y1="7.62" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-10.16" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
+<text x="-10.16" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-10.16" y="10.16" size="1.778" layer="95" align="top-left">&gt;NAME</text>
+</symbol>
 </symbols>
 <devicesets>
-<deviceset name="NUCLEO-32" prefix="B" uservalue="yes">
+<deviceset name="NUCLEO-32" prefix="B">
 <gates>
 <gate name="G$1" symbol="NUCLEO-32" x="0" y="0"/>
 </gates>
@@ -331,6 +369,82 @@ DIN A4, landscape with extra doc field</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="BOSCH-BNO055" prefix="B">
+<gates>
+<gate name="G$1" symbol="BOSCH-BNO055" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="BOSCH-BNO055">
+<connects>
+<connect gate="G$1" pin="3VO" pad="3VO"/>
+<connect gate="G$1" pin="ADR" pad="ADR"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="INT" pad="INT"/>
+<connect gate="G$1" pin="PS0" pad="PS0"/>
+<connect gate="G$1" pin="PS1" pad="PS1"/>
+<connect gate="G$1" pin="RST" pad="RST"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="VIN" pad="VIN"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="supply1" urn="urn:adsk.eagle:library:371">
+<description>&lt;b&gt;Supply Symbols&lt;/b&gt;&lt;p&gt;
+ GND, VCC, 0V, +5V, -5V, etc.&lt;p&gt;
+ Please keep in mind, that these devices are necessary for the
+ automatic wiring of the supply signals.&lt;p&gt;
+ The pin name defined in the symbol is identical to the net which is to be wired automatically.&lt;p&gt;
+ In this library the device names are the same as the pin names of the symbols, therefore the correct signal names appear next to the supply symbols in the schematic.&lt;p&gt;
+ &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="VCC" urn="urn:adsk.eagle:symbol:26928/1" library_version="1">
+<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
+<text x="-2.54" y="-2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="VCC" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
+</symbol>
+<symbol name="GND" urn="urn:adsk.eagle:symbol:26925/1" library_version="1">
+<wire x1="-1.905" y1="0" x2="1.905" y2="0" width="0.254" layer="94"/>
+<text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="VCC" urn="urn:adsk.eagle:component:26957/1" prefix="P+" library_version="1">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="VCC" symbol="VCC" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GND" urn="urn:adsk.eagle:component:26954/1" prefix="GND" library_version="1">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="GND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -345,6 +459,9 @@ DIN A4, landscape with extra doc field</description>
 <parts>
 <part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="DINA4_L" device=""/>
 <part name="B1" library="Frcy" deviceset="NUCLEO-32" device=""/>
+<part name="B2" library="Frcy" deviceset="BOSCH-BNO055" device=""/>
+<part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -354,10 +471,76 @@ DIN A4, landscape with extra doc field</description>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="FRAME1" gate="G$2" x="162.56" y="0"/>
 <instance part="B1" gate="G$1" x="119.38" y="106.68"/>
+<instance part="B2" gate="G$1" x="190.5" y="119.38"/>
+<instance part="P+1" gate="VCC" x="157.48" y="157.48"/>
+<instance part="GND1" gate="1" x="157.48" y="142.24"/>
 </instances>
 <busses>
 </busses>
 <nets>
+<net name="VCC" class="0">
+<segment>
+<pinref part="P+1" gate="VCC" pin="VCC"/>
+<wire x1="157.48" y1="154.94" x2="157.48" y2="152.4" width="0.1524" layer="91"/>
+<label x="157.48" y="152.4" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="VIN"/>
+<wire x1="132.08" y1="124.46" x2="139.7" y2="124.46" width="0.1524" layer="91"/>
+<label x="139.7" y="124.46" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B2" gate="G$1" pin="VIN"/>
+<wire x1="177.8" y1="124.46" x2="170.18" y2="124.46" width="0.1524" layer="91"/>
+<label x="170.18" y="124.46" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="GND" class="0">
+<segment>
+<pinref part="GND1" gate="1" pin="GND"/>
+<wire x1="157.48" y1="144.78" x2="157.48" y2="147.32" width="0.1524" layer="91"/>
+<label x="157.48" y="147.32" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="GND@2"/>
+<wire x1="132.08" y1="121.92" x2="139.7" y2="121.92" width="0.1524" layer="91"/>
+<label x="139.7" y="121.92" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="GND@1"/>
+<wire x1="106.68" y1="116.84" x2="99.06" y2="116.84" width="0.1524" layer="91"/>
+<label x="99.06" y="116.84" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B2" gate="G$1" pin="GND"/>
+<wire x1="177.8" y1="119.38" x2="170.18" y2="119.38" width="0.1524" layer="91"/>
+<label x="170.18" y="119.38" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="IMU-SDA" class="0">
+<segment>
+<pinref part="B2" gate="G$1" pin="SDA"/>
+<wire x1="177.8" y1="116.84" x2="170.18" y2="116.84" width="0.1524" layer="91"/>
+<label x="170.18" y="116.84" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="D12"/>
+<wire x1="106.68" y1="88.9" x2="99.06" y2="88.9" width="0.1524" layer="91"/>
+<label x="99.06" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="IMU-SCL" class="0">
+<segment>
+<pinref part="B2" gate="G$1" pin="SCL"/>
+<wire x1="177.8" y1="114.3" x2="170.18" y2="114.3" width="0.1524" layer="91"/>
+<label x="170.18" y="114.3" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="A6"/>
+<wire x1="132.08" y1="111.76" x2="139.7" y2="111.76" width="0.1524" layer="91"/>
+<label x="139.7" y="111.76" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
