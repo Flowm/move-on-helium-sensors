@@ -9,8 +9,8 @@
 
 ### MacOS
 ```
-brew cask install gcc-arm-embedded stlink openocd
-brew install direnv
+brew cask install gcc-arm-embedded
+brew install stlink openocd direnv
 sudo easy_install pip
 pip install virtualenv
 
