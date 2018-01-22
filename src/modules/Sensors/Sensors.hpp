@@ -10,7 +10,8 @@
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
 #include <modules/Temperature/DS18B20.hpp>
-
+#include <modules/GPS/GPS.hpp>
+#include <lib/MODSERIAL/MODSERIAL.h>
 
 class Sensors {
 public:
@@ -31,10 +32,11 @@ public:
         cdhuart(cdh, &storage),
 
         // Sensors
-        imu(i2c_imu, IMU_RST, &storage),
-        env0(spi, cs_env0, &storage, 0),
-        env1(spi, cs_env1, &storage, 1),
-        temperature(TEMP_OW, &storage)
+        imu(bno, &storage),
+        env(spi, cs_bme680, &storage),
+        adc(spi, cs_adc),
+        temperature(D9, &storage)
+        gps(gps_i2c)
         {};
 
     void setup();
@@ -63,5 +65,6 @@ private:
     BME680 env0;
     BME680 env1;
     DS18B20 temperature;
+    GPS gps;
 
 };
