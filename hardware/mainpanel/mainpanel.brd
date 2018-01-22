@@ -446,10 +446,10 @@ design rules under a new name.
 </pass>
 </autorouter>
 <elements>
-<element name="B1" library="Frcy" package="NUCLEO-32" value="" x="49.4" y="36.86" rot="R270"/>
-<element name="B2" library="Frcy" package="BOSCH-BNO055" value="BOSCH-BNO055" x="61.67" y="15.77" rot="R180"/>
-<element name="B3" library="Frcy" package="UPUTRONICS-UBLOX-PICO" value="" x="-22" y="6"/>
-<element name="B4" library="Frcy" package="SPARKFUN-OPENLOG" value="" x="-14" y="-11"/>
+<element name="B1" library="Frcy" package="NUCLEO-32" value="" x="48.4" y="36.86" rot="R270"/>
+<element name="B2" library="Frcy" package="BOSCH-BNO055" value="BOSCH-BNO055" x="39.67" y="15.77" rot="R180"/>
+<element name="B3" library="Frcy" package="UPUTRONICS-UBLOX-PICO" value="" x="58" y="48"/>
+<element name="B4" library="Frcy" package="SPARKFUN-OPENLOG" value="" x="66" y="16" rot="R180"/>
 </elements>
 <signals>
 <signal name="3V3">
@@ -463,9 +463,9 @@ design rules under a new name.
 <contactref element="B2" pad="VIN"/>
 <contactref element="B3" pad="VCC"/>
 <contactref element="B4" pad="VCC"/>
-<wire x1="68.02" y1="24.66" x2="65.91" y2="29.24" width="0" layer="19" extent="1-1"/>
-<wire x1="-8.03" y1="7.27" x2="65.91" y2="29.24" width="0" layer="19" extent="1-1"/>
-<wire x1="-12.73" y1="-19.128" x2="-8.03" y2="7.27" width="0" layer="19" extent="1-1"/>
+<wire x1="64.91" y1="29.24" x2="71.97" y2="49.27" width="0" layer="19" extent="1-1"/>
+<wire x1="64.73" y1="24.128" x2="64.91" y2="29.24" width="0" layer="19" extent="1-1"/>
+<wire x1="46.02" y1="24.66" x2="64.73" y2="24.128" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GND">
 <contactref element="B1" pad="GND@2"/>
@@ -485,20 +485,16 @@ design rules under a new name.
 </polygon>
 <contactref element="B3" pad="GND"/>
 <contactref element="B4" pad="GND"/>
-<wire x1="63.37" y1="29.24" x2="58.29" y2="44.48" width="0" layer="19" extent="1-1"/>
-<wire x1="62.94" y1="24.66" x2="63.37" y2="29.24" width="0" layer="19" extent="1-1"/>
-<wire x1="-10.57" y1="7.27" x2="62.94" y2="24.66" width="0" layer="19" extent="1-1"/>
-<wire x1="-10.19" y1="-19.128" x2="-10.57" y2="7.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IMU-SDA">
 <contactref element="B2" pad="SDA"/>
 <contactref element="B1" pad="D12"/>
-<wire x1="30.35" y1="44.48" x2="60.4" y2="24.66" width="0" layer="19" extent="1-1"/>
+<wire x1="38.4" y1="24.66" x2="29.35" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IMU-SCL">
 <contactref element="B2" pad="SCL"/>
 <contactref element="B1" pad="A6"/>
-<wire x1="53.21" y1="29.24" x2="57.86" y2="24.66" width="0" layer="19" extent="1-1"/>
+<wire x1="35.86" y1="24.66" x2="52.21" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GRN">
 <contactref element="B4" pad="GRN"/>
@@ -506,17 +502,17 @@ design rules under a new name.
 <signal name="GPS-SDA">
 <contactref element="B3" pad="SDA"/>
 <contactref element="B1" pad="D4"/>
-<wire x1="-20.73" y1="7.27" x2="50.67" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="49.67" y1="44.48" x2="59.27" y2="49.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPS-SCL">
 <contactref element="B3" pad="SCL"/>
 <contactref element="B1" pad="D5"/>
-<wire x1="-18.19" y1="7.27" x2="48.13" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="47.13" y1="44.48" x2="61.81" y2="49.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="LOG-UART">
 <contactref element="B4" pad="RXI"/>
 <contactref element="B1" pad="A7"/>
-<wire x1="-17.81" y1="-19.128" x2="55.75" y2="29.24" width="0" layer="19" extent="1-1"/>
+<wire x1="54.75" y1="29.24" x2="69.81" y2="24.128" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CDH-TX">
 <contactref element="B1" pad="D1/TX"/>
