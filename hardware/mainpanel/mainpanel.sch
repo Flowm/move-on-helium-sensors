@@ -265,6 +265,46 @@ DIN A4, landscape with extra doc field</description>
 <pad name="INT" x="1.27" y="8.89" drill="1"/>
 <pad name="ADR" x="3.81" y="8.89" drill="1"/>
 </package>
+<package name="UPUTRONICS-UBLOX-PICO">
+<pad name="SDA" x="1.27" y="1.27" drill="1"/>
+<pad name="SCL" x="3.81" y="1.27" drill="1"/>
+<pad name="TXD" x="6.35" y="1.27" drill="1"/>
+<pad name="RXD" x="8.89" y="1.27" drill="1"/>
+<pad name="GND" x="11.43" y="1.27" drill="1" shape="square"/>
+<pad name="VCC" x="13.97" y="1.27" drill="1"/>
+<wire x1="0" y1="0" x2="0" y2="30.48" width="0.127" layer="21"/>
+<wire x1="0" y1="30.48" x2="15.24" y2="30.48" width="0.127" layer="21"/>
+<wire x1="15.24" y1="30.48" x2="15.24" y2="0" width="0.127" layer="21"/>
+<wire x1="15.24" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
+<text x="1.27" y="20.32" size="1.27" layer="25">&gt;NAME</text>
+<text x="1.27" y="16.51" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="1.27" y1="13.97" x2="11.43" y2="13.97" width="0.127" layer="27"/>
+<wire x1="11.43" y1="13.97" x2="11.43" y2="3.81" width="0.127" layer="27"/>
+<wire x1="11.43" y1="3.81" x2="1.27" y2="3.81" width="0.127" layer="27"/>
+<wire x1="1.27" y1="3.81" x2="1.27" y2="13.97" width="0.127" layer="27"/>
+<wire x1="11.43" y1="29.21" x2="11.43" y2="22.86" width="0.127" layer="27"/>
+<wire x1="11.43" y1="22.86" x2="10.16" y2="22.86" width="0.127" layer="27"/>
+<wire x1="10.16" y1="22.86" x2="10.16" y2="29.21" width="0.127" layer="27"/>
+<wire x1="10.16" y1="29.21" x2="11.43" y2="29.21" width="0.127" layer="27"/>
+</package>
+<package name="SPARKFUN-OPENLOG">
+<wire x1="-7.62" y1="9.652" x2="7.62" y2="9.652" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="9.652" x2="7.62" y2="-9.398" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="-9.398" x2="-7.62" y2="-9.398" width="0.1524" layer="21"/>
+<wire x1="-7.62" y1="-9.398" x2="-7.62" y2="9.652" width="0.1524" layer="21"/>
+<wire x1="-4.064" y1="4.318" x2="3.048" y2="4.318" width="0.1524" layer="21"/>
+<wire x1="3.048" y1="4.318" x2="3.048" y2="-2.794" width="0.1524" layer="21"/>
+<wire x1="3.048" y1="-2.794" x2="-4.064" y2="-2.794" width="0.1524" layer="21"/>
+<wire x1="-4.064" y1="-2.794" x2="-4.064" y2="4.318" width="0.1524" layer="21"/>
+<pad name="GRN" x="-6.35" y="-8.128" drill="1"/>
+<pad name="RXI" x="-3.81" y="-8.128" drill="1"/>
+<pad name="TXO" x="-1.27" y="-8.128" drill="1"/>
+<pad name="VCC" x="1.27" y="-8.128" drill="1"/>
+<pad name="GND" x="3.81" y="-8.128" drill="1" shape="square"/>
+<pad name="BLK" x="6.35" y="-8.128" drill="1"/>
+<text x="-4.064" y="4.826" size="1.27" layer="25">&gt;NAME</text>
+<text x="-4.064" y="-4.572" size="1.27" layer="27">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="NUCLEO-32">
@@ -323,9 +363,40 @@ DIN A4, landscape with extra doc field</description>
 <text x="-10.16" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
 <text x="-10.16" y="10.16" size="1.778" layer="95" align="top-left">&gt;NAME</text>
 </symbol>
+<symbol name="UPUTRONICS-UBLOX-PICO">
+<pin name="SDA" x="-5.08" y="7.62" length="short"/>
+<pin name="SCL" x="-5.08" y="5.08" length="short"/>
+<pin name="TXD" x="-5.08" y="2.54" length="short"/>
+<pin name="RXD" x="-5.08" y="0" length="short"/>
+<pin name="GND" x="-5.08" y="-2.54" length="short" direction="pwr"/>
+<pin name="VCC" x="-5.08" y="-5.08" length="short" direction="pwr"/>
+<wire x1="-2.54" y1="10.16" x2="-2.54" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-7.62" x2="7.62" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-7.62" x2="7.62" y2="10.16" width="0.254" layer="94"/>
+<wire x1="7.62" y1="10.16" x2="-2.54" y2="10.16" width="0.254" layer="94"/>
+<text x="-2.54" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-2.54" y="12.7" size="1.778" layer="95" align="top-left">&gt;NAME</text>
+</symbol>
+<symbol name="SPARKFUN-OPENLOG">
+<pin name="GRN" x="-7.62" y="7.62" length="short" direction="pwr"/>
+<pin name="RXI" x="-7.62" y="5.08" length="short" direction="in"/>
+<pin name="TXO" x="-7.62" y="2.54" length="short" direction="out"/>
+<pin name="VCC" x="-7.62" y="0" length="short" direction="pwr"/>
+<pin name="GND" x="-7.62" y="-2.54" length="short" direction="pwr"/>
+<pin name="BLK" x="-7.62" y="-5.08" length="short"/>
+<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-7.62" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
+<text x="-5.08" y="12.7" size="1.778" layer="95" align="top-left">&gt;NAME</text>
+<text x="-5.08" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
 </symbols>
 <devicesets>
-<deviceset name="NUCLEO-32" prefix="B">
+<deviceset name="NUCLEO-32" prefix="B" uservalue="yes">
+<description>&lt;h3&gt;NUCLEO-L432KC&lt;/h3&gt;
+
+http://www.st.com/en/evaluation-tools/nucleo-l432kc.html</description>
 <gates>
 <gate name="G$1" symbol="NUCLEO-32" x="0" y="0"/>
 </gates>
@@ -370,6 +441,9 @@ DIN A4, landscape with extra doc field</description>
 </devices>
 </deviceset>
 <deviceset name="BOSCH-BNO055" prefix="B">
+<description>&lt;h3&gt;Adafruit BNO055&lt;/h3&gt;
+
+https://www.adafruit.com/product/2472</description>
 <gates>
 <gate name="G$1" symbol="BOSCH-BNO055" x="0" y="0"/>
 </gates>
@@ -386,6 +460,49 @@ DIN A4, landscape with extra doc field</description>
 <connect gate="G$1" pin="SCL" pad="SCL"/>
 <connect gate="G$1" pin="SDA" pad="SDA"/>
 <connect gate="G$1" pin="VIN" pad="VIN"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="UPUTRONICS-UBLOX-PICO" prefix="B" uservalue="yes">
+<description>&lt;h3&gt;uBLOX MAX-M8C Pico Breakout with Chip Antenna&lt;/h3&gt;
+
+https://store.uputronics.com/index.php?route=product/product&amp;path=60_64&amp;product_id=72</description>
+<gates>
+<gate name="G$1" symbol="UPUTRONICS-UBLOX-PICO" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="UPUTRONICS-UBLOX-PICO">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="RXD" pad="RXD"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="TXD" pad="TXD"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SPARKFUN-OPENLOG" prefix="B" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="SPARKFUN-OPENLOG" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SPARKFUN-OPENLOG">
+<connects>
+<connect gate="G$1" pin="BLK" pad="BLK"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="GRN" pad="GRN"/>
+<connect gate="G$1" pin="RXI" pad="RXI"/>
+<connect gate="G$1" pin="TXO" pad="TXO"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -462,6 +579,8 @@ DIN A4, landscape with extra doc field</description>
 <part name="B2" library="Frcy" deviceset="BOSCH-BNO055" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="B3" library="Frcy" deviceset="UPUTRONICS-UBLOX-PICO" device=""/>
+<part name="B4" library="Frcy" deviceset="SPARKFUN-OPENLOG" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -474,6 +593,8 @@ DIN A4, landscape with extra doc field</description>
 <instance part="B2" gate="G$1" x="190.5" y="119.38"/>
 <instance part="P+1" gate="VCC" x="157.48" y="157.48"/>
 <instance part="GND1" gate="1" x="157.48" y="142.24"/>
+<instance part="B3" gate="G$1" x="182.88" y="91.44"/>
+<instance part="B4" gate="G$1" x="185.42" y="66.04"/>
 </instances>
 <busses>
 </busses>
@@ -493,6 +614,16 @@ DIN A4, landscape with extra doc field</description>
 <pinref part="B2" gate="G$1" pin="VIN"/>
 <wire x1="177.8" y1="124.46" x2="170.18" y2="124.46" width="0.1524" layer="91"/>
 <label x="170.18" y="124.46" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B3" gate="G$1" pin="VCC"/>
+<wire x1="177.8" y1="86.36" x2="170.18" y2="86.36" width="0.1524" layer="91"/>
+<label x="170.18" y="86.36" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B4" gate="G$1" pin="VCC"/>
+<wire x1="177.8" y1="66.04" x2="170.18" y2="66.04" width="0.1524" layer="91"/>
+<label x="170.18" y="66.04" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -515,6 +646,16 @@ DIN A4, landscape with extra doc field</description>
 <pinref part="B2" gate="G$1" pin="GND"/>
 <wire x1="177.8" y1="119.38" x2="170.18" y2="119.38" width="0.1524" layer="91"/>
 <label x="170.18" y="119.38" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B3" gate="G$1" pin="GND"/>
+<wire x1="177.8" y1="88.9" x2="170.18" y2="88.9" width="0.1524" layer="91"/>
+<label x="170.18" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B4" gate="G$1" pin="GND"/>
+<wire x1="177.8" y1="63.5" x2="170.18" y2="63.5" width="0.1524" layer="91"/>
+<label x="170.18" y="63.5" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="IMU-SDA" class="0">
@@ -539,6 +680,98 @@ DIN A4, landscape with extra doc field</description>
 <pinref part="B1" gate="G$1" pin="A6"/>
 <wire x1="132.08" y1="111.76" x2="139.7" y2="111.76" width="0.1524" layer="91"/>
 <label x="139.7" y="111.76" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="GPS-SDA" class="0">
+<segment>
+<pinref part="B3" gate="G$1" pin="SDA"/>
+<wire x1="177.8" y1="99.06" x2="170.18" y2="99.06" width="0.1524" layer="91"/>
+<label x="170.18" y="99.06" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="D4"/>
+<wire x1="106.68" y1="109.22" x2="99.06" y2="109.22" width="0.1524" layer="91"/>
+<label x="99.06" y="109.22" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="GPS-SCL" class="0">
+<segment>
+<pinref part="B3" gate="G$1" pin="SCL"/>
+<wire x1="177.8" y1="96.52" x2="170.18" y2="96.52" width="0.1524" layer="91"/>
+<label x="170.18" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="D5"/>
+<wire x1="106.68" y1="106.68" x2="99.06" y2="106.68" width="0.1524" layer="91"/>
+<label x="99.06" y="106.68" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="LOG-UART" class="0">
+<segment>
+<pinref part="B4" gate="G$1" pin="RXI"/>
+<wire x1="177.8" y1="71.12" x2="170.18" y2="71.12" width="0.1524" layer="91"/>
+<label x="170.18" y="71.12" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="A7"/>
+<wire x1="132.08" y1="114.3" x2="139.7" y2="114.3" width="0.1524" layer="91"/>
+<label x="139.7" y="114.3" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="CDH-TX" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D1"/>
+<wire x1="106.68" y1="124.46" x2="99.06" y2="124.46" width="0.1524" layer="91"/>
+<label x="99.06" y="124.46" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="CDH-RX" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D0"/>
+<wire x1="106.68" y1="121.92" x2="99.06" y2="121.92" width="0.1524" layer="91"/>
+<label x="99.06" y="121.92" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="SPI-MOSI" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D2"/>
+<wire x1="106.68" y1="114.3" x2="99.06" y2="114.3" width="0.1524" layer="91"/>
+<label x="99.06" y="114.3" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="SPI-CS-ADC" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D6"/>
+<wire x1="106.68" y1="104.14" x2="99.06" y2="104.14" width="0.1524" layer="91"/>
+<label x="99.06" y="104.14" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="TEMP-OW" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D9"/>
+<wire x1="106.68" y1="96.52" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
+<label x="99.06" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="SPI-SCK" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="A1"/>
+<wire x1="132.08" y1="99.06" x2="139.7" y2="99.06" width="0.1524" layer="91"/>
+<label x="139.7" y="99.06" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="SPI-MISO" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="A5"/>
+<wire x1="132.08" y1="109.22" x2="139.7" y2="109.22" width="0.1524" layer="91"/>
+<label x="139.7" y="109.22" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="SPI-CS-ENV" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D3"/>
+<wire x1="106.68" y1="111.76" x2="99.06" y2="111.76" width="0.1524" layer="91"/>
+<label x="99.06" y="111.76" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
