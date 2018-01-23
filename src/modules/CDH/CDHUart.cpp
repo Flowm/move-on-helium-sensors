@@ -31,12 +31,13 @@ void CDHUart::processCommand(uint8_t command){
 
 void CDHUart::transmitData(){
     storage->lock();
-    //TODO: Maybe copy the data to avoid blocking during transmission
+    CDHPacket packet = storage->packet;
+    storage->unlock();
+
     calculateChecksum(storage->packet);
     for(uint8_t i = 0; i < sizeof(CDHPacket); i++){
-        cdh.putc(*(((uint8_t*)&storage->packet)+i));
+        cdh.putc(*(((uint8_t*)&packet)+i));
     }
-    storage->unlock();
 }
 
 void CDHUart::calculateChecksum(CDHPacket& data){
