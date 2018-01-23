@@ -17,9 +17,6 @@ void BME680::setup() {
     bme.setGasOn(320, 150); // 320 degree Celsius and 150 milliseconds
     bme.setForcedMode();
 
-    // Configure thread
-    // No static delay in thread loop as update() waits for variable amount of time itself
-    set_update_rate(0);
     // Increase thread priority to fix spi transmission errors caused by thread scheduling
     set_priority(osPriorityAboveNormal);
 }
@@ -29,7 +26,6 @@ void BME680::update() {
     //printf("BME680 status: DF:%d, MF:%d, GF:%d, GI:%d\r\n", status.newDataFlag, status.measuringStatusFlag, status.gasMeasuringStatusFlag, status.gasMeasurementIndex);
 
     if (!status.newDataFlag) {
-        Thread::wait(200);
         return;
     }
 
@@ -47,5 +43,4 @@ void BME680::update() {
     storage->unlock();
 
     bme.setForcedMode();
-    Thread::wait(1000);
 }
