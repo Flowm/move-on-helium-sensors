@@ -1,28 +1,27 @@
 #pragma once
 
 #include <mbed.h>
+#include <modules/SensorThread/SensorThread.hpp>
+#include <modules/Storage/Storage.hpp>
 
 /**
  * Driver for the BNO055 IMU
  */
-class BNO055 {
+class BNO055 : public SensorThread {
 public:
-    BNO055(I2C &i2c) :
-        i2c(i2c)
+    BNO055(I2C &i2c, Storage* storage) :
+        i2c(i2c),
+        storage(storage)
         {};
 
-    /**
-     * Inital sensor config
-     */
-    void setup();
+    void setup() override;
+    void update() override;
 
-    /**
-     * Read sensor data and print it
-     */
-    void read();
+    void getChipId();
 
 private:
     I2C& i2c;
+    Storage* storage;
 
     const int i2c_addr = 0x28 << 1;
     const int chip_id = 0xa0;

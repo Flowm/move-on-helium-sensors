@@ -1,6 +1,13 @@
 #include "BNO055.hpp"
 
 void BNO055::setup() {
+    getChipId();
+}
+
+void BNO055::update() {
+}
+
+void BNO055::getChipId() {
     i2c.write(i2c_addr, &tx_buffer[0], 1);
     i2c.read(i2c_addr, &rx_buffer[0], 1);
     if (rx_buffer[0] == chip_id) {
@@ -10,7 +17,4 @@ void BNO055::setup() {
     }
 
     memset(rx_buffer, 0, sizeof(rx_buffer));
-}
-
-void BNO055::read() {
 }

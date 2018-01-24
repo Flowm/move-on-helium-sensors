@@ -1,29 +1,26 @@
 #pragma once
 
 #include <mbed.h>
-#include "ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h"
+#include <lib/ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h>
+#include <modules/SensorThread/SensorThread.hpp>
+#include <modules/Storage/Storage.hpp>
 
 /**
  * Driver for the BME680 Environmental sensor
  */
-class BME680 {
+class BME680 : public SensorThread {
 public:
-    BME680(SPI &spi, DigitalOut &cs) :
-        bme(spi, cs)
+    BME680(SPI& spi, DigitalOut& cs, Storage* storage) :
+        bme(spi, cs),
+        storage(storage)
         {};
 
-    /**
-     * Inital sensor config
-     */
-    void setup();
-
-    /**
-     * Read sensor data and print it
-     */
-    void read();
+    void setup() override;
+    void update() override;
 
 private:
     ClosedCube_BME680_Mbed bme;
+    Storage* storage;
 
     const int _chip_id = 0x61;
 

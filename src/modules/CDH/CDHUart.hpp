@@ -9,14 +9,16 @@
 
 #include <mbed.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
+#include <modules/Storage/Storage.hpp>
 
 
 #define CDH_BAUD 115200
 
 class CDHUart {
 public:
-    CDHUart(MODSERIAL &cdh) :
-        cdh(cdh)
+    CDHUart(MODSERIAL &cdh, Storage* storage) :
+        cdh(cdh),
+        storage(storage)
         {setup();};
 
 
@@ -28,37 +30,16 @@ private:
     EventQueue queue;
     Thread queue_thread;
 
-    //CDH protocol format.
-    struct OutProtocolHeader {
-        uint8_t opcode;
-    };
-
-    struct InProtocolHeader {
-        uint8_t start;
-        uint8_t status;
-        uint16_t numBytes;
-    };
-
-    struct InProtocolFooter {
-        uint8_t checksum;
-        uint8_t end;
-    };
-
-    // Sensordata Structure.
-    struct SensorData {
-        uint16_t gyro[3];
-    };
-
-    struct CDHPacket {
-        InProtocolHeader header;
-        SensorData data;
-        InProtocolFooter footer;
-    };
+    Storage* storage;
 
     // Dummy Packet!
-    CDHPacket data = {  {0x01,0xFE,sizeof(SensorData)},
-                        {{'a','b','c'}},
-                        {0xFE,0x04}};
+    /*
+     *CDHPacket data = {{0x01, 0xFE, sizeof(SensorData)},
+     *                  {},
+     *                  {0xFE,0x04}
+     *                 };
+     */
+
     void setup();
 
     /**
