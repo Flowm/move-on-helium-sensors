@@ -1,6 +1,6 @@
 #include "BME680.hpp"
 
-void BME680::setup() {
+bool BME680::setup() {
     bme.init(0);
     bme.reset();
 
@@ -9,6 +9,7 @@ void BME680::setup() {
         printf("BME680 CHIP_ID: 0x%02x valid\r\n", chip_id);
     } else {
         printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
+        return false;
     }
 
     // Configure sensor
@@ -19,6 +20,8 @@ void BME680::setup() {
 
     // Increase thread priority to fix spi transmission errors caused by thread scheduling
     set_priority(osPriorityAboveNormal);
+
+    return true;
 }
 
 void BME680::update() {

@@ -19,7 +19,7 @@ public:
     /**
      * Inital sensor config
      */
-    virtual void setup() = 0;
+    virtual bool setup() = 0;
 
     /**
      * Read sensor data and update datastructure

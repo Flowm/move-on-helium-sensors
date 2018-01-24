@@ -14,10 +14,10 @@ public:
         storage(storage)
         {};
 
-    void setup() override;
+    bool setup() override;
     void update() override;
 
-    void getChipId();
+    bool getChipId();
 
 private:
     I2C& i2c;

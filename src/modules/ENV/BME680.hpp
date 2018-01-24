@@ -15,7 +15,7 @@ public:
         storage(storage)
         {};
 
-    void setup() override;
+    bool setup() override;
     void update() override;
 
 private:

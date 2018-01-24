@@ -1,8 +1,10 @@
 #include "SensorThread.hpp"
 
 void SensorThread::start() {
-    setup();
-    _thread.start(callback(this, &SensorThread::loop));
+    if (setup()) {
+        // Start thread if setup was successful
+        _thread.start(callback(this, &SensorThread::loop));
+    }
 }
 
 void SensorThread::loop() {
