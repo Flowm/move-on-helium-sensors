@@ -56,14 +56,14 @@ struct OutProtocolHeader {
 } __attribute__((packed));
 
 struct InProtocolHeader {
-    uint8_t start;
+    uint8_t start = 0x01;
     uint8_t status;
     uint16_t numBytes;
 } __attribute__((packed));
 
 struct InProtocolFooter {
     uint8_t checksum;
-    uint8_t end;
+    uint8_t end = 0x04;
 } __attribute__((packed));
 
 struct CDHPacket {
