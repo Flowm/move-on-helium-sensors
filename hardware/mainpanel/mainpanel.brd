@@ -314,6 +314,54 @@ vertical</description>
 <rectangle x1="3.5719" y1="-0.2381" x2="4.0481" y2="0.2381" layer="51"/>
 <rectangle x1="1.0319" y1="-0.2381" x2="1.5081" y2="0.2381" layer="51"/>
 </package>
+<package name="90136-1?06">
+<description>&lt;b&gt;C-Grid III&lt;/b&gt;&lt;p&gt;
+vertical</description>
+<wire x1="9.2075" y1="-2.8575" x2="9.2075" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="9.2075" y1="3.4925" x2="8.255" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="8.255" y1="3.4925" x2="8.255" y2="2.8575" width="0.254" layer="21"/>
+<wire x1="8.255" y1="2.8575" x2="7.9375" y2="2.54" width="0.254" layer="21" curve="-90.036103"/>
+<wire x1="7.9375" y1="2.54" x2="1.27" y2="2.54" width="0.254" layer="21"/>
+<wire x1="1.27" y1="2.54" x2="0.9525" y2="2.8575" width="0.254" layer="21" curve="-90"/>
+<wire x1="0.9525" y1="2.8575" x2="0.9525" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="0.9525" y1="3.4925" x2="-0.9525" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="-0.9525" y1="3.4925" x2="-0.9525" y2="2.8575" width="0.254" layer="21"/>
+<wire x1="-0.9525" y1="2.8575" x2="-1.27" y2="2.54" width="0.254" layer="21" curve="-90"/>
+<wire x1="-1.27" y1="2.54" x2="-7.9375" y2="2.54" width="0.254" layer="21"/>
+<wire x1="-7.9375" y1="2.54" x2="-8.255" y2="2.8575" width="0.254" layer="21" curve="-90.036103"/>
+<wire x1="-8.255" y1="2.8575" x2="-8.255" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="-8.255" y1="3.4925" x2="-9.2075" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="-9.2075" y1="3.4925" x2="-9.2075" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="-9.2075" y1="-2.8575" x2="-2.54" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="-2.54" y1="-2.8575" x2="-2.2225" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="-2.2225" y1="-3.81" x2="2.2225" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="2.2225" y1="-3.81" x2="2.54" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="2.54" y1="-2.8575" x2="9.2075" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="-8.5725" y1="1.5875" x2="-8.5725" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="8.5725" y1="1.5875" x2="8.5725" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="-8.5725" y1="1.5875" x2="8.5725" y2="1.5875" width="0.0508" layer="51"/>
+<wire x1="-8.5725" y1="-2.2225" x2="-2.2225" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="-2.2225" y1="-2.2225" x2="2.2225" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="2.2225" y1="-2.2225" x2="8.5725" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="1.905" y1="-3.175" x2="-1.905" y2="-3.175" width="0.0508" layer="51"/>
+<wire x1="-2.2225" y1="-2.2225" x2="-1.905" y2="-3.175" width="0.0508" layer="51"/>
+<wire x1="2.2225" y1="-2.2225" x2="1.905" y2="-3.175" width="0.0508" layer="51"/>
+<pad name="3" x="-1.27" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="2" x="-3.81" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="1" x="-6.35" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="4" x="1.27" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="5" x="3.81" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="6" x="6.35" y="0" drill="1.016" shape="long" rot="R90"/>
+<text x="-9.525" y="-2.54" size="1.016" layer="25" ratio="18" rot="R90">&gt;NAME</text>
+<text x="-8.5725" y="3.81" size="0.8128" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-7.9375" y="-1.5875" size="0.8128" layer="51" ratio="10">1</text>
+<rectangle x1="-4.0481" y1="-0.2381" x2="-3.5719" y2="0.2381" layer="51"/>
+<rectangle x1="-6.5881" y1="-0.2381" x2="-6.1119" y2="0.2381" layer="51"/>
+<rectangle x1="1.0319" y1="-0.2381" x2="1.5081" y2="0.2381" layer="51"/>
+<rectangle x1="-1.5081" y1="-0.2381" x2="-1.0319" y2="0.2381" layer="51"/>
+<rectangle x1="3.5719" y1="-0.2381" x2="4.0481" y2="0.2381" layer="51"/>
+<rectangle x1="6.1119" y1="-0.2381" x2="6.5881" y2="0.2381" layer="51"/>
+</package>
 <package name="90136-1?08">
 <description>&lt;b&gt;C-Grid III&lt;/b&gt;&lt;p&gt;
 vertical</description>
@@ -458,12 +506,12 @@ design rules under a new name.
 </designrules>
 <autorouter>
 <pass name="Default">
-<param name="RoutingGrid" value="50mil"/>
+<param name="RoutingGrid" value="0.125mm"/>
 <param name="AutoGrid" value="1"/>
 <param name="Efforts" value="1"/>
 <param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
-<param name="PrefDir.1" value="a"/>
+<param name="PrefDir.1" value="*"/>
 <param name="PrefDir.2" value="0"/>
 <param name="PrefDir.3" value="0"/>
 <param name="PrefDir.4" value="0"/>
@@ -478,7 +526,7 @@ design rules under a new name.
 <param name="PrefDir.13" value="0"/>
 <param name="PrefDir.14" value="0"/>
 <param name="PrefDir.15" value="0"/>
-<param name="PrefDir.16" value="a"/>
+<param name="PrefDir.16" value="*"/>
 <param name="cfVia" value="8"/>
 <param name="cfNonPref" value="5"/>
 <param name="cfChangeDir" value="2"/>
@@ -553,34 +601,36 @@ design rules under a new name.
 </pass>
 </autorouter>
 <elements>
-<element name="B1" library="Frcy" package="NUCLEO-32" value="" x="48.4" y="36.86" rot="R270"/>
+<element name="B1" library="Frcy" package="NUCLEO-32" value="" x="47.4" y="36.86" rot="R270"/>
 <element name="B2" library="Frcy" package="BOSCH-BNO055" value="BOSCH-BNO055" x="39.67" y="15.77" rot="R180"/>
 <element name="B3" library="Frcy" package="UPUTRONICS-UBLOX-PICO" value="" x="58" y="48"/>
 <element name="B4" library="Frcy" package="SPARKFUN-OPENLOG" value="" x="66" y="16" rot="R180"/>
-<element name="J1" library="con-molex-c-grid" package="90136-1?04" value="90136-104" x="46" y="72"/>
-<element name="J2" library="con-molex-c-grid" package="90136-1?04" value="90136-104" x="29" y="72"/>
-<element name="J3" library="con-molex-c-grid" package="90136-1?04" value="90136-104" x="12" y="41" rot="R90"/>
-<element name="J4" library="con-molex-c-grid" package="90136-1?08" value="90136-108" x="12" y="19" rot="R90"/>
+<element name="J2" library="con-molex-c-grid" package="90136-1?04" value="90136-104" x="34" y="72"/>
+<element name="J3" library="con-molex-c-grid" package="90136-1?04" value="90136-104" x="50" y="72"/>
+<element name="J1" library="con-molex-c-grid" package="90136-1?06" value="90136-106" x="15" y="72"/>
+<element name="J4" library="con-molex-c-grid" package="90136-1?08" value="90136-108" x="10" y="28" rot="R90"/>
+<element name="J5" library="con-molex-c-grid" package="90136-1?04" value="90136-104" x="10" y="51" rot="R270"/>
 </elements>
 <signals>
-<signal name="3V3">
-<contactref element="B1" pad="3V3"/>
-</signal>
 <signal name="5V">
 <contactref element="B1" pad="5V"/>
 </signal>
 <signal name="VCC">
-<contactref element="B1" pad="VIN"/>
 <contactref element="B2" pad="VIN"/>
 <contactref element="B3" pad="VCC"/>
 <contactref element="B4" pad="VCC"/>
-<contactref element="J1" pad="4"/>
 <contactref element="J2" pad="4"/>
-<wire x1="64.91" y1="29.24" x2="71.97" y2="49.27" width="0" layer="19" extent="1-1"/>
-<wire x1="64.73" y1="24.128" x2="64.91" y2="29.24" width="0" layer="19" extent="1-1"/>
+<contactref element="B1" pad="3V3"/>
+<contactref element="J1" pad="2"/>
+<contactref element="J4" pad="8"/>
+<contactref element="J5" pad="4"/>
+<wire x1="64.73" y1="24.128" x2="71.97" y2="49.27" width="0" layer="19" extent="1-1"/>
 <wire x1="46.02" y1="24.66" x2="64.73" y2="24.128" width="0" layer="19" extent="1-1"/>
-<wire x1="49.81" y1="72" x2="71.97" y2="49.27" width="0" layer="19" extent="1-1"/>
-<wire x1="32.81" y1="72" x2="49.81" y2="72" width="0" layer="19" extent="1-1"/>
+<wire x1="30.89" y1="29.24" x2="46.02" y2="24.66" width="0" layer="19" extent="1-1"/>
+<wire x1="10" y1="36.89" x2="30.89" y2="29.24" width="0" layer="19" extent="1-1"/>
+<wire x1="10" y1="47.19" x2="10" y2="36.89" width="0" layer="19" extent="1-1"/>
+<wire x1="11.19" y1="72" x2="10" y2="47.19" width="0" layer="19" extent="1-1"/>
+<wire x1="37.81" y1="72" x2="11.19" y2="72" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GND">
 <contactref element="B1" pad="GND@2"/>
@@ -600,19 +650,23 @@ design rules under a new name.
 </polygon>
 <contactref element="B3" pad="GND"/>
 <contactref element="B4" pad="GND"/>
-<contactref element="J1" pad="1"/>
 <contactref element="J2" pad="1"/>
 <contactref element="J2" pad="3"/>
+<contactref element="J1" pad="1"/>
+<contactref element="J1" pad="5"/>
+<contactref element="J1" pad="6"/>
+<contactref element="J4" pad="5"/>
+<contactref element="J5" pad="1"/>
 </signal>
 <signal name="IMU-SDA">
 <contactref element="B2" pad="SDA"/>
 <contactref element="B1" pad="D12"/>
-<wire x1="38.4" y1="24.66" x2="29.35" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="38.4" y1="24.66" x2="28.35" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IMU-SCL">
 <contactref element="B2" pad="SCL"/>
 <contactref element="B1" pad="A6"/>
-<wire x1="35.86" y1="24.66" x2="52.21" y2="29.24" width="0" layer="19" extent="1-1"/>
+<wire x1="35.86" y1="24.66" x2="51.21" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GRN">
 <contactref element="B4" pad="GRN"/>
@@ -620,83 +674,98 @@ design rules under a new name.
 <signal name="GPS-SDA">
 <contactref element="B3" pad="SDA"/>
 <contactref element="B1" pad="D4"/>
-<wire x1="49.67" y1="44.48" x2="59.27" y2="49.27" width="0" layer="19" extent="1-1"/>
+<wire x1="48.67" y1="44.48" x2="59.27" y2="49.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPS-SCL">
 <contactref element="B3" pad="SCL"/>
 <contactref element="B1" pad="D5"/>
-<wire x1="47.13" y1="44.48" x2="61.81" y2="49.27" width="0" layer="19" extent="1-1"/>
+<wire x1="46.13" y1="44.48" x2="61.81" y2="49.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="LOG-UART">
 <contactref element="B4" pad="RXI"/>
 <contactref element="B1" pad="A7"/>
-<wire x1="54.75" y1="29.24" x2="69.81" y2="24.128" width="0" layer="19" extent="1-1"/>
+<wire x1="53.75" y1="29.24" x2="69.81" y2="24.128" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CDH-TX">
 <contactref element="B1" pad="D1/TX"/>
-<contactref element="J1" pad="2"/>
-<wire x1="64.91" y1="44.48" x2="44.73" y2="72" width="0" layer="19" extent="1-1"/>
+<contactref element="J1" pad="3"/>
+<wire x1="13.73" y1="72" x2="63.91" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CDH-RX">
 <contactref element="B1" pad="D0/RX"/>
-<contactref element="J1" pad="3"/>
-<wire x1="62.37" y1="44.48" x2="47.27" y2="72" width="0" layer="19" extent="1-1"/>
+<contactref element="J1" pad="4"/>
+<wire x1="16.27" y1="72" x2="61.37" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-MOSI">
 <contactref element="B1" pad="D2"/>
+<contactref element="J4" pad="7"/>
+<wire x1="10" y1="34.35" x2="53.75" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="SPI-CS-ADC">
+<signal name="SPI-CS-ADCS">
 <contactref element="B1" pad="D6"/>
+<contactref element="J4" pad="2"/>
+<wire x1="10" y1="21.65" x2="43.59" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="TEMP-OW">
 <contactref element="B1" pad="D9"/>
 <contactref element="J2" pad="2"/>
-<wire x1="36.97" y1="44.48" x2="27.73" y2="72" width="0" layer="19" extent="1-1"/>
+<wire x1="35.97" y1="44.48" x2="32.73" y2="72" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-SCK">
 <contactref element="B1" pad="A1"/>
+<contactref element="J4" pad="4"/>
+<wire x1="10" y1="26.73" x2="38.51" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-MISO">
 <contactref element="B1" pad="A5"/>
+<contactref element="J4" pad="6"/>
+<wire x1="10" y1="31.81" x2="48.67" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-CS-ENV">
 <contactref element="B1" pad="D3"/>
-</signal>
-<signal name="N$1">
-<contactref element="J3" pad="1"/>
-</signal>
-<signal name="N$2">
-<contactref element="J3" pad="2"/>
-</signal>
-<signal name="N$3">
-<contactref element="J3" pad="3"/>
-</signal>
-<signal name="N$4">
-<contactref element="J3" pad="4"/>
-</signal>
-<signal name="N$5">
 <contactref element="J4" pad="1"/>
+<wire x1="10" y1="19.11" x2="51.21" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$6">
-<contactref element="J4" pad="2"/>
+<signal name="DBG-RX">
+<contactref element="J3" pad="3"/>
+<contactref element="B1" pad="A2"/>
+<wire x1="41.05" y1="29.24" x2="51.27" y2="72" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$7">
+<signal name="DBG-TX">
+<contactref element="J3" pad="4"/>
+<contactref element="B1" pad="A0"/>
+<wire x1="35.97" y1="29.24" x2="53.81" y2="72" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="VIN">
+<contactref element="B1" pad="VIN"/>
+</signal>
+<signal name="N$13">
+<contactref element="B1" pad="RST@2"/>
+</signal>
+<signal name="GPS-TX">
+<contactref element="B3" pad="TXD"/>
+<contactref element="J3" pad="2"/>
+<wire x1="64.35" y1="49.27" x2="48.73" y2="72" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="GPS-RX">
+<contactref element="B3" pad="RXD"/>
+<contactref element="J3" pad="1"/>
+<wire x1="66.89" y1="49.27" x2="46.19" y2="72" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="SPI-CS-SUN">
+<contactref element="B1" pad="D10"/>
 <contactref element="J4" pad="3"/>
+<wire x1="10" y1="24.19" x2="33.43" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$8">
-<contactref element="J4" pad="4"/>
+<signal name="SUN-RX">
+<contactref element="B1" pad="A4"/>
+<contactref element="J5" pad="2"/>
+<wire x1="10" y1="52.27" x2="46.13" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$9">
-<contactref element="J4" pad="5"/>
-</signal>
-<signal name="N$10">
-<contactref element="J4" pad="6"/>
-</signal>
-<signal name="N$11">
-<contactref element="J4" pad="7"/>
-</signal>
-<signal name="N$12">
-<contactref element="J4" pad="8"/>
+<signal name="SUN-TX">
+<contactref element="B1" pad="A3"/>
+<contactref element="J5" pad="3"/>
+<wire x1="10" y1="49.73" x2="43.59" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
