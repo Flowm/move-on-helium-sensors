@@ -857,12 +857,12 @@ vertical</description>
 </classes>
 <parts>
 <part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="DINA4_L" device=""/>
-<part name="B1" library="Frcy" deviceset="NUCLEO-32" device=""/>
+<part name="B1" library="Frcy" deviceset="NUCLEO-32" device="" value="NUCLEO-32"/>
 <part name="B2" library="Frcy" deviceset="BOSCH-BNO055" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="B3" library="Frcy" deviceset="UPUTRONICS-UBLOX-PICO" device=""/>
-<part name="B4" library="Frcy" deviceset="SPARKFUN-OPENLOG" device=""/>
+<part name="B3" library="Frcy" deviceset="UPUTRONICS-UBLOX-PICO" device="" value="UPUTRONICS-UBLOX-PICO"/>
+<part name="B4" library="Frcy" deviceset="SPARKFUN-OPENLOG" device="" value="SPARKFUN-OPENLOG"/>
 <part name="J2" library="con-molex-c-grid" deviceset="90136-1?04" device=""/>
 <part name="J3" library="con-molex-c-grid" deviceset="90136-1?04" device=""/>
 <part name="J1" library="con-molex-c-grid" deviceset="90136-1?06" device=""/>
