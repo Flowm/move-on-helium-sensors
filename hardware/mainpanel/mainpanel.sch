@@ -4958,6 +4958,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <part name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="M2012" package3d_urn="urn:adsk.eagle:package:26082/1" value="4.7k"/>
 <part name="U1" library="Frcy" deviceset="DS18B20" device=""/>
 <part name="U2" library="Frcy" deviceset="DS18B20" device=""/>
+<part name="R2" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="M2012" package3d_urn="urn:adsk.eagle:package:26082/1" value="4.7k"/>
 </parts>
 <sheets>
 <sheet>
@@ -4980,6 +4981,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <instance part="R1" gate="G$1" x="119.38" y="73.66" rot="R90"/>
 <instance part="U1" gate="G$1" x="144.78" y="91.44"/>
 <instance part="U2" gate="G$1" x="144.78" y="68.58"/>
+<instance part="R2" gate="G$1" x="154.94" y="157.48" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -5041,6 +5043,11 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="132.08" y1="78.74" x2="119.38" y2="78.74" width="0.1524" layer="91"/>
 <junction x="132.08" y="78.74"/>
+</segment>
+<segment>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="154.94" y1="162.56" x2="162.56" y2="162.56" width="0.1524" layer="91"/>
+<label x="162.56" y="162.56" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -5309,12 +5316,6 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <label x="144.78" y="129.54" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="N$13" class="0">
-<segment>
-<pinref part="B1" gate="G$1" pin="RST@2"/>
-<wire x1="137.16" y1="152.4" x2="152.4" y2="152.4" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="GPS-TX" class="0">
 <segment>
 <pinref part="B3" gate="G$1" pin="TXD"/>
@@ -5373,6 +5374,13 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <pinref part="J5" gate="G$1" pin="3"/>
 <wire x1="55.88" y1="55.88" x2="63.5" y2="55.88" width="0.1524" layer="91"/>
 <label x="63.5" y="55.88" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="RST@2"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="137.16" y1="152.4" x2="154.94" y2="152.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
