@@ -53,10 +53,6 @@ private:
     Storage storage;
     CDHUart cdhuart;
 
-    // CDH data
-    Storage storage;
-    CDHUart cdhuart;
-
     // Sensors
     BNO055IMU imu;
     BME680 env;
