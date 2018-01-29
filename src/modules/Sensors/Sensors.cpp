@@ -31,7 +31,7 @@ void Sensors::log() {
                   data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
                   data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
                   data->imu.quaternion.r, data->imu.quaternion.i, data->imu.quaternion.j, data->imu.quaternion.k,
-                  data->imu.orientation.h, data->imu.orientation.r, data->imu.orientation.p
+                  data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z
                  );
     storage.unlock();
 }

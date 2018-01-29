@@ -9,11 +9,6 @@ struct SensorVector {
             float y;
             float z;
         };
-        struct {
-            float h;
-            float r;
-            float p;
-        };
     };
 } __attribute__((packed));
 
