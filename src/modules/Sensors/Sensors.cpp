@@ -16,12 +16,15 @@ void Sensors::loop() {
 void Sensors::log() {
     storage.lock();
     SensorData* data = storage.data;
-    logger.printf("D=ENV,T=%4.2f,H=%4.2f;P=%6.2f;G=%6.3f "
-                  "ACCEL x=%4.2f, y=%4.2f, z=%4.2f "
-                  "MAG x=%4.2f, y=%4.2f, z=%4.2f "
-                  "GYRO x=%4.2f, y=%4.2f, z=%4.2f "
-                  "QUAT w=%4.2f, x=%4.2f, y=%4.2f, z=%4.2f "
-                  "ANGLES h=%4.2f, r=%4.2f, p=%4.2f "
+    logger.printf("D=ENV,"
+                  "T=%4.2f,H=%4.2f,P=%6.2f,G=%6.3f"
+                  "\r\n"
+                  "D=IMU,"
+                  "ACC_X=%4.2f,ACC_Y=%4.2f,ACC_Z=%4.2f,"
+                  "MAG_X=%4.2f,MAG_Y=%4.2f,MAG_Z=%4.2f,"
+                  "GYRO_X=%4.2f,GYRO_Y=%4.2f,GYRO_Z=%4.2f,"
+                  "QUAT_R=%4.2f,QUAT_I=%4.2f,QUAT_J=%4.2f,QUAT_K=%4.2f,"
+                  "ANG_X=%4.2f,ANG_Y=%4.2f,ANG_Z=%4.2f"
                   "\r\n",
                   data->env.temperature,
                   data->env.humidity,

@@ -18,16 +18,17 @@ bool BNO055IMU::setup() {
 
     if (impl.chip_ready() == 0)
     {
-        printf("Bosch BNO055 is NOT available!!\r\n");
+        printf("BNO055 is NOT available!!\r\n");
         return false;
     }
 
-    printf("CHIP:0x%02x, ACC:0x%02x, MAG:0x%02x, GYR:0x%02x, SW:0x%04x, BL:0x%02x\r\n",
+    printf(
+        "BNO055 CHIP:0x%02x, ACC:0x%02x, MAG:0x%02x, GYR:0x%02x, SW:0x%04x, BL:0x%02x\r\n",
         id_info.chip_id, id_info.acc_id, id_info.mag_id,
         id_info.gyr_id, id_info.sw_rev_id, id_info.bootldr_rev_id);
 
     impl.get_chip_temperature(&temp);
-    printf("TEMP acc_chip: %d, gyr_chip: %d\r\n", temp.acc_chip, temp.gyr_chip);
+    printf("BNO055 TEMP acc_chip: %d, gyr_chip: %d\r\n", temp.acc_chip, temp.gyr_chip);
 }
 
 void BNO055IMU::update() {
@@ -69,43 +70,14 @@ void BNO055IMU::update() {
     storage->data->imu.quaternion.k = quaternion.z;
     // TODO: gravity?
     // TODO: lin_accel?
-
-    // printf(
-    //     "[S] "
-    //     "ACCEL x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "MAG x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "GYRO x:%4.2f, y:%4.2f, z:%4.2f "
-    //     // "GRAVITY x:%4.2f, y:%4.2f, z:%4.2f "
-    //     // "LIN_ACC x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "QUAT w:%4.2f, x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "ANGLES h:%4.2f, r:%4.2f, p:%4.2f "
-    //     "\r\n",
-    //     storage->data->imu.accel.x, storage->data->imu.accel.y, storage->data->imu.accel.z,
-    //     storage->data->imu.mag.x, storage->data->imu.mag.y, storage->data->imu.mag.z,
-    //     storage->data->imu.gyro.x, storage->data->imu.gyro.y, storage->data->imu.gyro.z,
-    //     // gravity.x, gravity.y, gravity.z,
-    //     // lin_accel.x, lin_accel.y, lin_accel.z,
-    //     storage->data->imu.quaternion.r, storage->data->imu.quaternion.i, storage->data->imu.quaternion.j, storage->data->imu.quaternion.k,
-    //     storage->data->imu.orientation.h, storage->data->imu.orientation.r, storage->data->imu.orientation.p
-    // );
     storage->unlock();
 
     // printf(
-    //     "[D] "
-    //     "ACCEL x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "MAG x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "GYRO x:%4.2f, y:%4.2f, z:%4.2f "
-    //     // "GRAVITY x:%4.2f, y:%4.2f, z:%4.2f "
-    //     // "LIN_ACC x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "QUAT w:%4.2f, x:%4.2f, y:%4.2f, z:%4.2f "
-    //     "ANGLES h:%4.2f, r:%4.2f, p:%4.2f "
+    //     "BNO055"
+    //     " GRA_x=%4.2f, GRA_y=%4.2f, GRA_z=%4.2f "
+    //     " LIN_ACC_x:%4.2f, LIN_ACC_y:%4.2f, LIN_ACC_z:%4.2f "
     //     "\r\n",
-    //     accel.x, accel.y, accel.z,
-    //     mag.x, mag.y, mag.z,
-    //     gyro.x, gyro.y, gyro.z,
-    //     // gravity.x, gravity.y, gravity.z,
-    //     // lin_accel.x, lin_accel.y, lin_accel.z,
-    //     quaternion.w, quaternion.x, quaternion.y, quaternion.z,
-    //     angles.h, angles.r, angles.p
+    //     gravity.x, gravity.y, gravity.z,
+    //     lin_accel.x, lin_accel.y, lin_accel.z
     // );
 }
