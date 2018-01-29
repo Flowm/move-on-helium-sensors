@@ -53,5 +53,4 @@ private:
     BNO055IMU imu;
     BME680 env;
     MPC320X adc;
-
 };

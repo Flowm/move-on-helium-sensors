@@ -16,9 +16,8 @@ bool BNO055IMU::setup() {
     }
 
 
-    if (impl.chip_ready() == 0)
-    {
-        printf("BNO055 is NOT available!!\r\n");
+    if (impl.chip_ready() == 0) {
+        printf("BNO055 is NOT available!\r\n");
         return false;
     }
 
