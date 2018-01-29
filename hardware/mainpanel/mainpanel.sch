@@ -7985,8 +7985,8 @@ Source: AVX .. aphvc.pdf</description>
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0.8128" drill="0.8">
-<clearance class="0" value="0.4064"/>
+<class number="0" name="default" width="0.2" drill="0.4">
+<clearance class="0" value="0.2"/>
 </class>
 </classes>
 <parts>
