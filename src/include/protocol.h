@@ -52,8 +52,8 @@ struct SensorIMU {
 struct SensorTemp
 {
     float temp;
-    char rom[8];
-};
+//    char rom[8];
+}__attribute__((packed));
 
 struct SensorData {
     SensorGPS gps;

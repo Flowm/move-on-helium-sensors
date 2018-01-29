@@ -9,7 +9,6 @@
 #include <modules/Temperature/DS18B20.hpp>
 
 #include <lib/MODSERIAL/MODSERIAL.h>
-#include <lib/DS1820/DS1820.h>
 
 class Sensors {
 public:
