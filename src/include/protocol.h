@@ -42,6 +42,8 @@ struct SensorIMU {
     SensorVector mag;
     SensorVector orientation;
     SensorQuaternion quaternion;
+    int8_t temp_accel;
+    int8_t temp_gyro;
 } __attribute__((packed));
 
 struct SensorData {
