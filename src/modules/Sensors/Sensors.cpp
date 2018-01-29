@@ -23,7 +23,7 @@ void Sensors::log() {
                   "ACC_X=%4.2f,ACC_Y=%4.2f,ACC_Z=%4.2f,"
                   "MAG_X=%4.2f,MAG_Y=%4.2f,MAG_Z=%4.2f,"
                   "GYRO_X=%4.2f,GYRO_Y=%4.2f,GYRO_Z=%4.2f,"
-                  "QUAT_R=%4.2f,QUAT_I=%4.2f,QUAT_J=%4.2f,QUAT_K=%4.2f,"
+                  "QUAT_W=%4.2f,QUAT_X=%4.2f,QUAT_Y=%4.2f,QUAT_Z=%4.2f,"
                   "ANG_X=%4.2f,ANG_Y=%4.2f,ANG_Z=%4.2f"
                   "\r\n",
                   data->env.temperature,
@@ -33,7 +33,7 @@ void Sensors::log() {
                   data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
                   data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
                   data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
-                  data->imu.quaternion.r, data->imu.quaternion.i, data->imu.quaternion.j, data->imu.quaternion.k,
+                  data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
                   data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z
                  );
     storage.unlock();
