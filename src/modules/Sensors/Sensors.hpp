@@ -5,7 +5,9 @@
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
+#include <modules/Storage/Storage.hpp>
 #include <modules/Temperature/DS18B20.hpp>
+
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/DS1820/DS1820.h>
 
