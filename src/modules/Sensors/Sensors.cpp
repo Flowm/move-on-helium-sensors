@@ -4,6 +4,7 @@ void Sensors::setup() {
     printf("\r\nRESET\r\n");
     imu.start();
     env.start();
+    temperature.start();
 }
 
 
@@ -42,7 +43,7 @@ void Sensors::log() {
                  );
     logger.printf("D= TMP ");
     for(int i = 0; i < temperature.getNumDevices(); i++) {
-    	logger.printf(", T%d = %f ", i, data->temp[i].temp);
+        logger.printf(", T%d = %f ", i, data->temp[i].temp);
     }
     logger.printf("\r\n");
     storage.unlock();
