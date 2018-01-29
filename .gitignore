@@ -21,3 +21,5 @@ makefile.defs
 makefile.targets
 move-on-helium-sensors Run.cfg
 
+#Sublime Projects
+*.sublime*

@@ -1,5 +1,8 @@
 #pragma once
 
+// Define max temp sensors for temperatures array.
+#define MAX_TEMP_SENSORS 8
+
 // Generic
 struct SensorVector {
     union {
@@ -46,10 +49,17 @@ struct SensorIMU {
     int8_t temp_gyro;
 } __attribute__((packed));
 
+struct SensorTemp
+{
+    float temp;
+    char rom[8];
+};
+
 struct SensorData {
     SensorGPS gps;
     SensorENV env;
     SensorIMU imu;
+    SensorTemp temp[MAX_TEMP_SENSORS];
 } __attribute__((packed));
 
 // CDH protocol format

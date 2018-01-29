@@ -7,27 +7,46 @@
 
 #include <modules/Temperature/DS18B20.hpp>
 
-void DS18B20::setup(){
+bool DS18B20::setup(){
+
+    // Update once every 2 seconds. Since the sensors need ~700 ms to convert
+    // one temperature.
+    set_update_rate(2000);
 
     while(DS1820::unassignedProbe(dataPin)) {
         sensors[numDevices] = new DS1820(dataPin);
         numDevices++;
-        if (numDevices == MAX_SENSORS)
+        if (numDevices == MAX_TEMP_SENSORS)
             break;
     }
-    sensors[0]->convertTemperature(false, DS1820::all_devices); //Start temperature conversion, wait until ready
-    printf("Found %d device(s)\r\n\n", numDevices);
+
+    sensors[0]->convertTemperature(false, DS1820::all_devices);
+
+    printf("Found %d DS18B20 sensors\r\n", numDevices);
+
+    return numDevices;
 }
 
-void DS18B20::print_all(){
-    for (int i = 0; i< numDevices; i++)
-        logger.printf("Device %d returns %foC\r\n", i, sensors[i]->temperature());
-    printf("\r\n");
-    sensors[0]->convertTemperature(false, DS1820::all_devices); //Start temperature conversion, wait until ready
+void DS18B20::update(){
+
+    storage->lock();
+    for (int i = 0; i< numDevices; i++){
+        storage->data->temp[i].temp = sensors[i]->temperature();
+//        storage->data->temp[i].rom  = sensors[i]->getROM();
+    }
+    storage->unlock();
+
+    //Start temperature conversion, wait until ready
+    sensors[0]->convertTemperature(false, DS1820::all_devices);
+}
+
+
+uint8_t DS18B20::getNumDevices()  {
+    return numDevices;
 }
 
 DS18B20::~DS18B20(){
     for(uint8_t i = 0; i < numDevices; i++){
-        free(sensors[i]);
+        delete(sensors[i]);
     }
 }

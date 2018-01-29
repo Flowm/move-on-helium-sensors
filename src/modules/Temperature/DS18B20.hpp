@@ -9,27 +9,32 @@
 
 #include <mbed.h>
 #include <lib/DS1820/DS1820.h>
+#include <modules/Storage/Storage.hpp>
+#include <modules/SensorThread/SensorThread.hpp>
 
-#define MAX_SENSORS 16
-
-
-class DS18B20 {
+class DS18B20: public SensorThread {
 public:
-    DS18B20(PinName dataPin, Serial& logger):
+    DS18B20(PinName dataPin, Storage* storage):
     dataPin(dataPin),
-    logger(logger)
+    storage(storage)
     {setup();};
 
-    void print_all();
+    bool setup() override;
+    void update() override;
+
+    /**
+     * Get the Number of devices connected on the OneWire bus.
+     */
+    uint8_t getNumDevices();
+
     ~DS18B20();
 private:
     PinName dataPin;
-    Serial& logger; // For debugging. Normal printf doesnt support floats!
+
+    Storage* storage;
 
     //Array to hold the individual sensors
-    DS1820* sensors[MAX_SENSORS];
+    DS1820* sensors[MAX_TEMP_SENSORS];
     uint8_t numDevices = 0;
-    void setup();
-
 };
 

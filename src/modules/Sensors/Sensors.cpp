@@ -40,5 +40,10 @@ void Sensors::log() {
                   data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
                   data->imu.temp_accel, data->imu.temp_gyro
                  );
+    logger.printf("D= TMP ");
+    for(int i = 0; i < temperature.getNumDevices(); i++) {
+    	logger.printf(", T%d = %f ", i, data->temp[i].temp);
+    }
+    logger.printf("\r\n");
     storage.unlock();
 }
