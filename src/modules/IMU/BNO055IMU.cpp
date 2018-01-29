@@ -1,7 +1,6 @@
 #include "BNO055IMU.hpp"
 
 BNO055_ID_INF_TypeDef bno055_id_inf;
-BNO055_TEMPERATURE_TypeDef temp;
 
 bool BNO055IMU::setup() {
 
@@ -26,9 +25,6 @@ bool BNO055IMU::setup() {
         id_info.chip_id, id_info.acc_id, id_info.mag_id,
         id_info.gyr_id, id_info.sw_rev_id, id_info.bootldr_rev_id);
 
-    impl.get_chip_temperature(&temp);
-    printf("BNO055 TEMP acc_chip: %d, gyr_chip: %d\r\n", temp.acc_chip, temp.gyr_chip);
-
     return true;
 }
 
@@ -43,6 +39,8 @@ void BNO055IMU::update() {
     BNO055_QUATERNION_TypeDef quaternion;
     BNO055_EULER_TypeDef angles;
 
+    BNO055_TEMPERATURE_TypeDef temp;
+
     impl.get_accel(&accel);
     impl.get_mag(&mag);
     impl.get_gyro(&gyro);
@@ -51,6 +49,8 @@ void BNO055IMU::update() {
     impl.get_linear_accel(&lin_accel);
     impl.get_quaternion(&quaternion);
     impl.get_euler_angles(&angles);
+
+    impl.get_chip_temperature(&temp);
 
     storage->lock();
     storage->data->imu.accel.x = accel.x;
@@ -69,6 +69,8 @@ void BNO055IMU::update() {
     storage->data->imu.quaternion.x = quaternion.x;
     storage->data->imu.quaternion.y = quaternion.y;
     storage->data->imu.quaternion.z = quaternion.z;
+    storage->data->imu.temp_accel = temp.acc_chip;
+    storage->data->imu.temp_gyro = temp.gyr_chip;
     // TODO: gravity?
     // TODO: lin_accel?
     storage->unlock();
