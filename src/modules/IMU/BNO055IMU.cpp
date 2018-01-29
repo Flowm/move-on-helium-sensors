@@ -73,10 +73,11 @@ void BNO055IMU::update() {
     // TODO: lin_accel?
     storage->unlock();
 
+    // TODO: Remove this after adding these values to central data storage
     // printf(
-    //     "BNO055"
-    //     " GRA_x=%4.2f, GRA_y=%4.2f, GRA_z=%4.2f "
-    //     " LIN_ACC_x:%4.2f, LIN_ACC_y:%4.2f, LIN_ACC_z:%4.2f "
+    //     "BNO055 "
+    //     "GRA_x=%4.2f, GRA_y=%4.2f, GRA_z=%4.2f "
+    //     "LIN_ACC_x:%4.2f, LIN_ACC_y:%4.2f, LIN_ACC_z:%4.2f "
     //     "\r\n",
     //     gravity.x, gravity.y, gravity.z,
     //     lin_accel.x, lin_accel.y, lin_accel.z
