@@ -16,10 +16,10 @@ struct SensorQuaternion{
     union {
         float q[4];
         struct {
-            float r;
-            float i;
-            float j;
-            float k;
+            float w;
+            float x;
+            float y;
+            float z;
         };
     };
 } __attribute__((packed));

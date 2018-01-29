@@ -3,7 +3,7 @@
 #include <mbed.h>
 #include <modules/ADC/MPC320X.hpp>
 #include <modules/ENV/BME680.hpp>
-#include <modules/IMU/BNO055.hpp>
+#include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
 #include <modules/Storage/Storage.hpp>
 #include <lib/MODSERIAL/MODSERIAL.h>
@@ -50,8 +50,7 @@ private:
     CDHUart cdhuart;
 
     // Sensors
-    BNO055 imu;
+    BNO055IMU imu;
     BME680 env;
     MPC320X adc;
-
 };
