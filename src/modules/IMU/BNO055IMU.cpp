@@ -29,6 +29,8 @@ bool BNO055IMU::setup() {
 
     impl.get_chip_temperature(&temp);
     printf("BNO055 TEMP acc_chip: %d, gyr_chip: %d\r\n", temp.acc_chip, temp.gyr_chip);
+
+    return true;
 }
 
 void BNO055IMU::update() {
@@ -62,8 +64,8 @@ void BNO055IMU::update() {
     storage->data->imu.mag.y = mag.y;
     storage->data->imu.mag.z = mag.z;
     storage->data->imu.orientation.x = angles.h;
-    storage->data->imu.orientation.y = angles.r;
-    storage->data->imu.orientation.z = angles.p;
+    storage->data->imu.orientation.y = angles.p;
+    storage->data->imu.orientation.z = angles.r;
     storage->data->imu.quaternion.r = quaternion.w;
     storage->data->imu.quaternion.i = quaternion.x;
     storage->data->imu.quaternion.j = quaternion.y;

@@ -27,7 +27,6 @@ private:
 
     BNO055 impl;
 
-    const int _i2c_addr = 0x28 << 1;
     const int _chip_id = 0xa0;
     char tx_buffer[8] = {};
     char rx_buffer[8] = {};
