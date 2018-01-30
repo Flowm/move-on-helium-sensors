@@ -4,9 +4,12 @@ void Sensors::setup() {
     printf("\r\nRESET\r\n");
     imu.start();
     env.start();
+    temperature.start();
 }
 
+
 void Sensors::loop() {
+
     while(1) {
         log();
         Thread::wait(1000);
@@ -38,5 +41,10 @@ void Sensors::log() {
                   data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
                   data->imu.temp_accel, data->imu.temp_gyro
                  );
+    logger.printf("D=TMP");
+    for(int i = 0; i < temperature.getNumDevices(); i++) {
+        logger.printf(",T%d=%2.4f", i, data->temp[i].temp);
+    }
+    logger.printf("\r\n");
     storage.unlock();
 }
