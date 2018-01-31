@@ -75,6 +75,14 @@ void BNO055IMU::update() {
     // TODO: lin_accel?
     storage->unlock();
 
+    if (temp.acc_chip == 0 && temp.gyr_chip == 0 && mag.x == 0.0 && mag.y == 0.0 && mag.z == 0.0) {
+      impl.reset();
+    }
+
+    if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
+      impl.reset();
+    }
+
     // TODO: Remove this after adding these values to central data storage
     // printf(
     //     "BNO055 "

@@ -4,6 +4,8 @@ void SensorThread::start() {
     if (setup()) {
         // Start thread if setup was successful
         _thread.start(callback(this, &SensorThread::loop));
+    } else {
+      printf("Setup of sensor was not successful. Not starting thread...\r\n");
     }
 }
 

@@ -13,7 +13,7 @@ public:
     BNO055IMU(I2C &i2c, Storage* storage) :
         i2c(i2c),
         storage(storage),
-        impl(i2c, D12)
+        impl(i2c, D11)
         {};
 
     bool setup() override;
