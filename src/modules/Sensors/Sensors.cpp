@@ -47,6 +47,6 @@ void Sensors::log() {
             logger.printf(",T%d=%.4f", i, data->temp[i].temp);
         }
         logger.printf("\r\n");
-        storage.unlock();
     }
+    storage.unlock();
 }
