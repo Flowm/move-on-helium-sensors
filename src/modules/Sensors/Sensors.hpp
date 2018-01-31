@@ -35,8 +35,8 @@ public:
         imu(bno, &storage),
         env(spi, cs_bme680, &storage),
         adc(spi, cs_adc),
-        temperature(D9, &storage)
-        gps(gps_i2c)
+        temperature(D9, &storage),
+        gps(&gps_i2c)
         {};
 
     void setup();
