@@ -70,7 +70,7 @@ struct OutProtocolHeader {
 struct InProtocolHeader {
     uint8_t start = 0x01;
     uint8_t status;
-    uint16_t numBytes;
+    uint16_t numBytes = sizeof(SensorData);
 } __attribute__((packed));
 
 struct InProtocolFooter {

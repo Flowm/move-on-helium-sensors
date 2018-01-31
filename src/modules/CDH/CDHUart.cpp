@@ -33,18 +33,8 @@ void CDHUart::transmitData(){
     storage->lock();
     CDHPacket packet = storage->packet;
     storage->unlock();
-
-    calculateChecksum(storage->packet);
+    packet.footer.checksum = Checksum::crc16sw((uint8_t*)&packet.data, sizeof(SensorData));
     for(uint8_t i = 0; i < sizeof(CDHPacket); i++){
         cdh.putc(*(((uint8_t*)&packet)+i));
     }
-}
-
-void CDHUart::calculateChecksum(CDHPacket& data){
-    uint8_t* sData = (uint8_t*)(&data.data);
-    uint8_t checksum = 0x00;
-    for(uint8_t i=0; i < sizeof(SensorData); i++){
-        checksum ^= *(sData + i);
-    }
-    data.footer.checksum = checksum;
 }
