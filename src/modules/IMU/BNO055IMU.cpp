@@ -1,7 +1,5 @@
 #include "BNO055IMU.hpp"
 
-BNO055_ID_INF_TypeDef bno055_id_inf;
-
 bool BNO055IMU::setup() {
 
     BNO055_ID_INF_TypeDef id_info;
@@ -29,17 +27,6 @@ bool BNO055IMU::setup() {
 }
 
 void BNO055IMU::update() {
-
-    BNO055_VECTOR_TypeDef accel;
-    BNO055_VECTOR_TypeDef mag;
-    BNO055_VECTOR_TypeDef gyro;
-
-    BNO055_VECTOR_TypeDef gravity;
-    BNO055_VECTOR_TypeDef lin_accel;
-    BNO055_QUATERNION_TypeDef quaternion;
-    BNO055_EULER_TypeDef angles;
-
-    BNO055_TEMPERATURE_TypeDef temp;
 
     impl.get_accel(&accel);
     impl.get_mag(&mag);
