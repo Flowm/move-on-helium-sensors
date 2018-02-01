@@ -37,4 +37,9 @@ private:
     BNO055_TEMPERATURE_TypeDef temp;
 
     const int _chip_id = 0xa0;
+
+    uint8_t reset_counter_temperatures = 0;
+    uint8_t reset_counter_zeroes = 0;
+
+    bool all_values_zero();
 };

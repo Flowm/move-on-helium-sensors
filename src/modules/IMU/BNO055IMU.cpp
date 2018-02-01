@@ -60,14 +60,20 @@ void BNO055IMU::update() {
     storage->data->imu.temp_gyro = temp.gyr_chip;
     // TODO: gravity?
     // TODO: lin_accel?
+    storage->data->imu.resets_temps = reset_counter_temperatures;
+    storage->data->imu.resets_zeroes = reset_counter_zeroes;
     storage->unlock();
 
-    if (temp.acc_chip == 0 && temp.gyr_chip == 0 && mag.x == 0.0 && mag.y == 0.0 && mag.z == 0.0) {
-      impl.reset();
+    if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
+        printf("reset_counter_temperatures++\r\n");
+        reset_counter_temperatures++;
+        impl.reset();
     }
 
-    if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
-      impl.reset();
+    if (all_values_zero()) {
+        printf("reset_counter_zeroes++\r\n");
+        reset_counter_zeroes++;
+        impl.reset();
     }
 
     // TODO: Remove this after adding these values to central data storage
@@ -79,4 +85,28 @@ void BNO055IMU::update() {
     //     gravity.x, gravity.y, gravity.z,
     //     lin_accel.x, lin_accel.y, lin_accel.z
     // );
+}
+
+bool BNO055IMU::all_values_zero() {
+    if (accel.x == 0 &&
+        accel.y == 0 &&
+        accel.z == 0 &&
+        gyro.x == 0 &&
+        gyro.y == 0 &&
+        gyro.z == 0 &&
+        mag.x == 0 &&
+        mag.y == 0 &&
+        mag.z == 0 &&
+        angles.h == 0 &&
+        angles.p == 0 &&
+        angles.r == 0 &&
+        quaternion.w == 0 &&
+        quaternion.x == 0 &&
+        quaternion.y == 0 &&
+        quaternion.z == 0 &&
+        temp.acc_chip == 0 &&
+        temp.gyr_chip == 0) {
+            return true;
+        }
+    return false;
 }

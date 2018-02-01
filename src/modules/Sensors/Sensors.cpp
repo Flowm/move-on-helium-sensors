@@ -32,14 +32,16 @@ void Sensors::log() {
                   "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                   "QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
                   "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
-                  "TEMP_ACC=%d,TEMP_GYRO=%d"
+                  "TEMP_ACC=%d,TEMP_GYRO=%d,"
+                  "RESETS_TEMPS=%d,RESETS_ZEROES=%d"
                   "\r\n",
                   data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
                   data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
                   data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
                   data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
                   data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
-                  data->imu.temp_accel, data->imu.temp_gyro);
+                  data->imu.temp_accel, data->imu.temp_gyro,
+                  data->imu.resets_temps, data->imu.resets_zeroes);
     if(temperature.getNumDevices() > 0) {
         logger.printf("TMP ");
         logger.printf("T%d=%.4f", 0, data->temp[0].temp);
