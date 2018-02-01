@@ -27,7 +27,6 @@ stages:
 build:
   stage: build
   script:
-    - mbed deploy
     - cd src
     - make clean
     - make artifacts

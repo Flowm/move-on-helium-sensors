@@ -28,7 +28,9 @@ clean:
 	-rm -rf $(FLASH_DIR)
 
 $(GEN_MAKEFILE):
-	cd .. && mbed export -i gcc_arm --profile config/develop.json
+	cd .. && mbed-cli deploy
+	cd .. && mbed-cli export -i gcc_arm --profile config/develop.json
+
 $(BUILD_DIR)/$(PROJECT).hex: $(GEN_MAKEFILE) $(SOURCES)
 	$(MAKE) -C .. -j 8
 
