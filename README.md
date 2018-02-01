@@ -35,7 +35,6 @@ New shell in project directory:
 ```
 direnv allow
 pip install mbed-cli
-mbed-cli deploy
 ```
 
 ## Development
@@ -46,10 +45,10 @@ make
 ```
 
 ### Developing in SW4STM32 (Eclipse)
-1. `mbed export -i sw4stm32 --profile config/develop.json`
+1. `mbed-cli export -i sw4stm32 --profile config/develop.json`
 2. `File` -> `Open Projects from File System` (In Eclipse)
 3. Choose the `move-on-helium-sensors` project.
-4. Remember to regenerate the project files everytime you add a new library with `mbed add ...`.
+4. Remember to regenerate the project files everytime you add a new library with `mbed-cli add ...`.
 
 ## Reference
 ### Build targets

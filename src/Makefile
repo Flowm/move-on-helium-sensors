@@ -21,14 +21,16 @@ rflash: $(FLASH_DIR)/$(PROJECT).hex
 	scp -P $(DEPLOY_PORT) $< $(DEPLOY_TARGET):
 	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "st-flash --format ihex write $(notdir $<)"
 rtail:
-	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "stty -F /dev/ttyACM0 9600 && cat /dev/ttyACM0"
+	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "mqttserial"
 clean:
 	-rm -f ../Makefile
 	-rm -rf $(BUILD_DIR)
 	-rm -rf $(FLASH_DIR)
 
 $(GEN_MAKEFILE):
-	cd .. && mbed export -i gcc_arm --profile config/develop.json
+	cd .. && mbed-cli deploy
+	cd .. && mbed-cli export -i gcc_arm --profile config/develop.json
+
 $(BUILD_DIR)/$(PROJECT).hex: $(GEN_MAKEFILE) $(SOURCES)
 	$(MAKE) -C .. -j 8
 
@@ -46,4 +48,4 @@ ciflash:
 	scp -P $(DEPLOY_PORT) $(FLASH_DIR)/$(PROJECT).hex $(DEPLOY_TARGET):
 	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "st-flash --reset --format ihex write $(PROJECT).hex"
 citail:
-	timeout --preserve-status --foreground 30 ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "stty -F /dev/ttyACM0 9600 && cat /dev/ttyACM0"
+	timeout --preserve-status --foreground 30 ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "mqttserial"

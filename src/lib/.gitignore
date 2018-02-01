@@ -1,0 +1,4 @@
+# Ignore external libs updated by mbed-cli
+BNO055_fusion/
+DS1820/
+MODSERIAL/
