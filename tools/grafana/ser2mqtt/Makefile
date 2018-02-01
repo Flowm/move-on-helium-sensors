@@ -5,7 +5,9 @@ PRGS = $(SYSD:.service=.py)
 DSTS = $(SYSD:.service=)
 NAME = $(DSTS:adcs-=)
 
-all: ser2mqtt mqttserial
+install: ser2mqtt
+	cp mqttserial.sh $(DESTDIR)$(PREFIX)/bin/mqttserial
+	cp serial_wrap.py $(DESTDIR)$(PREFIX)/bin/serial_wrap.py
 
 $(DSTS): $(PRGS) $(SYSD)
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
@@ -15,7 +17,6 @@ $(DSTS): $(PRGS) $(SYSD)
 	systemctl enable $@
 	systemctl restart $@
 
-mqttserial:
-	cp $@.sh $(DESTDIR)$(PREFIX)/bin/$@
 
-.PHONY: all $(DSTS)
+
+.PHONY: install $(DSTS)
