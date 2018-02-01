@@ -33,7 +33,7 @@ void Sensors::log() {
                   "QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
                   "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
                   "TEMP_ACC=%d,TEMP_GYRO=%d,"
-                  "RESETS_TEMPS=%d,RESETS_ZEROES=%d"
+                  "RST_TMP=%u,RST_ZRO=%u"
                   "\r\n",
                   data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
                   data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
