@@ -65,13 +65,11 @@ void BNO055IMU::update() {
     storage->unlock();
 
     if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
-        printf("reset_counter_temperatures++\r\n");
         reset_counter_temperatures++;
         impl.reset();
     }
 
     if (all_values_zero()) {
-        printf("reset_counter_zeroes++\r\n");
         reset_counter_zeroes++;
         impl.reset();
     }
