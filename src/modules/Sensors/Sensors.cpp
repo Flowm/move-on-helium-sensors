@@ -7,9 +7,7 @@ void Sensors::setup() {
     temperature.start();
 }
 
-
 void Sensors::loop() {
-
     while(1) {
         log();
         Thread::wait(1000);
@@ -18,7 +16,10 @@ void Sensors::loop() {
 
 void Sensors::log() {
     storage.lock();
-    SensorData* data = storage.data;
+    SensorData data_copy = *storage.data;
+    SensorData* data = &data_copy;
+    storage.unlock();
+
     logger.printf("ENV "
                   "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
                   "\r\n",
@@ -26,6 +27,7 @@ void Sensors::log() {
                   data->env.humidity,
                   data->env.pressure,
                   data->env.gasresistance);
+
     logger.printf("IMU "
                   "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
                   "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
@@ -42,6 +44,7 @@ void Sensors::log() {
                   data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
                   data->imu.temp_accel, data->imu.temp_gyro,
                   data->imu.resets_temps, data->imu.resets_zeroes);
+
     if(temperature.getNumDevices() > 0) {
         logger.printf("TMP ");
         logger.printf("OW%d=%.4f", 0, data->temp[0].temp);
@@ -50,5 +53,4 @@ void Sensors::log() {
         }
         logger.printf("\r\n");
     }
-    storage.unlock();
 }
