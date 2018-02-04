@@ -1768,54 +1768,54 @@ Your Multi-CB Team
 </autorouter>
 <elements>
 <element name="B1" library="Frcy" package="NUCLEO-32" value="NUCLEO-32" x="47.4" y="36.86" rot="R270"/>
-<element name="B2" library="Frcy" package="BOSCH-BNO055" value="BNO055" x="40.67" y="15.77" rot="R180"/>
-<element name="B3" library="Frcy" package="UPUTRONICS-UBLOX-PICO" value="UBLOX" x="65" y="49"/>
-<element name="B4" library="Frcy" package="SPARKFUN-OPENLOG" value="OPENLOG" x="66" y="16" rot="R180"/>
-<element name="J2" library="con-molex-c-grid" package="90136-1?03" value="OW" x="47" y="53" rot="R180"/>
-<element name="J3" library="con-molex-c-grid" package="90136-1?04" value="DBG" x="40" y="66" rot="R180"/>
+<element name="B2" library="Frcy" package="BOSCH-BNO055" value="BNO055" x="41.67" y="15.77" rot="R180"/>
+<element name="B3" library="Frcy" package="UPUTRONICS-UBLOX-PICO" value="UBLOX" x="65" y="50"/>
+<element name="B4" library="Frcy" package="SPARKFUN-OPENLOG" value="OPENLOG" x="65" y="16" rot="R180"/>
+<element name="J2" library="con-molex-c-grid" package="90136-1?03" value="OW" x="34" y="64" rot="R180"/>
+<element name="J3" library="con-molex-c-grid" package="90136-1?04" value="DBG" x="49" y="64" rot="R180"/>
 <element name="J1" library="con-molex-c-grid" package="90136-1?06" value="CDH" x="46" y="75" rot="R180"/>
-<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="36" y="40" rot="MR270">
-<attribute name="SPICEPREFIX" value="R" x="36" y="40" size="1.778" layer="28" rot="MR270" display="off"/>
+<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="33" y="59" rot="MR180">
+<attribute name="SPICEPREFIX" value="R" x="33" y="59" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
-<element name="U1" library="Frcy" package="TO-92-AMMO" value="DS18B20" x="18" y="28">
-<attribute name="STORE_ID" value="SEN-00245" x="18" y="28" size="1.778" layer="27" display="off"/>
+<element name="U1" library="Frcy" package="TO-92-AMMO" value="DS18B20" x="10" y="29" rot="R180">
+<attribute name="STORE_ID" value="SEN-00245" x="10" y="29" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="U2" library="Frcy" package="TO-92-AMMO" value="DS18B20" x="36" y="51.25">
-<attribute name="STORE_ID" value="SEN-00245" x="36" y="51.25" size="1.778" layer="27" display="off"/>
+<element name="U2" library="Frcy" package="TO-92-AMMO" value="DS18B20" x="37" y="54.75" rot="R180">
+<attribute name="STORE_ID" value="SEN-00245" x="37" y="54.75" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="59" y="34" rot="MR270">
 <attribute name="SPICEPREFIX" value="R" x="59" y="34" size="1.778" layer="28" rot="MR270" display="off"/>
 </element>
-<element name="J6" library="con-molex-c-grid" package="90136-1?06" value="ENV" x="18" y="53" rot="R180"/>
-<element name="J4" library="con-molex-c-grid" package="90136-1?04" value="SUN-UART" x="13" y="40" rot="R270"/>
-<element name="J5" library="con-molex-c-grid" package="90136-1?06" value="ADCS" x="18" y="64" rot="R180"/>
-<element name="J7" library="con-molex-c-grid" package="90136-1?06" value="SUN" x="18" y="75" rot="R180"/>
+<element name="J6" library="con-molex-c-grid" package="90136-1?06" value="ENV" x="16" y="75" rot="R180"/>
+<element name="J4" library="con-molex-c-grid" package="90136-1?04" value="SUN-UART" x="10" y="39" rot="R270"/>
+<element name="J5" library="con-molex-c-grid" package="90136-1?06" value="ADCS" x="16" y="64" rot="R180"/>
+<element name="J7" library="con-molex-c-grid" package="90136-1?06" value="SUN" x="16" y="53" rot="R180"/>
 <element name="U3" library="Frcy" package="TO-92-AMMO" value="DS18B20" x="32" y="75">
 <attribute name="STORE_ID" value="SEN-00245" x="32" y="75" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="65.75" y="55" rot="MR270">
-<attribute name="SPICEPREFIX" value="R" x="65.75" y="55" size="1.778" layer="28" rot="MR270" display="off"/>
+<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="67.75" y="57" rot="MR270">
+<attribute name="SPICEPREFIX" value="R" x="67.75" y="57" size="1.778" layer="28" rot="MR270" display="off"/>
 </element>
-<element name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="60" y="55" rot="MR270">
-<attribute name="SPICEPREFIX" value="R" x="60" y="55" size="1.778" layer="28" rot="MR270" display="off"/>
+<element name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k" x="62" y="57" rot="MR270">
+<attribute name="SPICEPREFIX" value="R" x="62" y="57" size="1.778" layer="28" rot="MR270" display="off"/>
 </element>
-<element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="51" y="70" rot="MR0">
-<attribute name="SPICEPREFIX" value="C" x="51" y="70" size="1.778" layer="28" rot="MR0" display="off"/>
+<element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.2uF" x="51" y="71" rot="MR0">
+<attribute name="SPICEPREFIX" value="C" x="51" y="71" size="1.778" layer="28" rot="MR0" display="off"/>
 </element>
-<element name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="39" y="57.5" rot="MR90">
-<attribute name="SPICEPREFIX" value="C" x="39" y="57.5" size="1.778" layer="28" rot="MR90" display="off"/>
+<element name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="28.5" y="59" rot="MR180">
+<attribute name="SPICEPREFIX" value="C" x="28.5" y="59" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
-<element name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="8" y="35" rot="MR90">
-<attribute name="SPICEPREFIX" value="C" x="8" y="35" size="1.778" layer="28" rot="MR90" display="off"/>
+<element name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="7" y="33" rot="MR180">
+<attribute name="SPICEPREFIX" value="C" x="7" y="33" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
-<element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="8" y="63" rot="MR90">
-<attribute name="SPICEPREFIX" value="C" x="8" y="63" size="1.778" layer="28" rot="MR90" display="off"/>
+<element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="7" y="59" rot="MR180">
+<attribute name="SPICEPREFIX" value="C" x="7" y="59" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
-<element name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="8" y="52" rot="MR90">
-<attribute name="SPICEPREFIX" value="C" x="8" y="52" size="1.778" layer="28" rot="MR90" display="off"/>
+<element name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="7" y="70" rot="MR180">
+<attribute name="SPICEPREFIX" value="C" x="7" y="70" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
-<element name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="8" y="74" rot="MR90">
-<attribute name="SPICEPREFIX" value="C" x="8" y="74" size="1.778" layer="28" rot="MR90" display="off"/>
+<element name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF" x="7" y="48" rot="MR180">
+<attribute name="SPICEPREFIX" value="C" x="7" y="48" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
 <element name="B5" library="Frcy" package="WATTEROT-BME680" value="BME680" x="16" y="24" rot="R180"/>
 </elements>
@@ -1831,11 +1831,8 @@ Your Multi-CB Team
 <contactref element="J1" pad="2"/>
 <contactref element="U1" pad="3"/>
 <contactref element="U2" pad="3"/>
-<contactref element="R1" pad="2"/>
-<contactref element="J6" pad="6"/>
 <contactref element="J4" pad="4"/>
 <contactref element="J5" pad="6"/>
-<contactref element="J7" pad="6"/>
 <contactref element="U3" pad="3"/>
 <contactref element="R6" pad="1"/>
 <contactref element="R5" pad="1"/>
@@ -1845,8 +1842,6 @@ Your Multi-CB Team
 <contactref element="C2" pad="2"/>
 <contactref element="C4" pad="2"/>
 <contactref element="C5" pad="2"/>
-<contactref element="C6" pad="2"/>
-<contactref element="C7" pad="2"/>
 <polygon width="0.1524" layer="1">
 <vertex x="0" y="80"/>
 <vertex x="80" y="80"/>
@@ -1854,29 +1849,21 @@ Your Multi-CB Team
 <vertex x="0" y="0"/>
 </polygon>
 <contactref element="B5" pad="VCC"/>
-<wire x1="50.15" y1="70" x2="49.81" y2="75" width="0" layer="19" extent="16-16"/>
-<wire x1="34.54" y1="75" x2="49.81" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="39" y1="58.35" x2="50.15" y2="70" width="0" layer="19" extent="16-16"/>
-<wire x1="38.54" y1="51.25" x2="39" y2="58.35" width="0" layer="19" extent="16-16"/>
-<wire x1="44.46" y1="53" x2="38.54" y2="51.25" width="0" layer="19" extent="1-1"/>
-<wire x1="36" y1="39.15" x2="38.54" y2="51.25" width="0" layer="19" extent="16-16"/>
-<wire x1="30.89" y1="29.24" x2="36" y2="39.15" width="0" layer="19" extent="16-16"/>
-<wire x1="20.54" y1="28" x2="30.89" y2="29.24" width="0" layer="19" extent="1-1"/>
-<wire x1="13.46" y1="24" x2="20.54" y2="28" width="0" layer="19" extent="1-1"/>
-<wire x1="13" y1="36.19" x2="20.54" y2="28" width="0" layer="19" extent="1-1"/>
-<wire x1="8" y1="35.85" x2="13" y2="36.19" width="0" layer="19" extent="16-16"/>
-<wire x1="60" y1="55.85" x2="44.46" y2="53" width="0" layer="19" extent="16-16"/>
-<wire x1="65.75" y1="55.85" x2="60" y2="55.85" width="0" layer="19" extent="16-16"/>
-<wire x1="71.35" y1="49" x2="65.75" y2="55.85" width="0" layer="19" extent="16-16"/>
-<wire x1="47.02" y1="24.66" x2="30.89" y2="29.24" width="0" layer="19" extent="1-1"/>
-<wire x1="59" y1="34.85" x2="47.02" y2="24.66" width="0" layer="19" extent="16-16"/>
-<wire x1="64.73" y1="24.128" x2="59" y2="34.85" width="0" layer="19" extent="16-16"/>
-<wire x1="11.65" y1="53" x2="13" y2="36.19" width="0" layer="19" extent="1-1"/>
-<wire x1="8" y1="52.85" x2="11.65" y2="53" width="0" layer="19" extent="16-16"/>
-<wire x1="11.65" y1="64" x2="11.65" y2="53" width="0" layer="19" extent="1-1"/>
-<wire x1="8" y1="63.85" x2="11.65" y2="64" width="0" layer="19" extent="16-16"/>
-<wire x1="11.65" y1="75" x2="11.65" y2="64" width="0" layer="19" extent="1-1"/>
-<wire x1="8" y1="74.85" x2="11.65" y2="75" width="0" layer="19" extent="16-16"/>
+<contactref element="J7" pad="6"/>
+<contactref element="C7" pad="2"/>
+<contactref element="J6" pad="6"/>
+<contactref element="C6" pad="2"/>
+<contactref element="R1" pad="1"/>
+<wire x1="62" y1="57.85" x2="67.75" y2="57.85" width="0" layer="19" extent="16-16"/>
+<wire x1="71.35" y1="50" x2="67.75" y2="57.85" width="0" layer="19" extent="16-16"/>
+<wire x1="7.85" y1="33" x2="10" y2="35.19" width="0" layer="19" extent="16-16"/>
+<wire x1="49.81" y1="75" x2="50.15" y2="71" width="0" layer="19" extent="16-16"/>
+<wire x1="32.15" y1="59" x2="34.46" y2="54.75" width="0" layer="19" extent="16-16"/>
+<wire x1="29.35" y1="59" x2="32.15" y2="59" width="0" layer="19" extent="16-16"/>
+<wire x1="7.85" y1="70" x2="9.65" y2="75" width="0" layer="19" extent="16-16"/>
+<wire x1="7.85" y1="59" x2="9.65" y2="64" width="0" layer="19" extent="16-16"/>
+<wire x1="7.85" y1="48" x2="9.65" y2="53" width="0" layer="19" extent="16-16"/>
+<wire x1="59" y1="34.85" x2="63.73" y2="24.128" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="GND">
 <contactref element="B1" pad="GND@2"/>
@@ -1895,49 +1882,28 @@ Your Multi-CB Team
 <vertex x="80" y="0"/>
 <vertex x="0" y="0"/>
 </polygon>
-<contactref element="J6" pad="3"/>
 <contactref element="J4" pad="1"/>
-<contactref element="J5" pad="3"/>
-<contactref element="J7" pad="3"/>
 <contactref element="U3" pad="1"/>
 <contactref element="C1" pad="1"/>
 <contactref element="C2" pad="1"/>
 <contactref element="C4" pad="1"/>
-<contactref element="C5" pad="1"/>
-<contactref element="C6" pad="1"/>
-<contactref element="C7" pad="1"/>
 <contactref element="B5" pad="GND"/>
-<wire x1="51.85" y1="70" x2="52.35" y2="75" width="0" layer="19" extent="16-16"/>
-<wire x1="42.19" y1="75" x2="52.35" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="29.46" y1="75" x2="42.19" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="19.27" y1="75" x2="29.46" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="19.27" y1="64" x2="19.27" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="19.27" y1="53" x2="19.27" y2="64" width="0" layer="19" extent="1-1"/>
-<wire x1="13" y1="43.81" x2="19.27" y2="53" width="0" layer="19" extent="1-1"/>
-<wire x1="8" y1="51.15" x2="13" y2="43.81" width="0" layer="19" extent="16-16"/>
-<wire x1="8" y1="34.15" x2="13" y2="43.81" width="0" layer="19" extent="16-16"/>
-<wire x1="15.46" y1="28" x2="8" y2="34.15" width="0" layer="19" extent="16-16"/>
-<wire x1="8.38" y1="24" x2="15.46" y2="28" width="0" layer="19" extent="1-1"/>
-<wire x1="8" y1="62.15" x2="8" y2="51.15" width="0" layer="19" extent="16-16"/>
-<wire x1="8" y1="73.15" x2="8" y2="62.15" width="0" layer="19" extent="16-16"/>
-<wire x1="33.46" y1="51.25" x2="19.27" y2="53" width="0" layer="19" extent="1-1"/>
-<wire x1="39" y1="56.65" x2="33.46" y2="51.25" width="0" layer="19" extent="16-16"/>
-<wire x1="49.54" y1="53" x2="39" y2="56.65" width="0" layer="19" extent="16-16"/>
-<wire x1="56.29" y1="44.48" x2="49.54" y2="53" width="0" layer="19" extent="1-1"/>
-<wire x1="68.81" y1="49" x2="56.29" y2="44.48" width="0" layer="19" extent="1-1"/>
-<wire x1="61.37" y1="29.24" x2="56.29" y2="44.48" width="0" layer="19" extent="1-1"/>
-<wire x1="62.19" y1="24.128" x2="61.37" y2="29.24" width="0" layer="19" extent="1-1"/>
-<wire x1="41.94" y1="24.66" x2="61.37" y2="29.24" width="0" layer="19" extent="1-1"/>
+<contactref element="J7" pad="4"/>
+<contactref element="J6" pad="4"/>
+<contactref element="J5" pad="4"/>
+<contactref element="C7" pad="1"/>
+<contactref element="C6" pad="1"/>
+<contactref element="C5" pad="1"/>
 </signal>
 <signal name="IMU-SDA">
 <contactref element="B2" pad="SDA"/>
 <contactref element="B1" pad="D12"/>
-<wire x1="39.4" y1="24.66" x2="28.35" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="40.4" y1="24.66" x2="28.35" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IMU-SCL">
 <contactref element="B2" pad="SCL"/>
 <contactref element="B1" pad="A6"/>
-<wire x1="36.86" y1="24.66" x2="51.21" y2="29.24" width="0" layer="19" extent="1-1"/>
+<wire x1="37.86" y1="24.66" x2="51.21" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GRN">
 <contactref element="B4" pad="GRN"/>
@@ -1946,20 +1912,20 @@ Your Multi-CB Team
 <contactref element="B3" pad="SDA"/>
 <contactref element="B1" pad="D4"/>
 <contactref element="R6" pad="2"/>
-<wire x1="58.65" y1="49" x2="60" y2="54.15" width="0" layer="19" extent="16-16"/>
-<wire x1="48.67" y1="44.48" x2="58.65" y2="49" width="0" layer="19" extent="1-1"/>
+<wire x1="58.65" y1="50" x2="62" y2="56.15" width="0" layer="19" extent="16-16"/>
+<wire x1="48.67" y1="44.48" x2="58.65" y2="50" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPS-SCL">
 <contactref element="B3" pad="SCL"/>
 <contactref element="B1" pad="D5"/>
 <contactref element="R5" pad="2"/>
-<wire x1="61.19" y1="49" x2="65.75" y2="54.15" width="0" layer="19" extent="16-16"/>
-<wire x1="46.13" y1="44.48" x2="61.19" y2="49" width="0" layer="19" extent="1-1"/>
+<wire x1="61.19" y1="50" x2="67.75" y2="56.15" width="0" layer="19" extent="16-16"/>
+<wire x1="46.13" y1="44.48" x2="61.19" y2="50" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="LOG-UART">
 <contactref element="B4" pad="RXI"/>
 <contactref element="B1" pad="A7"/>
-<wire x1="53.75" y1="29.24" x2="69.81" y2="24.128" width="0" layer="19" extent="1-1"/>
+<wire x1="53.75" y1="29.24" x2="68.81" y2="24.128" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CDH-TX">
 <contactref element="B1" pad="D1/TX"/>
@@ -1973,69 +1939,69 @@ Your Multi-CB Team
 </signal>
 <signal name="SPI-MOSI">
 <contactref element="B1" pad="D2"/>
-<contactref element="J6" pad="5"/>
-<contactref element="J5" pad="5"/>
-<contactref element="J7" pad="5"/>
 <contactref element="B5" pad="SDA/MOSI"/>
-<wire x1="14.19" y1="53" x2="53.75" y2="44.48" width="0" layer="19" extent="1-1"/>
-<wire x1="14.19" y1="64" x2="14.19" y2="53" width="0" layer="19" extent="1-1"/>
-<wire x1="14.19" y1="75" x2="14.19" y2="64" width="0" layer="19" extent="1-1"/>
-<wire x1="18.54" y1="24" x2="14.19" y2="53" width="0" layer="19" extent="1-1"/>
+<contactref element="J7" pad="3"/>
+<contactref element="J6" pad="3"/>
+<contactref element="J5" pad="3"/>
+<wire x1="17.27" y1="53" x2="53.75" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="17.27" y1="64" x2="17.27" y2="53" width="0" layer="19" extent="1-1"/>
+<wire x1="17.27" y1="75" x2="17.27" y2="64" width="0" layer="19" extent="1-1"/>
+<wire x1="18.54" y1="24" x2="17.27" y2="53" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-CS-ADCS">
 <contactref element="B1" pad="D6"/>
 <contactref element="J5" pad="1"/>
-<wire x1="24.35" y1="64" x2="43.59" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="22.35" y1="64" x2="43.59" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="TEMP-OW">
 <contactref element="B1" pad="D9"/>
 <contactref element="U1" pad="2"/>
 <contactref element="U2" pad="2"/>
-<contactref element="R1" pad="1"/>
 <contactref element="U3" pad="2"/>
 <contactref element="J2" pad="2"/>
-<wire x1="36" y1="51.25" x2="32" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="35.97" y1="44.48" x2="36" y2="51.25" width="0" layer="19" extent="1-1"/>
-<wire x1="36" y1="40.85" x2="35.97" y2="44.48" width="0" layer="19" extent="16-16"/>
-<wire x1="47" y1="53" x2="36" y2="40.85" width="0" layer="19" extent="16-16"/>
-<wire x1="18" y1="28" x2="47" y2="53" width="0" layer="19" extent="1-1"/>
+<contactref element="R1" pad="2"/>
+<wire x1="34" y1="64" x2="32" y2="75" width="0" layer="19" extent="1-1"/>
+<wire x1="33.85" y1="59" x2="34" y2="64" width="0" layer="19" extent="16-16"/>
+<wire x1="37" y1="54.75" x2="33.85" y2="59" width="0" layer="19" extent="16-16"/>
+<wire x1="35.97" y1="44.48" x2="37" y2="54.75" width="0" layer="19" extent="1-1"/>
+<wire x1="10" y1="29" x2="35.97" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-SCK">
 <contactref element="B1" pad="A1"/>
-<contactref element="J6" pad="2"/>
-<contactref element="J5" pad="2"/>
-<contactref element="J7" pad="2"/>
 <contactref element="B5" pad="SCL/SCK"/>
-<wire x1="21.81" y1="64" x2="21.81" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="21.81" y1="53" x2="21.81" y2="64" width="0" layer="19" extent="1-1"/>
-<wire x1="38.51" y1="29.24" x2="21.81" y2="53" width="0" layer="19" extent="1-1"/>
-<wire x1="16" y1="24" x2="38.51" y2="29.24" width="0" layer="19" extent="1-1"/>
+<contactref element="J5" pad="5"/>
+<contactref element="J6" pad="5"/>
+<contactref element="J7" pad="5"/>
+<wire x1="12.19" y1="64" x2="12.19" y2="75" width="0" layer="19" extent="1-1"/>
+<wire x1="12.19" y1="53" x2="12.19" y2="64" width="0" layer="19" extent="1-1"/>
+<wire x1="16" y1="24" x2="12.19" y2="53" width="0" layer="19" extent="1-1"/>
+<wire x1="38.51" y1="29.24" x2="16" y2="24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-MISO">
 <contactref element="B1" pad="A5"/>
-<contactref element="J6" pad="4"/>
-<contactref element="J5" pad="4"/>
-<contactref element="J7" pad="4"/>
 <contactref element="B5" pad="SDO/MISO"/>
-<wire x1="16.73" y1="64" x2="16.73" y2="75" width="0" layer="19" extent="1-1"/>
-<wire x1="16.73" y1="53" x2="16.73" y2="64" width="0" layer="19" extent="1-1"/>
-<wire x1="21.08" y1="24" x2="16.73" y2="53" width="0" layer="19" extent="1-1"/>
+<contactref element="J7" pad="2"/>
+<contactref element="J6" pad="2"/>
+<contactref element="J5" pad="2"/>
+<wire x1="19.81" y1="64" x2="19.81" y2="75" width="0" layer="19" extent="1-1"/>
+<wire x1="19.81" y1="53" x2="19.81" y2="64" width="0" layer="19" extent="1-1"/>
+<wire x1="21.08" y1="24" x2="19.81" y2="53" width="0" layer="19" extent="1-1"/>
 <wire x1="48.67" y1="29.24" x2="21.08" y2="24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-CS-ENV">
 <contactref element="B1" pad="D3"/>
 <contactref element="J6" pad="1"/>
-<wire x1="24.35" y1="53" x2="51.21" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="22.35" y1="75" x2="51.21" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="DBG-RX">
 <contactref element="J3" pad="3"/>
-<contactref element="B1" pad="A2"/>
-<wire x1="41.05" y1="29.24" x2="38.73" y2="66" width="0" layer="19" extent="1-1"/>
+<contactref element="B1" pad="A4"/>
+<wire x1="46.13" y1="29.24" x2="47.73" y2="64" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="DBG-TX">
 <contactref element="J3" pad="4"/>
-<contactref element="B1" pad="A0"/>
-<wire x1="35.97" y1="29.24" x2="36.19" y2="66" width="0" layer="19" extent="1-1"/>
+<contactref element="B1" pad="A3"/>
+<wire x1="43.59" y1="29.24" x2="45.19" y2="64" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VIN">
 <contactref element="B1" pad="VIN"/>
@@ -2043,27 +2009,27 @@ Your Multi-CB Team
 <signal name="GPS-TX">
 <contactref element="B3" pad="TXD"/>
 <contactref element="J3" pad="2"/>
-<wire x1="63.73" y1="49" x2="41.27" y2="66" width="0" layer="19" extent="1-1"/>
+<wire x1="50.27" y1="64" x2="63.73" y2="50" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPS-RX">
 <contactref element="B3" pad="RXD"/>
 <contactref element="J3" pad="1"/>
-<wire x1="66.27" y1="49" x2="43.81" y2="66" width="0" layer="19" extent="1-1"/>
+<wire x1="52.81" y1="64" x2="66.27" y2="50" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI-CS-SUN">
 <contactref element="B1" pad="D10"/>
 <contactref element="J7" pad="1"/>
-<wire x1="33.43" y1="44.48" x2="24.35" y2="75" width="0" layer="19" extent="1-1"/>
+<wire x1="22.35" y1="53" x2="33.43" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SUN-RX">
-<contactref element="B1" pad="A4"/>
 <contactref element="J4" pad="2"/>
-<wire x1="13" y1="41.27" x2="46.13" y2="29.24" width="0" layer="19" extent="1-1"/>
+<contactref element="B1" pad="A2"/>
+<wire x1="10" y1="40.27" x2="41.05" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SUN-TX">
-<contactref element="B1" pad="A3"/>
 <contactref element="J4" pad="3"/>
-<wire x1="13" y1="38.73" x2="43.59" y2="29.24" width="0" layer="19" extent="1-1"/>
+<contactref element="B1" pad="A0"/>
+<wire x1="10" y1="37.73" x2="35.97" y2="29.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="NUC-RST">
 <contactref element="B1" pad="RST@2"/>
@@ -2073,9 +2039,9 @@ Your Multi-CB Team
 <signal name="IMU-RST">
 <contactref element="B1" pad="D11"/>
 <contactref element="B2" pad="RST"/>
-<wire x1="34.32" y1="24.66" x2="30.89" y2="44.48" width="0" layer="19" extent="1-1"/>
+<wire x1="35.32" y1="24.66" x2="30.89" y2="44.48" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="ENO-CS">
+<signal name="SPI-CS-ENO">
 <contactref element="B1" pad="D13"/>
 <contactref element="B5" pad="CS"/>
 <wire x1="23.62" y1="24" x2="28.35" y2="29.24" width="0" layer="19" extent="1-1"/>
