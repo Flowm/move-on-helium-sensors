@@ -169,6 +169,8 @@
 <text x="4" y="6" size="1.27" layer="25" rot="R90">&gt;LAST_DATE_TIME</text>
 <text x="6" y="3" size="1.27" layer="25">MOVE-ON Helium Sensor Board</text>
 <text x="6" y="1" size="1.27" layer="25">Florian Mauracher</text>
+<rectangle x1="63" y1="68" x2="80" y2="80" layer="41"/>
+<rectangle x1="63" y1="68" x2="80" y2="80" layer="42"/>
 </plain>
 <libraries>
 <library name="Frcy">
