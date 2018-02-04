@@ -166,6 +166,9 @@
 <hole x="77" y="77" drill="2"/>
 <hole x="3" y="77" drill="2"/>
 <hole x="40" y="3" drill="2"/>
+<text x="4" y="6" size="1.27" layer="25" rot="R90">&gt;LAST_DATE_TIME</text>
+<text x="6" y="3" size="1.27" layer="25">MOVE-ON Helium Sensor Board</text>
+<text x="6" y="1" size="1.27" layer="25">Florian Mauracher</text>
 </plain>
 <libraries>
 <library name="Frcy">
