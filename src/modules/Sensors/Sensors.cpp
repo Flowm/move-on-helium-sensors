@@ -20,7 +20,7 @@ void Sensors::log() {
     storage.lock();
     SensorData* data = storage.data;
     logger.printf("ENV "
-                  "T=%.4f,H=%.4f,P=%.4f,G=%.4f"
+                  "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
                   "\r\n",
                   data->env.temperature,
                   data->env.humidity,
@@ -44,9 +44,9 @@ void Sensors::log() {
                   data->imu.resets_temps, data->imu.resets_zeroes);
     if(temperature.getNumDevices() > 0) {
         logger.printf("TMP ");
-        logger.printf("T%d=%.4f", 0, data->temp[0].temp);
+        logger.printf("OW%d=%.4f", 0, data->temp[0].temp);
         for(int i = 1; i < temperature.getNumDevices(); i++) {
-            logger.printf(",T%d=%.4f", i, data->temp[i].temp);
+            logger.printf(",OW%d=%.4f", i, data->temp[i].temp);
         }
         logger.printf("\r\n");
     }
