@@ -2,8 +2,8 @@
 
 #include <mbed.h>
 #include <lib/BNO055_fusion/BNO055.h>
-#include <modules/SensorThread/SensorThread.hpp>
-#include <modules/Storage/Storage.hpp>
+#include <lib/SensorThread/SensorThread.hpp>
+#include <lib/Storage/Storage.hpp>
 
 /**
  * Driver for the BNO055 IMU

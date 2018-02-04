@@ -9,8 +9,8 @@
 
 #include <mbed.h>
 #include <lib/DS1820/DS1820.h>
-#include <modules/Storage/Storage.hpp>
-#include <modules/SensorThread/SensorThread.hpp>
+#include <lib/SensorThread/SensorThread.hpp>
+#include <lib/Storage/Storage.hpp>
 
 class DS18B20: public SensorThread {
 public:

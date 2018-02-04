@@ -2,8 +2,8 @@
 
 #include <mbed.h>
 #include <lib/ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h>
-#include <modules/SensorThread/SensorThread.hpp>
-#include <modules/Storage/Storage.hpp>
+#include <lib/SensorThread/SensorThread.hpp>
+#include <lib/Storage/Storage.hpp>
 
 /**
  * Driver for the BME680 Environmental sensor

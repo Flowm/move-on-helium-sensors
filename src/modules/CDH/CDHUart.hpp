@@ -10,7 +10,7 @@
 #include <mbed.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/Checksum/Checksum.hpp>
-#include <modules/Storage/Storage.hpp>
+#include <lib/Storage/Storage.hpp>
 
 #define CDH_BAUD 115200
 
