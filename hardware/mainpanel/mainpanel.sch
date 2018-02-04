@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -187,8 +187,8 @@
 <pad name="RST@2" x="7.62" y="11.43" drill="1"/>
 <pad name="GND@2" x="7.62" y="13.97" drill="1"/>
 <pad name="VIN" x="7.62" y="16.51" drill="1"/>
-<text x="-2.54" y="1.27" size="1.27" layer="25">&gt;NAME</text>
-<text x="-2.54" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
+<text x="-1.27" y="-3.81" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="2.54" y="-3.81" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 <package name="BOSCH-BNO055">
 <wire x1="-13.335" y1="10.16" x2="13.335" y2="10.16" width="0.1524" layer="21"/>
@@ -209,28 +209,30 @@
 <pad name="PS1" x="-1.27" y="8.89" drill="1"/>
 <pad name="INT" x="1.27" y="8.89" drill="1"/>
 <pad name="ADR" x="3.81" y="8.89" drill="1"/>
+<text x="-3.81" y="3.81" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.81" y="-5.08" size="1.27" layer="27">&gt;VALUE</text>
 </package>
 <package name="UPUTRONICS-UBLOX-PICO">
-<pad name="SDA" x="1.27" y="1.27" drill="1"/>
-<pad name="SCL" x="3.81" y="1.27" drill="1"/>
-<pad name="TXD" x="6.35" y="1.27" drill="1"/>
-<pad name="RXD" x="8.89" y="1.27" drill="1"/>
-<pad name="GND" x="11.43" y="1.27" drill="1" shape="square"/>
-<pad name="VCC" x="13.97" y="1.27" drill="1"/>
-<wire x1="0" y1="0" x2="0" y2="30.48" width="0.127" layer="21"/>
-<wire x1="0" y1="30.48" x2="15.24" y2="30.48" width="0.127" layer="21"/>
-<wire x1="15.24" y1="30.48" x2="15.24" y2="0" width="0.127" layer="21"/>
-<wire x1="15.24" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
-<text x="1.27" y="20.32" size="1.27" layer="25">&gt;NAME</text>
-<text x="1.27" y="16.51" size="1.27" layer="27">&gt;VALUE</text>
-<wire x1="1.27" y1="13.97" x2="11.43" y2="13.97" width="0.127" layer="27"/>
-<wire x1="11.43" y1="13.97" x2="11.43" y2="3.81" width="0.127" layer="27"/>
-<wire x1="11.43" y1="3.81" x2="1.27" y2="3.81" width="0.127" layer="27"/>
-<wire x1="1.27" y1="3.81" x2="1.27" y2="13.97" width="0.127" layer="27"/>
-<wire x1="11.43" y1="29.21" x2="11.43" y2="22.86" width="0.127" layer="27"/>
-<wire x1="11.43" y1="22.86" x2="10.16" y2="22.86" width="0.127" layer="27"/>
-<wire x1="10.16" y1="22.86" x2="10.16" y2="29.21" width="0.127" layer="27"/>
-<wire x1="10.16" y1="29.21" x2="11.43" y2="29.21" width="0.127" layer="27"/>
+<pad name="SDA" x="-6.35" y="0" drill="1"/>
+<pad name="SCL" x="-3.81" y="0" drill="1"/>
+<pad name="TXD" x="-1.27" y="0" drill="1"/>
+<pad name="RXD" x="1.27" y="0" drill="1"/>
+<pad name="GND" x="3.81" y="0" drill="1" shape="square"/>
+<pad name="VCC" x="6.35" y="0" drill="1"/>
+<wire x1="-7.62" y1="-1.27" x2="-7.62" y2="29.21" width="0.127" layer="21"/>
+<wire x1="-7.62" y1="29.21" x2="7.62" y2="29.21" width="0.127" layer="21"/>
+<wire x1="7.62" y1="29.21" x2="7.62" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="7.62" y1="-1.27" x2="-7.62" y2="-1.27" width="0.127" layer="21"/>
+<text x="-3.81" y="13.97" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="0" y="13.97" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<wire x1="-6.35" y1="12.7" x2="3.81" y2="12.7" width="0.127" layer="27"/>
+<wire x1="3.81" y1="12.7" x2="3.81" y2="2.54" width="0.127" layer="27"/>
+<wire x1="3.81" y1="2.54" x2="-6.35" y2="2.54" width="0.127" layer="27"/>
+<wire x1="-6.35" y1="2.54" x2="-6.35" y2="12.7" width="0.127" layer="27"/>
+<wire x1="3.81" y1="27.94" x2="3.81" y2="21.59" width="0.127" layer="27"/>
+<wire x1="3.81" y1="21.59" x2="2.54" y2="21.59" width="0.127" layer="27"/>
+<wire x1="2.54" y1="21.59" x2="2.54" y2="27.94" width="0.127" layer="27"/>
+<wire x1="2.54" y1="27.94" x2="3.81" y2="27.94" width="0.127" layer="27"/>
 </package>
 <package name="SPARKFUN-OPENLOG">
 <wire x1="-7.62" y1="9.652" x2="7.62" y2="9.652" width="0.1524" layer="21"/>
@@ -247,8 +249,8 @@
 <pad name="VCC" x="1.27" y="-8.128" drill="1"/>
 <pad name="GND" x="3.81" y="-8.128" drill="1" shape="square"/>
 <pad name="BLK" x="6.35" y="-8.128" drill="1"/>
-<text x="-4.064" y="4.826" size="1.27" layer="25">&gt;NAME</text>
-<text x="-4.064" y="-4.572" size="1.27" layer="27">&gt;VALUE</text>
+<text x="-5.08" y="-2.54" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="6.35" y="-2.54" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 <package name="TO-92-AMMO">
 <description>&lt;h3&gt;TO-92 3-Pin PTH AMMO package&lt;/h3&gt;
@@ -384,7 +386,7 @@ http://www.st.com/en/evaluation-tools/nucleo-l432kc.html</description>
 <gate name="G$1" symbol="NUCLEO-32" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="NUCLEO-32">
+<device name="BO" package="NUCLEO-32">
 <connects>
 <connect gate="G$1" pin="3V3" pad="3V3"/>
 <connect gate="G$1" pin="5V" pad="5V"/>
@@ -423,7 +425,7 @@ http://www.st.com/en/evaluation-tools/nucleo-l432kc.html</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="BOSCH-BNO055" prefix="B">
+<deviceset name="BOSCH-BNO055" prefix="B" uservalue="yes">
 <description>&lt;h3&gt;Adafruit BNO055&lt;/h3&gt;
 
 https://www.adafruit.com/product/2472</description>
@@ -431,7 +433,7 @@ https://www.adafruit.com/product/2472</description>
 <gate name="G$1" symbol="BOSCH-BNO055" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="BOSCH-BNO055">
+<device name="BO" package="BOSCH-BNO055">
 <connects>
 <connect gate="G$1" pin="3VO" pad="3VO"/>
 <connect gate="G$1" pin="ADR" pad="ADR"/>
@@ -458,7 +460,7 @@ https://store.uputronics.com/index.php?route=product/product&amp;path=60_64&amp;
 <gate name="G$1" symbol="UPUTRONICS-UBLOX-PICO" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="UPUTRONICS-UBLOX-PICO">
+<device name="BO" package="UPUTRONICS-UBLOX-PICO">
 <connects>
 <connect gate="G$1" pin="GND" pad="GND"/>
 <connect gate="G$1" pin="RXD" pad="RXD"/>
@@ -478,7 +480,7 @@ https://store.uputronics.com/index.php?route=product/product&amp;path=60_64&amp;
 <gate name="G$1" symbol="SPARKFUN-OPENLOG" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="SPARKFUN-OPENLOG">
+<device name="BO" package="SPARKFUN-OPENLOG">
 <connects>
 <connect gate="G$1" pin="BLK" pad="BLK"/>
 <connect gate="G$1" pin="GND" pad="GND"/>
@@ -493,7 +495,7 @@ https://store.uputronics.com/index.php?route=product/product&amp;path=60_64&amp;
 </device>
 </devices>
 </deviceset>
-<deviceset name="DS18B20" prefix="U">
+<deviceset name="DS18B20" prefix="U" uservalue="yes">
 <description>&lt;h3&gt;Dallas/Maxim DS18B20 1-Wire Temperature Sensor&lt;/h3&gt;
 &lt;p&gt;The DS18B20 reports degrees C with 9 to 12-bit precision, -55C to 125C (+/-0.5C). Each sensor has a unique 64-Bit Serial number etched into it - allows for a huge number of sensors to be used on one data bus.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf"&gt;Datasheet&lt;/a&gt;&lt;/p&gt;
@@ -7990,25 +7992,25 @@ Source: AVX .. aphvc.pdf</description>
 </class>
 </classes>
 <parts>
-<part name="B1" library="Frcy" deviceset="NUCLEO-32" device="" value="NUCLEO-32"/>
-<part name="B2" library="Frcy" deviceset="BOSCH-BNO055" device="" value="BNO055"/>
+<part name="B1" library="Frcy" deviceset="NUCLEO-32" device="BO" value="NUCLEO-32"/>
+<part name="B2" library="Frcy" deviceset="BOSCH-BNO055" device="BO" value="BNO055"/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="B3" library="Frcy" deviceset="UPUTRONICS-UBLOX-PICO" device="" value="UBLOX"/>
-<part name="B4" library="Frcy" deviceset="SPARKFUN-OPENLOG" device="" value="OPENLOG"/>
+<part name="B3" library="Frcy" deviceset="UPUTRONICS-UBLOX-PICO" device="BO" value="UBLOX"/>
+<part name="B4" library="Frcy" deviceset="SPARKFUN-OPENLOG" device="BO" value="OPENLOG"/>
 <part name="J2" library="con-molex-c-grid" deviceset="90136-1?04" device="" value="OW"/>
 <part name="J3" library="con-molex-c-grid" deviceset="90136-1?04" device="" value="DBG"/>
 <part name="J1" library="con-molex-c-grid" deviceset="90136-1?06" device="" value="CDH"/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
-<part name="U1" library="Frcy" deviceset="DS18B20" device=""/>
-<part name="U2" library="Frcy" deviceset="DS18B20" device=""/>
+<part name="U1" library="Frcy" deviceset="DS18B20" device="" value="DS18B20"/>
+<part name="U2" library="Frcy" deviceset="DS18B20" device="" value="DS18B20"/>
 <part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
 <part name="J6" library="con-molex-c-grid" deviceset="90136-1?06" device="" value="ENV"/>
 <part name="J4" library="con-molex-c-grid" deviceset="90136-1?04" device="" value="SUN-UART"/>
 <part name="J5" library="con-molex-c-grid" deviceset="90136-1?06" device="" value="ADCS"/>
 <part name="J7" library="con-molex-c-grid" deviceset="90136-1?06" device="" value="SUN"/>
 <part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device=""/>
-<part name="U3" library="Frcy" deviceset="DS18B20" device=""/>
+<part name="U3" library="Frcy" deviceset="DS18B20" device="" value="DS18B20"/>
 <part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
 <part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
