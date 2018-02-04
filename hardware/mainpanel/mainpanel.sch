@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -583,6 +583,42 @@ NOTE: C-Grid III does not mate to C-Grid types
 USE AT YOUR OWN RISK!&lt;p&gt;
 &lt;author&gt;Copyright (C) 2009, Bob Starr&lt;br&gt; http://www.bobstarr.net&lt;br&gt;&lt;/author&gt;</description>
 <packages>
+<package name="90136-1?03">
+<description>&lt;b&gt;C-Grid III&lt;/b&gt;&lt;p&gt;
+vertical</description>
+<wire x1="5.3975" y1="-2.8575" x2="5.3975" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="5.3975" y1="3.4925" x2="4.445" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="4.445" y1="3.4925" x2="4.445" y2="2.8575" width="0.254" layer="21"/>
+<wire x1="4.445" y1="2.8575" x2="4.1275" y2="2.54" width="0.254" layer="21" curve="-90.036103"/>
+<wire x1="4.1275" y1="2.54" x2="-4.1275" y2="2.54" width="0.254" layer="21"/>
+<wire x1="-4.1275" y1="2.54" x2="-4.445" y2="2.8575" width="0.254" layer="21" curve="-90.036103"/>
+<wire x1="-4.445" y1="2.8575" x2="-4.445" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="-4.445" y1="3.4925" x2="-5.3975" y2="3.4925" width="0.254" layer="21"/>
+<wire x1="-5.3975" y1="3.4925" x2="-5.3975" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="-5.3975" y1="-2.8575" x2="-2.54" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="-2.54" y1="-2.8575" x2="-2.2225" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="-2.2225" y1="-3.81" x2="2.2225" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="2.2225" y1="-3.81" x2="2.54" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="2.54" y1="-2.8575" x2="5.3975" y2="-2.8575" width="0.254" layer="21"/>
+<wire x1="-4.7625" y1="1.5875" x2="-4.7625" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="4.7625" y1="1.5875" x2="4.7625" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="-4.7625" y1="1.5875" x2="4.7625" y2="1.5875" width="0.0508" layer="51"/>
+<wire x1="-4.7625" y1="-2.2225" x2="-2.2225" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="-2.2225" y1="-2.2225" x2="2.2225" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="2.2225" y1="-2.2225" x2="4.7625" y2="-2.2225" width="0.0508" layer="51"/>
+<wire x1="1.905" y1="-3.175" x2="-1.905" y2="-3.175" width="0.0508" layer="51"/>
+<wire x1="-2.2225" y1="-2.2225" x2="-1.905" y2="-3.175" width="0.0508" layer="51"/>
+<wire x1="2.2225" y1="-2.2225" x2="1.905" y2="-3.175" width="0.0508" layer="51"/>
+<pad name="3" x="2.54" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="2" x="0" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="1" x="-2.54" y="0" drill="1.016" shape="long" rot="R90"/>
+<text x="-5.715" y="-2.54" size="1.016" layer="25" ratio="18" rot="R90">&gt;NAME</text>
+<text x="-4.7625" y="3.81" size="0.8128" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-4.1275" y="-1.5875" size="0.8128" layer="51" ratio="10">1</text>
+<rectangle x1="-0.2381" y1="-0.2381" x2="0.2381" y2="0.2381" layer="51"/>
+<rectangle x1="-2.7781" y1="-0.2381" x2="-2.3019" y2="0.2381" layer="51"/>
+<rectangle x1="2.3019" y1="-0.2381" x2="2.7781" y2="0.2381" layer="51"/>
+</package>
 <package name="90136-1?04">
 <description>&lt;b&gt;C-Grid III&lt;/b&gt;&lt;p&gt;
 vertical</description>
@@ -677,6 +713,20 @@ vertical</description>
 </package>
 </packages>
 <symbols>
+<symbol name="MA03-1">
+<wire x1="-1.27" y1="5.08" x2="3.81" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="-2.54" x2="0" y2="-2.54" width="0.6096" layer="94"/>
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.6096" layer="94"/>
+<wire x1="1.27" y1="2.54" x2="0" y2="2.54" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-5.08" x2="3.81" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="5.08" x2="-1.27" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="3.81" y1="-5.08" x2="-1.27" y2="-5.08" width="0.4064" layer="94"/>
+<text x="-1.27" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-1.27" y="5.842" size="1.778" layer="95">&gt;NAME</text>
+<pin name="1" x="-5.08" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1"/>
+<pin name="2" x="-5.08" y="0" visible="pad" length="middle" direction="pas" swaplevel="1"/>
+<pin name="3" x="-5.08" y="-2.54" visible="pad" length="middle" direction="pas" swaplevel="1"/>
+</symbol>
 <symbol name="MA04-1">
 <wire x1="-1.27" y1="5.08" x2="3.81" y2="5.08" width="0.4064" layer="94"/>
 <wire x1="1.27" y1="-2.54" x2="0" y2="-2.54" width="0.6096" layer="94"/>
@@ -715,6 +765,24 @@ vertical</description>
 </symbol>
 </symbols>
 <devicesets>
+<deviceset name="90136-1?03" prefix="J">
+<description>&lt;b&gt;C-Grid III&lt;/b&gt;</description>
+<gates>
+<gate name="G$1" symbol="MA03-1" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="90136-1?03">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="3" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="90136-1?04" prefix="J">
 <description>&lt;b&gt;C-Grid III&lt;/b&gt;</description>
 <gates>
@@ -7998,7 +8066,7 @@ Source: AVX .. aphvc.pdf</description>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="B3" library="Frcy" deviceset="UPUTRONICS-UBLOX-PICO" device="BO" value="UBLOX"/>
 <part name="B4" library="Frcy" deviceset="SPARKFUN-OPENLOG" device="BO" value="OPENLOG"/>
-<part name="J2" library="con-molex-c-grid" deviceset="90136-1?04" device="" value="OW"/>
+<part name="J2" library="con-molex-c-grid" deviceset="90136-1?03" device="" value="OW"/>
 <part name="J3" library="con-molex-c-grid" deviceset="90136-1?04" device="" value="DBG"/>
 <part name="J1" library="con-molex-c-grid" deviceset="90136-1?06" device="" value="CDH"/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
@@ -8011,8 +8079,6 @@ Source: AVX .. aphvc.pdf</description>
 <part name="J7" library="con-molex-c-grid" deviceset="90136-1?06" device="" value="SUN"/>
 <part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device=""/>
 <part name="U3" library="Frcy" deviceset="DS18B20" device="" value="DS18B20"/>
-<part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
-<part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
 <part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R2012" package3d_urn="urn:adsk.eagle:package:23543/2" value="4.7k"/>
 <part name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF"/>
@@ -8060,8 +8126,6 @@ Source: AVX .. aphvc.pdf</description>
 <attribute name="SHEET" x="230.505" y="5.08" size="2.54" layer="94"/>
 </instance>
 <instance part="U3" gate="G$1" x="38.1" y="111.76"/>
-<instance part="R3" gate="G$1" x="195.58" y="142.24"/>
-<instance part="R4" gate="G$1" x="195.58" y="134.62"/>
 <instance part="R5" gate="G$1" x="195.58" y="111.76"/>
 <instance part="R6" gate="G$1" x="195.58" y="104.14"/>
 <instance part="C1" gate="G$1" x="25.4" y="86.36" rot="R90"/>
@@ -8082,17 +8146,8 @@ Source: AVX .. aphvc.pdf</description>
 </segment>
 <segment>
 <pinref part="B2" gate="G$1" pin="VIN"/>
-<wire x1="210.82" y1="160.02" x2="187.96" y2="160.02" width="0.1524" layer="91"/>
-<label x="185.42" y="160.02" size="1.27" layer="95" rot="R180" xref="yes"/>
-<wire x1="187.96" y1="160.02" x2="185.42" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="160.02" x2="187.96" y2="142.24" width="0.1524" layer="91"/>
-<junction x="187.96" y="160.02"/>
-<pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="187.96" y1="142.24" x2="190.5" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="142.24" x2="187.96" y2="134.62" width="0.1524" layer="91"/>
-<junction x="187.96" y="142.24"/>
-<pinref part="R4" gate="G$1" pin="1"/>
-<wire x1="187.96" y1="134.62" x2="190.5" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="160.02" x2="200.66" y2="160.02" width="0.1524" layer="91"/>
+<label x="200.66" y="160.02" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="B3" gate="G$1" pin="VCC"/>
@@ -8296,22 +8351,12 @@ Source: AVX .. aphvc.pdf</description>
 <wire x1="109.22" y1="10.16" x2="109.22" y2="27.94" width="0.1524" layer="91"/>
 <junction x="109.22" y="27.94"/>
 </segment>
-<segment>
-<pinref part="J2" gate="G$1" pin="4"/>
-<wire x1="20.32" y1="48.26" x2="33.02" y2="48.26" width="0.1524" layer="91"/>
-<label x="33.02" y="48.26" size="1.27" layer="95" xref="yes"/>
-</segment>
 </net>
 <net name="IMU-SDA" class="0">
 <segment>
 <pinref part="B2" gate="G$1" pin="SDA"/>
-<wire x1="210.82" y1="152.4" x2="205.74" y2="152.4" width="0.1524" layer="91"/>
 <label x="200.66" y="152.4" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="205.74" y1="152.4" x2="200.66" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="200.66" y1="134.62" x2="205.74" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="205.74" y1="134.62" x2="205.74" y2="152.4" width="0.1524" layer="91"/>
-<junction x="205.74" y="152.4"/>
+<wire x1="210.82" y1="152.4" x2="200.66" y2="152.4" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="B1" gate="G$1" pin="D12"/>
@@ -8322,13 +8367,8 @@ Source: AVX .. aphvc.pdf</description>
 <net name="IMU-SCL" class="0">
 <segment>
 <pinref part="B2" gate="G$1" pin="SCL"/>
-<wire x1="210.82" y1="149.86" x2="203.2" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="149.86" x2="200.66" y2="149.86" width="0.1524" layer="91"/>
 <label x="200.66" y="149.86" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="203.2" y1="149.86" x2="200.66" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="200.66" y1="142.24" x2="203.2" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="142.24" x2="203.2" y2="149.86" width="0.1524" layer="91"/>
-<junction x="203.2" y="149.86"/>
 </segment>
 <segment>
 <pinref part="B1" gate="G$1" pin="A6"/>
@@ -8606,11 +8646,23 @@ Source: AVX .. aphvc.pdf</description>
 <pinref part="J4" gate="G$1" pin="3"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="NUC-RST" class="0">
 <segment>
 <pinref part="B1" gate="G$1" pin="RST@2"/>
 <pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="121.92" y1="129.54" x2="137.16" y2="129.54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="IMU-RST" class="0">
+<segment>
+<pinref part="B1" gate="G$1" pin="D11"/>
+<wire x1="96.52" y1="101.6" x2="88.9" y2="101.6" width="0.1524" layer="91"/>
+<label x="88.9" y="101.6" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B2" gate="G$1" pin="RST"/>
+<wire x1="210.82" y1="147.32" x2="200.66" y2="147.32" width="0.1524" layer="91"/>
+<label x="200.66" y="147.32" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
