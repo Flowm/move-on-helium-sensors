@@ -11,13 +11,13 @@ void GPS::setup(){
 
 //    i2c->frequency(200000);
 
-    char data[BUF_LEN];
-    char data1[BUF_LEN];
+    char data[BUF_LEN + 1];
+//    char data1[BUF_LEN + 1];
     while(true){
         readFromRegister(M8_ADDRESS, M8_DATALEN, data, 2, false);
-        uint16_t len = ((uint16_t)data[0])<<8 | ((uint16_t)data[1]);
-        printf("\r\nLen: %d:%d:%d\r\n", len, data[0], data[1]);
-        while(len > 0){
+        uint16_t len = (uint16_t)data[0]<<8 | (uint16_t)data[1];
+        printf("\r\nLen: %d:%d:%d\r\n", len, data[1], data[0]);
+        while(len > 0 && len != 0xFFFF){
             readFromRegister(M8_ADDRESS, M8_DATALEN, data, (len > BUF_LEN)?BUF_LEN:len, false);
             /* Rudimentary NMEA Parsing:
             * Look for new lines
@@ -37,15 +37,17 @@ void GPS::setup(){
             *
             * Dont trust the Length field
             */
-            int i = 0 , j = 0;
-            while(i < 100) {
-                if((data[i] > 0x20 && data[i] < 0x7E) || (data[i] == 0x0D || data[i] == 0x0A)) {
-                    data1[j++] = data[i];
-                }
-                i++;
-            }
-            printf("%s",data1);
-            len -= BUF_LEN;
+//            int i = 0 , j = 0;
+//            while(i < 100) {
+//                if((data[i] > 0x20 && data[i] < 0x7E) || (data[i] == 0x0D || data[i] == 0x0A)) {
+//                    data1[j++] = data[i];
+//                }
+//                i++;
+//            }
+            data[(len > BUF_LEN)?BUF_LEN:len] = '\0';
+            printf("%s",data);
+            len -= (len > BUF_LEN)?BUF_LEN:len;
+//            printf("\r\nLen1 : %d\r\n", len);
         }
         printf("\r\n");
         Thread::wait(1000);
