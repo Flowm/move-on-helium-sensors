@@ -76,7 +76,7 @@ struct InProtocolHeader {
 } __attribute__((packed));
 
 struct InProtocolFooter {
-    uint8_t checksum;
+    uint16_t checksum;
     uint8_t end = 0x04;
 } __attribute__((packed));
 
