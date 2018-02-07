@@ -1,14 +1,14 @@
 #pragma once
 
 #include <mbed.h>
+#include <lib/MODSERIAL/MODSERIAL.h>
+#include <lib/Storage/Storage.hpp>
 #include <modules/ADC/MPC320X.hpp>
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
-#include <modules/Storage/Storage.hpp>
 #include <modules/Temperature/DS18B20.hpp>
 
-#include <lib/MODSERIAL/MODSERIAL.h>
 
 class Sensors {
 public:
