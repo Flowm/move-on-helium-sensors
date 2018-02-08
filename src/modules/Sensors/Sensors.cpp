@@ -8,6 +8,9 @@ void Sensors::setup() {
 }
 
 void Sensors::loop() {
+    // Wait for sensor threads to start and gather inital data
+    Thread::wait(2500);
+
     while(1) {
         log();
         Thread::wait(1000);
