@@ -28,15 +28,21 @@ bool DS18B20::setup(){
 }
 
 void DS18B20::update(){
+    for (int i = 0; i< numDevices; i++) {
+        //XXX: Disable interrupts to ensure onewire communication is not interrupted
+        __disable_irq();
+        temperature[i] = sensors[i]->temperature();
+        // storage->data->temp[i].rom  = sensors[i]->getROM();
+        __enable_irq();
+    }
 
     storage->lock();
-    for (int i = 0; i< numDevices; i++){
-        storage->data->temp[i].temp = sensors[i]->temperature();
-//        storage->data->temp[i].rom  = sensors[i]->getROM();
+    for (int i = 0; i< numDevices; i++) {
+        storage->data->temp[i].temp = temperature[i];
     }
     storage->unlock();
 
-    //Start temperature conversion, wait until ready
+    // Start temperature conversion, wait until ready
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 }
 
