@@ -5,7 +5,7 @@
 
 class Storage {
 public:
-    Storage() : data(&packet.data) {}
+    Storage();
 
     void lock();
     void unlock();
