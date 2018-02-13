@@ -10,9 +10,10 @@
  */
 class BME680 : public SensorThread {
 public:
-    BME680(SPI& spi, DigitalOut& cs, Storage* storage) :
+    BME680(SPI& spi, DigitalOut& cs, Storage* storage, int id=0) :
         bme(spi, cs),
-        storage(storage)
+        storage(storage),
+        id(id)
         {};
 
     bool setup() override;
@@ -21,6 +22,7 @@ public:
 private:
     ClosedCube_BME680_Mbed bme;
     Storage* storage;
+    int id;
 
     const int _chip_id = 0x61;
 

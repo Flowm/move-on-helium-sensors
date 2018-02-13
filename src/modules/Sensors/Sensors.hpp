@@ -22,8 +22,8 @@ public:
         i2c_imu(IMU_SDA, IMU_SCL),
         spi(SPI_MOSI, SPI_MISO, SPI_SCK),
         cs_adcs(SPI_CS_ADCS, 1),
-        cs_eno(SPI_CS_ADCS, 1),
-        cs_env(SPI_CS_ENV, 1),
+        cs_env0(SPI_CS_ENV, 1),
+        cs_env1(SPI_CS_ENO, 1),
         cs_sun(SPI_CS_ADCS, 1),
 
         // CDH data
@@ -31,7 +31,8 @@ public:
 
         // Sensors
         imu(i2c_imu, &storage),
-        env(spi, cs_env, &storage),
+        env0(spi, cs_env0, &storage, 0),
+        env1(spi, cs_env1, &storage, 1),
         temperature(TEMP_OW, &storage)
         {};
 
@@ -48,8 +49,8 @@ private:
     I2C i2c_imu;
     SPI spi;
     DigitalOut cs_adcs;
-    DigitalOut cs_eno;
-    DigitalOut cs_env;
+    DigitalOut cs_env0;
+    DigitalOut cs_env1;
     DigitalOut cs_sun;
 
     // CDH data
@@ -58,7 +59,8 @@ private:
 
     // Sensors
     BNO055IMU imu;
-    BME680 env;
+    BME680 env0;
+    BME680 env1;
     DS18B20 temperature;
 
 };

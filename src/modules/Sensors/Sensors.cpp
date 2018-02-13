@@ -3,7 +3,8 @@
 void Sensors::setup() {
     printf("\r\nRESET\r\n");
     imu.start();
-    env.start();
+    env0.start();
+    env1.start();
     temperature.start();
 }
 
@@ -23,13 +24,16 @@ void Sensors::log() {
     SensorData* data = &data_copy;
     storage.unlock();
 
-    logger.printf("ENV "
-                  "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
-                  "\r\n",
-                  data->env.temperature,
-                  data->env.humidity,
-                  data->env.pressure,
-                  data->env.gasresistance);
+    for (int i = 0; i <= 1; i++) {
+        logger.printf("ENV%d "
+                      "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
+                      "\r\n",
+                      i,
+                      data->env[i].temperature,
+                      data->env[i].humidity,
+                      data->env[i].pressure,
+                      data->env[i].gasresistance);
+    }
 
     logger.printf("IMU "
                   "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
