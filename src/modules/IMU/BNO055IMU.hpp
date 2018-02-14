@@ -10,10 +10,10 @@
  */
 class BNO055IMU : public SensorThread {
 public:
-    BNO055IMU(I2C &i2c, Storage* storage) :
+    BNO055IMU(I2C &i2c, PinName reset_pin, Storage* storage) :
         i2c(i2c),
         storage(storage),
-        impl(i2c, D11)
+        impl(i2c, reset_pin)
         {};
 
     bool setup() override;

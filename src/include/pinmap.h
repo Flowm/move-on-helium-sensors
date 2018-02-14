@@ -3,7 +3,7 @@
 #define CDH_RX      D0
 #define CDH_TX      D1
 #define SPI_MOSI    D2
-#define SPI_CS_ENV  D3
+#define SPI_CS_ENV0 D3
 #define GPS_SDA     D4
 #define GPS_SCL     D5
 #define SPI_CS_ADCS D6
@@ -11,7 +11,7 @@
 #define SPI_CS_SUN  D10
 #define IMU_RST     D11
 #define IMU_SDA     D12
-#define SPI_CS_ENO  D13
+#define SPI_CS_ENV1 D13
 #define SUN_TX      A0
 #define SPI_SCK     A1
 #define SUN_RX      A2

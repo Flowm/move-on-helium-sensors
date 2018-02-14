@@ -22,15 +22,15 @@ public:
         i2c_imu(IMU_SDA, IMU_SCL),
         spi(SPI_MOSI, SPI_MISO, SPI_SCK),
         cs_adcs(SPI_CS_ADCS, 1),
-        cs_env0(SPI_CS_ENV, 1),
-        cs_env1(SPI_CS_ENO, 1),
+        cs_env0(SPI_CS_ENV0, 1),
+        cs_env1(SPI_CS_ENV1, 1),
         cs_sun(SPI_CS_ADCS, 1),
 
         // CDH data
         cdhuart(cdh, &storage),
 
         // Sensors
-        imu(i2c_imu, &storage),
+        imu(i2c_imu, IMU_RST, &storage),
         env0(spi, cs_env0, &storage, 0),
         env1(spi, cs_env1, &storage, 1),
         temperature(TEMP_OW, &storage)
