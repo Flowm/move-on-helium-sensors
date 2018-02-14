@@ -87,7 +87,7 @@ struct CDHPacket {
 } __attribute__((packed));
 
 #ifdef __cplusplus
-#if __GNUG__ && __GNUC__ < 5
+#if __GNUG__
 static_assert(__has_trivial_copy(CDHPacket), "CDHPacket must be trivially copyable.");
 #else
 static_assert(std::is_trivially_copyable<CDHPacket>::value, "CDHPacket must be trivially copyable.");
