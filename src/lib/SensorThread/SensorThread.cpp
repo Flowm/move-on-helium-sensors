@@ -11,10 +11,10 @@ void SensorThread::start() {
 
 void SensorThread::loop() {
     while(1) {
-        update();
         if (update_rate > 0) {
             Thread::wait(update_rate);
         }
+        update();
     }
 }
 
