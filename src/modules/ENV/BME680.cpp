@@ -39,10 +39,10 @@ void BME680::update() {
     //printf("BME680 %4.2f *C; %4.2f Pa; %6.2f %%; %6.3f kOhm\r\n", _temperature, _humidity, _pressure, _gasresistance);
 
     storage->lock();
-    storage->data->env.temperature = _temperature;
-    storage->data->env.humidity = _humidity;
-    storage->data->env.pressure = _pressure;
-    storage->data->env.gasresistance = _gasresistance;
+    storage->data->env[id].temperature = _temperature;
+    storage->data->env[id].humidity = _humidity;
+    storage->data->env[id].pressure = _pressure;
+    storage->data->env[id].gasresistance = _gasresistance;
     storage->unlock();
 
     bme.setForcedMode();

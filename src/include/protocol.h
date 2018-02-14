@@ -59,7 +59,7 @@ struct SensorTemp
 
 struct SensorData {
     SensorGPS gps;
-    SensorENV env;
+    SensorENV env[2];
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
 } __attribute__((packed));

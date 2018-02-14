@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mbed.h>
+#include <include/pinmap.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/Storage/Storage.hpp>
 #include <modules/ADC/MPC320X.hpp>
@@ -15,22 +16,24 @@ public:
     Sensors() :
         // Interfaces
         led(LED1),
-        logger(A7, USBRX),
-        cdh(D1, D0),
-        gps(D4, D5),
-        bno(D12, A6),
-        spi(D2, A5, A1),
-        cs_bme680(D3, 1),
-        cs_adc(D6, 1),
+        logger(LOG_UART, USBRX),
+        cdh(CDH_TX, CDH_RX),
+        i2c_gps(GPS_SDA, GPS_SCL),
+        i2c_imu(IMU_SDA, IMU_SCL),
+        spi(SPI_MOSI, SPI_MISO, SPI_SCK),
+        cs_adcs(SPI_CS_ADCS, 1),
+        cs_env0(SPI_CS_ENV0, 1),
+        cs_env1(SPI_CS_ENV1, 1),
+        cs_sun(SPI_CS_ADCS, 1),
 
         // CDH data
         cdhuart(cdh, &storage),
 
         // Sensors
-        imu(bno, &storage),
-        env(spi, cs_bme680, &storage),
-        adc(spi, cs_adc),
-        temperature(D9, &storage)
+        imu(i2c_imu, IMU_RST, &storage),
+        env0(spi, cs_env0, &storage, 0),
+        env1(spi, cs_env1, &storage, 1),
+        temperature(TEMP_OW, &storage)
         {};
 
     void setup();
@@ -42,11 +45,13 @@ private:
     DigitalOut led;
     Serial logger;
     MODSERIAL cdh;
-    I2C gps;
-    I2C bno;
+    I2C i2c_gps;
+    I2C i2c_imu;
     SPI spi;
-    DigitalOut cs_bme680;
-    DigitalOut cs_adc;
+    DigitalOut cs_adcs;
+    DigitalOut cs_env0;
+    DigitalOut cs_env1;
+    DigitalOut cs_sun;
 
     // CDH data
     Storage storage;
@@ -54,8 +59,8 @@ private:
 
     // Sensors
     BNO055IMU imu;
-    BME680 env;
-    MPC320X adc;
+    BME680 env0;
+    BME680 env1;
     DS18B20 temperature;
 
 };
