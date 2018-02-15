@@ -8520,7 +8520,7 @@ Source: AVX .. aphvc.pdf</description>
 <label x="88.9" y="116.84" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="LOG-UART" class="0">
+<net name="LOG-TX" class="0">
 <segment>
 <pinref part="B4" gate="G$1" pin="RXI"/>
 <wire x1="210.82" y1="81.28" x2="203.2" y2="81.28" width="0.1524" layer="91"/>
@@ -8678,7 +8678,7 @@ Source: AVX .. aphvc.pdf</description>
 <pinref part="J5" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="SPI-CS-ENV" class="0">
+<net name="SPI-CS-ENV0" class="0">
 <segment>
 <pinref part="B1" gate="G$1" pin="D3"/>
 <wire x1="96.52" y1="121.92" x2="88.9" y2="121.92" width="0.1524" layer="91"/>
@@ -8793,7 +8793,7 @@ Source: AVX .. aphvc.pdf</description>
 <label x="200.66" y="149.86" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="SPI-CS-ENO" class="0">
+<net name="SPI-CS-ENV1" class="0">
 <segment>
 <pinref part="B1" gate="G$1" pin="D13"/>
 <wire x1="121.92" y1="99.06" x2="129.54" y2="99.06" width="0.1524" layer="91"/>
