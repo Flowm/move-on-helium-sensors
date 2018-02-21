@@ -9,9 +9,10 @@ public:
 
     void lock();
     void unlock();
+    void update();
 
     CDHPacket packet;
-    SensorData* data;
+    SensorData* const data;
 private:
     Mutex data_mutex;
 };

@@ -11,9 +11,14 @@ void Storage::lock() {
     t.start();
     data_mutex.lock();
     t.stop();
-    packet.data.system.lock_wait_us = t.read_us();
+    data->system.lock_wait_us = t.read_us();
 }
 
 void Storage::unlock() {
     data_mutex.unlock();
+}
+
+void Storage::update() {
+    data->system.log_cnt++;
+    data->system.rtc_s = time(NULL);
 }

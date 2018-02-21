@@ -58,6 +58,8 @@ struct SensorTemp
 }__attribute__((packed));
 
 struct SystemStatus {
+    uint16_t log_cnt;
+    uint16_t rtc_s;
     uint32_t lock_wait_us;
 }__attribute__((packed));
 

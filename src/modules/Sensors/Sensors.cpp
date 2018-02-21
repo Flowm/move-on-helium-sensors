@@ -2,6 +2,7 @@
 
 void Sensors::setup() {
     printf("\r\nRESET\r\n");
+    set_time(0);
     imu.start();
     env0.start();
     env1.start();
@@ -20,6 +21,7 @@ void Sensors::loop() {
 
 void Sensors::log() {
     storage.lock();
+    storage.update();
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
@@ -62,7 +64,11 @@ void Sensors::log() {
     }
 
     logger.printf("SYS "
+            "LOG_CNT=%hu,"
+            "RTC=%u,"
             "LOCK=%u"
             "\r\n",
+            data->system.log_cnt,
+            data->system.rtc_s,
             data->system.lock_wait_us);
 }
