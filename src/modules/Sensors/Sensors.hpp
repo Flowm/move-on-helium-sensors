@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mbed.h>
+#include <algorithm>
 #include <include/pinmap.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/Storage/Storage.hpp>

@@ -12,10 +12,15 @@ void Sensors::setup() {
 void Sensors::loop() {
     // Wait for sensor threads to start and gather inital data
     Thread::wait(2500);
+    Timer t;
+    t.start();
 
     while(1) {
         log();
-        Thread::wait(1000);
+        int sleep = max(0, (1000 - 15 - t.read_ms()));
+        //logger.printf("DBG WAIT=%d\r\n", sleep);
+        Thread::wait(sleep);
+        t.reset();
     }
 }
 
