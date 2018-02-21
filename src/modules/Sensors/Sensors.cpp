@@ -60,4 +60,9 @@ void Sensors::log() {
         }
         logger.printf("\r\n");
     }
+
+    logger.printf("SYS "
+            "LOCK=%u"
+            "\r\n",
+            data->system.lock_wait_us);
 }
