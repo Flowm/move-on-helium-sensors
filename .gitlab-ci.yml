@@ -39,9 +39,16 @@ build:
     paths:
       - artifacts/
 
-deploy:
+deploy-sens:
   stage: deploy
   script:
     - scp -P ${DEPLOY_PORT} artifacts/move-on_helium_sensors.hex ${DEPLOY_TARGET}:move-on_helium_sensors.hex
     - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "st-flash --reset --format ihex write move-on_helium_sensors.hex"
     - timeout --preserve-status --foreground 30 ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "mqttserial" || true
+
+deploy-rpi:
+  stage: deploy
+  script:
+    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git pull --ff-only"
+  only:
+    - rpi
