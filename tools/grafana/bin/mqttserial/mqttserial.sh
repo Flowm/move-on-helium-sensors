@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-mosquitto_sub -t sensors-raw
+topic=sensors-raw
+
+if [ -n "$1" ]; then
+    topic=$1
+fi
+
+mosquitto_sub -t $topic
