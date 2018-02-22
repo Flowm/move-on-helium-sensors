@@ -9,7 +9,8 @@ public:
 
     void lock();
     void unlock();
-    void update();
+
+    void update_log_stats();
 
     CDHPacket packet;
     SensorData* const data;

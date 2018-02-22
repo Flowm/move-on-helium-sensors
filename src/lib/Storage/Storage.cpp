@@ -18,7 +18,7 @@ void Storage::unlock() {
     data_mutex.unlock();
 }
 
-void Storage::update() {
+void Storage::update_log_stats() {
     data->system.log_cnt++;
     data->system.rtc_s = time(NULL);
 }

@@ -26,7 +26,7 @@ void Sensors::loop() {
 
 void Sensors::log() {
     storage.lock();
-    storage.update();
+    storage.update_log_stats();
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
