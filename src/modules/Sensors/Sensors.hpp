@@ -27,7 +27,7 @@ public:
         cs_adcs(SPI_CS_ADCS, 1),
         cs_env0(SPI_CS_ENV0, 1),
         cs_env1(SPI_CS_ENV1, 1),
-        cs_sun(SPI_CS_ADCS, 1),
+        cs_sun(SPI_CS_SUN, 1),
 
         // CDH data
         cdhuart(cdh, &storage),
@@ -36,6 +36,8 @@ public:
         imu(i2c_imu, IMU_RST, &storage),
         env0(spi, cs_env0, &storage, 0),
         env1(spi, cs_env1, &storage, 1),
+        env2(spi, cs_sun, &storage, 2),
+
         temperature(TEMP_OW, &storage),
         gps(&i2c_gps, &storage, &logger)
         {};
@@ -65,6 +67,7 @@ private:
     BNO055IMU imu;
     BME680 env0;
     BME680 env1;
+    BME680 env2;
     DS18B20 temperature;
     GPS gps;
 

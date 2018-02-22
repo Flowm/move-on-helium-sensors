@@ -1,7 +1,10 @@
 #pragma once
 
-// Define max temp sensors for temperatures array.
+// Define max temp sensors (DS18B20) for temperatures array
 #define MAX_TEMP_SENSORS 8
+
+// Define max env sensors (BME680)
+#define MAX_ENV_SENSORS 3
 
 // Generic
 struct SensorVector {
@@ -71,7 +74,7 @@ struct SystemStatus {
 
 struct SensorData {
     SensorGPS gps;
-    SensorENV env[2];
+    SensorENV env[MAX_ENV_SENSORS];
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
     SystemStatus system;

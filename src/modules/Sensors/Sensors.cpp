@@ -6,6 +6,7 @@ void Sensors::setup() {
     imu.start();
     env0.start();
     env1.start();
+    env2.start();
     temperature.start();
     gps.start();
 }
@@ -32,7 +33,7 @@ void Sensors::log() {
     SensorData* data = &data_copy;
     storage.unlock();
 
-    for (int i = 0; i <= 1; i++) {
+    for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         logger.printf("ENV%d "
                       "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
                       "\r\n",
