@@ -38,6 +38,8 @@ build:
     expire_in: 4 week
     paths:
       - artifacts/
+  except:
+    - rpi
 
 deploy-sens:
   stage: deploy
@@ -45,10 +47,12 @@ deploy-sens:
     - scp -P ${DEPLOY_PORT} artifacts/move-on_helium_sensors.hex ${DEPLOY_TARGET}:move-on_helium_sensors.hex
     - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "st-flash --reset --format ihex write move-on_helium_sensors.hex"
     - timeout --preserve-status --foreground 30 ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "mqttserial" || true
+  except:
+    - rpi
 
 deploy-rpi:
   stage: deploy
   script:
-    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git pull --ff-only && tools/grafana/daemon/setup.sh"
+    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git fetch && git reset --hard origin/rpi && tools/grafana/daemon/setup.sh"
   only:
     - rpi
