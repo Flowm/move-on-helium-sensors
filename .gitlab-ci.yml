@@ -49,6 +49,6 @@ deploy-sens:
 deploy-rpi:
   stage: deploy
   script:
-    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git pull --ff-only"
+    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git pull --ff-only && tools/grafana/daemon/setup.sh"
   only:
     - rpi
