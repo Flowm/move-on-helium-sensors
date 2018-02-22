@@ -301,6 +301,28 @@
 <wire x1="-1.905" y1="12.7" x2="-1.905" y2="15.24" width="0.127" layer="21"/>
 <wire x1="-1.905" y1="15.24" x2="2.54" y2="15.24" width="0.127" layer="21"/>
 </package>
+<package name="HUAMAO-HM-11">
+<description>&lt;h3&gt;Plated Through Hole - 6 Pin&lt;/h3&gt;
+&lt;p&gt;Specifications:
+&lt;ul&gt;&lt;li&gt;Pin count:6&lt;/li&gt;
+&lt;li&gt;Pin pitch:0.1"&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Example device(s):
+&lt;ul&gt;&lt;li&gt;CONN_06&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<wire x1="-8.252165625" y1="-1.58485" x2="8.880334375" y2="-1.58485" width="0" layer="21"/>
+<wire x1="8.880334375" y1="-1.58485" x2="8.880334375" y2="22.85265" width="0" layer="21"/>
+<wire x1="8.880334375" y1="22.85265" x2="-8.252165625" y2="22.85265" width="0" layer="21"/>
+<wire x1="-8.252165625" y1="22.85265" x2="-8.252165625" y2="-1.58485" width="0" layer="21"/>
+<pad name="LED" x="-6.35" y="0" drill="1" diameter="1.6764"/>
+<pad name="RST" x="-3.81" y="0" drill="1" diameter="1.6764"/>
+<pad name="RX" x="-1.27" y="0" drill="1" diameter="1.6764"/>
+<pad name="TX" x="1.27" y="0" drill="1" diameter="1.6764"/>
+<pad name="GND" x="3.81" y="0" drill="1" diameter="1.6764" shape="square"/>
+<pad name="VCC" x="6.35" y="0" drill="1" diameter="1.6764"/>
+<text x="-2.54" y="5.08" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="3.81" y="5.08" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="NUCLEO-32">
@@ -414,6 +436,20 @@
 <pin name="2" x="-10.16" y="-5.08" visible="pin" length="short" direction="nc"/>
 <pin name="GND" x="-10.16" y="-7.62" visible="pin" length="short" direction="pwr"/>
 <pin name="7/CS" x="-10.16" y="7.62" visible="pin" length="short" direction="in"/>
+</symbol>
+<symbol name="HUAMAO-HM-11">
+<pin name="LED" x="-7.62" y="5.08" length="short"/>
+<pin name="RST" x="-7.62" y="2.54" length="short"/>
+<pin name="RX" x="-7.62" y="0" length="short" direction="in"/>
+<pin name="TX" x="-7.62" y="-2.54" length="short" direction="out"/>
+<pin name="GND" x="-7.62" y="-5.08" length="short" direction="pwr"/>
+<pin name="VCC" x="-7.62" y="-7.62" length="short" direction="pwr"/>
+<wire x1="-5.08" y1="7.62" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-10.16" x2="7.62" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-10.16" x2="7.62" y2="7.62" width="0.254" layer="94"/>
+<wire x1="7.62" y1="7.62" x2="-5.08" y2="7.62" width="0.254" layer="94"/>
+<text x="-5.08" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-5.08" y="10.16" size="1.778" layer="95" align="top-left">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -574,6 +610,29 @@ https://store.uputronics.com/index.php?route=product/product&amp;path=60_64&amp;
 <connect gate="G$1" pin="SCL/SCK" pad="SCL/SCK"/>
 <connect gate="G$1" pin="SDA/MOSI" pad="SDA/MOSI"/>
 <connect gate="G$1" pin="SDO/MISO" pad="SDO/MISO"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="HUAMAO-HM-11" prefix="B" uservalue="yes">
+<description>&lt;h3&gt;Huamao&lt;/h3&gt;
+
+Breakout: https://oshpark.com/shared_projects/1uC5vV5p</description>
+<gates>
+<gate name="G$1" symbol="HUAMAO-HM-11" x="0" y="0"/>
+</gates>
+<devices>
+<device name="BO" package="HUAMAO-HM-11">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="LED" pad="LED"/>
+<connect gate="G$1" pin="RST" pad="RST"/>
+<connect gate="G$1" pin="RX" pad="RX"/>
+<connect gate="G$1" pin="TX" pad="TX"/>
 <connect gate="G$1" pin="VCC" pad="VCC"/>
 </connects>
 <technologies>
@@ -8152,6 +8211,7 @@ Source: AVX .. aphvc.pdf</description>
 <part name="C8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF"/>
 <part name="C9" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF"/>
 <part name="C10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF"/>
+<part name="B6" library="Frcy" deviceset="HUAMAO-HM-11" device="BO"/>
 </parts>
 <sheets>
 <sheet>
@@ -8178,7 +8238,7 @@ Source: AVX .. aphvc.pdf</description>
 <instance part="P+1" gate="VCC" x="144.78" y="33.02"/>
 <instance part="GND1" gate="1" x="144.78" y="17.78"/>
 <instance part="B3" gate="G$1" x="215.9" y="109.22"/>
-<instance part="B4" gate="G$1" x="218.44" y="76.2"/>
+<instance part="B4" gate="G$1" x="195.58" y="76.2"/>
 <instance part="J2" gate="G$1" x="15.24" y="53.34" rot="MR0"/>
 <instance part="J3" gate="G$1" x="58.42" y="53.34" rot="MR0"/>
 <instance part="J1" gate="G$1" x="15.24" y="78.74" rot="MR0"/>
@@ -8206,6 +8266,7 @@ Source: AVX .. aphvc.pdf</description>
 <instance part="C8" gate="G$1" x="15.24" y="157.48"/>
 <instance part="C9" gate="G$1" x="15.24" y="134.62"/>
 <instance part="C10" gate="G$1" x="15.24" y="111.76"/>
+<instance part="B6" gate="G$1" x="233.68" y="78.74"/>
 </instances>
 <busses>
 </busses>
@@ -8237,8 +8298,8 @@ Source: AVX .. aphvc.pdf</description>
 </segment>
 <segment>
 <pinref part="B4" gate="G$1" pin="VCC"/>
-<wire x1="210.82" y1="76.2" x2="203.2" y2="76.2" width="0.1524" layer="91"/>
-<label x="203.2" y="76.2" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="187.96" y1="76.2" x2="180.34" y2="76.2" width="0.1524" layer="91"/>
+<label x="180.34" y="76.2" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="B1" gate="G$1" pin="3V3"/>
@@ -8339,6 +8400,11 @@ Source: AVX .. aphvc.pdf</description>
 <wire x1="73.66" y1="10.16" x2="73.66" y2="20.32" width="0.1524" layer="91"/>
 <junction x="73.66" y="20.32"/>
 </segment>
+<segment>
+<pinref part="B6" gate="G$1" pin="VCC"/>
+<wire x1="226.06" y1="71.12" x2="218.44" y2="71.12" width="0.1524" layer="91"/>
+<label x="218.44" y="71.12" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="GND" class="0">
 <segment>
@@ -8368,8 +8434,8 @@ Source: AVX .. aphvc.pdf</description>
 </segment>
 <segment>
 <pinref part="B4" gate="G$1" pin="GND"/>
-<wire x1="210.82" y1="73.66" x2="203.2" y2="73.66" width="0.1524" layer="91"/>
-<label x="203.2" y="73.66" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="187.96" y1="73.66" x2="180.34" y2="73.66" width="0.1524" layer="91"/>
+<label x="180.34" y="73.66" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="J2" gate="G$1" pin="1"/>
@@ -8461,6 +8527,11 @@ Source: AVX .. aphvc.pdf</description>
 <wire x1="109.22" y1="10.16" x2="109.22" y2="22.86" width="0.1524" layer="91"/>
 <junction x="109.22" y="22.86"/>
 </segment>
+<segment>
+<pinref part="B6" gate="G$1" pin="GND"/>
+<wire x1="226.06" y1="73.66" x2="218.44" y2="73.66" width="0.1524" layer="91"/>
+<label x="218.44" y="73.66" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="IMU-SDA" class="0">
 <segment>
@@ -8523,13 +8594,18 @@ Source: AVX .. aphvc.pdf</description>
 <net name="LOG-TX" class="0">
 <segment>
 <pinref part="B4" gate="G$1" pin="RXI"/>
-<wire x1="210.82" y1="81.28" x2="203.2" y2="81.28" width="0.1524" layer="91"/>
-<label x="203.2" y="81.28" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="187.96" y1="81.28" x2="180.34" y2="81.28" width="0.1524" layer="91"/>
+<label x="180.34" y="81.28" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="B1" gate="G$1" pin="A7"/>
 <wire x1="121.92" y1="124.46" x2="129.54" y2="124.46" width="0.1524" layer="91"/>
 <label x="129.54" y="124.46" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="B6" gate="G$1" pin="RX"/>
+<wire x1="226.06" y1="78.74" x2="218.44" y2="78.74" width="0.1524" layer="91"/>
+<label x="218.44" y="78.74" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="CDH-TX" class="0">
