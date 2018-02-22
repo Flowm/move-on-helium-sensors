@@ -5,7 +5,9 @@
     StartLimitBurst=10
 
 [Service]
-    ExecStart=/usr/local/bin/ser2mqtt
+    User=deploy
+    Group=deploy
+    ExecStart=/opt/move-on_helium/SEN/tools/grafana/daemon/ser2mqtt/ser2mqtt.py
     Type=simple
     WatchdogSec=36000
     Restart=always
