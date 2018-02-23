@@ -35,17 +35,10 @@ $(BUILD_DIR)/$(PROJECT).hex: $(GEN_MAKEFILE) $(SOURCES)
 	$(MAKE) -C .. -j 8
 
 # Artifacts for ci build
-.PHONY: artifacts cideploy ciflash citail
+.PHONY: artifacts
 artifacts: $(FLASH_DIR)/$(PROJECT).hex
 $(FLASH_DIR)/$(PROJECT).hex: $(BUILD_DIR)/$(PROJECT).hex
 	mkdir -p $(FLASH_DIR)
 	cp $< $(FLASH_DIR)/
 	cp $(basename $<).bin $(FLASH_DIR)/
 	cp $(basename $<).elf $(FLASH_DIR)/
-
-cideploy: ciflash citail
-ciflash:
-	scp -P $(DEPLOY_PORT) $(FLASH_DIR)/$(PROJECT).hex $(DEPLOY_TARGET):
-	ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "st-flash --reset --format ihex write $(PROJECT).hex"
-citail:
-	timeout --preserve-status --foreground 30 ssh -p $(DEPLOY_PORT) $(DEPLOY_TARGET) "mqttserial"

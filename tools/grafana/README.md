@@ -14,7 +14,15 @@
 ```
 ansible-playbook -i "devpi," devpi.yml
 ```
-- Deploy telegraf config
+
+- Clone the move-on_helium repository to `/opt/move-on_helium`
 ```
-sudo ./setup.sh
+sudo mkdir -p /opt/move-on_helium
+sudo chown deploy: /opt/move-on_helium
+git clone --recurse-submodules git@gitlab.lrz.de:move-on/move-on_helium.git /opt/move-on_helium
+```
+
+- Install services and config
+```
+sudo /opt/move-on_helium/SEN/tools/grafana/setup.sh
 ```
