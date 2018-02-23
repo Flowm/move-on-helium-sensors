@@ -30,7 +30,7 @@ def startMQTT():
 console = None
 def connectSerial():
     global console
-    console = serial.Serial("/dev/ttyUSB0", 9600, timeout=1)
+    console = serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=10)
     logging.info("Serial connected")
 
 
@@ -118,27 +118,24 @@ def formatStats(stats):
     return result[:-1]
         
 def handle_input():
-    bytes = console.readline()
-    
-    try:
-        if len(bytes) == 0:
-            return
-        bytes = bytes.strip()
-        if len(bytes) == 0:
-            client.publish("CDH", " ")
-        
-        if len(bytes) > 0 and bytes[0] == 0x04:
-            bytes = bytes[1:]
-            if len(bytes) == 78:
-                stats = Stats(bytes)
-                output = formatStats(stats)
-                client.publish("CDH", output)
-        else:
-            line = bytes.decode()
+    start = console.read(1)
+    if len(start) == 0:
+        return
+
+    start = start[0]
+    if  start == 0x04:
+        bytes = console.read(78)
+        stats = Stats(bytes)
+        output = formatStats(stats)
+        client.publish("CDH", output)
+    else:
+        bytes = bytearray(console.readline())
+        bytes.insert(0, start)
+        try:
+            line = bytes.decode().rstrip()
             client.publish("CDH", line)
-    except UnicodeDecodeError:
-        logging.error(traceback.format_exc())
-        logging.debug(bytes)
+        except UnicodeDecodeError:
+            client.publish("CDH", str(bytes)) 
 
 while True:
     if client == None:
