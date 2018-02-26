@@ -57,11 +57,18 @@ struct SensorTemp
 //    char rom[8];
 }__attribute__((packed));
 
+struct SystemStatus {
+    uint16_t log_cnt;
+    uint16_t rtc_s;
+    uint32_t lock_wait_us;
+}__attribute__((packed));
+
 struct SensorData {
     SensorGPS gps;
     SensorENV env[2];
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
+    SystemStatus system;
 } __attribute__((packed));
 
 // CDH protocol format

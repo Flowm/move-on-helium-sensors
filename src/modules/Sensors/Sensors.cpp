@@ -2,6 +2,7 @@
 
 void Sensors::setup() {
     printf("\r\nRESET\r\n");
+    set_time(0);
     imu.start();
     env0.start();
     env1.start();
@@ -11,15 +12,21 @@ void Sensors::setup() {
 void Sensors::loop() {
     // Wait for sensor threads to start and gather inital data
     Thread::wait(2500);
+    Timer t;
+    t.start();
 
     while(1) {
         log();
-        Thread::wait(1000);
+        int sleep = max(0, (1000 - 15 - t.read_ms()));
+        //logger.printf("DBG WAIT=%d\r\n", sleep);
+        Thread::wait(sleep);
+        t.reset();
     }
 }
 
 void Sensors::log() {
     storage.lock();
+    storage.update_log_stats();
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
@@ -60,4 +67,13 @@ void Sensors::log() {
         }
         logger.printf("\r\n");
     }
+
+    logger.printf("SYS "
+            "LOG_CNT=%hu,"
+            "RTC=%u,"
+            "LOCK=%u"
+            "\r\n",
+            data->system.log_cnt,
+            data->system.rtc_s,
+            data->system.lock_wait_us);
 }

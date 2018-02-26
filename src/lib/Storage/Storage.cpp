@@ -7,9 +7,18 @@ Storage::Storage() : data(&packet.data) {
 }
 
 void Storage::lock() {
+    Timer t;
+    t.start();
     data_mutex.lock();
+    t.stop();
+    data->system.lock_wait_us = t.read_us();
 }
 
 void Storage::unlock() {
     data_mutex.unlock();
+}
+
+void Storage::update_log_stats() {
+    data->system.log_cnt++;
+    data->system.rtc_s = time(NULL);
 }
