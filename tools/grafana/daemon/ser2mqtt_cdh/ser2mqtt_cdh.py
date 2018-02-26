@@ -94,9 +94,16 @@ def formatTable(data, rowNames, columnNames, title):
         result += "\n"
     return result
                 
+
+spinner = 0
+spinnerAnim = "|/-\\"
+
 def formatStats(stats):
+    global spinner
+
     result = "\n"
-    result += "STATS ".ljust(28, "=") + "\n"
+    result += "STATS ".ljust(28, "=")
+    result += " "  + spinnerAnim[spinner] + "\n"
     result += "timestamp:    %s\n" % str(stats.timestamp)
     result += "stats delta:  %i ms\n" % stats.statsDelta
     result += "active time:  %02.2f %%\n" % (stats.activeTime * 100)
@@ -115,8 +122,9 @@ def formatStats(stats):
     
     result += formatTable(stats.comResults, subsystemNames, comResultNames, "COM RESULTS")
     
+    spinner = (spinner + 1) % len(spinnerAnim)
     return result[:-1]
-        
+
 def handle_input():
     start = console.read(1)
     if len(start) == 0:
