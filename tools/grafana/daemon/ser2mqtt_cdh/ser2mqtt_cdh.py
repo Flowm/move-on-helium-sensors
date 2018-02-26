@@ -44,10 +44,10 @@ NR = len(subsystemResultNames)
 NC = len(comResultNames)
 
 structFormat = "".join([
-            "L", # time
-            "H", # cpu time
-            "B", # sdUSed
-            "B", # status
+            "L", # timestamp
+            "H", # statsDelta
+            "B", # activeTime
+            "B", # usedMemory
             "%iH" % N, # bytes
             "%iB" % (N * NR), # subsystem
             "%iB" % (N * NC) #com
@@ -56,10 +56,10 @@ structFormat = "".join([
 class Stats:
     def __init__(self, bytes):
         fields = list(struct.unpack(structFormat, bytes))
-        self.time = datetime.timedelta(milliseconds=fields.pop(0))
-        self.cpuTime = fields.pop(0)
-        self.sdUsed = fields.pop(0)
-        self.status = fields.pop(0)
+        self.timestamp= datetime.timedelta(milliseconds=fields.pop(0))
+        self.statsDelta = fields.pop(0)
+        self.activeTime = fields.pop(0) / 255.0
+        self.usedMemory = fields.pop(0) / 255.0
         self.bytes = [0 for i in range(0, N)]
         self.subsystemResults = [[0 for j in range(0, NR)] for i in range(0, N)]
         self.comResults = [[0 for j in range(0, NC)] for i in range(0, N)]
@@ -97,10 +97,10 @@ def formatTable(data, rowNames, columnNames, title):
 def formatStats(stats):
     result = "\n"
     result += "STATS ".ljust(28, "=") + "\n"
-    result += "timestamp:    %s\n" % str(stats.time)
-    result += "active time:  %i ms\n" % stats.cpuTime
-    result += "used memory:  %02.2f %%\n" % (stats.sdUsed * 100)
-    result += "status:       0x%.2X\n" % stats.status
+    result += "timestamp:    %s\n" % str(stats.timestamp)
+    result += "stats delta:  %i ms\n" % stats.statsDelta
+    result += "active time:  %02.2f %%\n" % (stats.activeTime * 100)
+    result += "used memory:  %02.2f %%\n" % (stats.usedMemory * 100)
     result += "\n"
     
     result += formatTable(stats.subsystemResults, subsystemNames, subsystemResultNames, "SUBSYSTEM RESULTS")
