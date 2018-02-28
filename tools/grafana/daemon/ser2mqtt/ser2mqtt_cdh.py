@@ -137,15 +137,20 @@ def handle_input():
             return
         stats = Stats(bytes)
         output = formatStats(stats)
-        client.publish("CDH", output)
+        client.publish("CDH-raw", output)
+        for i in range(N):
+            n = sum(stats.subsystemResults[i][8:10])
+            client.publish("CDH/%s" % subsystemNames[i], str(n))
     else:
         bytes = bytearray(console.readline())
         bytes.insert(0, start)
         try:
             line = bytes.decode().rstrip()
-            client.publish("CDH", line)
+            client.publish("CDH-raw", line)
+
+
         except UnicodeDecodeError:
-            client.publish("CDH", str(bytes)) 
+            client.publish("CDH-raw", str(bytes)) 
 
 while True:
     if client == None:
