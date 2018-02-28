@@ -133,6 +133,8 @@ def handle_input():
     start = start[0]
     if  start == 0x04:
         bytes = console.read(78)
+        if len(bytes) != 78:
+            return
         stats = Stats(bytes)
         output = formatStats(stats)
         client.publish("CDH", output)
