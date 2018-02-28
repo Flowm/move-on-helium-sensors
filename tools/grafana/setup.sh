@@ -14,4 +14,4 @@ influx -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATION 14d REPLI
 cd $DIR/bin/mqttserial && make install
 
 # Daemon
-$DIR/daemon/setup.sh
+$DIR/daemon/ser2mqtt/setup.sh

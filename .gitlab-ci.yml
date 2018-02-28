@@ -53,6 +53,6 @@ deploy-sens:
 deploy-rpi:
   stage: deploy
   script:
-    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git fetch && git reset --hard origin/rpi && tools/grafana/daemon/setup.sh"
+    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git fetch && git reset --hard origin/rpi && tools/grafana/daemon/ser2mqtt/setup.sh"
   only:
     - rpi
