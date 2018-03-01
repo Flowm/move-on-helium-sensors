@@ -9,6 +9,7 @@ systemctl restart telegraf
 
 # Influxdb
 influx -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATION 14d REPLICATION 1 default'
+influx -port 48086 -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATION 28d REPLICATION 1 default'
 
 # Bin
 cd $DIR/bin/mqttserial && make install
