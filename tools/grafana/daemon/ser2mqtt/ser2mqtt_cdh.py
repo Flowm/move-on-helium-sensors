@@ -138,9 +138,14 @@ def handle_input():
         stats = Stats(bytes)
         output = formatStats(stats)
         client.publish("CDH-raw", output)
+
+        client.publish("CDH/active",stats.activeTime)
+        client.publish("CDH/memory", stats.usedMemory)
         for i in range(N):
-            n = sum(stats.subsystemResults[i][8:10])
-            client.publish("CDH/%s" % subsystemNames[i], str(n))
+            ok = sum(stats.subsystemResults[i][8:10])
+            n =  sum(stats.subsystemResults[i]) * 1.0
+            avg = ok / n if n > 0 else 0
+            client.publish("CDH/%s" % subsystemNames[i], str(avg))
     else:
         bytes = bytearray(console.readline())
         bytes.insert(0, start)
