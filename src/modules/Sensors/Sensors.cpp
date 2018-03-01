@@ -14,21 +14,24 @@ void Sensors::setup() {
 void Sensors::loop() {
     // Wait for sensor threads to start and gather inital data
     Thread::wait(2500);
+
+    uint16_t log_ms = 0;
     Timer t;
     t.start();
 
     while(1) {
-        log();
-        int sleep = max(0, (1000 - 15 - t.read_ms()));
-        //logger.printf("DBG WAIT=%d\r\n", sleep);
-        Thread::wait(sleep);
         t.reset();
+        log(log_ms);
+        log_ms = t.read_ms();
+        int sleep = max(0, (1000 - 15 - log_ms));
+        Thread::wait(sleep);
     }
 }
 
-void Sensors::log() {
+void Sensors::log(uint16_t log_ms = 0) {
+    // Copy data structure to avoid locking it during printf
     storage.lock();
-    storage.update_log_stats();
+    storage.update_log_stats(log_ms);
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
@@ -69,18 +72,20 @@ void Sensors::log() {
         }
         logger.printf("\r\n");
     }
-    logger.printf("SYS "
-                "LOG_CNT=%hu,"
-                "RTC=%u,"
-                "LOCK=%u"
-                "\r\n",
-                data->system.log_cnt,
-                data->system.rtc_s,
-                data->system.lock_wait_us);
 
     logger.printf("GPS "
             "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,COURSE=%.4f,VAR=%.4f"
             "\r\n",
             data->gps.lat, data->gps.lon, data->gps.timestamp,
             data->gps.groundSpeed, data->gps.course, data->gps.magVar);
+
+    logger.printf("SYS "
+            "LOG_CNT=%hu,"
+            "RTC=%u,"
+            "LOCK=%u"
+            "\r\n",
+            data->system.log_cnt,
+            data->system.rtc_s,
+            data->system.log_ms,
+            data->system.lock_wait_us);
 }

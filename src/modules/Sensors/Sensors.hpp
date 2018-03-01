@@ -44,7 +44,7 @@ public:
 
     void setup();
     void loop();
-    void log();
+    void log(uint16_t log_ms);
 
 private:
     //Interfaces

@@ -67,9 +67,10 @@ struct SensorTemp
 }__attribute__((packed));
 
 struct SystemStatus {
-    uint16_t log_cnt;
-    uint16_t rtc_s;
-    uint32_t lock_wait_us;
+    uint16_t log_cnt;       // Number of total logged data sets since reset
+    uint16_t rtc_s;         // Time since reset in seconds
+    uint16_t log_ms;        // Time for writing the last log set to storage
+    uint32_t lock_wait_us;  // Delay until data structure could be locked
 }__attribute__((packed));
 
 struct SensorData {
