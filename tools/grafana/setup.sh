@@ -13,6 +13,7 @@ influx -port 48086 -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATI
 
 # Bin
 cd $DIR/bin/mqttserial && make install
+cd $DIR/bin/reset-nucleo && make install
 
 # Daemon
 $DIR/daemon/ser2mqtt/setup.sh
