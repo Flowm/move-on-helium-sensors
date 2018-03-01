@@ -30,7 +30,7 @@ def startMQTT():
 console = None
 def connectSerial():
     global console
-    console = serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=10)
+    console = serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=0.1)
     logging.info("Serial connected")
 
 
@@ -52,6 +52,26 @@ structFormat = "".join([
             "%iB" % (N * NR), # subsystem
             "%iB" % (N * NC) #com
             ])
+
+structFormatEPS = ">" + "H" * 13 
+
+structNamesEPS = [
+           "Counter",
+           "Solar_Cell_Voltage",
+           "Solar_Cell_Current",
+           "Solar_Cell_Power",
+           "Battery_Voltage",
+           "Battery_Current",
+           "Battery_Power",
+           "Bus_Voltage",
+           "Bus_Current",
+           "Bus_Power",
+           "Chrg_PWN",
+           "Exzess_PWM",
+           "Temperature"
+           ]
+           
+
 
 class Stats:
     def __init__(self, bytes):
@@ -121,9 +141,19 @@ def formatStats(stats):
     result += "\n"
     
     result += formatTable(stats.comResults, subsystemNames, comResultNames, "COM RESULTS")
-    
+    result += "\n"
+
     spinner = (spinner + 1) % len(spinnerAnim)
     return result[:-1]
+
+def readBytes(n):
+    bytes = bytearray()
+    while len(bytes) < n:
+        tmp = console.read(n - len(bytes))
+        if len(tmp) == 0:
+            return bytes
+        bytes.extend(tmp)
+    return bytes
 
 def handle_input():
     start = console.read(1)
@@ -131,31 +161,44 @@ def handle_input():
         return
 
     start = start[0]
-    if  start == 0x04:
-        bytes = console.read(78)
-        if len(bytes) != 78:
+    bytes = bytearray()
+    if  start == 0x80:
+        bytes = readBytes(78)
+
+        if len(bytes) == 78:
+            stats = Stats(bytes)
+            output = formatStats(stats)
+            client.publish("CDH-raw", output)
+
+            client.publish("CDH/active",stats.activeTime)
+            client.publish("CDH/memory", stats.usedMemory)
+            for i in range(N):
+                ok = sum(stats.subsystemResults[i][8:10])
+                n =  sum(stats.subsystemResults[i]) * 1.0
+                avg = ok / n if n > 0 else 0
+                client.publish("CDH/%s" % subsystemNames[i], str(avg))
             return
-        stats = Stats(bytes)
-        output = formatStats(stats)
-        client.publish("CDH-raw", output)
+    elif start == 0x81:
+        bytes = readBytes(27)
+        if len(bytes) == 27:
+            channel = bytes[0]
 
-        client.publish("CDH/active",stats.activeTime)
-        client.publish("CDH/memory", stats.usedMemory)
-        for i in range(N):
-            ok = sum(stats.subsystemResults[i][8:10])
-            n =  sum(stats.subsystemResults[i]) * 1.0
-            avg = ok / n if n > 0 else 0
-            client.publish("CDH/%s" % subsystemNames[i], str(avg))
+            fields = list(struct.unpack(structFormatEPS, bytes[1:]))
+            for i in range(len(fields)):
+                value = fields[i]
+                client.publish("CDH/EPS%i/%s" %(channel, structNamesEPS[i]), value)
+            return
     else:
-        bytes = bytearray(console.readline())
-        bytes.insert(0, start)
-        try:
-            line = bytes.decode().rstrip()
-            client.publish("CDH-raw", line)
+        bytes = console.readline()
+    
+    bytes = bytearray(bytes)
+    bytes.insert(0, start)
+    try:
+        line = bytes.decode().rstrip()
+        client.publish("CDH-raw", line)
 
-
-        except UnicodeDecodeError:
-            client.publish("CDH-raw", str(bytes)) 
+    except UnicodeDecodeError:
+        client.publish("CDH-raw", str(bytes))
 
 while True:
     if client == None:
