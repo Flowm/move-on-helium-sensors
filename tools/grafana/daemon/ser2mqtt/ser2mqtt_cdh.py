@@ -53,7 +53,7 @@ structFormat = "".join([
             "%iB" % (N * NC) #com
             ])
 
-structFormatEPS = ">" + "H" * 13 
+structFormatEPS = ">H" + ("Hhh" * 3) + "HHH"
 
 structNamesEPS = [
            "Counter",
