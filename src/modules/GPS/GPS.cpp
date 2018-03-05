@@ -36,8 +36,7 @@ void GPS::processBuffer() {
         // data is present.
         if(scentence[0] == 0xFF) break;
 
-        fputs("RAWGPS ", stdout);
-        puts(scentence);
+        logger->printf("RAWGPS  %s\r\n", scentence);
 
         // Parse the scentence.
         switch(minmea_sentence_id(scentence,false)) {
@@ -72,7 +71,6 @@ void GPS::processBuffer() {
     storage->lock();
     storage->data->gps = gpsData;
     storage->unlock();
-
 }
 
 void GPS::getNextChunk(uint16_t len){

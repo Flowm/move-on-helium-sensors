@@ -19,19 +19,21 @@
 // Reduce if running out of flash space. The longest buffer
 // have seen is ~1500 chars long.
 #define BUF_LEN     2000
-#define NMEA_DELIM  "\r\n\0xFF"
+#define NMEA_DELIM  "\r\n"
 
 
 class GPS : public SensorThread {
 public:
-    GPS(I2C* i2c, Storage* storage):
+    GPS(I2C* i2c, Storage* storage, Serial* logger):
         i2c(i2c),
-        storage(storage)
+        storage(storage),
+        logger(logger)
         {setup();};
 private:
 
     I2C* i2c;
-    Storage *storage;
+    Storage* storage;
+    Serial* logger;
 
     bool setup() override;
     /**

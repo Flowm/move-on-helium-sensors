@@ -36,7 +36,7 @@ public:
         env0(spi, cs_env0, &storage, 0),
         env1(spi, cs_env1, &storage, 1),
         temperature(TEMP_OW, &storage),
-        gps(&i2c_gps, &storage)
+        gps(&i2c_gps, &storage, &logger)
         {};
 
     void setup();
