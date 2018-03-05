@@ -10,7 +10,7 @@
 bool GPS::setup(){
 
     i2c->frequency(400000);
-    set_update_rate(1000);
+    set_update_rate(1000); // 2000 doesnot work.
 
     return true;
 }
@@ -75,8 +75,11 @@ void GPS::processBuffer() {
 }
 
 void GPS::getNextChunk(uint16_t len){
-    char reg[2] = {M8_DATA};
-    i2c->transfer(M8_ADDRESS, reg, 2, (char*)data, BUF_LEN, event_callback_t(this, &GPS::callback), I2C_EVENT_ALL);
+    // XXX: The read address of M8_DATA works, but I dont know why!.
+    //      Changing it still works.
+    //      It seems that the write is being ignored. So writing nothing works
+    //      because the I2C register starts at 0xFF by default.
+    i2c->transfer(M8_ADDRESS, NULL, 0, (char*)data, BUF_LEN, event_callback_t(this, &GPS::callback), I2C_EVENT_ALL);
 }
 
 
