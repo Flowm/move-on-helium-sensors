@@ -71,14 +71,16 @@ void GPS::processBuffer() {
     SensorGPS gpsData;
     timespec ts;
 
-    gpsData.latitude = minmea_tocoord(&rmc.latitude);
-    gpsData.longitude = minmea_tocoord(&rmc.longitude);
-    gpsData.groundSpeed = minmea_tofloat(&rmc.speed);
-    gpsData.course = minmea_tofloat(&rmc.course);
-    gpsData.magVar = minmea_tofloat(&rmc.variation);
+    if(rmc.valid){
+        gpsData.latitude = minmea_tocoord(&rmc.latitude);
+        gpsData.longitude = minmea_tocoord(&rmc.longitude);
+        gpsData.groundSpeed = minmea_tofloat(&rmc.speed);
+        gpsData.course = minmea_tofloat(&rmc.course);
+        gpsData.magVar = minmea_tofloat(&rmc.variation);
 
-    minmea_gettime(&ts, &rmc.date, &rmc.time);
-    gpsData.timestamp = ts.tv_sec;
+        minmea_gettime(&ts, &rmc.date, &rmc.time);
+        gpsData.timestamp = ts.tv_sec;
+    }
 
     storage->lock();
     storage->data->gps = gpsData;
