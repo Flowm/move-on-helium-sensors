@@ -20,27 +20,15 @@ bool GPS::setup(){
 void GPS::update() {
 
     if(t_flag){
-
-//        uint16_t len  = getDataLength();
-//        if(len != 0xFF) {
-            t_flag = false;
-            processBuffer();
-            getNextChunk(0);
-//        }
-
-//        Thread::wait(1000);
+        t_flag = false;
+//        uint16_t len = getDataLength();
+        processBuffer();
+        getNextChunk(0);
     }
 }
 
 void GPS::processBuffer() {
-    // Sanitize buffer.
-    printf("\r\nProcessing\r\n");
-//    for(int i = 0; i < BUF_LEN; i++) {
-//        if(data[i] == 0xFF) {
-//            data[i] = '\0';
-//            break;
-//        }
-//    }
+
     char *scentence = strtok(data,NMEA_DELIM);
     while(scentence != NULL) {
 
@@ -48,8 +36,6 @@ void GPS::processBuffer() {
         // data is present.
         if(scentence[0] == 0xFF) break;
 
-
-        //#TODO What prefix will not break influx?
         fputs("RAWGPS ", stdout);
         puts(scentence);
 
@@ -69,18 +55,19 @@ void GPS::processBuffer() {
     }
 
     SensorGPS gpsData;
-    timespec ts;
 
     if(rmc.valid){
-        gpsData.latitude = minmea_tocoord(&rmc.latitude);
-        gpsData.longitude = minmea_tocoord(&rmc.longitude);
+        gpsData.lat = minmea_tocoord(&rmc.latitude);
+        gpsData.lon = minmea_tocoord(&rmc.longitude);
         gpsData.groundSpeed = minmea_tofloat(&rmc.speed);
         gpsData.course = minmea_tofloat(&rmc.course);
         gpsData.magVar = minmea_tofloat(&rmc.variation);
-
+        //#TODO Handle valid time when invalid GPS fix.
+        timespec ts;
         minmea_gettime(&ts, &rmc.date, &rmc.time);
         gpsData.timestamp = ts.tv_sec;
     }
+
 
     storage->lock();
     storage->data->gps = gpsData;

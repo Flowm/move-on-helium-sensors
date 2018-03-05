@@ -29,8 +29,8 @@ struct SensorQuaternion{
 
 // Sensor data
 struct SensorGPS {
-    float latitude;
-    float longitude;
+    float lat;
+    float lon;
     float groundSpeed; // Knots.
     float course; // Degrees from True North.
     float magVar;

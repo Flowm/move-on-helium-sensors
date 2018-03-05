@@ -48,6 +48,7 @@ private:
     /**
      * Gets the length of the datastream from registers 0xFE and 0xFD.
      * #FIXME Does not work correctly!, always returns too high a value.
+     * Currently not used.
      */
     uint16_t getDataLength();
 

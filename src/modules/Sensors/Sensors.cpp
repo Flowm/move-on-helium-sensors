@@ -69,13 +69,18 @@ void Sensors::log() {
         }
         logger.printf("\r\n");
     }
-
     logger.printf("SYS "
-            "LOG_CNT=%hu,"
-            "RTC=%u,"
-            "LOCK=%u"
+                "LOG_CNT=%hu,"
+                "RTC=%u,"
+                "LOCK=%u"
+                "\r\n",
+                data->system.log_cnt,
+                data->system.rtc_s,
+                data->system.lock_wait_us);
+
+    logger.printf("GPS "
+            "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,COURSE=%.4f,VAR=%.4f"
             "\r\n",
-            data->system.log_cnt,
-            data->system.rtc_s,
-            data->system.lock_wait_us);
+            data->gps.lat, data->gps.lon, data->gps.timestamp,
+            data->gps.groundSpeed, data->gps.course, data->gps.magVar);
 }
