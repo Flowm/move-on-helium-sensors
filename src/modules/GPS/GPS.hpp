@@ -16,9 +16,10 @@
 #define M8_ADDRESS  (0x42 << 1)
 #define M8_DATALEN  0xFD // 2 bytes 0xFD,0xFE
 #define M8_DATA     0xFF
+// Reduce if running out of flash space. The longest buffer
+// have seen is ~1500 chars long.
 #define BUF_LEN     2000
-#define CHUNK_LEN   80
-
+#define NMEA_DELIM  "\r\n\0xFF"
 
 
 class GPS : public SensorThread {
@@ -33,21 +34,43 @@ private:
     Storage *storage;
 
     bool setup() override;
+    /**
+     * Processes the last buffer and schedules a new transaction.
+     */
     void update() override;
 
-    void readFromRegister(uint16_t device, uint16_t reg, char* data, uint32_t len, bool repeated);
-    void callback(int event);
+    /**
+     * Does a I2C read from an address.
+     * Unused.
+     */
+    void readFromRegister(char device, char reg, char* data, uint32_t len, bool repeated);
 
+    /**
+     * Gets the length of the datastream from registers 0xFE and 0xFD.
+     * #FIXME Does not work correctly!, always returns too high a value.
+     */
     uint16_t getDataLength();
 
+    /**
+     * Process the last read NMEA scentences.
+     * Also prints the raw NMEA data to openlog.
+     */
     void processBuffer();
+
+    /**
+     * Get the next chunk of NMEA scentences.
+     */
     void getNextChunk(uint16_t len);
+
+    /**
+     * Callback which handles the result of the async I2C transaction.
+     */
+    void callback(int event);
 
     char data[BUF_LEN + 1];
     bool t_flag = true;
+
     minmea_sentence_gll gll;
     minmea_sentence_rmc rmc;
-//    uint8_t readRegister(uint8_t address);
-//    char* getNMEAData();
 };
 

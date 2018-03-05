@@ -31,8 +31,11 @@ struct SensorQuaternion{
 struct SensorGPS {
     float latitude;
     float longitude;
-    uint32_t sec;
-    uint32_t nsec;
+    float groundSpeed; // Knots.
+    float course; // Degrees from True North.
+    float magVar;
+    uint32_t timestamp; //Unix timestamp(seconds)
+
 } __attribute__((packed));
 
 struct SensorENV {
