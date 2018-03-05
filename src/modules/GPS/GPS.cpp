@@ -61,9 +61,10 @@ void GPS::processBuffer() {
         gpsData.groundSpeed = minmea_tofloat(&rmc.speed);
         gpsData.course = minmea_tofloat(&rmc.course);
         gpsData.magVar = minmea_tofloat(&rmc.variation);
-        //#TODO Handle valid time when invalid GPS fix.
-        timespec ts;
-        minmea_gettime(&ts, &rmc.date, &rmc.time);
+    }
+
+    timespec ts;
+    if(!minmea_gettime(&ts, &rmc.date, &rmc.time)) {
         gpsData.timestamp = ts.tv_sec;
     }
 
