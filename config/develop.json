@@ -6,7 +6,7 @@
                    "-ffunction-sections", "-fdata-sections", "-funsigned-char",
                    "-MMD", "-fno-delete-null-pointer-checks",
                    "-fno-strict-aliasing",
-                   "-fomit-frame-pointer", "-Os"],
+                   "-fomit-frame-pointer", "-Os","-Dtimegm=mktime"],
         "asm": ["-x", "assembler-with-cpp"],
         "c": ["-std=gnu11"],
         "cxx": ["-std=gnu++14", "-fno-rtti", "-Wvla"],

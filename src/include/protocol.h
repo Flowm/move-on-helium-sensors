@@ -29,7 +29,10 @@ struct SensorQuaternion{
 
 // Sensor data
 struct SensorGPS {
-    uint32_t time;
+    float latitude;
+    float longitude;
+    uint32_t sec;
+    uint32_t nsec;
 } __attribute__((packed));
 
 struct SensorENV {

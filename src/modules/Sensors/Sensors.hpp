@@ -32,11 +32,11 @@ public:
         cdhuart(cdh, &storage),
 
         // Sensors
-        imu(bno, &storage),
-        env(spi, cs_bme680, &storage),
-        adc(spi, cs_adc),
-        temperature(D9, &storage),
-        gps(&gps_i2c)
+        imu(i2c_imu, IMU_RST, &storage),
+        env0(spi, cs_env0, &storage, 0),
+        env1(spi, cs_env1, &storage, 1),
+        temperature(TEMP_OW, &storage),
+        gps(&i2c_gps, &storage)
         {};
 
     void setup();

@@ -8,6 +8,7 @@ void Sensors::setup() {
     env0.start();
     env1.start();
     temperature.start();
+    gps.start();
 }
 
 void Sensors::loop() {
