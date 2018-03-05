@@ -29,28 +29,28 @@ void GPS::update() {
 
 void GPS::processBuffer() {
 
-    char *scentence = strtok(data,NMEA_DELIM);
-    while(scentence != NULL) {
+    char *sentence = strtok(data,NMEA_DELIM);
+    while(sentence != NULL) {
 
         // 0xFF is the default value returned when no more
         // data is present.
-        if(scentence[0] == 0xFF) break;
+        if(sentence[0] == 0xFF) break;
 
-        logger->printf("RAWGPS  %s\r\n", scentence);
+        logger->printf("RAWGPS  %s\r\n", sentence);
 
         // Parse the scentence.
-        switch(minmea_sentence_id(scentence,false)) {
+        switch(minmea_sentence_id(sentence,false)) {
         case MINMEA_SENTENCE_GLL:
-            minmea_parse_gll(&gll, scentence);
+            minmea_parse_gll(&gll, sentence);
             break;
         case MINMEA_SENTENCE_RMC:
-            minmea_parse_rmc(&rmc, scentence);
+            minmea_parse_rmc(&rmc, sentence);
             break;
         default:
             // #TODO: Parse more scentence types here.
             break;
         }
-        scentence = strtok(NULL, NMEA_DELIM);
+        sentence = strtok(NULL, NMEA_DELIM);
     }
 
     SensorGPS gpsData;

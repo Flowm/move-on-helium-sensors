@@ -12,6 +12,7 @@
 #include <modules/Temperature/DS18B20.hpp>
 #include <modules/GPS/GPS.hpp>
 #include <lib/MODSERIAL/MODSERIAL.h>
+#include <lib/SyncSerial/SyncSerial.hpp>
 
 class Sensors {
 public:
@@ -46,7 +47,7 @@ public:
 private:
     //Interfaces
     DigitalOut led;
-    Serial logger;
+    SyncSerial logger;
     MODSERIAL cdh;
     I2C i2c_gps;
     I2C i2c_imu;

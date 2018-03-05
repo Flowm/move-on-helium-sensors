@@ -12,6 +12,7 @@
 #include <lib/SensorThread/SensorThread.hpp>
 #include <lib/minmea.git/minmea.h>
 #include <lib/Storage/Storage.hpp>
+#include <lib/SyncSerial/SyncSerial.hpp>
 
 #define M8_ADDRESS  (0x42 << 1)
 #define M8_DATALEN  0xFD // 2 bytes 0xFD,0xFE
@@ -24,7 +25,7 @@
 
 class GPS : public SensorThread {
 public:
-    GPS(I2C* i2c, Storage* storage, Serial* logger):
+    GPS(I2C* i2c, Storage* storage, SyncSerial* logger):
         i2c(i2c),
         storage(storage),
         logger(logger)
@@ -33,7 +34,7 @@ private:
 
     I2C* i2c;
     Storage* storage;
-    Serial* logger;
+    SyncSerial* logger;
 
     bool setup() override;
     /**

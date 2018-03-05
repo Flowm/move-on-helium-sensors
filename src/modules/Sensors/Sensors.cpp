@@ -1,7 +1,6 @@
 #include "Sensors.hpp"
 
 void Sensors::setup() {
-    logger.baud(115200);
     printf("\r\nRESET\r\n");
     set_time(0);
     imu.start();
