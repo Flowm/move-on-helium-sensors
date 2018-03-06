@@ -1,3 +1,10 @@
+# Ignore unused mbed-os features to speed up compilation
+mbed-os/features/*
+
+# Ignore unrelated folders
+tools/*
+
+# Ignore build folders
 artifacts/
 Debug/
 *examples.c
