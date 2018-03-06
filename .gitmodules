@@ -1,4 +1,0 @@
-[submodule "src/lib/ClosedCube_BME680"]
-	path = src/lib/ClosedCube_BME680
-	url = https://github.com/Flowm/ClosedCube_BME680.git
-	branch = mbed
