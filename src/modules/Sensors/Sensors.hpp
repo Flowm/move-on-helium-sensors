@@ -10,7 +10,9 @@
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
 #include <modules/Temperature/DS18B20.hpp>
-
+#include <modules/GPS/GPS.hpp>
+#include <lib/MODSERIAL/MODSERIAL.h>
+#include <lib/SyncSerial/SyncSerial.hpp>
 
 class Sensors {
 public:
@@ -34,7 +36,8 @@ public:
         imu(i2c_imu, IMU_RST, &storage),
         env0(spi, cs_env0, &storage, 0),
         env1(spi, cs_env1, &storage, 1),
-        temperature(TEMP_OW, &storage)
+        temperature(TEMP_OW, &storage),
+        gps(&i2c_gps, &storage, &logger)
         {};
 
     void setup();
@@ -44,7 +47,7 @@ public:
 private:
     //Interfaces
     DigitalOut led;
-    Serial logger;
+    SyncSerial logger;
     MODSERIAL cdh;
     I2C i2c_gps;
     I2C i2c_imu;
@@ -63,5 +66,6 @@ private:
     BME680 env0;
     BME680 env1;
     DS18B20 temperature;
+    GPS gps;
 
 };

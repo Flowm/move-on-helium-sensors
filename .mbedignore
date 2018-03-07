@@ -1,2 +1,5 @@
 artifacts/
 Debug/
+*examples.c
+*test.c
+
