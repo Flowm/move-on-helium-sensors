@@ -29,9 +29,9 @@ clean:
 
 $(GEN_MAKEFILE):
 	cd .. && mbed-cli deploy
+#XXX: Remove test and example from the minmea library as it fails to compile.
+	rm -f lib/minmea.git/example.c lib/minmea.git/tests.c
 	cd .. && mbed-cli export -i gcc_arm --profile config/develop.json
-	# XXX: Remove test and example from the minmea library as it fails to compile.
-	cd .. && sed -i "/example\.o\|tests\.o/d" Makefile
 
 $(BUILD_DIR)/$(PROJECT).hex: $(GEN_MAKEFILE) $(SOURCES)
 	$(MAKE) -C .. -j 8
