@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG,
 logging.info("ser2mqtt starting")
 
 mqtt = MqttBroker()
-serial_console = SerialWrap("/dev/ttyACM0", 9600, timeout=0.2)
+serial_console = SerialWrap("/dev/ttyACM0", 115200, timeout=0.2)
 
 
 def handle_input():
