@@ -46,13 +46,13 @@ deploy-sens:
   script:
     - scp -P ${DEPLOY_PORT} artifacts/move-on_helium_sensors.hex ${DEPLOY_TARGET}:move-on_helium_sensors.hex
     - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "st-flash --format ihex write move-on_helium_sensors.hex"
-    - timeout --preserve-status --foreground 30 ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "mqttserial" || true
+    - timeout --preserve-status --foreground 30 ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "reset-nucleo && mqttserial" || true
   except:
     - rpi
 
 deploy-rpi:
   stage: deploy
   script:
-    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git fetch && git reset --hard origin/rpi && tools/grafana/daemon/setup.sh"
+    - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git fetch && git reset --hard origin/rpi && tools/grafana/daemon/ser2mqtt/setup.sh"
   only:
     - rpi
