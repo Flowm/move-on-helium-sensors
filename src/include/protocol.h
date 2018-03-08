@@ -1,7 +1,10 @@
 #pragma once
 
-// Define max temp sensors for temperatures array.
+// Define max temp sensors (DS18B20) for temperatures array
 #define MAX_TEMP_SENSORS 8
+
+// Define max env sensors (BME680)
+#define MAX_ENV_SENSORS 3
 
 // Generic
 struct SensorVector {
@@ -64,14 +67,15 @@ struct SensorTemp
 }__attribute__((packed));
 
 struct SystemStatus {
-    uint16_t log_cnt;
-    uint16_t rtc_s;
-    uint32_t lock_wait_us;
+    uint16_t log_cnt;       // Number of total logged data sets since reset
+    uint16_t rtc_s;         // Time since reset in seconds
+    uint16_t log_ms;        // Time for writing the last log set to storage
+    uint32_t lock_wait_us;  // Delay until data structure could be locked
 }__attribute__((packed));
 
 struct SensorData {
     SensorGPS gps;
-    SensorENV env[2];
+    SensorENV env[MAX_ENV_SENSORS];
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
     SystemStatus system;
