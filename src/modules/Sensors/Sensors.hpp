@@ -36,7 +36,7 @@ public:
         imu(i2c_imu, IMU_RST, &storage),
         env0(spi, cs_env0, &storage, 0),
         env1(spi, cs_env1, &storage, 1),
-        env2(spi, cs_sun, &storage, 2),
+        env2(spi, cs_adcs, &storage, 2),
 
         temperature(TEMP_OW, &storage),
         gps(&i2c_gps, &storage, &logger)
