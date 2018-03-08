@@ -36,7 +36,11 @@ void GPS::processBuffer() {
         // data is present.
         if(sentence[0] == 0xFF) break;
 
-        logger->printf("RAWGPS  %s\r\n", sentence);
+        logger->lock();
+        logger->puts("RAWGPS  ");
+        logger->puts(sentence);
+        logger->puts("\r\n");
+        logger->unlock();
 
         // Parse the scentence.
         switch(minmea_sentence_id(sentence,false)) {

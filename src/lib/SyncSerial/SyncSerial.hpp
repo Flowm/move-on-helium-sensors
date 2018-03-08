@@ -14,14 +14,14 @@
 /**
  * Provides a synchronous thread safe Serial class.
  */
-class SyncSerial: public Serial {
+class SyncSerial: public RawSerial {
 public:
     SyncSerial(PinName tx, PinName rx, int baud = SYNC_BAUD) :
-        Serial(tx,rx,baud){};
+        RawSerial(tx,rx,baud) {};
 
-protected:
     void lock() override;
     void unlock() override;
+
 private:
     Mutex serial_mutex;
 };

@@ -36,6 +36,7 @@ void Sensors::log(uint16_t log_ms = 0) {
     SensorData* data = &data_copy;
     storage.unlock();
 
+    logger.lock();
     logger.printf("GPS "
                   "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,COURSE=%.4f,VAR=%.4f"
                   "\r\n",
@@ -88,4 +89,5 @@ void Sensors::log(uint16_t log_ms = 0) {
                   data->system.rtc_s,
                   data->system.log_ms,
                   data->system.lock_wait_us);
+    logger.unlock();
 }
