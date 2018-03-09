@@ -7,7 +7,8 @@
 #include <lib/Storage/Storage.hpp>
 #include <lib/SyncSerial/SyncSerial.hpp>
 
-//#define PRINT_CHECKSUM_ERRORS
+#define SIDEPANEL_PRINT_CHECKSUM_ERRORS
+//#define SIDEPANEL_RAW_DATA
 
 /**
  * Driver for the ADCS Sidepanel
@@ -25,6 +26,7 @@ public:
     void update() override;
 
 private:
+    void updateVerifyData(const uint8_t* data, VerifyStruct* verify);
     bool checkVerifyData(const uint8_t* data, VerifyStruct* verify);
 
     SPI& spi;
@@ -32,5 +34,7 @@ private:
     Storage* storage;
     SyncSerial* logger;
 
-    SidepanelSpiData spi_data;
+    uint8_t recv[sizeof(SidepanelData) + 1];
+    SidepanelData* data = (SidepanelData*) &recv[1];
+    SidepanelControl control;
 };
