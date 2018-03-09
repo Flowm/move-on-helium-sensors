@@ -52,9 +52,9 @@ uint16_t Checksum::crc16hw(const uint8_t* data, uint16_t len)
  * @return The CRC16 checksum of data
  *
  */
-uint16_t Checksum::crc16sw(const uint8_t* data, uint16_t len)
+uint16_t Checksum::crc16sw(const uint8_t* data, uint16_t len, uint16_t init)
 {
-    uint16_t crc = 0x0000;
+    uint16_t crc = init;
     uint16_t x;
 
     while(len > 0) {
