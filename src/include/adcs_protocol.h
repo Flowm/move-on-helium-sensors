@@ -31,7 +31,6 @@ enum class MainpanelMode : uint8_t {
     DETUMB   = 0x03, // hex for 0000 0011
     NADIR    = 0x04, // hex for 0000 0100
     SUN      = 0x05, // hex for 0000 0101
-    FLASH    = 0x06, // hex for 0000 0110
     EXP      = 0x07, // hex for 0000 0111
     TESTM    = 0x08, // hex for 0000 1000
     POWEROFF = 0x0F  // hex for 0000 1111 // Not used adcs internally
