@@ -60,11 +60,20 @@ struct SensorIMU {
     uint8_t resets_zeroes;
 } __attribute__((packed));
 
-struct SensorTemp
-{
+struct SensorTemp {
     float temp;
-//    char rom[8];
+    //char rom[8];
 }__attribute__((packed));
+
+struct SensorADCS {
+    SensorVector accel;
+    SensorVector gyro;
+    SensorVector mag;
+    SensorVector sun;
+
+    int16_t raw_mag[3];
+    uint16_t raw_sun[4];
+} __attribute__((packed));
 
 struct SystemStatus {
     uint16_t log_cnt;       // Number of total logged data sets since reset
@@ -78,6 +87,7 @@ struct SensorData {
     SensorENV env[MAX_ENV_SENSORS];
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
+    SensorADCS adcs;
     SystemStatus system;
 } __attribute__((packed));
 

@@ -71,5 +71,4 @@ private:
     Sidepanel adcs;
     DS18B20 temperature;
     GPS gps;
-
 };

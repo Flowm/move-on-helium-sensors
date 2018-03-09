@@ -7,7 +7,7 @@
 #include <lib/Storage/Storage.hpp>
 #include <lib/SyncSerial/SyncSerial.hpp>
 
-#define PRINT_CHECKSUM_ERRORS
+//#define PRINT_CHECKSUM_ERRORS
 
 /**
  * Driver for the ADCS Sidepanel
