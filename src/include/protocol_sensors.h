@@ -66,12 +66,13 @@ struct SensorTemp {
 }__attribute__((packed));
 
 struct SensorADCS {
-    SensorVector accel;
+    //SensorVector accel;
     SensorVector gyro;
     SensorVector mag;
     SensorVector sun;
 
-    int16_t raw_mag[3];
+    float temp[3];
+    //int16_t raw_mag[3];
     uint16_t raw_sun[4];
 } __attribute__((packed));
 

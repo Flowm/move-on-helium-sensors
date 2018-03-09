@@ -34,7 +34,9 @@ private:
     Storage* storage;
     SyncSerial* logger;
 
-    uint8_t recv[sizeof(SidepanelData) + 1];
+    // Additional size in receive buffer to copensate for inital spi delay and
+    // to ensure data sync
+    uint8_t recv[sizeof(SidepanelData) + 50];
     SidepanelData* data = (SidepanelData*) &recv[1];
     SidepanelControl control;
 };

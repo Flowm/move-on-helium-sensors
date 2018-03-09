@@ -1,6 +1,7 @@
 #include "Sidepanel.hpp"
 
 bool Sidepanel::setup() {
+    // Set sidepanel to NORMAL mode to enable the BMX055 sensor
     control.mode.mode = SidepanelMode::NORMAL;
     control.mode.generation++;
     updateVerifyData((uint8_t*) &control, &control.end);
@@ -10,7 +11,7 @@ bool Sidepanel::setup() {
 
 void Sidepanel::update() {
     cs = 0;
-    spi.write((char*) &control, sizeof(SidepanelControl), (char*) recv, sizeof(SidepanelData));
+    spi.write((char*) &control, sizeof(SidepanelControl), (char*) recv, sizeof(recv));
     cs = 1;
 
 #ifdef SIDEPANEL_RAW_DATA
@@ -26,18 +27,25 @@ void Sidepanel::update() {
     bool valid = checkVerifyData((uint8_t*) data, &data->end);
     if (valid) {
         storage->lock();
-        storage->data->adcs.accel.x = data->sensors.acc.x;
-        storage->data->adcs.accel.y = data->sensors.acc.y;
-        storage->data->adcs.accel.z = data->sensors.acc.z;
+        //storage->data->adcs.accel.x = data->sensors.acc.x;
+        //storage->data->adcs.accel.y = data->sensors.acc.y;
+        //storage->data->adcs.accel.z = data->sensors.acc.z;
         storage->data->adcs.gyro.x = data->sensors.gyro.x;
         storage->data->adcs.gyro.y = data->sensors.gyro.y;
         storage->data->adcs.gyro.z = data->sensors.gyro.z;
         storage->data->adcs.mag.x = data->sensors.mag.x;
         storage->data->adcs.mag.y = data->sensors.mag.y;
         storage->data->adcs.mag.z = data->sensors.mag.z;
-        storage->data->adcs.raw_mag[0] = data->sensors.rawMag.x;
-        storage->data->adcs.raw_mag[1] = data->sensors.rawMag.y;
-        storage->data->adcs.raw_mag[2] = data->sensors.rawMag.z;
+        storage->data->adcs.sun.x = data->sensors.sun.x;
+        storage->data->adcs.sun.y = data->sensors.sun.y;
+        storage->data->adcs.sun.z = data->sensors.sun.z;
+        //storage->data->adcs.tbmx = data->sensors.temp.bmx / 2.0 + 23;
+        storage->data->adcs.temp[0] = (int16_t) data->sensors.temp.t1 / 16.0;
+        storage->data->adcs.temp[1] = (int16_t) data->sensors.temp.t2 / 16.0;
+        storage->data->adcs.temp[2] = (int16_t) data->sensors.temp.t3 / 16.0;
+        //storage->data->adcs.raw_mag[0] = data->sensors.rawMag.x;
+        //storage->data->adcs.raw_mag[1] = data->sensors.rawMag.y;
+        //storage->data->adcs.raw_mag[2] = data->sensors.rawMag.z;
         storage->data->adcs.raw_sun[0] = data->sensors.rawSun.pads[0];
         storage->data->adcs.raw_sun[1] = data->sensors.rawSun.pads[1];
         storage->data->adcs.raw_sun[2] = data->sensors.rawSun.pads[2];
