@@ -14,6 +14,10 @@
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/SyncSerial/SyncSerial.hpp>
 
+//#include "mbed_memory_status.h"
+//print_all_thread_info();
+//print_heap_and_isr_stack_info();
+
 class Sensors {
 public:
     Sensors() :

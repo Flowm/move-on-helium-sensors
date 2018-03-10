@@ -6,7 +6,12 @@
                    "-ffunction-sections", "-fdata-sections", "-funsigned-char",
                    "-MMD", "-fno-delete-null-pointer-checks",
                    "-fno-strict-aliasing",
-                   "-fomit-frame-pointer", "-Os","-Dtimegm=mktime"],
+                   "-fomit-frame-pointer", "-Os",
+                   "-Dtimegm=mktime"
+        ],
+        "common_disabled": [
+            "-DDEBUG_ISR_STACK_USAGE=1", "-DMBED_HEAP_STATS_ENABLED=1", "-DMBED_STACK_STATS_ENABLED=1"
+        ],
         "asm": ["-x", "assembler-with-cpp"],
         "c": ["-std=gnu11"],
         "cxx": ["-std=gnu++14", "-fno-rtti", "-Wvla"],
