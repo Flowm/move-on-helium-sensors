@@ -10,9 +10,11 @@ bool Sidepanel::setup() {
 }
 
 void Sidepanel::update() {
-    cs = 0;
-    spi.write((char*) &control, sizeof(SidepanelControl), (char*) recv, sizeof(recv));
-    cs = 1;
+    spi->lock();
+    *cs = 0;
+    spi->write((char*) &control, sizeof(SidepanelControl), (char*) recv, sizeof(recv));
+    *cs = 1;
+    spi->unlock();
 
 #ifdef SIDEPANEL_RAW_DATA
     logger->lock();

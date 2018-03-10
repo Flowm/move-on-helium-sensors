@@ -15,7 +15,7 @@
  */
 class Sidepanel : public SensorThread {
 public:
-    Sidepanel(SPI& spi, DigitalOut& cs, Storage* storage, SyncSerial* logger) :
+    Sidepanel(SPI* spi, DigitalOut* cs, Storage* storage, SyncSerial* logger) :
         spi(spi),
         cs(cs),
         storage(storage),
@@ -29,8 +29,8 @@ private:
     void updateVerifyData(const uint8_t* data, VerifyStruct* verify);
     bool checkVerifyData(const uint8_t* data, VerifyStruct* verify);
 
-    SPI& spi;
-    DigitalOut& cs;
+    SPI* spi;
+    DigitalOut* cs;
     Storage* storage;
     SyncSerial* logger;
 
