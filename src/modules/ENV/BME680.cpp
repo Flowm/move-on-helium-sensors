@@ -29,6 +29,10 @@ void BME680::update() {
     //printf("BME680 status: DF:%d, MF:%d, GF:%d, GI:%d\r\n", status.newDataFlag, status.measuringStatusFlag, status.gasMeasuringStatusFlag, status.gasMeasurementIndex);
 
     if (!status.newDataFlag) {
+        if (_read_attempts++ > 4) {
+            bme.setForcedMode();
+            _read_attempts = 0;
+        }
         return;
     }
 
