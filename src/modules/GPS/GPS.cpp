@@ -37,7 +37,7 @@ void GPS::processBuffer() {
         if(sentence[0] == 0xFF) break;
 
         logger->lock();
-        logger->puts("RAWGPS  ");
+        logger->puts("RAWGPS ");
         logger->puts(sentence);
         logger->puts("\r\n");
         logger->unlock();

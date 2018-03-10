@@ -82,8 +82,9 @@ void Sensors::log(uint16_t log_ms = 0) {
 
     logger.printf("SYS "
                   "LOG_CNT=%hu,"
-                  "RTC=%u,"
-                  "LOCK=%u"
+                  "RTC_S=%hu,"
+                  "LOG_MS=%hu,"
+                  "LOCK_US=%u"
                   "\r\n",
                   data->system.log_cnt,
                   data->system.rtc_s,
