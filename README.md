@@ -1,5 +1,15 @@
 # MOVE-ON Helium Sensors
 
+## Interfaces
+
+### Micro USB
+The output from Micro USB can be read with the following command (MacOS:
+```
+picocom -b 115200 /dev/tty.usbmodem1453
+```
+(`usbmodem1453` needs to be adjusted on your system)
+
+
 ## Setup
 
 ### Requirements
