@@ -1,8 +1,15 @@
 #include "Sensors.hpp"
 
 void Sensors::setup() {
-    printf("\r\nRESET\r\n");
+    logger.printf("\r\nRESET\r\n");
+
+    // Reset system time
     set_time(0);
+
+    // Increase bus speeds
+    spi.frequency(4000000);
+
+    // Start sensor threads
     imu.start();
     env0.start();
     env1.start();
