@@ -22,7 +22,6 @@ class Sensors {
 public:
     Sensors() :
         // Interfaces
-        led(LED1),
         logger(LOG_UART, USBRX),
         cdh(CDH_TX, CDH_RX),
         i2c_gps(GPS_SDA, GPS_SCL),
@@ -40,8 +39,7 @@ public:
         imu(i2c_imu, IMU_RST, &storage),
         env0(&spi, &cs_env0, &storage, 0),
         env1(&spi, &cs_env1, &storage, 1),
-        env2(&spi, &cs_adcs, &storage, 2),
-        adcs(&spi, &cs_sun, &storage, &logger),
+        adcs(&spi, &cs_adcs, &storage, &logger),
         temperature(TEMP_OW, &storage),
         gps(&i2c_gps, &storage, &logger)
         {};
@@ -52,7 +50,6 @@ public:
 
 private:
     //Interfaces
-    DigitalOut led;
     SyncSerial logger;
     MODSERIAL cdh;
     I2C i2c_gps;
@@ -71,7 +68,6 @@ private:
     BNO055IMU imu;
     BME680 env0;
     BME680 env1;
-    BME680 env2;
     Sidepanel adcs;
     DS18B20 temperature;
     GPS gps;

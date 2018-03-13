@@ -4,7 +4,7 @@
 #define MAX_TEMP_SENSORS 8
 
 // Define max env sensors (BME680)
-#define MAX_ENV_SENSORS 3
+#define MAX_ENV_SENSORS 2
 
 // Generic
 struct SensorVector {

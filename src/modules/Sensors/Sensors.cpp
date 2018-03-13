@@ -13,7 +13,6 @@ void Sensors::setup() {
     imu.start();
     env0.start();
     env1.start();
-    env2.start();
     adcs.start();
     temperature.start();
     gps.start();
