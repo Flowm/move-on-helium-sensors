@@ -52,10 +52,10 @@ void BNO055IMU::update() {
     storage->data->imu.orientation.x = angles.h;
     storage->data->imu.orientation.y = angles.p;
     storage->data->imu.orientation.z = angles.r;
-    storage->data->imu.quaternion.w = quaternion.w;
-    storage->data->imu.quaternion.x = quaternion.x;
-    storage->data->imu.quaternion.y = quaternion.y;
-    storage->data->imu.quaternion.z = quaternion.z;
+    //storage->data->imu.quaternion.w = quaternion.w;
+    //storage->data->imu.quaternion.x = quaternion.x;
+    //storage->data->imu.quaternion.y = quaternion.y;
+    //storage->data->imu.quaternion.z = quaternion.z;
     storage->data->imu.temp_accel = temp.acc_chip;
     storage->data->imu.temp_gyro = temp.gyr_chip;
     // TODO: gravity?

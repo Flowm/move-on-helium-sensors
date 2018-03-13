@@ -35,9 +35,9 @@ void Sidepanel::update() {
         storage->data->adcs.gyro.x = data->sensors.gyro.x;
         storage->data->adcs.gyro.y = data->sensors.gyro.y;
         storage->data->adcs.gyro.z = data->sensors.gyro.z;
-        storage->data->adcs.mag.x = data->sensors.mag.x;
-        storage->data->adcs.mag.y = data->sensors.mag.y;
-        storage->data->adcs.mag.z = data->sensors.mag.z;
+        storage->data->adcs.mag.x = data->sensors.mag.x * data->sensors.mag.length;
+        storage->data->adcs.mag.y = data->sensors.mag.y * data->sensors.mag.length;
+        storage->data->adcs.mag.z = data->sensors.mag.z * data->sensors.mag.length;
         storage->data->adcs.sun.x = data->sensors.sun.x;
         storage->data->adcs.sun.y = data->sensors.sun.y;
         storage->data->adcs.sun.z = data->sensors.sun.z;
