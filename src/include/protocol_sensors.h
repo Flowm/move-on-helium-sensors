@@ -35,8 +35,8 @@ struct SensorGPS {
     float lat;
     float lon;
     float groundSpeed; // Knots.
-    float course; // Degrees from True North.
-    float magVar;
+    float trueTrack; // Degrees from True North.
+    float magTrack;
     uint32_t timestamp; //Unix timestamp(seconds)
 
 } __attribute__((packed));
