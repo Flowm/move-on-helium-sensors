@@ -69,7 +69,9 @@ bool Sidepanel::checkVerifyData(const uint8_t* data, VerifyStruct* verify) {
     // Basic check if data structure is valid
     if(verify->magic != 0xF0) {
 #ifdef SIDEPANEL_PRINT_CHECKSUM_ERRORS
+        logger->lock();
         logger->printf("ADCS Invalid magic byte RECV:%02X EXP:%02X\r\n", verify->magic, 0xF0);
+        logger->unlock();
 #endif
         return false;
     }
@@ -79,7 +81,9 @@ bool Sidepanel::checkVerifyData(const uint8_t* data, VerifyStruct* verify) {
     uint16_t checksum = Checksum::crc16sw(data, len, 0xFFFF);
     if(verify->checksum != checksum) {
 #ifdef SIDEPANEL_PRINT_CHECKSUM_ERRORS
+        logger->lock();
         logger->printf("ADCS Invalid checksum RECV:%04X EXP:%04X GEN:%02X\r\n", verify->checksum, checksum, verify->generation);
+        logger->unlock();
 #endif
         return false;
     }
