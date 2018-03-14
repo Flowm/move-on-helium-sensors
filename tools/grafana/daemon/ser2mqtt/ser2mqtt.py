@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import logging
+import json
 from mqtt import MqttBroker
 from serial_wrap import SerialWrap
 
@@ -12,6 +13,18 @@ mqtt = MqttBroker()
 serial_console = SerialWrap("/dev/ttyACM0", 115200, timeout=0.2)
 
 
+def str2digit(value):
+    if value == "nan":
+        return None
+    try:
+        return int(value)
+    except ValueError:
+        try:
+            return float(value)
+        except ValueError:
+            return None
+
+
 def handle_input():
     line = serial_console.try_readline_decode()
     if not line:
@@ -21,15 +34,20 @@ def handle_input():
     mqtt.publish("sensors-raw", line)
 
     try:
+        data_dict = {}
         type, data = line.split(' ')
         for entry in data.split(','):
+
             try:
                 name, value = entry.split('=')
             except ValueError:
                 return
             else:
+                data_dict[name] = str2digit(value)
                 mqtt.publish("sensors/%s/%s" % (type, name), value)
                 logging.info("Pub sensors/%s/%s: %s" % (type, name, value))
+        if type == "GPS":
+            mqtt.publish("sensors-processed/%s" % type, json.dumps(data_dict))
     except ValueError:
         logging.info('Invalid data in line: ' + line)
         return
