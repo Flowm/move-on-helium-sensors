@@ -26,10 +26,11 @@
 class GPS : public SensorThread {
 public:
     GPS(I2C* i2c, Storage* storage, SyncSerial* logger):
+        SensorThread("GPS"),
         i2c(i2c),
         storage(storage),
         logger(logger)
-        {setup();};
+        {};
 private:
 
     I2C* i2c;

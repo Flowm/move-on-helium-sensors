@@ -18,7 +18,7 @@ void Sensors::setup() {
     gps.start();
 
     // Wait for sensor threads to start and gather inital data
-    Thread::wait(2500);
+    Thread::wait(3500);
 }
 
 void Sensors::loop() {

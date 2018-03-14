@@ -16,6 +16,7 @@
 class Sidepanel : public SensorThread {
 public:
     Sidepanel(SPI* spi, DigitalOut* cs, Storage* storage, SyncSerial* logger) :
+        SensorThread("ADCS"),
         spi(spi),
         cs(cs),
         storage(storage),
