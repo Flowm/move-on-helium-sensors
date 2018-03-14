@@ -15,9 +15,10 @@
 class DS18B20: public SensorThread {
 public:
     DS18B20(PinName dataPin, Storage* storage):
-    dataPin(dataPin),
-    storage(storage)
-    {setup();};
+        SensorThread("DS18B20"),
+        dataPin(dataPin),
+        storage(storage)
+        {};
 
     bool setup() override;
     void update() override;

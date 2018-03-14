@@ -5,20 +5,20 @@
 #include <include/pinmap.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/Storage/Storage.hpp>
-#include <modules/ADC/MPC320X.hpp>
+#include <lib/SyncSerial/SyncSerial.hpp>
+#include <lib/mbed-memory-status/mbed_memory_status.h>
+#include <modules/ADCS/Sidepanel.hpp>
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
 #include <modules/Temperature/DS18B20.hpp>
 #include <modules/GPS/GPS.hpp>
-#include <lib/MODSERIAL/MODSERIAL.h>
-#include <lib/SyncSerial/SyncSerial.hpp>
+
 
 class Sensors {
 public:
     Sensors() :
         // Interfaces
-        led(LED1),
         logger(LOG_UART, USBRX),
         cdh(CDH_TX, CDH_RX),
         i2c_gps(GPS_SDA, GPS_SCL),
@@ -34,9 +34,9 @@ public:
 
         // Sensors
         imu(i2c_imu, IMU_RST, &storage),
-        env0(spi, cs_env0, &storage, 0),
-        env1(spi, cs_env1, &storage, 1),
-        env2(spi, cs_adcs, &storage, 2),
+        env0(&spi, &cs_env0, &storage, 0),
+        env1(&spi, &cs_env1, &storage, 1),
+        adcs(&spi, &cs_adcs, &storage, &logger),
         temperature(TEMP_OW, &storage),
         gps(&i2c_gps, &storage, &logger)
         {};
@@ -47,7 +47,6 @@ public:
 
 private:
     //Interfaces
-    DigitalOut led;
     SyncSerial logger;
     MODSERIAL cdh;
     I2C i2c_gps;
@@ -66,8 +65,7 @@ private:
     BNO055IMU imu;
     BME680 env0;
     BME680 env1;
-    BME680 env2;
+    Sidepanel adcs;
     DS18B20 temperature;
     GPS gps;
-
 };

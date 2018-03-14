@@ -4,7 +4,7 @@
 
 class SensorThread {
 public:
-    SensorThread() = default;
+    SensorThread(const char* name = NULL);
 
     /**
      * Start thread
@@ -36,6 +36,7 @@ public:
 
 private:
     Thread _thread;
+    const char* _name;
 
-    uint16_t update_rate = 1000;
+    uint16_t _update_rate = 1000;
 };

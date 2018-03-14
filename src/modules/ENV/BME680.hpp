@@ -10,7 +10,8 @@
  */
 class BME680 : public SensorThread {
 public:
-    BME680(SPI& spi, DigitalOut& cs, Storage* storage, int id=0) :
+    BME680(SPI* spi, DigitalOut* cs, Storage* storage, int id=0) :
+        SensorThread("BME680"),
         bme(spi, cs),
         storage(storage),
         id(id)
@@ -26,6 +27,7 @@ private:
 
     const int _chip_id = 0x61;
 
+    int _read_attempts = 0;
     float _temperature;
     float _humidity;
     float _pressure;

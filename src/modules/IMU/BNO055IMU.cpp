@@ -18,8 +18,7 @@ bool BNO055IMU::setup() {
         return false;
     }
 
-    printf(
-        "BNO055 CHIP:0x%02x, ACC:0x%02x, MAG:0x%02x, GYR:0x%02x, SW:0x%04x, BL:0x%02x\r\n",
+    printf("BNO055 CHIP:0x%02x, ACC:0x%02x, MAG:0x%02x, GYR:0x%02x, SW:0x%04x, BL:0x%02x\r\n",
         id_info.chip_id, id_info.acc_id, id_info.mag_id,
         id_info.gyr_id, id_info.sw_rev_id, id_info.bootldr_rev_id);
 
@@ -52,10 +51,10 @@ void BNO055IMU::update() {
     storage->data->imu.orientation.x = angles.h;
     storage->data->imu.orientation.y = angles.p;
     storage->data->imu.orientation.z = angles.r;
-    storage->data->imu.quaternion.w = quaternion.w;
-    storage->data->imu.quaternion.x = quaternion.x;
-    storage->data->imu.quaternion.y = quaternion.y;
-    storage->data->imu.quaternion.z = quaternion.z;
+    //storage->data->imu.quaternion.w = quaternion.w;
+    //storage->data->imu.quaternion.x = quaternion.x;
+    //storage->data->imu.quaternion.y = quaternion.y;
+    //storage->data->imu.quaternion.z = quaternion.z;
     storage->data->imu.temp_accel = temp.acc_chip;
     storage->data->imu.temp_gyro = temp.gyr_chip;
     // TODO: gravity?
@@ -73,16 +72,6 @@ void BNO055IMU::update() {
         reset_counter_zeroes++;
         impl.reset();
     }
-
-    // TODO: Remove this after adding these values to central data storage
-    // printf(
-    //     "BNO055 "
-    //     "GRA_X=%4.2f,GRA_Y=%4.2f,GRA_Z=%4.2f,"
-    //     "LIN_ACC_X:%4.2f,LIN_ACC_Y:%4.2f,LIN_ACC_Z:%4.2f,"
-    //     "\r\n",
-    //     gravity.x, gravity.y, gravity.z,
-    //     lin_accel.x, lin_accel.y, lin_accel.z
-    // );
 }
 
 bool BNO055IMU::all_values_zero() {

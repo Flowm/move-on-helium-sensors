@@ -4,7 +4,7 @@
 #define MAX_TEMP_SENSORS 8
 
 // Define max env sensors (BME680)
-#define MAX_ENV_SENSORS 3
+#define MAX_ENV_SENSORS 2
 
 // Generic
 struct SensorVector {
@@ -53,18 +53,28 @@ struct SensorIMU {
     SensorVector gyro;
     SensorVector mag;
     SensorVector orientation;
-    SensorQuaternion quaternion;
+    //SensorQuaternion quaternion;
     int8_t temp_accel;
     int8_t temp_gyro;
     uint8_t resets_temps;
     uint8_t resets_zeroes;
 } __attribute__((packed));
 
-struct SensorTemp
-{
+struct SensorTemp {
     float temp;
-//    char rom[8];
+    //char rom[8];
 }__attribute__((packed));
+
+struct SensorADCS {
+    //SensorVector accel;
+    SensorVector gyro;
+    SensorVector mag;
+    SensorVector sun;
+
+    float temp[3];
+    //int16_t raw_mag[3];
+    uint16_t raw_sun[4];
+} __attribute__((packed));
 
 struct SystemStatus {
     uint16_t log_cnt;       // Number of total logged data sets since reset
@@ -78,6 +88,7 @@ struct SensorData {
     SensorENV env[MAX_ENV_SENSORS];
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
+    SensorADCS adcs;
     SystemStatus system;
 } __attribute__((packed));
 

@@ -7,7 +7,7 @@
 
 #include <modules/Temperature/DS18B20.hpp>
 
-bool DS18B20::setup(){
+bool DS18B20::setup() {
 
     // Update once every 2 seconds. Since the sensors need ~700 ms to convert
     // one temperature.
@@ -27,7 +27,7 @@ bool DS18B20::setup(){
     return numDevices;
 }
 
-void DS18B20::update(){
+void DS18B20::update() {
     for (int i = 0; i< numDevices; i++) {
         //XXX: Disable interrupts to ensure onewire communication is not interrupted
         __disable_irq();
@@ -47,11 +47,11 @@ void DS18B20::update(){
 }
 
 
-uint8_t DS18B20::getNumDevices()  {
+uint8_t DS18B20::getNumDevices() {
     return numDevices;
 }
 
-DS18B20::~DS18B20(){
+DS18B20::~DS18B20() {
     for(uint8_t i = 0; i < numDevices; i++){
         delete(sensors[i]);
     }

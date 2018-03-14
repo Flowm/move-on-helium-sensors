@@ -11,6 +11,7 @@
 class BNO055IMU : public SensorThread {
 public:
     BNO055IMU(I2C &i2c, PinName reset_pin, Storage* storage) :
+        SensorThread("BNO055"),
         i2c(i2c),
         storage(storage),
         impl(i2c, reset_pin)
