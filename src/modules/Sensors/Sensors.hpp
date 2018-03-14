@@ -5,18 +5,15 @@
 #include <include/pinmap.h>
 #include <lib/MODSERIAL/MODSERIAL.h>
 #include <lib/Storage/Storage.hpp>
+#include <lib/SyncSerial/SyncSerial.hpp>
+#include <lib/mbed-memory-status/mbed_memory_status.h>
 #include <modules/ADCS/Sidepanel.hpp>
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
 #include <modules/Temperature/DS18B20.hpp>
 #include <modules/GPS/GPS.hpp>
-#include <lib/MODSERIAL/MODSERIAL.h>
-#include <lib/SyncSerial/SyncSerial.hpp>
 
-//#include "mbed_memory_status.h"
-//print_all_thread_info();
-//print_heap_and_isr_stack_info();
 
 class Sensors {
 public:
