@@ -2,8 +2,8 @@
 
 import logging
 import json
-from mqtt import MqttBroker
-from serial_wrap import SerialWrap
+from lib.input.serial_wrap import SerialWrap
+from lib.output.mqtt_broker import MqttBroker
 
 logging.basicConfig(level=logging.DEBUG,
                     format="(%(threadName)-10s) %(levelname)s %(message)s")
