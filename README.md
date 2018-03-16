@@ -3,7 +3,7 @@
 ## Interfaces
 
 ### Micro USB
-The output from Micro USB can be read with the following command (MacOS:
+The output from Micro USB can be read with the following command (MacOS):
 ```
 picocom -b 115200 /dev/tty.usbmodem1453
 ```
