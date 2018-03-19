@@ -91,4 +91,3 @@ struct SensorData {
     SensorADCS adcs;
     SystemStatus system;
 } __attribute__((packed));
-
