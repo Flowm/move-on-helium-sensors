@@ -55,7 +55,7 @@ struct SensorIMU {
     SensorVector orientation;
     //SensorQuaternion quaternion;
     int8_t temp_accel;
-    int8_t temp_gyro;
+    //int8_t temp_gyro;
     uint8_t resets_temps;
     uint8_t resets_zeroes;
 } __attribute__((packed));

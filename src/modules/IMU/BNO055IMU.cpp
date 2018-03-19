@@ -56,7 +56,7 @@ void BNO055IMU::update() {
     //storage->data->imu.quaternion.y = quaternion.y;
     //storage->data->imu.quaternion.z = quaternion.z;
     storage->data->imu.temp_accel = temp.acc_chip;
-    storage->data->imu.temp_gyro = temp.gyr_chip;
+    //storage->data->imu.temp_gyro = temp.gyr_chip;
     // TODO: gravity?
     // TODO: lin_accel?
     storage->data->imu.resets_temps = reset_counter_temperatures;
