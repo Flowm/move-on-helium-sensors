@@ -38,6 +38,8 @@ void BNO055IMU::update() {
 
     impl.get_chip_temperature(&temp);
 
+    uint8_t resets = assemble_combined_resets();
+
     storage->lock();
     storage->data->imu.accel.x = accel.x;
     storage->data->imu.accel.y = accel.y;
@@ -59,8 +61,7 @@ void BNO055IMU::update() {
     //storage->data->imu.temp_gyro = temp.gyr_chip;
     // TODO: gravity?
     // TODO: lin_accel?
-    storage->data->imu.resets_temps = reset_counter_temperatures;
-    storage->data->imu.resets_zeroes = reset_counter_zeroes;
+    storage->data->imu.resets = resets;
     storage->unlock();
 
     if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
@@ -96,4 +97,8 @@ bool BNO055IMU::all_values_zero() {
             return true;
         }
     return false;
+}
+
+uint8_t BNO055IMU::assemble_combined_resets() {
+    return (reset_counter_temperatures & 0xF) << 4 | (reset_counter_zeroes & 0xF);
 }

@@ -69,7 +69,7 @@ void Sensors::log(uint16_t log_ms = 0) {
                   //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
                   "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
                   "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
-                  "RST_TMP=%u,RST_ZRO=%u"
+                  "RSTS=%u"
                   "\r\n",
                   data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
                   data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
@@ -77,7 +77,7 @@ void Sensors::log(uint16_t log_ms = 0) {
                   //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
                   data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
                   data->imu.temp_accel,//data->imu.temp_gyro,
-                  data->imu.resets_temps, data->imu.resets_zeroes);
+                  data->imu.resets);
 
     logger.printf("ADCS "
                   //"ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
