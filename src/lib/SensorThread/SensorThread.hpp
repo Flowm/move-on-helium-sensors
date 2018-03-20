@@ -3,6 +3,8 @@
 #include <mbed.h>
 #include <algorithm>
 
+//#define DEBUG_THREAD_TIMES
+
 class SensorThread {
 public:
     SensorThread(const char* name = NULL);

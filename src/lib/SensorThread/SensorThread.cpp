@@ -21,8 +21,11 @@ void SensorThread::loop() {
     while(1) {
         update();
         int time_passed = t.read_ms();
-        int sleep = max(0, (_update_rate - time_passed));
-        Thread::wait(sleep);
+        int sleep_ms = max(0, (_update_rate - time_passed));
+#ifdef DEBUG_THREAD_TIMES
+        printf("SYS %s_R=%d %s_S=%d\r\n", _name, time_passed, _name, sleep_ms);
+#endif
+        Thread::wait(sleep_ms);
         t.reset();
     }
 }
