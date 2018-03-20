@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mbed.h>
+#include <algorithm>
 
 class SensorThread {
 public:

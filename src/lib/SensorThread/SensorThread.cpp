@@ -15,11 +15,15 @@ void SensorThread::start() {
 }
 
 void SensorThread::loop() {
+    Timer t;
+    t.start();
+
     while(1) {
-        if (_update_rate > 0) {
-            Thread::wait(_update_rate);
-        }
         update();
+        int time_passed = t.read_ms();
+        int sleep = max(0, (_update_rate - time_passed));
+        Thread::wait(sleep);
+        t.reset();
     }
 }
 
