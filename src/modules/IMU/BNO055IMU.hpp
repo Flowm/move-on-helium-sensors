@@ -43,4 +43,5 @@ private:
     uint8_t reset_counter_zeroes = 0;
 
     bool all_values_zero();
+    uint8_t assemble_combined_resets();
 };
