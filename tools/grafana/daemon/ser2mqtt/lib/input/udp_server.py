@@ -34,10 +34,10 @@ class UdpServer():
             if not data:
                 continue
             length = len(data)
-            logging.debug("RECV %3d: %s" % (length, data))
+            logging.debug("RECV %d: %s" % (length, data))
 
-            if(data[length-1] != 0x00):
-                logging.warning("At least one fragment is corrupt -> check the last byte: Each bit set to 1 tells which fragment is corrupt (LSB equals the first fragment, MSB the last fragment)")
-                continue
+            #if(data[length-1] != 0x00):
+            #    logging.warning("At least one fragment is corrupt -> check the last byte: Each bit set to 1 tells which fragment is corrupt (LSB equals the first fragment, MSB the last fragment)")
+            #    continue
 
             yield(data)

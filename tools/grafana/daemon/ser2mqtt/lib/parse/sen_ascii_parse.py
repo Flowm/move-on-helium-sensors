@@ -15,7 +15,7 @@ def str2digit(value):
             return None
 
 
-class SENParse:
+class SenAsciiParse:
     def parse_packet(self, packet):
         yield ("sensors-raw", packet)
 
