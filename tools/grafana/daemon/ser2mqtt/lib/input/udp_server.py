@@ -33,13 +33,12 @@ class UdpServer():
             (data, addr) = self.socket.recvfrom(256)
             if not data:
                 break
+            logging.debug("RECV: " + str(data))
 
-            logging.info(data)
-            counter = 0
-            for i in data:
-                counter = counter + 1
-            #logging.info(counter)
-            if(data[counter-1] != 0x00):
+            length = len(data)
+            logging.info("CNT %d LEN %d" % (counter, length))
+            if(data[length-1] != 0x00):
                 logging.warning("At least one fragment is corrupt -> check the last byte: Each bit set to 1 tells which fragment is corrupt (LSB equals the first fragment, MSB the last fragment)")
-            logging.debug(data)
+                continue
+
             yield(data)
