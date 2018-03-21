@@ -28,15 +28,14 @@ class UdpServer():
     def __exit__(self, exc_type, exc_value, traceback):
         self.socket.close()
 
-    def try_readline_decode(self):
+    def get_packets(self):
         while 1:
             (data, addr) = self.socket.recvfrom(256)
             if not data:
-                break
-            logging.debug("RECV: " + str(data))
-
+                continue
             length = len(data)
-            logging.info("CNT %d LEN %d" % (counter, length))
+            logging.debug("RECV %3d: %s" % (length, data))
+
             if(data[length-1] != 0x00):
                 logging.warning("At least one fragment is corrupt -> check the last byte: Each bit set to 1 tells which fragment is corrupt (LSB equals the first fragment, MSB the last fragment)")
                 continue

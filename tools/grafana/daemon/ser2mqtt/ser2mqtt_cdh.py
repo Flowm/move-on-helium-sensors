@@ -13,7 +13,7 @@ import serial
 MQTT_IP = "localhost"
 MQTT_PORT = 1883
 
-logging.basicConfig(level=logging.DEBUG, format="(%(threadName)-10s) %(levelname)s %(message)s")
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)-15s %(levelname)s %(message)s")
 logging.info("ser2mqtt CDH starting")
 
 def on_connect(client, userdata, flags, rc):

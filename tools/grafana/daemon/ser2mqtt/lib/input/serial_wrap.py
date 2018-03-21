@@ -1,6 +1,7 @@
 import logging
 import serial
 
+
 class SerialWrap(serial.Serial):
     def __init__(self, *args, **kwargs):
         self.serial_args = args
@@ -54,6 +55,12 @@ class SerialWrap(serial.Serial):
         except UnicodeDecodeError:
             return
         return line
+
+    def get_packets(self):
+        while 1:
+            line = self.try_readline_decode()
+            if line:
+                yield line
 
     def try_write(self, *args, **kwargs):
         if self.serial:
