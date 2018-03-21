@@ -4,7 +4,7 @@ Storage::Storage() : data(&packet.data) {
     packet.header.start = 0x01;
     packet.header.numBytes = sizeof(SensorData);
     packet.footer.end = 0x04;
-    printf("SYS PACKET_SIZE=%u\r\n", sizeof(packet));
+    printf("SYS PACKET_SIZE=%u SENSOR_SIZE=%u\r\n", sizeof(packet), sizeof(SensorData));
 }
 
 void Storage::lock() {
