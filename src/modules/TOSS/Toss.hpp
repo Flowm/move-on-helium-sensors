@@ -6,7 +6,7 @@
 #include <lib/Storage/Storage.hpp>
 #include <lib/SyncSerial/SyncSerial.hpp>
 
-#define TOSS_RAW_DATA
+//#define TOSS_RAW_DATA
 
 /**
  * Driver for the TOSS board
@@ -29,5 +29,5 @@ private:
     // Additional size in receive buffer to copensate for inital spi delay and
     // to ensure data sync
     char recv[sizeof(SensorTOSS)+20];
-    SensorTOSS* data = (SensorTOSS*) &recv[0];
+    SensorTOSS* data = (SensorTOSS*) &recv[1];
 };
