@@ -35,7 +35,7 @@
     }
 </style>
 <div id="floating-panel">
-  <input type="datetime-local" id="startDate"/>
+  <!-- <input type="datetime-local" id="startDate"/> -->
   <input type="button" id="refresh" onclick="refresh()" value="Refresh">
 </div>
 <div id="map">
@@ -74,7 +74,8 @@
 
 
     function refresh() {
-        var from = (+new Date(document.getElementById('startDate').value))  / 1000;
+        // var from = (+new Date(document.getElementById('startDate').value))  / 1000;
+        from = NaN;
         if( isNaN(from) ) {
             from = "now() - 4h"
         }
