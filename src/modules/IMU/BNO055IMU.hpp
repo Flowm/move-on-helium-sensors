@@ -3,17 +3,15 @@
 #include <mbed.h>
 #include <lib/BNO055_fusion/BNO055.h>
 #include <lib/SensorThread/SensorThread.hpp>
-#include <lib/Storage/Storage.hpp>
 
 /**
  * Driver for the BNO055 IMU
  */
 class BNO055IMU : public SensorThread {
 public:
-    BNO055IMU(I2C &i2c, PinName reset_pin, Storage* storage) :
-        SensorThread("BNO055"),
+    BNO055IMU(I2C &i2c, PinName reset_pin, Storage* storage, SyncSerial* logger) :
+        SensorThread(storage, logger, "BNO055"),
         i2c(i2c),
-        storage(storage),
         impl(i2c, reset_pin)
         {};
 
@@ -24,7 +22,6 @@ public:
 
 private:
     I2C& i2c;
-    Storage* storage;
 
     BNO055 impl;
 

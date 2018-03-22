@@ -4,8 +4,6 @@
 #include <include/adcs_protocol.h>
 #include <lib/Checksum/Checksum.hpp>
 #include <lib/SensorThread/SensorThread.hpp>
-#include <lib/Storage/Storage.hpp>
-#include <lib/SyncSerial/SyncSerial.hpp>
 
 #define SIDEPANEL_PRINT_CHECKSUM_ERRORS
 //#define SIDEPANEL_RAW_DATA
@@ -16,11 +14,9 @@
 class Sidepanel : public SensorThread {
 public:
     Sidepanel(SPI* spi, DigitalOut* cs, Storage* storage, SyncSerial* logger) :
-        SensorThread("ADCS"),
+        SensorThread(storage, logger, "ADCS"),
         spi(spi),
-        cs(cs),
-        storage(storage),
-        logger(logger)
+        cs(cs)
         {};
 
     bool setup() override;
@@ -32,8 +28,6 @@ private:
 
     SPI* spi;
     DigitalOut* cs;
-    Storage* storage;
-    SyncSerial* logger;
 
     // Additional size in receive buffer to copensate for inital spi delay and
     // to ensure data sync

@@ -3,18 +3,16 @@
 #include <mbed.h>
 #include <lib/ClosedCube_BME680/src/ClosedCube_BME680_Mbed.h>
 #include <lib/SensorThread/SensorThread.hpp>
-#include <lib/Storage/Storage.hpp>
 
 /**
  * Driver for the BME680 Environmental sensor
  */
 class BME680 : public SensorThread {
 public:
-    BME680(SPI* spi, DigitalOut* cs, Storage* storage, int id=0) :
-        SensorThread("BME680"),
+    BME680(SPI* spi, DigitalOut* cs, int id, Storage* storage, SyncSerial* logger) :
+        SensorThread(storage, logger, "BME680"),
         bme(spi, cs),
-        storage(storage),
-        id(id)
+        _id(id)
         {};
 
     bool setup() override;
@@ -22,8 +20,7 @@ public:
 
 private:
     ClosedCube_BME680_Mbed bme;
-    Storage* storage;
-    int id;
+    int _id;
 
     const int _chip_id = 0x61;
 
