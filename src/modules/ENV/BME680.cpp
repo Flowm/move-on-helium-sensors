@@ -49,9 +49,9 @@ void BME680::update() {
 
     // Store the data
     storage->lock();
-    storage->data->env[id].temperature = _temperature;
-    storage->data->env[id].humidity = _humidity;
-    storage->data->env[id].pressure = _pressure;
-    storage->data->env[id].gasresistance = _gasresistance;
+    storage->data->env[_id].temperature = _temperature;
+    storage->data->env[_id].humidity = _humidity;
+    storage->data->env[_id].pressure = _pressure;
+    storage->data->env[_id].gasresistance = _gasresistance;
     storage->unlock();
 }

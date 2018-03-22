@@ -33,11 +33,11 @@ public:
         cdhuart(cdh, &storage),
 
         // Sensors
-        imu(i2c_imu, IMU_RST, &storage),
-        env0(&spi, &cs_env0, &storage, 0),
-        env1(&spi, &cs_env1, &storage, 1),
+        imu(i2c_imu, IMU_RST, &storage, &logger),
+        env0(&spi, &cs_env0, 0, &storage, &logger),
+        env1(&spi, &cs_env1, 1, &storage, &logger),
         adcs(&spi, &cs_adcs, &storage, &logger),
-        temperature(TEMP_OW, &storage),
+        temperature(TEMP_OW, &storage, &logger),
         gps(&i2c_gps, &storage, &logger)
         {};
 
