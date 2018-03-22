@@ -14,6 +14,7 @@ void Sensors::setup() {
     env0.start();
     env1.start();
     adcs.start();
+    toss.start();
     temperature.start();
     gps.start();
 
