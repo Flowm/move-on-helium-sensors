@@ -6,7 +6,7 @@ void Sensors::setup() {
     // Reset system time
     set_time(0);
 
-    // Increase bus speeds
+    // Configure bus speeds
     spi.frequency(4000000);
 
     // Start sensor threads
