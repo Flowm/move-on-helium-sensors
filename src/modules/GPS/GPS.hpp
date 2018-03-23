@@ -73,5 +73,6 @@ private:
     minmea_sentence_gll gll;
     minmea_sentence_rmc rmc;
     minmea_sentence_vtg vtg;
+    minmea_sentence_gga gga;
 };
 
