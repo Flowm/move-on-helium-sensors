@@ -26,12 +26,12 @@ void Toss::update() {
     uint16_t len = (uint8_t*)&data->checksum - (uint8_t*)data;
     uint16_t checksum = Checksum::crc16sw((uint8_t*)data, len);
     if (data->checksum == checksum) {
-        valid = true;
+        last_data = storage->get_ts();
         storage->lock();
         storage->data->toss = *data;
         storage->unlock();
     } else {
-        valid = false;
+        last_data = 0;
         logger->lock();
         logger->printf("TOSS Invalid checksum RECV:%04X EXP:%04X\r\n", data->checksum, checksum);
         logger->unlock();
@@ -40,12 +40,15 @@ void Toss::update() {
 
 void Toss::print() {
     // Only print valid data
-    if (!valid) {
+    if (!last_data) {
         return;
     }
 
     logger->lock();
-    logger->printf("TOSS RTC=%u", data->timestamp);
+    logger->printf("%s T=%lu,"
+                   "RTC=%u",
+                   _name, last_data,
+                   data->timestamp);
     for (int i = 0; i < 4; i++) {
         logger->printf(",TMP%u=%d", i+1, data->temp[i]);
     }

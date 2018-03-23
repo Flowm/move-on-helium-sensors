@@ -49,5 +49,9 @@ void SensorThread::set_priority(osPriority priority) {
 }
 
 bool SensorThread::is_valid() {
-    return valid;
+    if (last_data) {
+        return true;
+    } else {
+        return false;
+    }
 }

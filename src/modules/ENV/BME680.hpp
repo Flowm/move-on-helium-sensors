@@ -10,7 +10,7 @@
 class BME680 : public SensorThread {
 public:
     BME680(SPI* spi, DigitalOut* cs, int id, Storage* storage, SyncSerial* logger) :
-        SensorThread(storage, logger, "BME680"),
+        SensorThread(storage, logger, "ENV"),
         bme(spi, cs),
         _id(id)
         {};

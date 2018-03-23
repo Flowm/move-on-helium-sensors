@@ -35,6 +35,7 @@ void DS18B20::update() {
         // storage->data->temp[i].rom  = sensors[i]->getROM();
         __enable_irq();
     }
+    last_data = storage->get_ts();
 
     storage->lock();
     for (int i = 0; i< numDevices; i++) {
@@ -55,8 +56,10 @@ uint8_t DS18B20::getNumDevices() {
 void DS18B20::print() {
     logger->lock();
     if (getNumDevices() > 0) {
-        logger->printf("TMP ");
-        logger->printf("OW%d=%.4f", 0, temperature[0]);
+        logger->printf("%s T=%lu,"
+                       "OW%d=%.4f",
+                       _name, last_data,
+                       0, temperature[0]);
         for (int i = 1; i < getNumDevices(); i++) {
             if(temperature[i] != -1000) {
                 logger->printf(",OW%d=%.4f", i, temperature[i]);

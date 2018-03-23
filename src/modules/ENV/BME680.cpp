@@ -33,7 +33,7 @@ void BME680::update() {
 
     if (!status.newDataFlag) {
         if (_read_attempts++ > 1) {
-            valid = false;
+            last_data = 0;
             bme.setForcedMode();
             _read_attempts = 0;
         }
@@ -44,7 +44,7 @@ void BME680::update() {
     data.humidity = bme.readHumidity();
     data.pressure = bme.readPressure();
     data.gasresistance = bme.readGasResistance() / 1000.0;
-    //printf("BME680 %4.2f *C; %4.2f Pa; %6.2f %%; %6.3f kOhm\r\n", _temperature, _humidity, _pressure, _gasresistance);
+    last_data = storage->get_ts();
 
     // Trigger a single THPG measurement
     bme.setForcedMode();
@@ -57,15 +57,15 @@ void BME680::update() {
 
 void BME680::print() {
     // Only print valid data
-    if (!valid) {
+    if (!last_data) {
         return;
     }
 
     logger->lock();
-    logger->printf("ENV%d "
+    logger->printf("%s%d T=%lu,"
                    "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
                    "\r\n",
-                   _id,
+                   _name, _id, last_data,
                    data.temperature,
                    data.humidity,
                    data.pressure,

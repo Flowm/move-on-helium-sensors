@@ -14,7 +14,7 @@
 class DS18B20: public SensorThread {
 public:
     DS18B20(PinName dataPin, Storage* storage, SyncSerial* logger):
-        SensorThread(storage, logger, "DS18B20"),
+        SensorThread(storage, logger, "TMP"),
         dataPin(dataPin)
         {};
 

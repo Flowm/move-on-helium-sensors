@@ -74,9 +74,9 @@ void GPS::processBuffer() {
         gpsData.altitude = minmea_tofloat(&gga.altitude);
         gpsData.trueTrack = minmea_tofloat(&vtg.true_track_degrees);
         gpsData.groundSpeed = minmea_tofloat(&vtg.speed_kph);
-        valid = true;
+        last_data = storage->get_ts();
     } else {
-        valid = false;
+        last_data = 0;
     }
 
     timespec ts;
@@ -118,14 +118,15 @@ void GPS::callback(int event) {
 
 void GPS::print() {
     // Only print valid data
-    if (!valid) {
+    if (!last_data) {
         return;
     }
 
     logger->lock();
-    logger->printf("GPS "
+    logger->printf("%s T=%lu,"
                    "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
                    "\r\n",
+                   _name, last_data,
                    gpsData.lat, gpsData.lon, gpsData.timestamp,
                    gpsData.groundSpeed, gpsData.trueTrack, gpsData.altitude);
     logger->unlock();

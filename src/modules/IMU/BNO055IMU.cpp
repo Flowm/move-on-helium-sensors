@@ -37,7 +37,7 @@ void BNO055IMU::update() {
     impl.get_euler_angles(&angles);
 
     impl.get_chip_temperature(&temp);
-    valid = true;
+    last_data = storage->get_ts();
 
     uint8_t resets = assemble_combined_resets();
 
@@ -66,13 +66,12 @@ void BNO055IMU::update() {
     storage->unlock();
 
     if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
-        valid = false;
         reset_counter_temperatures++;
         impl.reset();
     }
 
     if (all_values_zero()) {
-        valid = false;
+        last_data = 0;
         reset_counter_zeroes++;
         impl.reset();
     }
@@ -108,11 +107,11 @@ uint8_t BNO055IMU::assemble_combined_resets() {
 
 void BNO055IMU::print() {
     // Only print valid data
-    if (!valid) {
+    if (!last_data) {
         return;
     }
     logger->lock();
-    logger->printf("IMU "
+    logger->printf("%s T=%lu,"
                    "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
                    "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                    "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
@@ -121,6 +120,7 @@ void BNO055IMU::print() {
                    "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
                    "RSTS=%u"
                    "\r\n",
+                   _name, last_data,
                    accel.x, accel.y, accel.z,
                    gyro.x, gyro.y, gyro.z,
                    mag.x, mag.y, mag.z,

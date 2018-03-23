@@ -29,3 +29,7 @@ void Storage::update_log_stats(uint16_t log_ms) {
     data->system.rtc_s = time(NULL);
     data->system.log_ms = log_ms;
 }
+
+uint32_t Storage::get_ts() {
+    return timestamp.read_ms();
+}

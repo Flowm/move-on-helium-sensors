@@ -56,11 +56,11 @@ public:
 protected:
     Storage* storage;
     SyncSerial* logger;
-    bool valid = false;
+    const char* _name;
+    uint32_t last_data;
 
 private:
     Thread _thread;
-    const char* _name;
 
     uint16_t _update_rate = 1000;
 };
