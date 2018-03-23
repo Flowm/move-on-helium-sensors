@@ -1,10 +1,14 @@
 #include "Storage.hpp"
 
 Storage::Storage() : data(&packet.data) {
+    // Initialize CDH packet
     packet.header.start = 0x01;
     packet.header.numBytes = sizeof(SensorData);
     packet.footer.end = 0x04;
     printf("SYS PACKET_SIZE=%u,SENSOR_SIZE=%u\r\n", sizeof(packet), sizeof(SensorData));
+
+    // Start the global timer
+    timestamp.start();
 }
 
 void Storage::lock() {
@@ -13,6 +17,7 @@ void Storage::lock() {
     data_mutex.lock();
     t.stop();
     data->system.lock_wait_us = t.read_us();
+    data->system.rtc_ms = timestamp.read_ms();
 }
 
 void Storage::unlock() {
