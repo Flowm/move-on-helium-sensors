@@ -11,6 +11,13 @@ bool GPS::setup() {
     i2c->frequency(400000);
     set_update_rate(1000); // 2000 doesnot work.
 
+    // Write the config message and wait 100 ms to allow for configuration.
+    // #TODO: Parse the UBX-ACK-ACK to really verify that its acknowledged.
+    for(int i=0; i < 3; i++) {
+        i2c->write(M8_ADDRESS, HA_MODE_CFG, sizeof(HA_MODE_CFG), false);
+        Thread::wait(200);
+    }
+
     return true;
 }
 
