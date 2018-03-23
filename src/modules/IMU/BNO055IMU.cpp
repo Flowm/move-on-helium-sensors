@@ -106,8 +106,8 @@ uint8_t BNO055IMU::assemble_combined_resets() {
 }
 
 void BNO055IMU::print() {
-    logger.lock();
-    logger.printf("IMU "
+    logger->lock();
+    logger->printf("IMU "
                       "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
                       "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                       "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
@@ -116,13 +116,13 @@ void BNO055IMU::print() {
                       "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
                       "RSTS=%u"
                       "\r\n",
-                      data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
-                      data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
-                      data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
+                      accel.x, accel.y, accel.z,
+                      gyro.x, gyro.y, gyro.z,
+                      mag.x, mag.y, mag.z,
                       //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
-                      data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
-                      data->imu.temp_accel,//data->imu.temp_gyro,
-                      data->imu.resets);
-    logger.unlock();
+                      angles.h, angles.p, angles.r,
+                      temp.acc_chip,//data->imu.temp_gyro,
+                      temp.gyr_chip);
+    logger->unlock();
 
 }

@@ -35,3 +35,6 @@ void Toss::update() {
         logger->unlock();
     }
 }
+
+void Toss::print() {
+}

@@ -86,5 +86,8 @@ private:
     minmea_sentence_rmc rmc;
     minmea_sentence_vtg vtg;
     minmea_sentence_gga gga;
+
+    SensorGPS gpsData;
+
 };
 

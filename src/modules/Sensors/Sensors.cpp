@@ -46,11 +46,6 @@ void Sensors::log(uint16_t log_ms = 0) {
 
     // Lock serial and print all data
     logger.lock();
-    logger.printf("GPS "
-                  "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
-                  "\r\n",
-                  data->gps.lat, data->gps.lon, data->gps.timestamp,
-                  data->gps.groundSpeed, data->gps.trueTrack, data->gps.altitude);
 
     for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         logger.printf("ENV%d "
