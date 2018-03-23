@@ -47,6 +47,12 @@ void GPS::processBuffer() {
         case MINMEA_SENTENCE_RMC:
             minmea_parse_rmc(&rmc, sentence);
             break;
+        case MINMEA_SENTENCE_VTG:
+            minmea_parse_vtg(&vtg, sentence);
+            break;
+        case MINMEA_SENTENCE_GGA:
+            minmea_parse_gga(&gga, sentence);
+            break;
         default:
             // #TODO: Parse more scentence types here.
             break;
@@ -56,16 +62,16 @@ void GPS::processBuffer() {
 
     SensorGPS gpsData;
 
-    if(rmc.valid){
-        gpsData.lat = minmea_tocoord(&rmc.latitude);
-        gpsData.lon = minmea_tocoord(&rmc.longitude);
-        gpsData.groundSpeed = minmea_tofloat(&rmc.speed);
-        gpsData.course = minmea_tofloat(&rmc.course);
-        gpsData.magVar = minmea_tofloat(&rmc.variation);
+    if(gga.fix_quality != 0){
+        gpsData.lat = minmea_tocoord(&gga.latitude);
+        gpsData.lon = minmea_tocoord(&gga.longitude);
+        gpsData.altitude = minmea_tofloat(&gga.altitude);
+        gpsData.trueTrack = minmea_tofloat(&vtg.true_track_degrees);
+        gpsData.groundSpeed = minmea_tofloat(&vtg.speed_kph);
     }
 
     timespec ts;
-    if(!minmea_gettime(&ts, &rmc.date, &rmc.time)) {
+    if(!minmea_gettime(&ts, &rmc.date, &gga.time)) {
         gpsData.timestamp = ts.tv_sec;
     }
 
