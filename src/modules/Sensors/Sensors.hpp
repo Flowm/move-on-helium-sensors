@@ -11,6 +11,7 @@
 #include <modules/ENV/BME680.hpp>
 #include <modules/IMU/BNO055IMU.hpp>
 #include <modules/CDH/CDHUart.hpp>
+#include <modules/TOSS/Toss.hpp>
 #include <modules/Temperature/DS18B20.hpp>
 #include <modules/GPS/GPS.hpp>
 
@@ -38,6 +39,7 @@ public:
         env1(&spi, &cs_env1, 1, &storage, &logger),
         adcs(&spi, &cs_adcs, &storage, &logger),
         temperature(TEMP_OW, &storage, &logger),
+        toss(&spi, &cs_sun, &storage, &logger),
         gps(&i2c_gps, &storage, &logger)
         {};
 
@@ -67,5 +69,6 @@ private:
     BME680 env1;
     Sidepanel adcs;
     DS18B20 temperature;
+    Toss toss;
     GPS gps;
 };

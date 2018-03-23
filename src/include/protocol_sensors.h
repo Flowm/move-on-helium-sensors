@@ -61,7 +61,6 @@ struct SensorIMU {
 
 struct SensorTemp {
     float temp;
-    //char rom[8];
 }__attribute__((packed));
 
 struct SensorADCS {
@@ -73,6 +72,13 @@ struct SensorADCS {
     float temp[3];
     //int16_t raw_mag[3];
     uint16_t raw_sun[4];
+} __attribute__((packed));
+
+struct SensorTOSS {
+    uint32_t timestamp;
+    int16_t temp[4];
+    uint16_t photodiode[9];
+    uint16_t checksum;
 } __attribute__((packed));
 
 struct SystemStatus {
@@ -88,5 +94,6 @@ struct SensorData {
     SensorIMU imu;
     SensorTemp temp[MAX_TEMP_SENSORS];
     SensorADCS adcs;
+    SensorTOSS toss;
     SystemStatus system;
 } __attribute__((packed));
