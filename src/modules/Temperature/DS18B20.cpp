@@ -12,12 +12,11 @@ bool DS18B20::setup() {
     // Update once every 2 seconds. Since the sensors need ~700 ms to convert
     // one temperature.
     set_update_rate(2000);
-
-    while(DS1820::unassignedProbe(dataPin)) {
-        sensors[numDevices] = new DS1820(dataPin);
-        numDevices++;
-        if (numDevices == MAX_TEMP_SENSORS)
-            break;
+    while(numDevices < MAX_TEMP_SENSORS) {
+        if(DS1820::unassignedProbe(dataPin)) {
+            sensors[numDevices] = new DS1820(dataPin);
+            numDevices++;
+        }
     }
 
     sensors[0]->convertTemperature(false, DS1820::all_devices);
