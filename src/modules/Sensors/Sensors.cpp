@@ -40,6 +40,7 @@ void Sensors::log(uint16_t log_ms = 0) {
     // Copy data structure to avoid locking it during printf
     storage.lock();
     storage.update_log_stats(log_ms);
+    storage.data->system.sensor_status = check_sensor_status();
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
@@ -49,13 +50,17 @@ void Sensors::log(uint16_t log_ms = 0) {
     logger.printf("SYS "
                   "LOG_CNT=%hu,"
                   "RTC_S=%hu,"
+                  "RTC_MS=%hu,"
                   "LOG_MS=%hu,"
-                  "LOCK_US=%u"
+                  "LOCK_US=%u,"
+                  "STATUS=%hu"
                   "\r\n",
                   data->system.log_cnt,
                   data->system.rtc_s,
+                  data->system.rtc_ms,
                   data->system.log_ms,
-                  data->system.lock_wait_us);
+                  data->system.lock_wait_us,
+                  data->system.sensor_status);
 
 #if defined(MBED_STACK_STATS_ENABLED) && MBED_STACK_STATS_ENABLED == 1
     // Print memory stats if enabled
@@ -64,4 +69,16 @@ void Sensors::log(uint16_t log_ms = 0) {
 #endif
 
     logger.unlock();
+}
+
+uint8_t Sensors::check_sensor_status() {
+    uint8_t status = 1 << 7 |
+                     imu.is_valid() << 6 |
+                     env0.is_valid() << 5 |
+                     env1.is_valid() << 4 |
+                     adcs.is_valid() << 3 |
+                     toss.is_valid() << 2 |
+                     temperature.is_valid() << 1 |
+                     gps.is_valid() << 0;
+    return ~status;
 }

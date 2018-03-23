@@ -19,6 +19,9 @@ void SensorThread::start() {
 }
 
 void SensorThread::loop() {
+    // Give other sensor threads time to start
+    Thread::wait(500);
+
     Timer t;
     t.start();
 
@@ -43,4 +46,8 @@ void SensorThread::set_update_rate(uint16_t update_rate) {
 
 void SensorThread::set_priority(osPriority priority) {
     _thread.set_priority(priority);
+}
+
+bool SensorThread::is_valid() {
+    return valid;
 }

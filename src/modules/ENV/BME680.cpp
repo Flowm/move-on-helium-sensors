@@ -22,6 +22,7 @@ bool BME680::setup() {
 
     // Increase thread priority to fix spi transmission errors caused by thread scheduling
     set_priority(osPriorityAboveNormal);
+    set_update_rate(1000);
 
     return true;
 }
@@ -32,6 +33,7 @@ void BME680::update() {
 
     if (!status.newDataFlag) {
         if (_read_attempts++ > 1) {
+            valid = false;
             bme.setForcedMode();
             _read_attempts = 0;
         }
@@ -54,6 +56,11 @@ void BME680::update() {
 }
 
 void BME680::print() {
+    // Only print valid data
+    if (!valid) {
+        return;
+    }
+
     logger->lock();
     logger->printf("ENV%d "
                    "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"

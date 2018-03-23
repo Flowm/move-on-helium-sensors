@@ -46,6 +46,7 @@ public:
     void setup();
     void loop();
     void log(uint16_t log_ms);
+    uint8_t check_sensor_status();
 
 private:
     //Interfaces

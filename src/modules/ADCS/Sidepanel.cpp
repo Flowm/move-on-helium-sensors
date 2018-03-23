@@ -28,7 +28,7 @@ void Sidepanel::update() {
     logger->unlock();
 #endif
 
-    bool valid = checkVerifyData((uint8_t*) data, &data->end);
+    valid = checkVerifyData((uint8_t*) data, &data->end);
     if (valid) {
         storage->lock();
         //storage->data->adcs.accel.x = data->sensors.acc.x;
@@ -94,6 +94,11 @@ bool Sidepanel::checkVerifyData(const uint8_t* data, VerifyStruct* verify) {
 }
 
 void Sidepanel::print() {
+    // Only print valid data
+    if (!valid) {
+        return;
+    }
+
     logger->lock();
     logger->printf("ADCS "
                    "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
