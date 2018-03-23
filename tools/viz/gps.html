@@ -41,8 +41,7 @@
 <div id="map">
 </div>
 <script>
-      // Needs to be updated!
-      var influxURL = "http://localhost:48086/query?pretty=false&db=telegraf&q=";
+      var influxURL = "https://move.frcy.org/influxdb/query?pretty=false&db=telegraf&q=";
       var query = "SELECT mean(\"LAT\") as \"lat\",mean(\"LON\") as \"lng\" FROM \"sensors-processed\" WHERE (\"topic\" = 'sensors-processed/GPS')";
       var groupby = "GROUP BY time(1m)"
       var map;
