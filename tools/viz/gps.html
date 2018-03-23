@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>MOVE-ON Helium Balloon Track</title>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <style>
+      /* Always set the map height explicitly to define the size of the div
+      * element that contains the map. */
+      #map {
+        height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+</style>
+<div id="floating-panel">
+  <!-- <input type="datetime-local" id="startDate"/> -->
+  <input type="button" id="refresh" onclick="refresh()" value="Refresh">
+</div>
+<div id="map">
+</div>
+<script>
+      var influxURL = "https://move.frcy.org/influxdb/query?pretty=false&db=telegraf&q=";
+      var query = "SELECT mean(\"LAT\") as \"lat\",mean(\"LON\") as \"lng\" FROM \"sensors-processed\" WHERE (\"topic\" = 'sensors-processed/GPS')";
+      var groupby = "GROUP BY time(1m)"
+      var map;
+      var flightPath;
+      var firstQuery = true;
+
+      var flightPlanCoordinates = [];
+      var updateInterval = 30000;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: {lat: 48.266182,lng:11.668098 },
+          mapTypeId: 'terrain'
+      });
+
+        flightPath = new google.maps.Polyline({
+          path: flightPlanCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+      });
+
+        flightPath.setMap(map);
+        refresh();
+        setInterval(refresh, updateInterval);
+    }
+
+
+    function refresh() {
+        // var from = (+new Date(document.getElementById('startDate').value))  / 1000;
+        from = NaN;
+        if( isNaN(from) ) {
+            from = "now() - 4h"
+        }
+
+        var queryUrl = `${influxURL}${query} AND time >= ${from}  ${groupby}`
+        console.log(queryUrl);
+
+        var jqxhr = $.get( queryUrl)
+        .fail(function() {
+          alert( "Request to influx Failed." );
+      })
+        .done(updateMap);
+    }
+    /* Checks if the coordinatie is between Sttutguart and
+    *  Graz. This removes random error values.
+    *     48.802393, 9.133245 - Stuttgart
+    *     47.072569, 15.406078 - Graz
+    */
+    function isValidCoord(lat , lng) {
+        if(lat > 47.072569 && lat < 48.802393 ) {
+          if(lng > 9.133245 && lng < 15.406078 )
+            return true;
+        } else {
+          return false;
+        }
+
+    }
+    function updateMap(data){
+        // Remove invalid Data
+        var rawCoords = data.results[0].series[0].values.filter(
+            a => {
+                   if(null == a[1] || null == a[2]
+                    || a[1] === 0 || a[2] === 0
+                    || !isValidCoord(a[1],a[2]))
+                       return false;
+                   else
+                    return true;
+            } );
+        flightPlanCoordinates = rawCoords.map(
+            x => {
+                return {lat : x[1], lng: x[2], timestamp: x[0]}
+            });
+
+        if( firstQuery ) {
+          flightPath.map.setCenter(flightPlanCoordinates[0]);
+          firstQuery = false;
+        }
+
+        flightPath.setPath(flightPlanCoordinates);
+    }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTo0fcQYqO0y4et3UULa2Dem0BS3x36es&callback=initMap">
+</script>
+</body>
+</html>
