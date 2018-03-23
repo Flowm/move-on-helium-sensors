@@ -20,7 +20,7 @@ void SensorThread::start() {
 
 void SensorThread::loop() {
     // Give other sensor threads time to start
-    Thread::wait(500);
+    Thread::wait(1000);
 
     Timer t;
     t.start();
