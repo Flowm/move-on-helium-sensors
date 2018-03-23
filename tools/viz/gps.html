@@ -3,8 +3,8 @@
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
-  <title>MOVE - ON Helium Baloon Track</title>
-  
+  <title>MOVE-ON Helium Balloon Track</title>
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -48,10 +48,10 @@
       var map;
       var flightPath;
       var firstQuery = true;
-      
+
       var flightPlanCoordinates = [];
       var updateInterval = 30000;
-      
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
@@ -87,12 +87,12 @@
         .fail(function() {
           alert( "Request to influx Failed." );
       })
-        .done(updateMap); 
+        .done(updateMap);
     }
-//     48.802393, 9.133245 - Sttutguart
-//     47.072569, 15.406078 - Graz
-    /* Checks if the coordinatie is between Sttutguart and 
+    /* Checks if the coordinatie is between Sttutguart and
     *  Graz. This removes random error values.
+    *     48.802393, 9.133245 - Stuttgart
+    *     47.072569, 15.406078 - Graz
     */
     function isValidCoord(lat , lng) {
         if(lat > 47.072569 && lat < 48.802393 ) {
@@ -101,18 +101,18 @@
         } else {
           return false;
         }
-          
+
     }
     function updateMap(data){
         // Remove invalid Data
-        var rawCoords = data.results[0].series[0].values.filter( 
-            a => { 
-                   if(null == a[1] || null == a[2] 
-                    || a[1] === 0 || a[2] === 0 
+        var rawCoords = data.results[0].series[0].values.filter(
+            a => {
+                   if(null == a[1] || null == a[2]
+                    || a[1] === 0 || a[2] === 0
                     || !isValidCoord(a[1],a[2]))
                        return false;
-                   else 
-                    return true; 
+                   else
+                    return true;
             } );
         flightPlanCoordinates = rawCoords.map(
             x => {
