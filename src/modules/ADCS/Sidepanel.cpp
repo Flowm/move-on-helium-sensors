@@ -7,7 +7,7 @@ bool Sidepanel::setup() {
     updateVerifyData((uint8_t*) &control, &control.end);
 
     //Set update rate of sidepanel thread
-    set_update_rate(100);
+    set_update_rate(200);
     return true;
 }
 

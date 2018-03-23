@@ -28,7 +28,7 @@ bool BNO055IMU::setup() {
         id_info.gyr_id, id_info.sw_rev_id, id_info.bootldr_rev_id);
     logger->unlock();
 
-    set_update_rate(100);
+    set_update_rate(200);
 
     return true;
 }
