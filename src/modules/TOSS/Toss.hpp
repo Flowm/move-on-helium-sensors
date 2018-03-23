@@ -28,6 +28,6 @@ private:
 
     // Additional size in receive buffer to copensate for inital spi delay and
     // to ensure data sync
-    char recv[sizeof(SensorTOSS)+20];
+    char recv[sizeof(SensorTOSS)+2];
     SensorTOSS* data = (SensorTOSS*) &recv[1];
 };

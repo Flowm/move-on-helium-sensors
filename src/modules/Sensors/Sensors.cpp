@@ -107,10 +107,10 @@ void Sensors::log(uint16_t log_ms = 0) {
     logger.printf("TOSS RTC=%u",
                   data->toss.timestamp);
     for (int i = 0; i < 4; i++) {
-        logger.printf(",TMP%u=%d", i, data->toss.temp[i]);
+        logger.printf(",TMP%u=%d", i+1, data->toss.temp[i]);
     }
     for (int i = 0; i < 9; i++) {
-        logger.printf(",PH%u=%d", i, data->toss.photodiode[i]);
+        logger.printf(",PH%u=%d", i+1, data->toss.photodiode[i]);
     }
         logger.printf("\r\n");
 

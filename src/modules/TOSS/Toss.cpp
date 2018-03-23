@@ -1,6 +1,8 @@
 #include "Toss.hpp"
 
 bool Toss::setup() {
+    set_update_rate(250);
+
     return true;
 }
 
