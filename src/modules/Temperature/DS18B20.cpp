@@ -55,7 +55,7 @@ void DS18B20::update() {
     storage->lock();
     for (int i = 0; i< numDevices; i++) {
         if(temperature[i] != -1000) {
-            storage->data->temp[i].temp = (int)temperature[i]*100;
+            storage->data->temp[i].temp = (int16_t)(temperature[i]*100);
         }
     }
     storage->unlock();
