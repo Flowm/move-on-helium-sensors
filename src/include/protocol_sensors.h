@@ -60,7 +60,7 @@ struct SensorIMU {
 } __attribute__((packed));
 
 struct SensorTemp {
-    int16_t temp;
+    int16_t temp[MAX_TEMP_SENSORS];
 }__attribute__((packed));
 
 struct SensorADCS {
@@ -94,7 +94,7 @@ struct SensorData {
     SensorGPS gps;
     SensorENV env[MAX_ENV_SENSORS];
     SensorIMU imu;
-    SensorTemp temp[MAX_TEMP_SENSORS];
+    SensorTemp temp;
     SensorADCS adcs;
     SensorTOSS toss;
     SystemStatus system;

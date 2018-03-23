@@ -34,6 +34,7 @@ private:
     //Array to hold the individual sensors
     DS1820* sensors[MAX_TEMP_SENSORS];
     float temperature[MAX_TEMP_SENSORS];
+    SensorTemp data;
     uint8_t numDevices = 0;
 };
 

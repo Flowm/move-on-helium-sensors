@@ -47,17 +47,15 @@ void DS18B20::update() {
         //XXX: Disable interrupts to ensure onewire communication is not interrupted
         __disable_irq();
         temperature[i] = sensors[i]->temperature();
-        // storage->data->temp[i].rom  = sensors[i]->getROM();
         __enable_irq();
+        if (temperature[i] != -1000) {
+            data.temp[i] = (int16_t)(temperature[i]*100);
+        }
     }
     last_data = storage->get_ts();
 
     storage->lock();
-    for (int i = 0; i< numDevices; i++) {
-        if(temperature[i] != -1000) {
-            storage->data->temp[i].temp = (int16_t)(temperature[i]*100);
-        }
-    }
+    storage->data->temp = data;
     storage->unlock();
 
     // Start temperature conversion, wait until ready
@@ -72,13 +70,11 @@ void DS18B20::print() {
     logger->lock();
     if (getNumDevices() > 0) {
         logger->printf("%s T=%lu,"
-                       "OW%d=%.4f",
+                       "OW%d=%u",
                        _name, last_data,
-                       0, temperature[0]);
+                       0, data.temp[0]);
         for (int i = 1; i < getNumDevices(); i++) {
-            if(temperature[i] != -1000) {
-                logger->printf(",OW%d=%.4f", i, temperature[i]);
-            }
+            logger->printf(",OW%d=%u", i, data.temp[i]);
         }
         logger->printf("\r\n");
     }
