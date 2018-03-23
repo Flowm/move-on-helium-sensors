@@ -103,12 +103,11 @@ void GPS::readFromRegister(char device, char reg, char* data, uint32_t len, bool
 }
 
 uint16_t GPS::getDataLength() {
-
     char len[2];
     readFromRegister(M8_ADDRESS, M8_DATALEN, len, 2, false);
 
     uint16_t len16 = (((uint16_t)len[0] << 8) | (uint16_t)len[1]);
-    printf("Len:%d\r\n",len16);
+    //printf("Len:%d\r\n",len16);
     return len16;
 }
 

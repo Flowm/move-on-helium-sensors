@@ -6,9 +6,13 @@ bool BME680::setup() {
 
     uint8_t chip_id = bme.getChipID();
     if (chip_id == _chip_id) {
-        printf("BME680 CHIP_ID: 0x%02x valid\r\n", chip_id);
+        logger->lock();
+        logger->printf("BME680 CHIP_ID: 0x%02x valid\r\n", chip_id);
+        logger->unlock();
     } else {
-        printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
+        logger->lock();
+        logger->printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
+        logger->unlock();
         return false;
     }
 

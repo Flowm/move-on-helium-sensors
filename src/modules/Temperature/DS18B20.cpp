@@ -22,7 +22,9 @@ bool DS18B20::setup() {
 
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 
-    printf("Found %d DS18B20 sensors\r\n", numDevices);
+    logger->lock();
+    logger->printf("Found %d DS18B20 sensors\r\n", numDevices);
+    logger->unlock();
 
     return numDevices;
 }

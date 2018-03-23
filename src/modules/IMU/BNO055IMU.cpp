@@ -5,20 +5,28 @@ bool BNO055IMU::setup() {
 
     impl.read_id_inf(&id_info);
     if (_chip_id == id_info.chip_id) {
-        printf("BNO055 CHIP_ID: 0x%02x valid\r\n", id_info.chip_id);
+        logger->lock();
+        logger->printf("BNO055 CHIP_ID: 0x%02x valid\r\n", id_info.chip_id);
+        logger->unlock();
     } else {
-        printf("BNO055 CHIP_ID: 0x%02x invalid\r\n", id_info.chip_id);
+        logger->lock();
+        logger->printf("BNO055 CHIP_ID: 0x%02x invalid\r\n", id_info.chip_id);
+        logger->unlock();
         return false;
     }
 
     if (impl.chip_ready() == 0) {
-        printf("BNO055 is NOT available!\r\n");
+        logger->lock();
+        logger->printf("BNO055 is NOT available!\r\n");
+        logger->unlock();
         return false;
     }
 
-    printf("BNO055 CHIP:0x%02x, ACC:0x%02x, MAG:0x%02x, GYR:0x%02x, SW:0x%04x, BL:0x%02x\r\n",
+    logger->lock();
+    logger->printf("BNO055 CHIP:0x%02x, ACC:0x%02x, MAG:0x%02x, GYR:0x%02x, SW:0x%04x, BL:0x%02x\r\n",
         id_info.chip_id, id_info.acc_id, id_info.mag_id,
         id_info.gyr_id, id_info.sw_rev_id, id_info.bootldr_rev_id);
+    logger->unlock();
 
     set_update_rate(100);
 
