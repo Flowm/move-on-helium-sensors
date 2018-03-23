@@ -1,7 +1,6 @@
 #include "BNO055IMU.hpp"
 
 bool BNO055IMU::setup() {
-
     BNO055_ID_INF_TypeDef id_info;
 
     impl.read_id_inf(&id_info);
@@ -11,7 +10,6 @@ bool BNO055IMU::setup() {
         printf("BNO055 CHIP_ID: 0x%02x invalid\r\n", id_info.chip_id);
         return false;
     }
-
 
     if (impl.chip_ready() == 0) {
         printf("BNO055 is NOT available!\r\n");
@@ -26,7 +24,7 @@ bool BNO055IMU::setup() {
 }
 
 void BNO055IMU::update() {
-
+    // Retrive sensor data
     impl.get_accel(&accel);
     impl.get_mag(&mag);
     impl.get_gyro(&gyro);
@@ -63,8 +61,6 @@ void BNO055IMU::update() {
     // TODO: lin_accel?
     storage->data->imu.resets = resets;
     storage->unlock();
-
-    print();
 
     if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
         reset_counter_temperatures++;
@@ -108,21 +104,20 @@ uint8_t BNO055IMU::assemble_combined_resets() {
 void BNO055IMU::print() {
     logger->lock();
     logger->printf("IMU "
-                      "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                      "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                      "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
-                      //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
-                      "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
-                      "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
-                      "RSTS=%u"
-                      "\r\n",
-                      accel.x, accel.y, accel.z,
-                      gyro.x, gyro.y, gyro.z,
-                      mag.x, mag.y, mag.z,
-                      //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
-                      angles.h, angles.p, angles.r,
-                      temp.acc_chip,//data->imu.temp_gyro,
-                      temp.gyr_chip);
+                   "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
+                   "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
+                   "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
+                   //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
+                   "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
+                   "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
+                   "RSTS=%u"
+                   "\r\n",
+                   accel.x, accel.y, accel.z,
+                   gyro.x, gyro.y, gyro.z,
+                   mag.x, mag.y, mag.z,
+                   //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
+                   angles.h, angles.p, angles.r,
+                   temp.acc_chip,//data->imu.temp_gyro,
+                   temp.gyr_chip);
     logger->unlock();
-
 }

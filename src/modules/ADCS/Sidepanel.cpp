@@ -55,7 +55,6 @@ void Sidepanel::update() {
         storage->data->adcs.raw_sun[2] = data->sensors.rawSun.pads[2];
         storage->data->adcs.raw_sun[3] = data->sensors.rawSun.pads[3];
         storage->unlock();
-        print();
     }
 }
 
@@ -97,18 +96,17 @@ bool Sidepanel::checkVerifyData(const uint8_t* data, VerifyStruct* verify) {
 void Sidepanel::print() {
     logger->lock();
     logger->printf("ADCS "
-                     //"ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                     "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                     "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
-                     "SUN_X=%.4f,SUN_Y=%.4f,SUN_Z=%.4f,"
-                     "TEMP_OW1=%.4f,TEMP_OW2=%.4f,TEMP_OW3=%.4f,"
-                     "SUN_RAW1=%hu,SUN_RAW2=%hu,SUN_RAW3=%hu,SUN_RAW4=%hu"
-                     "\r\n",
-                     //data->adcs.accel.x, data->adcs.accel.y, data->adcs.accel.z,
-                     data->sensors.gyro.x, data->sensors.gyro.y, data->sensors.gyro.z,
-                     data->sensors.mag.x, data->sensors.mag.y, data->sensors.mag.z,
-                     data->sensors.sun.x, data->sensors.sun.y, data->sensors.sun.z,
-                     (int16_t) data->sensors.temp.t1 / 16.0, (int16_t) data->sensors.temp.t2 / 16.0, (int16_t) data->sensors.temp.t3 / 16.0,
-                     data->sensors.rawSun.pads[0], data->sensors.rawSun.pads[1], data->sensors.rawSun.pads[2], data->sensors.rawSun.pads[3]);
+                   "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
+                   "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
+                   "SUN_X=%.4f,SUN_Y=%.4f,SUN_Z=%.4f,"
+                   "TEMP_OW1=%.4f,TEMP_OW2=%.4f,TEMP_OW3=%.4f,"
+                   "SUN_RAW1=%hu,SUN_RAW2=%hu,SUN_RAW3=%hu,SUN_RAW4=%hu"
+                   "\r\n",
+                   //data->adcs.accel.x, data->adcs.accel.y, data->adcs.accel.z,
+                   data->sensors.gyro.x, data->sensors.gyro.y, data->sensors.gyro.z,
+                   data->sensors.mag.x, data->sensors.mag.y, data->sensors.mag.z,
+                   data->sensors.sun.x, data->sensors.sun.y, data->sensors.sun.z,
+                   (int16_t) data->sensors.temp.t1 / 16.0, (int16_t) data->sensors.temp.t2 / 16.0, (int16_t) data->sensors.temp.t3 / 16.0,
+                   data->sensors.rawSun.pads[0], data->sensors.rawSun.pads[1], data->sensors.rawSun.pads[2], data->sensors.rawSun.pads[3]);
     logger->unlock();
 }

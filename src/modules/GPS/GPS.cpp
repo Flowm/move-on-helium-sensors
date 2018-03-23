@@ -81,12 +81,9 @@ void GPS::processBuffer() {
         gpsData.timestamp = ts.tv_sec;
     }
 
-
     storage->lock();
     storage->data->gps = gpsData;
     storage->unlock();
-
-    print();
 }
 
 void GPS::getNextChunk(uint16_t len) {
@@ -119,12 +116,10 @@ void GPS::callback(int event) {
 void GPS::print() {
     logger->lock();
     logger->printf("GPS "
-                      "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
-                      "\r\n",
-                      gpsData.lat, gpsData.lon, gpsData.timestamp,
-                      gpsData.groundSpeed, gpsData.trueTrack, gpsData.altitude);
+                   "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
+                   "\r\n",
+                   gpsData.lat, gpsData.lon, gpsData.timestamp,
+                   gpsData.groundSpeed, gpsData.trueTrack, gpsData.altitude);
     logger->unlock();
-
-
 }
 

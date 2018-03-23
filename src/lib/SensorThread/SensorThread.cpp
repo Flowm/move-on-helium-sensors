@@ -24,6 +24,7 @@ void SensorThread::loop() {
 
     while(1) {
         update();
+        print();
         int time_passed = t.read_ms();
         int sleep_ms = max(0, (_update_rate - time_passed));
 #ifdef DEBUG_THREAD_TIMES
