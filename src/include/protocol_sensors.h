@@ -60,7 +60,7 @@ struct SensorIMU {
 } __attribute__((packed));
 
 struct SensorTemp {
-    float temp;
+    int temp;
 }__attribute__((packed));
 
 struct SensorADCS {
