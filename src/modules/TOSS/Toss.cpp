@@ -37,4 +37,14 @@ void Toss::update() {
 }
 
 void Toss::print() {
+    logger->lock();
+    logger->printf("TOSS RTC=%u", data->timestamp);
+    for (int i = 0; i < 4; i++) {
+        logger->printf(",TMP%u=%d", i+1, data->temp[i]);
+    }
+    for (int i = 0; i < 9; i++) {
+        logger->printf(",PH%u=%d", i+1, data->photodiode[i]);
+    }
+    logger->printf("\r\n");
+    logger->unlock();
 }

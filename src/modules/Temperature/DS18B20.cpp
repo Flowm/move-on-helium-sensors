@@ -48,13 +48,23 @@ void DS18B20::update() {
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 }
 
-
 uint8_t DS18B20::getNumDevices() {
     return numDevices;
 }
 
 void DS18B20::print() {
-
+    logger->lock();
+    if (getNumDevices() > 0) {
+        logger->printf("TMP ");
+        logger->printf("OW%d=%.4f", 0, temperature[0]);
+        for (int i = 1; i < getNumDevices(); i++) {
+            if(temperature[i] != -1000) {
+                logger->printf(",OW%d=%.4f", i, temperature[i]);
+            }
+        }
+        logger->printf("\r\n");
+    }
+    logger->unlock();
 }
 
 DS18B20::~DS18B20() {

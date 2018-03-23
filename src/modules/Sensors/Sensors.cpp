@@ -46,38 +46,6 @@ void Sensors::log(uint16_t log_ms = 0) {
 
     // Lock serial and print all data
     logger.lock();
-
-    for (int i = 0; i < MAX_ENV_SENSORS; i++) {
-        logger.printf("ENV%d "
-                      "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
-                      "\r\n",
-                      i,
-                      data->env[i].temperature,
-                      data->env[i].humidity,
-                      data->env[i].pressure,
-                      data->env[i].gasresistance);
-    }
-
-
-    if(temperature.getNumDevices() > 0) {
-        logger.printf("TMP ");
-        logger.printf("OW%d=%.4f", 0, data->temp[0].temp);
-        for(int i = 1; i < temperature.getNumDevices(); i++) {
-            logger.printf(",OW%d=%.4f", i, data->temp[i].temp);
-        }
-        logger.printf("\r\n");
-    }
-
-    logger.printf("TOSS RTC=%u",
-                  data->toss.timestamp);
-    for (int i = 0; i < 4; i++) {
-        logger.printf(",TMP%u=%d", i+1, data->toss.temp[i]);
-    }
-    for (int i = 0; i < 9; i++) {
-        logger.printf(",PH%u=%d", i+1, data->toss.photodiode[i]);
-    }
-        logger.printf("\r\n");
-
     logger.printf("SYS "
                   "LOG_CNT=%hu,"
                   "RTC_S=%hu,"

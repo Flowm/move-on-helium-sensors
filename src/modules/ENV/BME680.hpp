@@ -21,13 +21,11 @@ public:
 
 private:
     ClosedCube_BME680_Mbed bme;
+    SensorENV data;
     int _id;
 
     const int _chip_id = 0x61;
 
     int _read_attempts = 0;
-    float _temperature;
-    float _humidity;
-    float _pressure;
-    float _gasresistance;
+
 };
