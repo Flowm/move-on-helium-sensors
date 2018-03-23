@@ -20,6 +20,7 @@ public:
 
     bool setup() override;
     void update() override;
+    void print() override;
 
     /**
      * Get the Number of devices connected on the OneWire bus.

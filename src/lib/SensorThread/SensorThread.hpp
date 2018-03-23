@@ -39,6 +39,11 @@ public:
     void set_update_rate(uint16_t update_rate);
     void set_priority(osPriority priority);
 
+    /**
+     * Log to SD card
+     */
+    virtual void print() = 0;
+
 protected:
     Storage* storage;
     SyncSerial* logger;

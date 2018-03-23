@@ -63,37 +63,6 @@ void Sensors::log(uint16_t log_ms = 0) {
                       data->env[i].gasresistance);
     }
 
-    logger.printf("IMU "
-                  "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                  "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                  "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
-                  //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
-                  "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
-                  "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
-                  "RSTS=%u"
-                  "\r\n",
-                  data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
-                  data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
-                  data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
-                  //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
-                  data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
-                  data->imu.temp_accel,//data->imu.temp_gyro,
-                  data->imu.resets);
-
-    logger.printf("ADCS "
-                  //"ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                  "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                  "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
-                  "SUN_X=%.4f,SUN_Y=%.4f,SUN_Z=%.4f,"
-                  "TEMP_OW1=%.4f,TEMP_OW2=%.4f,TEMP_OW3=%.4f,"
-                  "SUN_RAW1=%hu,SUN_RAW2=%hu,SUN_RAW3=%hu,SUN_RAW4=%hu"
-                  "\r\n",
-                  //data->adcs.accel.x, data->adcs.accel.y, data->adcs.accel.z,
-                  data->adcs.gyro.x, data->adcs.gyro.y, data->adcs.gyro.z,
-                  data->adcs.mag.x, data->adcs.mag.y, data->adcs.mag.z,
-                  data->adcs.sun.x, data->adcs.sun.y, data->adcs.sun.z,
-                  data->adcs.temp[0], data->adcs.temp[1], data->adcs.temp[2],
-                  data->adcs.raw_sun[0], data->adcs.raw_sun[1], data->adcs.raw_sun[2], data->adcs.raw_sun[3]);
 
     if(temperature.getNumDevices() > 0) {
         logger.printf("TMP ");

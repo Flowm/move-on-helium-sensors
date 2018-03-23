@@ -53,6 +53,10 @@ uint8_t DS18B20::getNumDevices() {
     return numDevices;
 }
 
+void DS18B20::print() {
+
+}
+
 DS18B20::~DS18B20() {
     for(uint8_t i = 0; i < numDevices; i++){
         delete(sensors[i]);

@@ -115,3 +115,7 @@ void GPS::callback(int event) {
     t_flag = true;
 }
 
+void GPS::print() {
+
+}
+

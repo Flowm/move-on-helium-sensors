@@ -55,3 +55,7 @@ void BME680::update() {
     storage->data->env[_id].gasresistance = _gasresistance;
     storage->unlock();
 }
+
+void BME680::print() {
+
+}

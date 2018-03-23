@@ -17,6 +17,7 @@ public:
 
     bool setup() override;
     void update() override;
+    void print() override;
 
 private:
     ClosedCube_BME680_Mbed bme;

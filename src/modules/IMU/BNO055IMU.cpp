@@ -64,6 +64,8 @@ void BNO055IMU::update() {
     storage->data->imu.resets = resets;
     storage->unlock();
 
+    print();
+
     if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
         reset_counter_temperatures++;
         impl.reset();
@@ -101,4 +103,26 @@ bool BNO055IMU::all_values_zero() {
 
 uint8_t BNO055IMU::assemble_combined_resets() {
     return (reset_counter_temperatures & 0xF) << 4 | (reset_counter_zeroes & 0xF);
+}
+
+void BNO055IMU::print() {
+    logger.lock();
+    logger.printf("IMU "
+                      "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
+                      "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
+                      "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
+                      //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
+                      "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
+                      "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
+                      "RSTS=%u"
+                      "\r\n",
+                      data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
+                      data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
+                      data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
+                      //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
+                      data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
+                      data->imu.temp_accel,//data->imu.temp_gyro,
+                      data->imu.resets);
+    logger.unlock();
+
 }
