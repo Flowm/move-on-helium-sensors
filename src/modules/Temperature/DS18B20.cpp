@@ -12,10 +12,17 @@ bool DS18B20::setup() {
     // Update once every 2 seconds. Since the sensors need ~700 ms to convert
     // one temperature.
     set_update_rate(2000);
+
+    int retries = MAX_TEMP_SENSORS * 5;
     while(numDevices < MAX_TEMP_SENSORS) {
         if(DS1820::unassignedProbe(dataPin)) {
             sensors[numDevices] = new DS1820(dataPin);
             numDevices++;
+        }
+        retries--;
+        if(retries <= 0){
+            printf("Couldnot find all %d Temp sensors!\r\n", MAX_TEMP_SENSORS);
+            break;
         }
     }
 
