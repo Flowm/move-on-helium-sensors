@@ -22,7 +22,9 @@ bool DS18B20::setup() {
 
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 
-    printf("Found %d DS18B20 sensors\r\n", numDevices);
+    logger->lock();
+    logger->printf("Found %d DS18B20 sensors\r\n", numDevices);
+    logger->unlock();
 
     return numDevices;
 }
@@ -35,6 +37,7 @@ void DS18B20::update() {
         // storage->data->temp[i].rom  = sensors[i]->getROM();
         __enable_irq();
     }
+    last_data = storage->get_ts();
 
     storage->lock();
     for (int i = 0; i< numDevices; i++) {
@@ -48,9 +51,25 @@ void DS18B20::update() {
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 }
 
-
 uint8_t DS18B20::getNumDevices() {
     return numDevices;
+}
+
+void DS18B20::print() {
+    logger->lock();
+    if (getNumDevices() > 0) {
+        logger->printf("%s T=%lu,"
+                       "OW%d=%.4f",
+                       _name, last_data,
+                       0, temperature[0]);
+        for (int i = 1; i < getNumDevices(); i++) {
+            if(temperature[i] != -1000) {
+                logger->printf(",OW%d=%.4f", i, temperature[i]);
+            }
+        }
+        logger->printf("\r\n");
+    }
+    logger->unlock();
 }
 
 DS18B20::~DS18B20() {

@@ -40,90 +40,28 @@ void Sensors::log(uint16_t log_ms = 0) {
     // Copy data structure to avoid locking it during printf
     storage.lock();
     storage.update_log_stats(log_ms);
+    storage.set_sensor_status(check_sensor_status());
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
 
     // Lock serial and print all data
     logger.lock();
-    logger.printf("GPS "
-                  "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
-                  "\r\n",
-                  data->gps.lat, data->gps.lon, data->gps.timestamp,
-                  data->gps.groundSpeed, data->gps.trueTrack, data->gps.altitude);
-
-    for (int i = 0; i < MAX_ENV_SENSORS; i++) {
-        logger.printf("ENV%d "
-                      "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
-                      "\r\n",
-                      i,
-                      data->env[i].temperature,
-                      data->env[i].humidity,
-                      data->env[i].pressure,
-                      data->env[i].gasresistance);
-    }
-
-    logger.printf("IMU "
-                  "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                  "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                  "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
-                  //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
-                  "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
-                  "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
-                  "RSTS=%u"
-                  "\r\n",
-                  data->imu.accel.x, data->imu.accel.y, data->imu.accel.z,
-                  data->imu.gyro.x, data->imu.gyro.y, data->imu.gyro.z,
-                  data->imu.mag.x, data->imu.mag.y, data->imu.mag.z,
-                  //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
-                  data->imu.orientation.x, data->imu.orientation.y, data->imu.orientation.z,
-                  data->imu.temp_accel,//data->imu.temp_gyro,
-                  data->imu.resets);
-
-    logger.printf("ADCS "
-                  //"ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                  "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                  "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
-                  "SUN_X=%.4f,SUN_Y=%.4f,SUN_Z=%.4f,"
-                  "TEMP_OW1=%.4f,TEMP_OW2=%.4f,TEMP_OW3=%.4f,"
-                  "SUN_RAW1=%hu,SUN_RAW2=%hu,SUN_RAW3=%hu,SUN_RAW4=%hu"
-                  "\r\n",
-                  //data->adcs.accel.x, data->adcs.accel.y, data->adcs.accel.z,
-                  data->adcs.gyro.x, data->adcs.gyro.y, data->adcs.gyro.z,
-                  data->adcs.mag.x, data->adcs.mag.y, data->adcs.mag.z,
-                  data->adcs.sun.x, data->adcs.sun.y, data->adcs.sun.z,
-                  data->adcs.temp[0], data->adcs.temp[1], data->adcs.temp[2],
-                  data->adcs.raw_sun[0], data->adcs.raw_sun[1], data->adcs.raw_sun[2], data->adcs.raw_sun[3]);
-
-    if(temperature.getNumDevices() > 0) {
-        logger.printf("TMP ");
-        logger.printf("OW%d=%.4f", 0, data->temp[0].temp);
-        for(int i = 1; i < temperature.getNumDevices(); i++) {
-            logger.printf(",OW%d=%.4f", i, data->temp[i].temp);
-        }
-        logger.printf("\r\n");
-    }
-
-    logger.printf("TOSS RTC=%u",
-                  data->toss.timestamp);
-    for (int i = 0; i < 4; i++) {
-        logger.printf(",TMP%u=%d", i+1, data->toss.temp[i]);
-    }
-    for (int i = 0; i < 9; i++) {
-        logger.printf(",PH%u=%d", i+1, data->toss.photodiode[i]);
-    }
-        logger.printf("\r\n");
-
-    logger.printf("SYS "
+    logger.printf("SYS T=%lu"
                   "LOG_CNT=%hu,"
                   "RTC_S=%hu,"
+                  "RTC_MS=%hu,"
                   "LOG_MS=%hu,"
-                  "LOCK_US=%u"
+                  "LOCK_US=%u,"
+                  "STATUS=%hu"
                   "\r\n",
+                  storage.get_ts(),
                   data->system.log_cnt,
                   data->system.rtc_s,
+                  data->system.rtc_ms,
                   data->system.log_ms,
-                  data->system.lock_wait_us);
+                  data->system.lock_wait_us,
+                  data->system.sensor_status);
 
 #if defined(MBED_STACK_STATS_ENABLED) && MBED_STACK_STATS_ENABLED == 1
     // Print memory stats if enabled
@@ -132,4 +70,16 @@ void Sensors::log(uint16_t log_ms = 0) {
 #endif
 
     logger.unlock();
+}
+
+uint8_t Sensors::check_sensor_status() {
+    uint8_t status = 1 << 7 |
+                     imu.is_valid() << 6 |
+                     env0.is_valid() << 5 |
+                     env1.is_valid() << 4 |
+                     adcs.is_valid() << 3 |
+                     toss.is_valid() << 2 |
+                     temperature.is_valid() << 1 |
+                     gps.is_valid() << 0;
+    return ~status;
 }

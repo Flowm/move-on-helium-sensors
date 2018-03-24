@@ -14,12 +14,13 @@
 class DS18B20: public SensorThread {
 public:
     DS18B20(PinName dataPin, Storage* storage, SyncSerial* logger):
-        SensorThread(storage, logger, "DS18B20"),
+        SensorThread(storage, logger, "TMP"),
         dataPin(dataPin)
         {};
 
     bool setup() override;
     void update() override;
+    void print() override;
 
     /**
      * Get the Number of devices connected on the OneWire bus.

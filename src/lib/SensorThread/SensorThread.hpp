@@ -37,15 +37,30 @@ public:
      * function.
      */
     void set_update_rate(uint16_t update_rate);
+
+    /**
+     * Set the thread scheduling priority
+     */
     void set_priority(osPriority priority);
+
+    /**
+     * Indicate whether the sensor status is valid
+     */
+    bool is_valid();
+
+    /**
+     * Log to SD card
+     */
+    virtual void print() = 0;
 
 protected:
     Storage* storage;
     SyncSerial* logger;
+    const char* _name;
+    uint32_t last_data;
 
 private:
     Thread _thread;
-    const char* _name;
 
     uint16_t _update_rate = 1000;
 };

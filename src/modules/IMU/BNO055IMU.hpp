@@ -10,13 +10,14 @@
 class BNO055IMU : public SensorThread {
 public:
     BNO055IMU(I2C &i2c, PinName reset_pin, Storage* storage, SyncSerial* logger) :
-        SensorThread(storage, logger, "BNO055"),
+        SensorThread(storage, logger, "IMU"),
         i2c(i2c),
         impl(i2c, reset_pin)
         {};
 
     bool setup() override;
     void update() override;
+    void print() override;
 
     bool getChipId();
 

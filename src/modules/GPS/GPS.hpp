@@ -77,6 +77,8 @@ private:
      */
     void callback(int event);
 
+    void print() override;
+
     char data[BUF_LEN + 1];
     bool t_flag = true;
 
@@ -84,5 +86,8 @@ private:
     minmea_sentence_rmc rmc;
     minmea_sentence_vtg vtg;
     minmea_sentence_gga gga;
+
+    SensorGPS gpsData;
+
 };
 

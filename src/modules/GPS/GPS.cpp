@@ -67,7 +67,6 @@ void GPS::processBuffer() {
         sentence = strtok(NULL, NMEA_DELIM);
     }
 
-    SensorGPS gpsData;
 
     if(gga.fix_quality != 0){
         gpsData.lat = minmea_tocoord(&gga.latitude);
@@ -75,13 +74,15 @@ void GPS::processBuffer() {
         gpsData.altitude = minmea_tofloat(&gga.altitude);
         gpsData.trueTrack = minmea_tofloat(&vtg.true_track_degrees);
         gpsData.groundSpeed = minmea_tofloat(&vtg.speed_kph);
+        last_data = storage->get_ts();
+    } else {
+        last_data = 0;
     }
 
     timespec ts;
     if(!minmea_gettime(&ts, &rmc.date, &gga.time)) {
         gpsData.timestamp = ts.tv_sec;
     }
-
 
     storage->lock();
     storage->data->gps = gpsData;
@@ -102,16 +103,31 @@ void GPS::readFromRegister(char device, char reg, char* data, uint32_t len, bool
 }
 
 uint16_t GPS::getDataLength() {
-
     char len[2];
     readFromRegister(M8_ADDRESS, M8_DATALEN, len, 2, false);
 
     uint16_t len16 = (((uint16_t)len[0] << 8) | (uint16_t)len[1]);
-    printf("Len:%d\r\n",len16);
+    //printf("Len:%d\r\n",len16);
     return len16;
 }
 
 void GPS::callback(int event) {
     t_flag = true;
+}
+
+void GPS::print() {
+    // Only print valid data
+    if (!last_data) {
+        return;
+    }
+
+    logger->lock();
+    logger->printf("%s T=%lu,"
+                   "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
+                   "\r\n",
+                   _name, last_data,
+                   gpsData.lat, gpsData.lon, gpsData.timestamp,
+                   gpsData.groundSpeed, gpsData.trueTrack, gpsData.altitude);
+    logger->unlock();
 }
 

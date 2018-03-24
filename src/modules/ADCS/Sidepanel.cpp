@@ -6,6 +6,8 @@ bool Sidepanel::setup() {
     control.mode.generation++;
     updateVerifyData((uint8_t*) &control, &control.end);
 
+    //Set update rate of sidepanel thread
+    set_update_rate(200);
     return true;
 }
 
@@ -26,8 +28,8 @@ void Sidepanel::update() {
     logger->unlock();
 #endif
 
-    bool valid = checkVerifyData((uint8_t*) data, &data->end);
-    if (valid) {
+    if (checkVerifyData((uint8_t*) data, &data->end)) {
+        last_data = storage->get_ts();
         storage->lock();
         //storage->data->adcs.accel.x = data->sensors.acc.x;
         //storage->data->adcs.accel.y = data->sensors.acc.y;
@@ -53,7 +55,10 @@ void Sidepanel::update() {
         storage->data->adcs.raw_sun[2] = data->sensors.rawSun.pads[2];
         storage->data->adcs.raw_sun[3] = data->sensors.rawSun.pads[3];
         storage->unlock();
+    } else {
+        last_data = 0;
     }
+
 }
 
 void Sidepanel::updateVerifyData(const uint8_t* data, VerifyStruct* verify) {
@@ -89,4 +94,28 @@ bool Sidepanel::checkVerifyData(const uint8_t* data, VerifyStruct* verify) {
     }
 
     return true;
+}
+
+void Sidepanel::print() {
+    // Only print valid data
+    if (!last_data) {
+        return;
+    }
+
+    logger->lock();
+    logger->printf("%s T=%lu,"
+                   "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
+                   "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
+                   "SUN_X=%.4f,SUN_Y=%.4f,SUN_Z=%.4f,"
+                   "TEMP_OW1=%.4f,TEMP_OW2=%.4f,TEMP_OW3=%.4f,"
+                   "SUN_RAW1=%hu,SUN_RAW2=%hu,SUN_RAW3=%hu,SUN_RAW4=%hu"
+                   "\r\n",
+                   _name, last_data,
+                   //data->adcs.accel.x, data->adcs.accel.y, data->adcs.accel.z,
+                   data->sensors.gyro.x, data->sensors.gyro.y, data->sensors.gyro.z,
+                   data->sensors.mag.x, data->sensors.mag.y, data->sensors.mag.z,
+                   data->sensors.sun.x, data->sensors.sun.y, data->sensors.sun.z,
+                   (int16_t) data->sensors.temp.t1 / 16.0, (int16_t) data->sensors.temp.t2 / 16.0, (int16_t) data->sensors.temp.t3 / 16.0,
+                   data->sensors.rawSun.pads[0], data->sensors.rawSun.pads[1], data->sensors.rawSun.pads[2], data->sensors.rawSun.pads[3]);
+    logger->unlock();
 }

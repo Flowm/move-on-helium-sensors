@@ -21,6 +21,7 @@ public:
 
     bool setup() override;
     void update() override;
+    void print() override;
 
 private:
     void updateVerifyData(const uint8_t* data, VerifyStruct* verify);

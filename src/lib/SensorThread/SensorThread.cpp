@@ -19,11 +19,15 @@ void SensorThread::start() {
 }
 
 void SensorThread::loop() {
+    // Give other sensor threads time to start
+    Thread::wait(1000);
+
     Timer t;
     t.start();
 
     while(1) {
         update();
+        print();
         int time_passed = t.read_ms();
         int sleep_ms = max(0, (_update_rate - time_passed));
 #ifdef DEBUG_THREAD_TIMES
@@ -42,4 +46,12 @@ void SensorThread::set_update_rate(uint16_t update_rate) {
 
 void SensorThread::set_priority(osPriority priority) {
     _thread.set_priority(priority);
+}
+
+bool SensorThread::is_valid() {
+    if (last_data) {
+        return true;
+    } else {
+        return false;
+    }
 }

@@ -6,9 +6,13 @@ bool BME680::setup() {
 
     uint8_t chip_id = bme.getChipID();
     if (chip_id == _chip_id) {
-        printf("BME680 CHIP_ID: 0x%02x valid\r\n", chip_id);
+        logger->lock();
+        logger->printf("BME680 CHIP_ID: 0x%02x valid\r\n", chip_id);
+        logger->unlock();
     } else {
-        printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
+        logger->lock();
+        logger->printf("BME680 CHIP_ID: 0x%02x invalid\r\n", chip_id);
+        logger->unlock();
         return false;
     }
 
@@ -22,6 +26,7 @@ bool BME680::setup() {
 
     // Increase thread priority to fix spi transmission errors caused by thread scheduling
     set_priority(osPriorityAboveNormal);
+    set_update_rate(1000);
 
     return true;
 }
@@ -35,23 +40,39 @@ void BME680::update() {
             bme.setForcedMode();
             _read_attempts = 0;
         }
+        last_data = 0;
         return;
     }
 
-    _temperature = bme.readTemperature();
-    _humidity = bme.readHumidity();
-    _pressure = bme.readPressure();
-    _gasresistance = bme.readGasResistance() / 1000.0;
-    //printf("BME680 %4.2f *C; %4.2f Pa; %6.2f %%; %6.3f kOhm\r\n", _temperature, _humidity, _pressure, _gasresistance);
+    data.temperature = bme.readTemperature();
+    data.humidity = bme.readHumidity();
+    data.pressure = bme.readPressure();
+    data.gasresistance = bme.readGasResistance() / 1000.0;
+    last_data = storage->get_ts();
 
     // Trigger a single THPG measurement
     bme.setForcedMode();
 
     // Store the data
     storage->lock();
-    storage->data->env[_id].temperature = _temperature;
-    storage->data->env[_id].humidity = _humidity;
-    storage->data->env[_id].pressure = _pressure;
-    storage->data->env[_id].gasresistance = _gasresistance;
+    storage->data->env[_id] = data;
     storage->unlock();
+}
+
+void BME680::print() {
+    // Only print valid data
+    if (!last_data) {
+        return;
+    }
+
+    logger->lock();
+    logger->printf("%s%d T=%lu,"
+                   "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f"
+                   "\r\n",
+                   _name, _id, last_data,
+                   data.temperature,
+                   data.humidity,
+                   data.pressure,
+                   data.gasresistance);
+    logger->unlock();
 }
