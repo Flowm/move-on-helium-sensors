@@ -2,7 +2,7 @@
 import time
 
 import Adafruit_ADS1x15
-from mqtt import MqttBroker
+from lib.output.mqtt_broker import MqttBroker
 
 adc = Adafruit_ADS1x15.ADS1115()
 

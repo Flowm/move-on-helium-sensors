@@ -4,6 +4,7 @@ import logging
 import sys
 import traceback
 import struct
+import ctypes
 import datetime
 import time
 import paho.mqtt.client as mqtt
@@ -12,7 +13,7 @@ import serial
 MQTT_IP = "localhost"
 MQTT_PORT = 1883
 
-logging.basicConfig(level=logging.DEBUG, format="(%(threadName)-10s) %(levelname)s %(message)s")
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)-15s %(levelname)s %(message)s")
 logging.info("ser2mqtt CDH starting")
 
 def on_connect(client, userdata, flags, rc):
@@ -35,68 +36,19 @@ def connectSerial():
 
 
 subsystemNames = ["SENS", "EPS1", "EPS2", "CAM", "PAYL"]
-subsystemResultNames = ["CF", "TR", "TH", "IS", "IN", "TD", "TF", "IE", "IC", "OK"]
-subsystemResultOrder = [9, 8, 1, 2, 5, 6, 3, 4, 7, 0]
-comResultNames = ["OK", "NR"] 
+systemNames = subsystemNames + ["GPS", "CDH"]
+requestResultNames = ["CF", "TR", "TH", "IS", "IN", "TD", "TF", "IE", "IC", "OK"]
+sendResultNames = ["NR", "OK"] 
 
-N = len(subsystemNames)
-NR = len(subsystemResultNames)
-NC = len(comResultNames)
+NumSubsystems = len(subsystemNames)
+NumSystems = len(systemNames)
+NumRequestResults = len(requestResultNames)
+NumSendResults = len(sendResultNames)
 
-structFormat = "".join([
-            "L", # timestamp
-            "H", # statsDelta
-            "B", # activeTime
-            "B", # usedMemory
-            "%iH" % N, # bytes
-            "%iB" % (N * NR), # subsystem
-            "%iB" % (N * NC) #com
-            ])
-
-structFormatEPS = ">H" + ("Hhh" * 3) + "HHH"
-
-structNamesEPS = [
-           "Counter",
-           "Solar_Cell_Voltage",
-           "Solar_Cell_Current",
-           "Solar_Cell_Power",
-           "Battery_Voltage",
-           "Battery_Current",
-           "Battery_Power",
-           "Bus_Voltage",
-           "Bus_Current",
-           "Bus_Power",
-           "Chrg_PWN",
-           "Exzess_PWM",
-           "Temperature"
-           ]
-           
-
-
-class Stats:
-    def __init__(self, bytes):
-        fields = list(struct.unpack(structFormat, bytes))
-        self.timestamp= datetime.timedelta(milliseconds=fields.pop(0))
-        self.statsDelta = fields.pop(0)
-        self.activeTime = fields.pop(0) / 255.0
-        self.usedMemory = fields.pop(0) / 255.0
-        self.bytes = [0 for i in range(0, N)]
-        self.subsystemResults = [[0 for j in range(0, NR)] for i in range(0, N)]
-        self.comResults = [[0 for j in range(0, NC)] for i in range(0, N)]
-        
-        for i in range(0, N):
-            self.bytes[i] = fields.pop(0)
-        for i in range(0, N):
-            for j in range(0, NR):
-                self.subsystemResults[i][j] = fields.pop(0)
-        for i in range(0, N):
-            for j in range(0, NC):
-                self.comResults[i][j] = fields.pop(0)           
-                
 def formatTable(data, rowNames, columnNames, title):
     n = len(data)
     m = len(data[0])
-    
+	
     result = ""
     result += (title + " ").ljust(8 + m * 4, "=") + "\n"
     result += " " * 8
@@ -113,39 +65,84 @@ def formatTable(data, rowNames, columnNames, title):
                 result += ".   "
         result += "\n"
     return result
-                
 
 spinner = 0
 spinnerAnim = "|/-\\"
-
-def formatStats(stats):
-    global spinner
-
-    result = "\n"
-    result += "STATS ".ljust(28, "=")
-    result += " "  + spinnerAnim[spinner] + "\n"
-    result += "timestamp:    %s\n" % str(stats.timestamp)
-    result += "stats delta:  %i ms\n" % stats.statsDelta
-    result += "active time:  %02.2f %%\n" % (stats.activeTime * 100)
-    result += "used memory:  %02.2f %%\n" % (stats.usedMemory * 100)
-    result += "\n"
     
-    result += formatTable(stats.subsystemResults, subsystemNames, subsystemResultNames, "SUBSYSTEM RESULTS")
-    result += "\n"
-    
-    result += "RECEIVED ".ljust(12, "=") + "\n"
-    for i in range(0, N):
-        result += "%4s:   " % subsystemNames[i]
-        result += "%i" % stats.bytes[i]
+class Stats(ctypes.Structure):
+    _pack_ = 1
+    _fields_ = [
+        ("timestamp", ctypes.c_uint), 
+        ("statsDeltaTime", ctypes.c_ushort),
+        ("activeTime", ctypes.c_ubyte),
+        ("usedMemory", ctypes.c_ubyte),
+        ("bytes", ctypes.c_short * NumSubsystems),
+        ("requestResults", ctypes.c_ubyte * NumRequestResults * NumSubsystems),
+        ("sendResults", ctypes.c_ubyte * NumSendResults * NumSystems),
+        ("loopCounter", ctypes.c_ubyte),
+        ]
+        
+    def __init__(self, b):
+        ctypes.memmove(ctypes.addressof(self), bytes(b), ctypes.sizeof(self))
+        
+    def __str__(self):
+        global spinner
+        
+        result = "\n"
+        result += "STATS ".ljust(28, "=")
+        result += " "  + spinnerAnim[spinner] + "\n"
+        time = datetime.timedelta(milliseconds=self.timestamp)
+        result += "timestamp:    %s\n" % str(time)
+        result += "stats delta:  %i ms\n" % self.statsDeltaTime
+        result += "active time:  %02.2f %%\n" % (self.activeTime / 255.0 * 100)
+        result += "used memory:  %02.2f %%\n" % (self.usedMemory / 255.0 * 100)
+        result += "loop count:  %i\n" % self.loopCounter
         result += "\n"
-    result += "\n"
+        
+        result += formatTable(self.requestResults, subsystemNames, requestResultNames, "REQUEST RESULTS")
+        result += "\n"
+        
+        result += "RECEIVED ".ljust(12, "=") + "\n"
+        for i in range(0, NumSubsystems):
+            result += "%4s:   " % subsystemNames[i]
+            result += "%i" % self.bytes[i]
+            result += "\n"
+        result += "\n"
+        
+        result += formatTable(self.sendResults, systemNames, sendResultNames, "SEND RESULTS")
+        result += "\n"
+        
+        spinner = (spinner + 1) % len(spinnerAnim)
+        return result[:-1]
+
+def handle_cdh(bytes):
+    stats = Stats(bytes)
+    output = str(stats)
+    client.publish("CDH-raw", output)
+
+    client.publish("CDH/active", stats.activeTime / 255.0)
+    client.publish("CDH/memory", stats.usedMemory / 255.0)
+    for i in range(NumSubsystems):
+        ok = stats.requestResults[i][-1]
+        n =  sum(stats.requestResults[i]) * 1.0
+        avg = ok / n if n > 0 else 0
+        client.publish("CDH/%s" % subsystemNames[i], str(avg))
+	
+
+epsStructFormat = ">H" + ("Hhh" * 3) + "HHH"
+epsStructNames = ["Counter",
+           "Solar_Cell_Voltage", "Solar_Cell_Current", "Solar_Cell_Power",
+           "Battery_Voltage", "Battery_Current", "Battery_Power", 
+           "Bus_Voltage", "Bus_Current", "Bus_Power",
+           "Chrg_PWN", "Exzess_PWM", "Temperature"]
     
-    result += formatTable(stats.comResults, subsystemNames, comResultNames, "COM RESULTS")
-    result += "\n"
-
-    spinner = (spinner + 1) % len(spinnerAnim)
-    return result[:-1]
-
+def handle_eps(bytes):
+    channel = bytes[0]
+    fields = list(struct.unpack(epsStructFormat, bytes[1:]))
+    for i in range(len(fields)):
+        value = fields[i]
+        client.publish("CDH/EPS%i/%s" %(channel, epsStructNames[i]), value)
+    
 def readBytes(n):
     bytes = bytearray()
     while len(bytes) < n:
@@ -154,7 +151,7 @@ def readBytes(n):
             return bytes
         bytes.extend(tmp)
     return bytes
-
+    
 def handle_input():
     start = console.read(1)
     if len(start) == 0:
@@ -162,31 +159,16 @@ def handle_input():
 
     start = start[0]
     bytes = bytearray()
+    
     if  start == 0x80:
-        bytes = readBytes(78)
-
-        if len(bytes) == 78:
-            stats = Stats(bytes)
-            output = formatStats(stats)
-            client.publish("CDH-raw", output)
-
-            client.publish("CDH/active",stats.activeTime)
-            client.publish("CDH/memory", stats.usedMemory)
-            for i in range(N):
-                ok = sum(stats.subsystemResults[i][8:10])
-                n =  sum(stats.subsystemResults[i]) * 1.0
-                avg = ok / n if n > 0 else 0
-                client.publish("CDH/%s" % subsystemNames[i], str(avg))
-            return
+        bytes = readBytes(83)
+        if len(bytes) == 83:
+            handle_cdh(bytes)
+            return        
     elif start == 0x81:
         bytes = readBytes(27)
         if len(bytes) == 27:
-            channel = bytes[0]
-
-            fields = list(struct.unpack(structFormatEPS, bytes[1:]))
-            for i in range(len(fields)):
-                value = fields[i]
-                client.publish("CDH/EPS%i/%s" %(channel, structNamesEPS[i]), value)
+            handle_eps(bytes)
             return
     else:
         bytes = console.readline()
