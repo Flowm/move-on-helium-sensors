@@ -24,6 +24,11 @@ void Storage::unlock() {
     data_mutex.unlock();
 }
 
+void Storage::set_sensor_status(uint8_t status) {
+    packet.header.status = status;
+    data->system.sensor_status = status;
+}
+
 void Storage::update_log_stats(uint16_t log_ms) {
     data->system.log_cnt++;
     data->system.rtc_s = time(NULL);

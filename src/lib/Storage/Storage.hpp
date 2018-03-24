@@ -11,6 +11,7 @@ public:
     void unlock();
 
     void update_log_stats(uint16_t log_ms);
+    void set_sensor_status(uint8_t status);
 
     /**
      * Shared timer to timestamp sensor data.

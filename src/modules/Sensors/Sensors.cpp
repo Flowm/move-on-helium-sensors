@@ -40,7 +40,7 @@ void Sensors::log(uint16_t log_ms = 0) {
     // Copy data structure to avoid locking it during printf
     storage.lock();
     storage.update_log_stats(log_ms);
-    storage.data->system.sensor_status = check_sensor_status();
+    storage.set_sensor_status(check_sensor_status());
     SensorData data_copy = *storage.data;
     SensorData* data = &data_copy;
     storage.unlock();
