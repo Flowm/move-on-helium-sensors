@@ -67,7 +67,7 @@ void BME680::print() {
 
     logger->lock();
     logger->printf("%s%d T=%lu,"
-                   "TEMP=%.4f,HUM=%.4f,PRES=%.4f,GAS=%.4f"
+                   "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f"
                    "\r\n",
                    _name, _id, last_data,
                    data.temperature,
