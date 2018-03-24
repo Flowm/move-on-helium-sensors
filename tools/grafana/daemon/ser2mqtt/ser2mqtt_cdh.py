@@ -2,6 +2,7 @@
 
 import logging
 import sys
+import os
 import traceback
 import struct
 import ctypes
@@ -9,6 +10,7 @@ import datetime
 import time
 import paho.mqtt.client as mqtt
 import serial
+import threading
 
 MQTT_IP = "localhost"
 MQTT_PORT = 1883
@@ -48,7 +50,7 @@ NumSendResults = len(sendResultNames)
 def formatTable(data, rowNames, columnNames, title):
     n = len(data)
     m = len(data[0])
-	
+    
     result = ""
     result += (title + " ").ljust(8 + m * 4, "=") + "\n"
     result += " " * 8
@@ -127,8 +129,62 @@ def handle_cdh(bytes):
         n =  sum(stats.requestResults[i]) * 1.0
         avg = ok / n if n > 0 else 0
         client.publish("CDH/%s" % subsystemNames[i], str(avg))
-	
 
+        
+schedulerLogFile = None
+schedulerLogFilename = "~/logs/cdh_scheduler.log"
+schedulerLogFileMutex = threading.Lock()
+
+def findSchedulerFilename():
+    filename = os.path.expanduser(schedulerLogFilename)
+    dir, tmp = os.path.split(filename)
+    name, ext = os.path.splitext(tmp)
+    suffix = 0
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
+    
+    for f in os.listdir(dir):
+        d, t = os.path.split(f)
+        n, e = os.path.splitext(t)
+        if n.startswith(name):
+            try:
+                i = int(n[len(name):])
+                suffix = max(suffix, i + 1)
+            except ValueError:
+                pass
+    filename = dir + "/" + name + str(suffix) + ext
+    return filename
+    
+    
+def openSchdulerLogFile():
+    global schedulerLogFile 
+    while True:
+        filename = findSchedulerFilename()
+        
+        schedulerLogFileMutex.acquire()
+        schedulerLogFile = open(filename, 'w')
+        schedulerLogFileMutex.release()
+        
+        time.sleep(3600)
+        
+        schedulerLogFileMutex.acquire()
+        schedulerLogFile.close()
+        schedulerLogFileMutex.release()
+    
+def handle_cdh_scheduler(bytes):    
+    time = datetime.datetime.now()
+    event = ''
+    event += str(time) + ", "
+    event += str(bytes[0]) + ", "
+    event += str(bytes[1]) + "\n"
+    
+    if schedulerLogFile != None:
+        schedulerLogFileMutex.acquire()
+        schedulerLogFile.write(event)
+        schedulerLogFileMutex.release()
+        
+    client.publish("CDH-scheduler", event)
+    
 epsStructFormat = ">H" + ("Hhh" * 3) + "HHH"
 epsStructNames = ["Counter",
            "Solar_Cell_Voltage", "Solar_Cell_Current", "Solar_Cell_Power",
@@ -164,7 +220,12 @@ def handle_input():
         bytes = readBytes(83)
         if len(bytes) == 83:
             handle_cdh(bytes)
-            return        
+            return
+    elif start == 0x82:
+        bytes = readBytes(2)
+        if len(bytes) == 2:
+            handle_cdh_scheduler(bytes)
+            return
     elif start == 0x81:
         bytes = readBytes(27)
         if len(bytes) == 27:
@@ -181,14 +242,18 @@ def handle_input():
 
     except UnicodeDecodeError:
         client.publish("CDH-raw", str(bytes))
-
+        
+    
+t = threading.Thread(target=openSchdulerLogFile)
+t.start()
+    
 while True:
     if client == None:
         startMQTT()
         
     if console == None:
         connectSerial()
-        
+    
     while True:
         try:
             handle_input()
