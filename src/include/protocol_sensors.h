@@ -87,7 +87,7 @@ struct SystemStatus {
     uint16_t rtc_ms;        // Time of last data write to shared structure in ms
     uint16_t log_ms;        // Time for writing the last log set to storage
     uint16_t lock_wait_us;  // Delay until data structure could be locked
-    uint8_t  sensor_status; // Bitmask indicating valid sensor data
+    uint8_t sensor_status;  // Bitmask indicating valid sensor data
 }__attribute__((packed));
 
 struct SensorData {

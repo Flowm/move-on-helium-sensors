@@ -55,7 +55,10 @@ void Sidepanel::update() {
         storage->data->adcs.raw_sun[2] = data->sensors.rawSun.pads[2];
         storage->data->adcs.raw_sun[3] = data->sensors.rawSun.pads[3];
         storage->unlock();
+    } else {
+        last_data = 0;
     }
+
 }
 
 void Sidepanel::updateVerifyData(const uint8_t* data, VerifyStruct* verify) {

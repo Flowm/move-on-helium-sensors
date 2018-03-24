@@ -47,7 +47,7 @@ void Sensors::log(uint16_t log_ms = 0) {
 
     // Lock serial and print all data
     logger.lock();
-    logger.printf("SYS "
+    logger.printf("SYS T=%lu"
                   "LOG_CNT=%hu,"
                   "RTC_S=%hu,"
                   "RTC_MS=%hu,"
@@ -55,6 +55,7 @@ void Sensors::log(uint16_t log_ms = 0) {
                   "LOCK_US=%u,"
                   "STATUS=%hu"
                   "\r\n",
+                  storage.get_ts(),
                   data->system.log_cnt,
                   data->system.rtc_s,
                   data->system.rtc_ms,

@@ -37,10 +37,10 @@ void BME680::update() {
 
     if (!status.newDataFlag) {
         if (_read_attempts++ > 1) {
-            last_data = 0;
             bme.setForcedMode();
             _read_attempts = 0;
         }
+        last_data = 0;
         return;
     }
 

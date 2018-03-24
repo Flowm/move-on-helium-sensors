@@ -122,7 +122,7 @@ void BNO055IMU::print() {
     logger->printf("%s T=%lu,"
                    "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
                    "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
-                   "MAG_X=%.4f,MAG_Y=%.4f,MAG_Z=%.4f,"
+                   "MAG_X=%f,MAG_Y=%f,MAG_Z=%f,"
                    //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
                    "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
                    "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
