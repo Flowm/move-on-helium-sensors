@@ -5,10 +5,9 @@
  *      Author: tkale
  */
 
-#include <modules/Temperature/DS18B20.hpp>
+#include "DS18B20.hpp"
 
 bool DS18B20::setup() {
-
     // Update once every 2 seconds. Since the sensors need ~700 ms to convert
     // one temperature.
     set_update_rate(2000);
@@ -21,9 +20,10 @@ bool DS18B20::setup() {
                 numDevices++;
             }
         }
-        retries--;
-        if(retries <= 0){
-            printf("Couldnot find all %d Temp sensors!\r\n", MAX_TEMP_SENSORS);
+        if(retries-- <= 0){
+            logger->lock();
+            logger->printf("Could not find all %d Temp sensors!\r\n", MAX_TEMP_SENSORS);
+            logger->unlock();
             break;
         }
     }
@@ -36,7 +36,7 @@ bool DS18B20::setup() {
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 
     logger->lock();
-    logger->printf("Found %d DS18B20 sensors\r\n", numDevices);
+    logger->printf("%s Found %d DS18B20 sensors with %d remaining retries\r\n", _name, numDevices, retries);
     logger->unlock();
 
     return numDevices;
