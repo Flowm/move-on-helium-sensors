@@ -123,11 +123,12 @@ void GPS::print() {
 
     logger->lock();
     logger->printf("%s T=%lu,"
-                   "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,TRUETRK=%.4f,ALT=%.4f"
+                   "LAT=%.6f,LON=%.6f,ALT=%.4f,"
+                   "TIME=%u,SPEED=%.4f,TRUETRK=%.4f"
                    "\r\n",
                    _name, last_data,
-                   gpsData.lat, gpsData.lon, gpsData.timestamp,
-                   gpsData.groundSpeed, gpsData.trueTrack, gpsData.altitude);
+                   gpsData.lat, gpsData.lon, gpsData.altitude,
+                   gpsData.timestamp, gpsData.groundSpeed, gpsData.trueTrack);
     logger->unlock();
 }
 
