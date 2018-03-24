@@ -22,7 +22,7 @@ bool DS18B20::setup() {
         }
         if(retries-- <= 0){
             logger->lock();
-            logger->printf("Could not find all %d Temp sensors!\r\n", MAX_TEMP_SENSORS);
+            logger->printf("%s Could not find all %d Temp sensors!\r\n", _name, MAX_TEMP_SENSORS);
             logger->unlock();
             break;
         }
