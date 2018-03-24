@@ -1,7 +1,7 @@
 #pragma once
 
 // Define max temp sensors (DS18B20) for temperatures array
-#define MAX_TEMP_SENSORS 8
+#define MAX_TEMP_SENSORS 7
 
 // Define max env sensors (BME680)
 #define MAX_ENV_SENSORS 2

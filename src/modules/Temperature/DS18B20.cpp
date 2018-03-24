@@ -17,7 +17,9 @@ bool DS18B20::setup() {
     while(numDevices < MAX_TEMP_SENSORS) {
         if(DS1820::unassignedProbe(dataPin)) {
             sensors[numDevices] = new DS1820(dataPin);
-            numDevices++;
+            if (sensors[numDevices]->isValid()) {
+                numDevices++;
+            }
         }
         retries--;
         if(retries <= 0){
@@ -26,6 +28,11 @@ bool DS18B20::setup() {
         }
     }
 
+    // XXX: For some reason we need a manual reset condition on the bus.
+    DigitalOut d(dataPin);
+    d = 0;
+    Thread::wait(1);
+    d = 1;
     sensors[0]->convertTemperature(false, DS1820::all_devices);
 
     logger->lock();
