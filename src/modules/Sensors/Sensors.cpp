@@ -10,12 +10,12 @@ void Sensors::setup() {
     spi.frequency(4000000);
 
     // Start sensor threads
+    temperature.start();
     imu.start();
     env0.start();
     env1.start();
     adcs.start();
     toss.start();
-    temperature.start();
     gps.start();
 
     // Wait for sensor threads to start and gather inital data

@@ -14,7 +14,7 @@
 class DS18B20: public SensorThread {
 public:
     DS18B20(PinName dataPin, Storage* storage, SyncSerial* logger):
-        SensorThread(storage, logger, "TMP"),
+        SensorThread(storage, logger, "OWT"),
         dataPin(dataPin)
         {};
 
@@ -34,6 +34,7 @@ private:
     //Array to hold the individual sensors
     DS1820* sensors[MAX_TEMP_SENSORS];
     float temperature[MAX_TEMP_SENSORS];
+    SensorTemp data;
     uint8_t numDevices = 0;
 };
 

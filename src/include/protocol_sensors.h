@@ -1,7 +1,7 @@
 #pragma once
 
 // Define max temp sensors (DS18B20) for temperatures array
-#define MAX_TEMP_SENSORS 8
+#define MAX_TEMP_SENSORS 7
 
 // Define max env sensors (BME680)
 #define MAX_ENV_SENSORS 2
@@ -60,7 +60,7 @@ struct SensorIMU {
 } __attribute__((packed));
 
 struct SensorTemp {
-    float temp;
+    int16_t temp[MAX_TEMP_SENSORS];
 }__attribute__((packed));
 
 struct SensorADCS {
@@ -94,7 +94,7 @@ struct SensorData {
     SensorGPS gps;
     SensorENV env[MAX_ENV_SENSORS];
     SensorIMU imu;
-    SensorTemp temp[MAX_TEMP_SENSORS];
+    SensorTemp temp;
     SensorADCS adcs;
     SensorTOSS toss;
     SystemStatus system;
