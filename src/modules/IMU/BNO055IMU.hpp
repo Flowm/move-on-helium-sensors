@@ -35,6 +35,8 @@ private:
     BNO055_EULER_TypeDef angles;
     BNO055_TEMPERATURE_TypeDef temp;
 
+    SensorIMU data;
+
     const int _chip_id = 0xa0;
 
     uint8_t reset_counter_temperatures = 0;

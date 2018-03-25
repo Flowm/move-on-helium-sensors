@@ -38,39 +38,35 @@ void BNO055IMU::update() {
     impl.get_accel(&accel);
     impl.get_mag(&mag);
     impl.get_gyro(&gyro);
-
-    impl.get_gravity(&gravity);
-    impl.get_linear_accel(&lin_accel);
-    impl.get_quaternion(&quaternion);
+    //impl.get_gravity(&gravity);
+    //impl.get_linear_accel(&lin_accel);
+    //impl.get_quaternion(&quaternion);
     impl.get_euler_angles(&angles);
-
     impl.get_chip_temperature(&temp);
     last_data = storage->get_ts();
 
-    uint8_t resets = assemble_combined_resets();
+    data.accel.x = accel.x;
+    data.accel.y = accel.y;
+    data.accel.z = accel.z;
+    data.gyro.x = gyro.x;
+    data.gyro.y = gyro.y;
+    data.gyro.z = gyro.z;
+    data.mag.x = mag.x;
+    data.mag.y = mag.y;
+    data.mag.z = mag.z;
+    data.orientation.x = angles.h;
+    data.orientation.y = angles.p;
+    data.orientation.z = angles.r;
+    //data.quaternion.w = quaternion.w;
+    //data.quaternion.x = quaternion.x;
+    //data.quaternion.y = quaternion.y;
+    //data.quaternion.z = quaternion.z;
+    data.temp_accel = temp.acc_chip;
+    //data.temp_gyro = temp.gyr_chip;
+    data.resets = assemble_combined_resets();
 
     storage->lock();
-    storage->data->imu.accel.x = accel.x;
-    storage->data->imu.accel.y = accel.y;
-    storage->data->imu.accel.z = accel.z;
-    storage->data->imu.gyro.x = gyro.x;
-    storage->data->imu.gyro.y = gyro.y;
-    storage->data->imu.gyro.z = gyro.z;
-    storage->data->imu.mag.x = mag.x;
-    storage->data->imu.mag.y = mag.y;
-    storage->data->imu.mag.z = mag.z;
-    storage->data->imu.orientation.x = angles.h;
-    storage->data->imu.orientation.y = angles.p;
-    storage->data->imu.orientation.z = angles.r;
-    //storage->data->imu.quaternion.w = quaternion.w;
-    //storage->data->imu.quaternion.x = quaternion.x;
-    //storage->data->imu.quaternion.y = quaternion.y;
-    //storage->data->imu.quaternion.z = quaternion.z;
-    storage->data->imu.temp_accel = temp.acc_chip;
-    //storage->data->imu.temp_gyro = temp.gyr_chip;
-    // TODO: gravity?
-    // TODO: lin_accel?
-    storage->data->imu.resets = resets;
+    storage->data->imu = data;
     storage->unlock();
 
     if (temp.acc_chip == 104 && temp.gyr_chip == 104) {
@@ -123,18 +119,18 @@ void BNO055IMU::print() {
                    "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
                    "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                    "MAG_X=%.2f,MAG_Y=%.2f,MAG_Z=%.2f,"
-                   //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
                    "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
-                   "TEMP_ACC=%d,"//TEMP_GYRO=%d,"
+                   //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
+                   "TEMP_ACC=%d,"
                    "RSTS=%u"
                    "\r\n",
                    _name, last_data,
-                   accel.x, accel.y, accel.z,
-                   gyro.x, gyro.y, gyro.z,
-                   mag.x, mag.y, mag.z,
-                   //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
-                   angles.h, angles.p, angles.r,
-                   temp.acc_chip,//data->imu.temp_gyro,
-                   temp.gyr_chip);
+                   data.accel.x, data.accel.y, data.accel.z,
+                   data.gyro.x, data.gyro.y, data.gyro.z,
+                   data.mag.x, data.mag.y, data.mag.z,
+                   data.orientation.z, data.orientation.y, data.orientation.z,
+                   //data.quaternion.w, data.quaternion.x, data.quaternion.y, data.quaternion.z,
+                   data.temp_accel,
+                   data.resets);
     logger->unlock();
 }
