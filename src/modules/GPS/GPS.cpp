@@ -22,12 +22,13 @@ bool GPS::setup() {
 }
 
 void GPS::update() {
-
-    if(t_flag){
+    if(t_flag) {
         t_flag = false;
-//        uint16_t len = getDataLength();
+        //uint16_t len = getDataLength();
         processBuffer();
         getNextChunk(0);
+    } else {
+        last_data = 0;
     }
 }
 
