@@ -42,7 +42,7 @@ class SerialWrap(serial.Serial):
             self.try_connect()
             return
 
-    def try_readline_decode(self, *args, **kwargs):
+    def try_readline_decode(self, binary=False, *args, **kwargs):
         line = self.try_readline(*args, **kwargs)
         if not line:
             return
@@ -53,12 +53,15 @@ class SerialWrap(serial.Serial):
         except TypeError:
             return
         except UnicodeDecodeError:
-            return
+            if binary:
+                return line
+            else:
+                return
         return line
 
-    def get_packets(self):
+    def get_packets(self, binary=False):
         while 1:
-            line = self.try_readline_decode()
+            line = self.try_readline_decode(binary)
             if line:
                 yield line
 

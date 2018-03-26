@@ -12,15 +12,15 @@ class UdpServer():
         try:
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             logging.info('Socket created')
-        except socket.error:
-            logging.info('Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+        except socket.error as e:
+            logging.info('Failed to create socket. Error Code : ' + str(e.args[0]) + ' Message ' + e.args[1])
             sys.exit()
 
         # Bind socket to local host and port
         try:
             self.socket.bind((self.host, self.port))
-        except socket.error:
-            logging.info('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+        except socket.error as e:
+            logging.info('Bind failed. Error Code : ' + str(e.args[0]) + ' Message ' + e.args[1])
             sys.exit()
 
         logging.info('Socket bind complete')
