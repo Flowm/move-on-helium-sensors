@@ -7,7 +7,7 @@ from lib.output.mqtt_broker import MqttBroker
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)-15s %(levelname)s %(message)s")
 
-input = UdpServer(23000)
+input = UdpServer(23002)
 parser = SenBinParse()
 output = MqttBroker()
 

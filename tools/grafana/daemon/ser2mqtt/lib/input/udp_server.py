@@ -19,6 +19,7 @@ class UdpServer():
         # Bind socket to local host and port
         try:
             self.socket.bind((self.host, self.port))
+            logging.info('Bound to %s:%s' % (self.host, self.port))
         except socket.error as e:
             logging.info('Bind failed. Error Code : ' + str(e.args[0]) + ' Message ' + e.args[1])
             sys.exit()

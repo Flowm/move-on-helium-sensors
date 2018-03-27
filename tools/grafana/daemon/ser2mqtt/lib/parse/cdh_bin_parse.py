@@ -17,7 +17,7 @@ NumSendResults = len(sendResultNames)
 def formatTable(data, rowNames, columnNames, title):
     n = len(data)
     m = len(data[0])
-	
+    
     result = ""
     result += (title + " ").ljust(8 + m * 4, "=") + "\n"
     result += " " * 8
@@ -135,6 +135,14 @@ class CDHBinParserExtended:
         output = str(stats)
         yield ("CDH-stats", output)
         yield ("CDH-raw", output)
+        
+        #yield("CDH/active", stats.activeTime / 255.0)
+        #yield("CDH/memory", stats.usedMemory / 255.0)
+        #for i in range(NumSubsystems):
+        #    ok = stats.requestResults[i][-1]
+        #    n =  sum(stats.requestResults[i]) * 1.0
+        #    avg = ok / n if n > 0 else 0
+        #    yield("CDH/%s" % subsystemNames[i], str(avg))
 
 class CDHBinParserCompact:
     def parse_packet(self, packet):
@@ -142,15 +150,14 @@ class CDHBinParserCompact:
         output = str(stats)
         yield ("CDH-stats", output)
         yield ("CDH-raw", output)
-		
-		yield("CDH/active", stats.activeTime / 255.0)
-		yield("CDH/memory", stats.usedMemory / 255.0)
-		for i in range(NumSubsystems):
-			ok = stats.requestResults[i][-1]
-			n =  sum(stats.requestResults[i]) * 1.0
-			avg = ok / n if n > 0 else 0
-			yield("CDH/%s" % subsystemNames[i], str(avg))
-
+        
+        #yield("CDH/active", stats.activeTime / 255.0)
+        #yield("CDH/memory", stats.usedMemory / 255.0)
+        #for i in range(NumSubsystems):
+        #    ok = stats.requestResults[i]
+        #    n =  stats.loopCounter
+        #    avg = ok / n if n > 0 else 0
+        #    yield("CDH/%s" % subsystemNames[i], str(avg))
         
 class CDHSchedulerParser:
     def parse_packet(self, packet):
