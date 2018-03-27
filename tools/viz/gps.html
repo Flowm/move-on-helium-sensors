@@ -37,6 +37,8 @@
 <div id="floating-panel">
   <!-- <input type="datetime-local" id="startDate"/> -->
   <input type="button" id="refresh" onclick="refresh()" value="Refresh">
+  <input type="text" id="predict_text" placeholder="Prediction UUID">
+  <input type="button" id="predict_button" onclick="plotPrediction()" value="Add Prediction" >
 </div>
 <div id="map">
 </div>
@@ -45,10 +47,12 @@
       var query = "SELECT mean(\"LAT\") as \"lat\",mean(\"LON\") as \"lng\" FROM \"sensors-processed\" WHERE (\"topic\" = 'sensors-processed/GPS')";
       var groupby = "GROUP BY time(1m)"
       var map;
-      var flightPath;
+      var flightPath, predictionPath = null;
       var firstQuery = true;
 
-      var flightPlanCoordinates = [];
+      var HBABURL = "http://predict.habhub.org/ajax.php?action=getCSV&uuid=";
+
+      var flightPlanCoordinates = [], predictionPathCoordinates = [];
       var updateInterval = 30000;
 
     function initMap() {
@@ -65,18 +69,26 @@
           strokeOpacity: 1.0,
           strokeWeight: 2
       });
+      predictionPath =  new google.maps.Polyline({
+        path: predictionPathCoordinates,
+        geodesic: true,
+        strokeColor: '#000000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
 
-        flightPath.setMap(map);
-        refresh();
-        setInterval(refresh, updateInterval);
+      flightPath.setMap(map);
+      predictionPath.setMap(map);
+
+      refresh();
+      setInterval(refresh, updateInterval);
     }
-
 
     function refresh() {
         // var from = (+new Date(document.getElementById('startDate').value))  / 1000;
         from = NaN;
         if( isNaN(from) ) {
-            from = "now() - 4h"
+            from = "now() - 1d"
         }
 
         var queryUrl = `${influxURL}${query} AND time >= ${from}  ${groupby}`
@@ -124,6 +136,47 @@
         }
 
         flightPath.setPath(flightPlanCoordinates);
+    }
+
+    function plotPrediction() {
+      uuid = $("#predict_text").val();
+      uuid = JSON.parse(uuid);
+      
+//       No Direct URL access for now. Maybe ask flow to setup a proxy.
+//       if(uuid.length !== 40) {
+//         alert('Bad UUID!');
+//         return;
+//       }
+
+      
+
+//       $.get(`${HBABURL}${uuid}`)
+//         .fail(function() {
+//           alert( "Request to hbab Failed." );
+//         })
+//         .done((data) => {
+//           console.log(data);
+//         });
+      predictionPathCoordinates =  uuid.map( x => {
+        vals = x.split(',');  
+        return {
+          lat:  parseFloat(vals[1]),
+          lng:  parseFloat(vals[2])
+        }
+      }).filter( x => {
+        if( null === x.lat || null === x.lng
+           || isNaN(x.lat) || isNaN(x.lng)) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      console.log(predictionPathCoordinates);
+      console.log(JSON.stringify(predictionPathCoordinates));
+      predictionPath.setPath(predictionPathCoordinates);
+
+
+
     }
 </script>
 <script async defer
