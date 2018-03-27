@@ -142,6 +142,15 @@ class CDHBinParserCompact:
         output = str(stats)
         yield ("CDH-stats", output)
         yield ("CDH-raw", output)
+		
+		yield("CDH/active", stats.activeTime / 255.0)
+		yield("CDH/memory", stats.usedMemory / 255.0)
+		for i in range(NumSubsystems):
+			ok = stats.requestResults[i][-1]
+			n =  sum(stats.requestResults[i]) * 1.0
+			avg = ok / n if n > 0 else 0
+			yield("CDH/%s" % subsystemNames[i], str(avg))
+
         
 class CDHSchedulerParser:
     def parse_packet(self, packet):
