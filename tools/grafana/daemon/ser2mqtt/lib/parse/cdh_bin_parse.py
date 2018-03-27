@@ -136,14 +136,20 @@ class CDHBinParserExtended:
         yield ("CDH-stats", output)
         yield ("CDH-raw", output)
         
-        #yield("CDH/active", stats.activeTime / 255.0)
-        #yield("CDH/memory", stats.usedMemory / 255.0)
-        #for i in range(NumSubsystems):
-        #    ok = stats.requestResults[i][-1]
-        #    n =  sum(stats.requestResults[i]) * 1.0
-        #    avg = ok / n if n > 0 else 0
-        #    yield("CDH/%s" % subsystemNames[i], str(avg))
+        yield("CDH/active", stats.activeTime / 255.0)
+        yield("CDH/memory", stats.usedMemory / 255.0)
+        yield("CDH/loop", stats.loopCounter)
+        for i in range(NumSubsystems):
+            ok = stats.requestResults[i][-1]
+            n = stats.loopCounter
+            avg = ok / n if n > 0 else 0
+            yield("CDH/%s" % subsystemNames[i], str(avg))
 
+        for i in range(NumSystems):
+            ok = stats.sendResults[i][-1]
+            yield("CDH/send/%s" % systemNames[i], str(ok))
+            
+            
 class CDHBinParserCompact:
     def parse_packet(self, packet):
         stats = StatsCompact(packet)
@@ -151,8 +157,9 @@ class CDHBinParserCompact:
         yield ("CDH-stats", output)
         yield ("CDH-raw", output)
         
-        #yield("CDH/active", stats.activeTime / 255.0)
-        #yield("CDH/memory", stats.usedMemory / 255.0)
+        yield("CDH/active", stats.activeTime / 255.0)
+        yield("CDH/memory", stats.usedMemory / 255.0)
+        yield("CDH/loop", stats.loopCounter)
         #for i in range(NumSubsystems):
         #    ok = stats.requestResults[i]
         #    n =  stats.loopCounter
