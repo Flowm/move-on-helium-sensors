@@ -22,13 +22,14 @@ bool GPS::setup() {
 }
 
 void GPS::update() {
-
-    if(t_flag){
+    if(t_flag) {
         t_flag = false;
-//        uint16_t len = getDataLength();
+        //uint16_t len = getDataLength();
         processBuffer();
-        getNextChunk(0);
+    } else {
+        last_data = 0;
     }
+    getNextChunk(0);
 }
 
 void GPS::processBuffer() {
@@ -112,7 +113,15 @@ uint16_t GPS::getDataLength() {
 }
 
 void GPS::callback(int event) {
-    t_flag = true;
+    switch(event) {
+    case I2C_EVENT_TRANSFER_COMPLETE:
+        t_flag = true;
+        break;
+    default:
+        t_flag = false;
+    }
+
+
 }
 
 void GPS::print() {
