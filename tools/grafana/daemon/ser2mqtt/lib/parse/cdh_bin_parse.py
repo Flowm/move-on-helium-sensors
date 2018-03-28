@@ -51,6 +51,8 @@ class StatsExtended(ctypes.Structure):
         ]
         
     def __init__(self, b):
+        if ctypes.sizeof(self) != len(b):
+            logging.debug("tried to parse %i B, expected %i B", len(b), ctypes.sizeof(self))
         ctypes.memmove(ctypes.addressof(self), bytes(b), ctypes.sizeof(self))
         self.spinner = 0
         self.spinnerAnim = "|/-\\"
@@ -97,6 +99,8 @@ class StatsCompact(ctypes.Structure):
         ]
         
     def __init__(self, b):
+        if ctypes.sizeof(self) != len(b):
+            logging.debug("tried to parse %i B, expected %i B", len(b), ctypes.sizeof(self))
         ctypes.memmove(ctypes.addressof(self), bytes(b), ctypes.sizeof(self))
         self.spinner = 0
         self.spinnerAnim = "|/-\\"

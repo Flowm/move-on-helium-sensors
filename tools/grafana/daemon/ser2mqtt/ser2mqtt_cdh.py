@@ -44,17 +44,22 @@ def main():
         
         parser = None        
         if start == 0x80:
-            bytes = readBytes(83 + 1)[:-1]
+            bytes = readBytes(83)
+            readBytes(1)
             if len(bytes) == 83:
                 logging.info("Stats packet")
                 parser = cdhParserExtended   
         elif start == 0x81:
-            bytes = readBytes(27 + 1)[:-1]
-            if len(bytes) == 27:
+            board = readBytes(1)[0]
+            bytes = readBytes(26)
+            readBytes(1)
+            if len(bytes) == 26:
                 logging.info("EPS packet")
                 parser = epsParser
+                parser.board = board
         elif start == 0x82:
-            bytes = readBytes(2 + 1)[:-1]
+            bytes = readBytes(2)
+            readBytes(1)
             if len(bytes) == 2:
                 logging.info("Scheduler packet")
                 parser = cdhSchedulerParser

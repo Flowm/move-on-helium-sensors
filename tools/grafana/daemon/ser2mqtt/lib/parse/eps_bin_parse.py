@@ -11,9 +11,11 @@ epsStructNames = ["Counter",
            "Chrg_PWN", "Exzess_PWM", "Temperature"]
 
 class EPSBinParser:
+    def __init__(self):
+        self.board = 1
+
     def parse_packet(self, packet):
-        channel = packet[0]
-        fields = list(struct.unpack(epsStructFormat, packet[1:]))
+        fields = list(struct.unpack(epsStructFormat, packet))
         for i in range(len(fields)):
             value = fields[i]
-            yield ("CDH/EPS%i/%s" %(channel, epsStructNames[i]), value)
+            yield ("CDH/EPS%i/%s" %(self.board, epsStructNames[i]), value)
