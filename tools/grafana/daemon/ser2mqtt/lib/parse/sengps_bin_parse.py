@@ -5,7 +5,7 @@ from subprocess import Popen, PIPE, STDOUT
 from lib.parse.sen_ascii_parse import SenAsciiParse
 
 
-class SenBinParse:
+class SengpsBinParse:
     def __init__(self):
         self.ascii_parser = SenAsciiParse()
 
@@ -15,7 +15,7 @@ class SenBinParse:
         length, status = packet[:2]
         data = packet[2:-1]
 
-        parser = Popen(['moveon-sen-parser'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+        parser = Popen(['moveon-sengps-parser'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
         stdout = parser.communicate(input=data)[0]
 
         logging.debug("BIN OUT: %s" % stdout.strip().decode())

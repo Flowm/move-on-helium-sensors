@@ -108,3 +108,7 @@ struct SensorDataNoGps {
     SensorTOSS toss;
     SystemStatus system;
 } __attribute__((packed));
+
+struct SensorDataGps {
+    SensorGPS gps;
+} __attribute__((packed));
