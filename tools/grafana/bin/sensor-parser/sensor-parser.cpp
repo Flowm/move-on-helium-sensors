@@ -15,13 +15,13 @@ int main() {
 
 
     // Cast to datastructure and print
-    SensorData* data = (SensorData*) buf;
+    SensorDataNoGps* data = (SensorDataNoGps*) buf;
 
-    printf("GPS "
-           "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,COURSE=%.4f,VAR=%.4f"
-           "\r\n",
-           data->gps.lat, data->gps.lon, data->gps.timestamp,
-           data->gps.groundSpeed, data->gps.course, data->gps.magVar);
+    //printf("GPS "
+    //       "LAT=%.6f,LON=%.6f,TIME=%u,SPEED=%.4f,COURSE=%.4f,VAR=%.4f"
+    //       "\r\n",
+    //       data->gps.lat, data->gps.lon, data->gps.timestamp,
+    //       data->gps.groundSpeed, data->gps.course, data->gps.magVar);
 
     for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         printf("ENV%d "
@@ -66,9 +66,9 @@ int main() {
            data->adcs.temp[0], data->adcs.temp[1], data->adcs.temp[2],
            data->adcs.raw_sun[0], data->adcs.raw_sun[1], data->adcs.raw_sun[2], data->adcs.raw_sun[3]);
 
-    printf("TMP OW%d=%.4f", 0, data->temp[0].temp);
+    printf("TMP OW%d=%.4f", 0, data->temp.temp[0]);
     for(int i = 1; i < MAX_TEMP_SENSORS; i++) {
-        printf(",OW%d=%.4f", i, data->temp[i].temp);
+        printf(",OW%d=%.4f", i, data->temp.temp[i]);
     }
     printf("\r\n");
 

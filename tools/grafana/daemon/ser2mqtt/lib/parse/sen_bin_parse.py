@@ -12,9 +12,11 @@ class SenBinParse:
     def parse_packet(self, packet):
         logging.debug("BIN IN: %s" % packet)
 
-        #TODO Call c parser here
+        length, status = packet[:2]
+        data = packet[2:-1]
+
         parser = Popen(['sensor-parser'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
-        stdout = parser.communicate(input=packet)[0]
+        stdout = parser.communicate(input=data)[0]
 
         logging.debug("BIN OUT: %s" % stdout.strip().decode())
 
