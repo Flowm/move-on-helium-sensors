@@ -6,6 +6,7 @@
   <title>MOVE-ON Helium Balloon Track</title>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <style type="text/css" src="https://move.frcy.org/habhub/css/pred.css"></style>
 </head>
 <body>
   <style>
@@ -22,8 +23,8 @@
     }
     #floating-panel {
         position: absolute;
-        top: 10px;
-        left: 25%;
+        bottom: 10px;
+        left: 75%;
         z-index: 5;
         background-color: #fff;
         padding: 5px;
@@ -35,10 +36,72 @@
     }
 </style>
 <div id="floating-panel">
-  <!-- <input type="datetime-local" id="startDate"/> -->
   <input type="button" id="refresh" onclick="refresh()" value="Refresh">
-  <input type="text" id="predict_text" placeholder="Prediction UUID">
-  <input type="button" id="predict_button" onclick="plotPrediction()" value="Add Prediction" >
+  <div id="input_form" class="box ui-corner-all ui-draggable" style="display: block; left: 1273px; top: 343px;"> 
+    <form action="" id="modelForm" name="modelForm">
+      <table id="launch-card" style="text-align: left !important;">
+        <tbody>
+          <tr>
+            <td>Latitude/Longitude:</td>
+            <td>
+              <input id="lat" type="text" size="8" name="lat" value="48.266182" onkeydown="SetSiteOther()" style="">&nbsp;/&nbsp;
+              <input id="lon" type="text" size="8" name="lon" value="11.668098" onkeydown="SetSiteOther()" style="">
+            </td>
+          </tr>
+          <tr>
+            <td>Launch altitude (m):</td>
+            <td>
+              <input id="initial_alt" type="text" name="initial_alt" value="550">
+            </td>
+          </tr>
+          <tr>
+            <td>Launch Time (UTC):</td>
+            <td>
+              <input id="hour" type="text" name="hour" value="13" maxlength="2" size="2"> :
+              <input id="min" type="text" name="min" value="44" maxlength="2" size="2">
+              <input id="sec" type="hidden" name="second" value="0"></td></tr>
+              <tr><td>Launch Date:</td><td>
+                <input id="day" type="text" name="day" value="27" maxlength="2" size="2">
+                <select id="month" name="month"><option value="1">Jan</option>
+                  <option value="2">Feb</option>
+                  <option value="3" selected="selected">Mar</option>
+                  <option value="4">Apr</option>
+                  <option value="5">May</option>
+                  <option value="6">Jun</option>
+                  <option value="7">Jul</option>
+                  <option value="8">Aug</option>
+                  <option value="9">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                </select>
+                <input id="year" type="text" name="year" value="2018" maxlength="4" size="4">
+              </td>
+            </tr><tr>
+              <td>
+                Ascent Rate (m/s): 
+              </td>
+              <td><input id="ascent" type="text" name="ascent" value="5" style=""></td>
+            </tr>
+            <tr>
+              <td>Burst Altitude (m):</td>
+              <td><input id="burst" type="text" name="burst" value="30000" style=""></td>
+            </tr>
+            <tr>
+              <td>
+                Descent Rate (<a class="tipsyLink" title="At sea level">m/s</a>):
+              </td>
+              <td><input id="drag" type="text" name="drag" value="5"></td>
+            </tr>
+      <tr>
+        <td></td>
+        <td><input type="button" name="submit" id="run_pred_btn" value="Run Prediction" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" onclick="plotPrediction()">
+        </td>
+      </tr>
+    </tbody></table>
+  </form>
+
+</div>
 </div>
 <div id="map">
 </div>
@@ -50,7 +113,7 @@
       var flightPath, predictionPath = null;
       var firstQuery = true;
 
-      var HBABURL = "http://predict.habhub.org/ajax.php?action=getCSV&uuid=";
+      const var HBABBase = "https://move.frcy.org/habhub/";
 
       var flightPlanCoordinates = [], predictionPathCoordinates = [];
       var updateInterval = 30000;
@@ -138,25 +201,7 @@
         flightPath.setPath(flightPlanCoordinates);
     }
 
-    function plotPrediction() {
-      uuid = $("#predict_text").val();
-      uuid = JSON.parse(uuid);
-      
-//       No Direct URL access for now. Maybe ask flow to setup a proxy.
-//       if(uuid.length !== 40) {
-//         alert('Bad UUID!');
-//         return;
-//       }
-
-      
-
-//       $.get(`${HBABURL}${uuid}`)
-//         .fail(function() {
-//           alert( "Request to hbab Failed." );
-//         })
-//         .done((data) => {
-//           console.log(data);
-//         });
+    function plotPrediction(data) {
       predictionPathCoordinates =  uuid.map( x => {
         vals = x.split(',');  
         return {
@@ -174,9 +219,6 @@
       console.log(predictionPathCoordinates);
       console.log(JSON.stringify(predictionPathCoordinates));
       predictionPath.setPath(predictionPathCoordinates);
-
-
-
     }
 </script>
 <script async defer
