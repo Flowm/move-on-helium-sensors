@@ -1,6 +1,4 @@
-import time
 import logging
-import json
 from subprocess import Popen, PIPE, STDOUT
 from lib.parse.sen_ascii_parse import SenAsciiParse
 
@@ -21,5 +19,5 @@ class SenBinParse:
         logging.debug("BIN OUT: %s" % stdout.strip().decode())
 
         for line in stdout.decode().splitlines():
-            for data in self.ascii_parser.parse_packet(line):
+            for data in self.ascii_parser.parse_packet(line, "com"):
                 yield data
