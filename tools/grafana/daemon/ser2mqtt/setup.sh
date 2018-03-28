@@ -10,6 +10,6 @@ for service in *.service; do
     fi
     cp $service /etc/systemd/system/ || true
     sudo systemctl daemon-reload || true
-    sudo systemctl enable $service || true
+    #sudo systemctl enable $service || true
     sudo systemctl restart $service
 done

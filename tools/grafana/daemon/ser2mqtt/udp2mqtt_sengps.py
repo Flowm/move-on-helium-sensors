@@ -20,8 +20,7 @@ def main():
 
         for (key, value) in parser.parse_packet(packet):
             logging.info("Pub %s: %s" % (key, value))
-            #TODO: Disabled until verified
-            #output.publish(key, value)
+            output.publish(key, value)
 
 
 if __name__ == '__main__':
