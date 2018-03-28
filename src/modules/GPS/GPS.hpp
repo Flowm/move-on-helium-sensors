@@ -80,7 +80,7 @@ private:
     void print() override;
 
     char data[BUF_LEN + 1];
-    bool t_flag = true;
+    bool t_flag = 0;
 
     minmea_sentence_gll gll;
     minmea_sentence_rmc rmc;
