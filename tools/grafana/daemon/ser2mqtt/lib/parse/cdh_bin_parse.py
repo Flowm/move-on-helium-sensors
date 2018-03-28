@@ -161,11 +161,11 @@ class CDHBinParserCompact:
         yield("CDH/active", stats.activeTime / 255.0)
         yield("CDH/memory", stats.usedMemory / 255.0)
         yield("CDH/loop", stats.loopCounter)
-        #for i in range(NumSubsystems):
-        #    ok = stats.requestResults[i]
-        #    n =  stats.loopCounter
-        #    avg = ok / n if n > 0 else 0
-        #    yield("CDH/%s" % subsystemNames[i], str(avg))
+        for i in range(NumSubsystems):
+            ok = stats.requestResults[i]
+            n =  stats.loopCounter
+            avg = ok / n if n > 0 else 0
+            yield("CDH/%s" % subsystemNames[i], str(avg))
         
 class CDHSchedulerParser:
     def parse_packet(self, packet):
