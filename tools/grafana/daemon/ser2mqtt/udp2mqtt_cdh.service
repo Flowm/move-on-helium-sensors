@@ -1,0 +1,16 @@
+[Unit]
+    Description=Publish udp sensor data over mqtt
+    After=network.target
+    StartLimitIntervalSec=10min
+    StartLimitBurst=10
+
+[Service]
+    User=deploy
+    Group=deploy
+    ExecStart=/opt/move-on_helium/SEN/tools/grafana/daemon/ser2mqtt/udp2mqtt_cdh.py
+    Type=simple
+    WatchdogSec=36000
+    Restart=always
+
+[Install]
+    WantedBy=multi-user.target

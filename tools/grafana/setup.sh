@@ -9,7 +9,6 @@ systemctl restart telegraf
 
 # Influxdb
 influx -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATION 14d REPLICATION 1 default'
-influx -port 48086 -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATION 28d REPLICATION 1 default'
 
 # Influxdb manual config for auth
 ##/etc/influxdb/influxdb.conf:
@@ -20,6 +19,7 @@ influx -port 48086 -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATI
 #influx -port 48086 -execute "GRANT WRITE ON telegraf TO moveon"
 #influx -port 48086 -execute "CREATE USER grafana WITH PASSWORD 'yeah7Evade-beep'"
 #influx -port 48086 -execute "GRANT READ ON telegraf TO grafana"
+#influx -port 48086 -execute 'CREATE RETENTION POLICY "moveon" ON telegraf DURATION 28d REPLICATION 1 default'
 
 
 # Bin
