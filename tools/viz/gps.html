@@ -34,54 +34,70 @@
         line-height: 30px;
         padding-left: 10px;
     }
+    #overlay {
+        background: black;
+        height: 96%;
+        width: 96%;
+        z-index: 10000;
+        position: absolute;
+        opacity: 0.7;
+        display: none;
+    }
+    #overlay-text {
+        opacity: 1;
+        color: white;
+    }
 </style>
 <div id="floating-panel">
-  <input type="button" id="refresh" onclick="refresh()" value="Refresh">
-  <div id="input_form" class="box ui-corner-all ui-draggable" style="display: block; left: 1273px; top: 343px;"> 
-    <form action="" id="modelForm" name="modelForm">
-      <table id="launch-card" style="text-align: left !important;">
-        <tbody>
+    <div id="overlay" class="overlay"> 
+        <p class="overlay-text"> Loading...</p>
+    </div>
+    <input type="button" id="refresh" onclick="refresh()" value="Refresh">
+    <div id="input_form" class="box ui-corner-all ui-draggable" style="display: block; left: 1273px; top: 343px;"> 
+        <form action="" id="modelForm" name="modelForm">
+          <table id="launch-card" style="text-align: left !important;">
+            <tbody>
+              <tr>
+                <td>Latitude/Longitude:</td>
+                <td>
+                  <input id="lat" type="text" size="8" name="lat" value="48.266182" onkeydown="SetSiteOther()" style="">&nbsp;/&nbsp;
+                  <input id="lon" type="text" size="8" name="lon" value="11.668098" onkeydown="SetSiteOther()" style="">
+              </td>
+          </tr>
           <tr>
-            <td>Latitude/Longitude:</td>
+            <td>Launch altitude (m):</td>
             <td>
-              <input id="lat" type="text" size="8" name="lat" value="48.266182" onkeydown="SetSiteOther()" style="">&nbsp;/&nbsp;
-              <input id="lon" type="text" size="8" name="lon" value="11.668098" onkeydown="SetSiteOther()" style="">
+              <input id="initial_alt" type="text" name="initial_alt" value="550">
           </td>
       </tr>
       <tr>
-        <td>Launch altitude (m):</td>
+        <td>Launch Time (UTC):</td>
         <td>
-          <input id="initial_alt" type="text" name="initial_alt" value="550">
+          <input id="hour" type="text" name="hour" value="13" maxlength="2" size="2"> :
+          <input id="min" type="text" name="min" value="44" maxlength="2" size="2">
+          <input id="sec" type="hidden" name="second" value="0"></td></tr>
+          <tr><td>Launch Date:</td><td>
+            <input id="day" type="text" name="day" value="27" maxlength="2" size="2">
+            <select id="month" name="month"><option value="1">Jan</option>
+              <option value="2">Feb</option>
+              <option value="3" selected="selected">Mar</option>
+              <option value="4">Apr</option>
+              <option value="5">May</option>
+              <option value="6">Jun</option>
+              <option value="7">Jul</option>
+              <option value="8">Aug</option>
+              <option value="9">Sep</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+          </select>
+          <input id="year" type="text" name="year" value="2018" maxlength="4" size="4">
       </td>
-  </tr>
-  <tr>
-    <td>Launch Time (UTC):</td>
-    <td>
-      <input id="hour" type="text" name="hour" value="13" maxlength="2" size="2"> :
-      <input id="min" type="text" name="min" value="44" maxlength="2" size="2">
-      <input id="sec" type="hidden" name="second" value="0"></td></tr>
-      <tr><td>Launch Date:</td><td>
-        <input id="day" type="text" name="day" value="27" maxlength="2" size="2">
-        <select id="month" name="month"><option value="1">Jan</option>
-          <option value="2">Feb</option>
-          <option value="3" selected="selected">Mar</option>
-          <option value="4">Apr</option>
-          <option value="5">May</option>
-          <option value="6">Jun</option>
-          <option value="7">Jul</option>
-          <option value="8">Aug</option>
-          <option value="9">Sep</option>
-          <option value="10">Oct</option>
-          <option value="11">Nov</option>
-          <option value="12">Dec</option>
-      </select>
-      <input id="year" type="text" name="year" value="2018" maxlength="4" size="4">
-  </td>
-</tr><tr>
-  <td>
-    Ascent Rate (m/s): 
-</td>
-<td><input id="ascent" type="text" name="ascent" value="5" style=""></td>
+  </tr><tr>
+      <td>
+        Ascent Rate (m/s): 
+    </td>
+    <td><input id="ascent" type="text" name="ascent" value="5" style=""></td>
 </tr>
 <tr>
   <td>Burst Altitude (m):</td>
@@ -95,7 +111,7 @@
 </tr>
 <tr>
     <td></td>
-    <td><input type="button" name="submit" id="run_pred_btn" value="Run Prediction" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" onclick="plotPrediction()">
+    <td><input type="button" name="submit" id="run_pred_btn" value="Run Prediction" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" onclick="startPrediction()">
     </td>
 </tr>
 </tbody></table>
@@ -199,35 +215,32 @@ function updateMap(data){
   flightPath.setPath(flightPlanCoordinates);
 }
 
-function predict(){
-  data = {
-      lat:parseFloat($('#lat').val()),
-      lon:parseFloat($('#lon').val()),
-      initial_alt:parseFloat($('#initial_alt').val()),
-      hour:parseFloat($('#hour').val()),
-      min:parseFloat($('#min').val()),
-      second:parseFloat($('#second').val()), // Check if this parameter is required!!
-      day:parseFloat($('#day').val()),
-      month:parseFloat($('#month').val()),
-      year:parseFloat($('#year').val()),
-      ascent:parseFloat($('#ascent').val()),
-      burst:parseFloat($('#burst').val()),
-      drag:parseFloat($('#drag').val()),
-      submit:"Run+Prediction"
-  }
+function startPrediction(){
+
+  data = $('#modelForm').serialize() + "&submit=Run+Prediction";
   // Poor mans input validation.
-  if( JSON.stringify(data).indexOf('null') < 0) {
+  if( data.indexOf('null') < 0) {
     alert("Please Complete all fields in the Prediction form.");
     return;
     }
-    var jqxhr  = $.post({
-        url:`${HBABBase}ajax.php?action=submitForm`,
-        data: data
+    var jqxhr  = $.post(`${HBABBase}ajax.php?action=submitForm`, data);
+    .fail( function () {
+      alert( "Request to HABABAHBABABBA failed." );
     })
-    .fail( () => {
-      alert( "Request to influx Failed." );
+    .done( data => {
+        if(data.valid) { 
+            // There is logic to check the progress of the prediction, but this is the easy way out.
+            setTimeout(updateInterval, getPredictionResult(data));
+        }
+    });
+}
+
+function getPredictionResult(data) {
+    var jqxhr = $.get(`${HBABBase}ajax.php?action=getCSV&uuid=${data.uuid}`)
+    .fail( function () {
+        alert("HABABAHBABABBA prediction get failed.");
     })
-    .done(updateMap);
+    .done(plotPrediction(data));
 }
 
 function plotPrediction(data) {
