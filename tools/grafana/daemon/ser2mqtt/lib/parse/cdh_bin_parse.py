@@ -6,6 +6,7 @@ from subprocess import Popen, PIPE, STDOUT
 
 subsystemNames = ["SENS", "EPS1", "EPS2", "CAM", "PAYL"]
 systemNames = subsystemNames + ["GPS", "CDH"]
+schedulerOrder = [5, 4, 0, 1, 2, 6]
 requestResultNames = ["CF", "TR", "TH", "IS", "IN", "TD", "TF", "IE", "IC", "OK"]
 sendResultNames = ["NR", "OK"] 
 
@@ -169,9 +170,13 @@ class CDHBinParserCompact:
 class CDHSchedulerParser:
     def parse_packet(self, packet):
         time = datetime.datetime.now()
+        name = systemNames[schedulerOrder[packet[0]]]
+        result = "OK" if packet[1] == 0x00 else "NR"
+        
         event = ''
         event += str(time) + ", "
-        event += str(packet[0]) + ", "
-        event += str(packet[1]) + "\n"
+        event += name + ", "
+        event += result + "\n"
         yield ("CDH-scheduler", event)
         yield ("CDH-raw", event)
+        yield ("CDH/scheduler/%s" % name, 1 if packet[1] == 0x00 else 0)
