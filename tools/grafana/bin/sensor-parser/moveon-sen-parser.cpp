@@ -60,9 +60,9 @@ int main() {
            data->adcs.temp[0], data->adcs.temp[1], data->adcs.temp[2],
            data->adcs.raw_sun[0], data->adcs.raw_sun[1], data->adcs.raw_sun[2], data->adcs.raw_sun[3]);
 
-    printf("TMP OW%d=%d", 0, data->temp.temp[0]);
+    printf("OWT OW%d=%hd", 0, data->temp.temp[0]);
     for(int i = 1; i < MAX_TEMP_SENSORS; i++) {
-        printf(",OW%d=%d", i, data->temp.temp[i]);
+        printf(",OW%d=%hd", i, data->temp.temp[i]);
     }
     printf("\r\n");
 
@@ -70,11 +70,12 @@ int main() {
            "RTC=%u",
            data->toss.timestamp);
     for (int i = 0; i < 4; i++) {
-        printf(",TMP%u=%d", i+1, data->toss.temp[i]);
+        printf(",TMP%d=%hd", i+1, data->toss.temp[i]);
     }
     for (int i = 0; i < 9; i++) {
-        printf(",PH%u=%d", i+1, data->toss.photodiode[i]);
+        printf(",PH%d=%hu", i+1, data->toss.photodiode[i]);
     }
+    printf("\r\n");
 
     printf("SYS "
            "LOG_CNT=%hu,"
