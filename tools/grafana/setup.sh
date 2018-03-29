@@ -28,4 +28,4 @@ cd $DIR/bin/reset-nucleo && make install
 cd $DIR/bin/sensor-parser && make install
 
 # Daemon
-$DIR/daemon/ser2mqtt/setup.sh
+$DIR/daemon/setup.sh

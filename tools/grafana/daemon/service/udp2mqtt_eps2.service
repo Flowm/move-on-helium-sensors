@@ -7,7 +7,7 @@
 [Service]
     User=deploy
     Group=deploy
-    ExecStart=/opt/move-on_helium/SEN/tools/grafana/daemon/ser2mqtt/udp2mqtt_eps.py 2
+    ExecStart=/opt/move-on_helium/SEN/tools/grafana/daemon/udp2mqtt_eps.py 2
     Type=simple
     WatchdogSec=36000
     Restart=always
