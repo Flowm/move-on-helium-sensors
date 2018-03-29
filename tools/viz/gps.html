@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Consider forking https://github.com/jonsowman/cusf-standalone-predictor to add 
+    live flight tracking. Its easy! -->
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <title>MOVE-ON Helium Balloon Track</title>
@@ -34,7 +36,7 @@
         line-height: 30px;
         padding-left: 10px;
     }
-    #overlay {
+    .overlay {
         background: black;
         height: 96%;
         width: 96%;
@@ -43,19 +45,19 @@
         opacity: 0.7;
         display: none;
     }
-    #overlay-text {
+    .overlay_text {
         opacity: 1;
         color: white;
     }
 </style>
 <div id="floating-panel">
     <div id="overlay" class="overlay"> 
-        <p class="overlay-text"> Loading...</p>
+        <p class="overlay_text"> Loading...</p>
     </div>
-    <input type="button" id="refresh" onclick="refresh()" value="Refresh">
+    <input type="button" id="refresh" onclick="refresh()" value="Refresh GPS position">
     <div id="input_form" class="box ui-corner-all ui-draggable" style="display: block; left: 1273px; top: 343px;"> 
         <form action="" id="modelForm" name="modelForm">
-          <table id="launch-card" style="text-align: left !important;">
+          <table id="launch-card" style="text-align: left !important;border-top: 1px solid black;">
             <tbody>
               <tr>
                 <td>Latitude/Longitude:</td>
@@ -77,11 +79,11 @@
           <input id="min" type="text" name="min" value="44" maxlength="2" size="2">
           <input id="sec" type="hidden" name="second" value="0"></td></tr>
           <tr><td>Launch Date:</td><td>
-            <input id="day" type="text" name="day" value="27" maxlength="2" size="2">
+            <input id="day" type="text" name="day" value="1" maxlength="2" size="2">
             <select id="month" name="month"><option value="1">Jan</option>
               <option value="2">Feb</option>
-              <option value="3" selected="selected">Mar</option>
-              <option value="4">Apr</option>
+              <option value="3">Mar</option>
+              <option value="4" selected="selected">Apr</option>
               <option value="5">May</option>
               <option value="6">Jun</option>
               <option value="7">Jul</option>
@@ -133,6 +135,7 @@
 
   var flightPlanCoordinates = [], predictionPathCoordinates = [];
   var updateInterval = 30000;
+  var HBABDelay = 5000;
 
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -171,7 +174,6 @@ function refresh() {
     }
 
     var queryUrl = `${influxURL}${query} AND time >= ${from}  ${groupby}`
-    console.log(queryUrl);
 
     var jqxhr = $.get(queryUrl)
     .fail(function() {
@@ -217,34 +219,44 @@ function updateMap(data){
 
 function startPrediction(){
 
+  $('#overlay').show();
   data = $('#modelForm').serialize() + "&submit=Run+Prediction";
   // Poor mans input validation.
-  if( data.indexOf('null') < 0) {
+  if( data.indexOf('null') > 0) {
     alert("Please Complete all fields in the Prediction form.");
     return;
     }
-    var jqxhr  = $.post(`${HBABBase}ajax.php?action=submitForm`, data);
+    var jqxhr  = $.post({
+        url:`${HBABBase}ajax.php?action=submitForm`,
+        data:data,
+        dataType: "json"
+    })
     .fail( function () {
       alert( "Request to HABABAHBABABBA failed." );
     })
     .done( data => {
-        if(data.valid) { 
+        if("true" === data.valid) { 
             // There is logic to check the progress of the prediction, but this is the easy way out.
-            setTimeout(updateInterval, getPredictionResult(data));
+            setTimeout(getPredictionResult, HBABDelay, data);
+        } else  {
+            alert(data.error);
         }
     });
 }
 
 function getPredictionResult(data) {
-    var jqxhr = $.get(`${HBABBase}ajax.php?action=getCSV&uuid=${data.uuid}`)
+    var jqxhr = $.get({
+        url:`${HBABBase}ajax.php?action=getCSV&uuid=${data.uuid}`,
+        dataType: 'json'
+    })
     .fail( function () {
         alert("HABABAHBABABBA prediction get failed.");
     })
-    .done(plotPrediction(data));
+    .done(plotPrediction);
 }
 
 function plotPrediction(data) {
-    predictionPathCoordinates =  uuid.map( x => {
+    predictionPathCoordinates =  data.map( x => {
     vals = x.split(',');  
     return {
       lat:  parseFloat(vals[1]),
@@ -258,9 +270,8 @@ function plotPrediction(data) {
     return true;
     }
     });
-    console.log(predictionPathCoordinates);
-    console.log(JSON.stringify(predictionPathCoordinates));
     predictionPath.setPath(predictionPathCoordinates);
+    $('#overlay').hide();
 }
 </script>
 <script async defer
