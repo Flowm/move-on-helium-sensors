@@ -70,11 +70,11 @@ void DS18B20::print() {
     logger->lock();
     if (getNumDevices() > 0) {
         logger->printf("%s T=%lu,"
-                       "OW%d=%u",
+                       "OW%d=%hd",
                        _name, last_data,
                        0, data.temp[0]);
         for (int i = 1; i < getNumDevices(); i++) {
-            logger->printf(",OW%d=%u", i, data.temp[i]);
+            logger->printf(",OW%d=%hd", i, data.temp[i]);
         }
         logger->printf("\r\n");
     }
