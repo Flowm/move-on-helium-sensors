@@ -1,5 +1,5 @@
 [Unit]
-    Description=Parse power data and publish it over mqtt
+    Description=Publish udp sensor data over mqtt
     After=network.target
     StartLimitIntervalSec=10min
     StartLimitBurst=10
@@ -7,7 +7,7 @@
 [Service]
     User=deploy
     Group=deploy
-    ExecStart=/opt/move-on_helium/SEN/tools/grafana/daemon/ser2mqtt/ser2mqtt_power.py
+    ExecStart=/opt/move-on_helium/SEN/tools/grafana/daemon/udp2mqtt_eps.py 1
     Type=simple
     WatchdogSec=36000
     Restart=always

@@ -7,7 +7,7 @@ from lib.output.mqtt_broker import MqttBroker
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)-15s %(levelname)s %(message)s")
 
-input = UdpServer(23000)
+input = UdpServer(23003)
 parser = SenBinParse()
 output = MqttBroker()
 
@@ -20,8 +20,7 @@ def main():
 
         for (key, value) in parser.parse_packet(packet):
             logging.info("Pub %s: %s" % (key, value))
-            #TODO: Disabled until verified
-            #output.publish(key, value)
+            output.publish(key, value)
 
 
 if __name__ == '__main__':

@@ -2,9 +2,9 @@
 set -eux
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $DIR
+cd $DIR/service
 
-for service in *.service; do
+for service in udp2mqtt_*.service; do
     if ! [ -f "$service" ]; then
         continue
     fi

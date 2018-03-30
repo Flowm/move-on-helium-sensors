@@ -99,3 +99,16 @@ struct SensorData {
     SensorTOSS toss;
     SystemStatus system;
 } __attribute__((packed));
+
+struct SensorDataNoGps {
+    SensorENV env[MAX_ENV_SENSORS];
+    SensorIMU imu;
+    SensorTemp temp;
+    SensorADCS adcs;
+    SensorTOSS toss;
+    SystemStatus system;
+} __attribute__((packed));
+
+struct SensorDataGps {
+    SensorGPS gps;
+} __attribute__((packed));

@@ -1,4 +1,3 @@
-import time
 import logging
 import json
 
@@ -16,8 +15,8 @@ def str2digit(value):
 
 
 class SenAsciiParse:
-    def parse_packet(self, packet):
-        yield ("sensors-raw", packet)
+    def parse_packet(self, packet, topic="raw"):
+        yield ("sensors-%s" % topic, packet)
 
         try:
             data_dict = {}
