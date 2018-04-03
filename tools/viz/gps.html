@@ -126,7 +126,7 @@
 <script>
   var influxURL = "https://move.frcy.org/influxdb/query?pretty=false&db=telegraf&q=";
   var query = "SELECT mean(\"LAT\") as \"lat\",mean(\"LON\") as \"lng\" FROM \"sensors-processed\" WHERE (\"topic\" = 'sensors-processed/GPS')";
-  var groupby = "GROUP BY time(1m)"
+  var groupby = "GROUP BY time(30s)"
   var map;
   var flightPath, predictionPath = null;
   var firstQuery = true;
@@ -170,7 +170,7 @@ function refresh() {
     // var from = (+new Date(document.getElementById('startDate').value))  / 1000;
     from = NaN;
     if( isNaN(from) ) {
-        from = "now() - 1d"
+        from = "now() - 6h"
     }
 
     var queryUrl = `${influxURL}${query} AND time >= ${from}  ${groupby}`
@@ -213,7 +213,13 @@ function updateMap(data){
     if( firstQuery ) {
       flightPath.map.setCenter(flightPlanCoordinates[0]);
       firstQuery = false;
-  }
+    }
+    var marker = new google.maps.Marker({
+      position: flightPlanCoordinates[flightPlanCoordinates.length - 1],
+      map: map,
+      title: 'Last Known Position'
+    });
+
   flightPath.setPath(flightPlanCoordinates);
 }
 
