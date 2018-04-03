@@ -18,6 +18,9 @@ class SengpsBinParse:
         #logging.debug("BIN IN: CHK=%d DATA%s" % (invalid_chunks, packet))
         logging.debug("BIN IN: CHK=%d" % invalid_chunks)
 
+        if invalid_chunks != 0:
+            return
+
         parser = Popen(['moveon-sengps-parser'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
         stdout = parser.communicate(input=data)[0]
 
