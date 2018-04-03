@@ -117,8 +117,8 @@ void BNO055IMU::print() {
                    _name, last_data,
                    data.accel.x, data.accel.y, data.accel.z,
                    data.mag.x, data.mag.y, data.mag.z,
-                   data.orientation.z, data.orientation.y, data.orientation.z,
                    data.gyro.x, data.gyro.y, data.gyro.z,
+                   data.orientation.x, data.orientation.y, data.orientation.z,
                    data.temp_accel,
                    data.resets);
     logger->unlock();
