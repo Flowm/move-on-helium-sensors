@@ -1,7 +1,7 @@
 #include "Toss.hpp"
 
 bool Toss::setup() {
-    set_update_rate(250);
+    set_update_rate(500);
 
     return true;
 }
@@ -50,10 +50,10 @@ void Toss::print() {
                    _name, last_data,
                    data->timestamp);
     for (int i = 0; i < 4; i++) {
-        logger->printf(",TMP%u=%d", i+1, data->temp[i]);
+        logger->printf(",TMP%d=%hd", i+1, data->temp[i]);
     }
     for (int i = 0; i < 9; i++) {
-        logger->printf(",PH%u=%d", i+1, data->photodiode[i]);
+        logger->printf(",PH%d=%hu", i+1, data->photodiode[i]);
     }
     logger->printf("\r\n");
     logger->unlock();
