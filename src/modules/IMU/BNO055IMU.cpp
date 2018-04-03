@@ -48,12 +48,12 @@ void BNO055IMU::update() {
     data.accel.x = accel.x;
     data.accel.y = accel.y;
     data.accel.z = accel.z;
-    data.gyro.x = gyro.x;
-    data.gyro.y = gyro.y;
-    data.gyro.z = gyro.z;
     data.mag.x = mag.x;
     data.mag.y = mag.y;
     data.mag.z = mag.z;
+    data.gyro.x = gyro.x;
+    data.gyro.y = gyro.y;
+    data.gyro.z = gyro.z;
     data.orientation.x = angles.h;
     data.orientation.y = angles.p;
     data.orientation.z = angles.r;
@@ -80,12 +80,12 @@ bool BNO055IMU::all_values_zero() {
     if (accel.x == 0 &&
         accel.y == 0 &&
         accel.z == 0 &&
-        gyro.x == 0 &&
-        gyro.y == 0 &&
-        gyro.z == 0 &&
         mag.x == 0 &&
         mag.y == 0 &&
         mag.z == 0 &&
+        gyro.x == 0 &&
+        gyro.y == 0 &&
+        gyro.z == 0 &&
         angles.h == 0 &&
         angles.p == 0 &&
         angles.r == 0 &&
@@ -108,17 +108,17 @@ void BNO055IMU::print() {
     logger->lock();
     logger->printf("%s T=%lu,"
                    "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
-                   "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                    "MAG_X=%.2f,MAG_Y=%.2f,MAG_Z=%.2f,"
+                   "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                    "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
                    "TEMP_ACC=%d,"
                    "RSTS=%u"
                    "\r\n",
                    _name, last_data,
                    data.accel.x, data.accel.y, data.accel.z,
-                   data.gyro.x, data.gyro.y, data.gyro.z,
                    data.mag.x, data.mag.y, data.mag.z,
                    data.orientation.z, data.orientation.y, data.orientation.z,
+                   data.gyro.x, data.gyro.y, data.gyro.z,
                    data.temp_accel,
                    data.resets);
     logger->unlock();
