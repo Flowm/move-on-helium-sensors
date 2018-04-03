@@ -8,10 +8,13 @@ class SenBinParse:
         self.ascii_parser = SenAsciiParse()
 
     def parse_packet(self, packet):
-        logging.debug("BIN IN: %s" % packet)
+        if len(packet) < 10:
+            return
 
         length, status = packet[:2]
         data = packet[2:-1]
+        invalid_chunks = packet[-1]
+        logging.debug("BIN IN: CHK=%d DATA%s" % (invalid_chunks, packet))
 
         parser = Popen(['moveon-sen-parser'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
         stdout = parser.communicate(input=data)[0]
