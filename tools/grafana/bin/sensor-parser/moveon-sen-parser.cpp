@@ -1,10 +1,12 @@
 #include <cstdio>
 #include <cstdint>
+#include <string>
 #include "../../../../src/include/protocol_sensors.h"
 
-int main() {
+int main(int argc, char **argv) {
     int c;
     int s = 0;
+    int invalid = 0;
     char buf[1000];
 
     // Read binary data from stdin
@@ -12,6 +14,11 @@ int main() {
         buf[s++] = c;
     }
     printf("DBG SIZE=%d\n", s);
+
+    if (argc == 2) {
+        invalid = std::stoi(argv[1]);
+    }
+    printf("DBG CHK=%d\n", invalid);
 
 
     // Cast to datastructure and print
