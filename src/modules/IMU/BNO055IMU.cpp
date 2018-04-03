@@ -57,12 +57,7 @@ void BNO055IMU::update() {
     data.orientation.x = angles.h;
     data.orientation.y = angles.p;
     data.orientation.z = angles.r;
-    //data.quaternion.w = quaternion.w;
-    //data.quaternion.x = quaternion.x;
-    //data.quaternion.y = quaternion.y;
-    //data.quaternion.z = quaternion.z;
     data.temp_accel = temp.acc_chip;
-    //data.temp_gyro = temp.gyr_chip;
     data.resets = assemble_combined_resets();
 
     storage->lock();
@@ -94,10 +89,6 @@ bool BNO055IMU::all_values_zero() {
         angles.h == 0 &&
         angles.p == 0 &&
         angles.r == 0 &&
-        quaternion.w == 0 &&
-        quaternion.x == 0 &&
-        quaternion.y == 0 &&
-        quaternion.z == 0 &&
         temp.acc_chip == 0 &&
         temp.gyr_chip == 0) {
             return true;
@@ -120,7 +111,6 @@ void BNO055IMU::print() {
                    "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
                    "MAG_X=%.2f,MAG_Y=%.2f,MAG_Z=%.2f,"
                    "ANG_X=%.4f,ANG_Y=%.4f,ANG_Z=%.4f,"
-                   //"QUAT_W=%.4f,QUAT_X=%.4f,QUAT_Y=%.4f,QUAT_Z=%.4f,"
                    "TEMP_ACC=%d,"
                    "RSTS=%u"
                    "\r\n",
@@ -129,7 +119,6 @@ void BNO055IMU::print() {
                    data.gyro.x, data.gyro.y, data.gyro.z,
                    data.mag.x, data.mag.y, data.mag.z,
                    data.orientation.z, data.orientation.y, data.orientation.z,
-                   //data.quaternion.w, data.quaternion.x, data.quaternion.y, data.quaternion.z,
                    data.temp_accel,
                    data.resets);
     logger->unlock();
