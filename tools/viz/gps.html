@@ -240,6 +240,7 @@ function startPrediction(){
             setTimeout(getPredictionResult, HBABDelay, data);
         } else  {
             alert(data.error);
+            $('#overlay').hide();
         }
     });
 }
