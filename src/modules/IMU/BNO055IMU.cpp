@@ -34,7 +34,7 @@ bool BNO055IMU::setup() {
 }
 
 void BNO055IMU::update() {
-    // Retrive sensor data
+    // Retrieve sensor data
     impl.get_accel(&accel);
     impl.get_mag(&mag);
     impl.get_gyro(&gyro);
