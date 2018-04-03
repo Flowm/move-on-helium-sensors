@@ -29,9 +29,9 @@ private:
     BNO055_VECTOR_TypeDef accel;
     BNO055_VECTOR_TypeDef mag;
     BNO055_VECTOR_TypeDef gyro;
-    BNO055_VECTOR_TypeDef gravity;
-    BNO055_VECTOR_TypeDef lin_accel;
-    BNO055_QUATERNION_TypeDef quaternion;
+    // BNO055_VECTOR_TypeDef gravity;
+    // BNO055_VECTOR_TypeDef lin_accel;
+    // BNO055_QUATERNION_TypeDef quaternion;
     BNO055_EULER_TypeDef angles;
     BNO055_TEMPERATURE_TypeDef temp;
 
