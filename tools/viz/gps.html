@@ -127,7 +127,7 @@
   var influxURL = "https://move.frcy.org/influxdb/query?pretty=false&db=telegraf&q=";
   var query = "SELECT mean(\"LAT\") as \"lat\",mean(\"LON\") as \"lng\" FROM \"sensors-processed\" WHERE (\"topic\" = 'sensors-processed/GPS')";
   var groupby = "GROUP BY time(30s)"
-  var map;
+  var map, lastKnownLoc;
   var flightPath, predictionPath = null;
   var firstQuery = true;
 
@@ -157,6 +157,12 @@
         strokeColor: '#000000',
         strokeOpacity: 1.0,
         strokeWeight: 2
+    });
+
+    lastKnownLoc = new google.maps.Marker({
+      position:  {lat: 48.266182,lng:11.668098 },//flightPlanCoordinates[flightPlanCoordinates.length - 1],
+      map: map,
+      title: 'Last Known Position'
     });
 
     flightPath.setMap(map);
@@ -214,13 +220,9 @@ function updateMap(data){
       flightPath.map.setCenter(flightPlanCoordinates[0]);
       firstQuery = false;
     }
-    var marker = new google.maps.Marker({
-      position: flightPlanCoordinates[flightPlanCoordinates.length - 1],
-      map: map,
-      title: 'Last Known Position'
-    });
 
   flightPath.setPath(flightPlanCoordinates);
+  lastKnownLoc.setPosition(flightPlanCoordinates[flightPlanCoordinates.length - 1]);
 }
 
 function startPrediction(){
