@@ -3,6 +3,35 @@
 #include <cstddef>
 #include <string>
 #include "../../../../src/include/protocol_sensors.h"
+#include <math.h>
+
+
+float calculateDensity(float pressure, float temperature){
+
+  //pressure [Pa], temperature [°C]
+  //calculate current density [kg/m^3]
+
+  int selector = 0;
+  const float Rs = 287.1; //gas constant of air J/(kg*K);
+
+  int N = 10;
+  float nominaldensity[N] = {1.225, 3.899e-2, 1.774e-2, 3.972e-3, 1.057e-3, 3.206e-4, 8.77e-5, 1.905e-5, 3.396e-6, 5.297e-7};
+  float basealtitude[N] = {0, 25, 30, 40, 50, 60, 70, 80, 90, 100};
+  float scaleheight[N] = {7.249, 6.349, 6.682, 7.554, 8.382, 7.714, 6.549, 5.799, 5.382, 5.877};
+
+  float density = pressure / (Rs * (temperature+273.15));
+  for(int i = 0; i < N && density < nominaldensity[i]; i++) {
+    selector = i;
+  }
+
+  float currentaltitudedensity = (basealtitude[selector] - log(density/nominaldensity[selector])*scaleheight[selector])*1000;
+  return currentaltitudedensity;
+}
+
+float calculatePressure(float pressure){
+  float currentaltitudepressure = - 8435 * log(pressure / 101325);
+  return currentaltitudepressure;
+}
 
 int main(int argc, char **argv) {
     int c;
@@ -43,13 +72,16 @@ int main(int argc, char **argv) {
     if (!(invalid & 0x01)) {
     for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         printf("ENV%d "
-               "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f"
+               "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f",
+               "PALT=%.2f,DALT=%.2f",
                "\r\n",
                i,
                data->env[i].temperature,
                data->env[i].humidity,
                data->env[i].pressure,
-               data->env[i].gasresistance);
+               data->env[i].gasresistance,
+               calculatePressure(data->env[i].pressure),
+               calculateDensity(data->env[i].pressure, data->env[i].temperature));
     }
     }
 
