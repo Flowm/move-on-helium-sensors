@@ -80,8 +80,8 @@ int main(int argc, char **argv) {
                data->env[i].humidity,
                data->env[i].pressure,
                data->env[i].gasresistance,
-               calculatePressure(data->env[i].pressure),
-               calculateDensity(data->env[i].pressure, data->env[i].temperature));
+               calculatePressure(data->env[i].pressure * 100),
+               calculateDensity(data->env[i].pressure * 100, data->env[i].temperature));
     }
     }
 
