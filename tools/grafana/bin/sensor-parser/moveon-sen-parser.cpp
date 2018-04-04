@@ -23,27 +23,19 @@ int main(int argc, char **argv) {
 
     // Invalid byte to packet size
     int invalid_range_start[8] = {};
+    int invalid_count = 0;
     for (int i=0; i<8; i++) {
         if (invalid & (1 << i)) {
+            invalid_count++;
             invalid_range_start[i] = 30 + 32 * i;
             printf("DBG Invalid Chunk %d from byte %d\n", i, invalid_range_start[i]);
         }
     }
 
-#if 0
-    if (invalid) {
+    if (invalid_count > 2) {
+        printf("DBG Too many invalid chunks %d\n", invalid_count);
         return 1;
     }
-
-    printf("ENV: %d, IMU: %d, temp: %d, adcs: %d, toss: %d, system: %d\n",
-            offsetof(SensorDataNoGps, env),
-            offsetof(SensorDataNoGps, imu),
-            offsetof(SensorDataNoGps, temp),
-            offsetof(SensorDataNoGps, adcs),
-            offsetof(SensorDataNoGps, toss),
-            offsetof(SensorDataNoGps, system)
-          );
-#endif
 
     // Cast to datastructure and print
     SensorDataNoGps* data = (SensorDataNoGps*) buf;
