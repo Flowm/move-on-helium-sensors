@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
     if (!(invalid & 0x01)) {
     for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         printf("ENV%d "
-               "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f",
+               "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f,",
                "PALT=%.2f,DALT=%.2f",
                "\r\n",
                i,
