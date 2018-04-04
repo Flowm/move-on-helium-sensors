@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdint>
+#include <cstddef>
 #include <string>
 #include "../../../../src/include/protocol_sensors.h"
 
@@ -13,17 +14,41 @@ int main(int argc, char **argv) {
     while((c = getchar()) != EOF) {
         buf[s++] = c;
     }
-    printf("DBG SIZE=%d\n", s);
+    printf("DBG SIZE=%d EXP=%d\n", s, sizeof(SensorDataNoGps));
 
     if (argc == 2) {
         invalid = std::stoi(argv[1]);
     }
     printf("DBG CHK=%d\n", invalid);
 
+    // Invalid byte to packet size
+    int invalid_range_start[8] = {};
+    for (int i=0; i<8; i++) {
+        if (invalid & (1 << i)) {
+            invalid_range_start[i] = 30 + 32 * i;
+            printf("DBG Invalid Chunk %d from byte %d\n", i, invalid_range_start[i]);
+        }
+    }
+
+#if 0
+    if (invalid) {
+        return 1;
+    }
+
+    printf("ENV: %d, IMU: %d, temp: %d, adcs: %d, toss: %d, system: %d\n",
+            offsetof(SensorDataNoGps, env),
+            offsetof(SensorDataNoGps, imu),
+            offsetof(SensorDataNoGps, temp),
+            offsetof(SensorDataNoGps, adcs),
+            offsetof(SensorDataNoGps, toss),
+            offsetof(SensorDataNoGps, system)
+          );
+#endif
 
     // Cast to datastructure and print
     SensorDataNoGps* data = (SensorDataNoGps*) buf;
 
+    if (!(invalid & 0x01)) {
     for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         printf("ENV%d "
                "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f"
@@ -34,7 +59,9 @@ int main(int argc, char **argv) {
                data->env[i].pressure,
                data->env[i].gasresistance);
     }
+    }
 
+    if (!(invalid & 0x03)) {
     printf("IMU "
            "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
            "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
@@ -51,7 +78,9 @@ int main(int argc, char **argv) {
            //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
            data->imu.temp_accel, //data->imu.temp_gyro,
            data->imu.resets);
+    }
 
+    if (!(invalid & 0x0C)) {
     printf("ADCS "
            //"ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
            "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
@@ -66,13 +95,17 @@ int main(int argc, char **argv) {
            data->adcs.sun.x, data->adcs.sun.y, data->adcs.sun.z,
            data->adcs.temp[0], data->adcs.temp[1], data->adcs.temp[2],
            data->adcs.raw_sun[0], data->adcs.raw_sun[1], data->adcs.raw_sun[2], data->adcs.raw_sun[3]);
+    }
 
+    if (!(invalid & 0x06)) {
     printf("OWT OW%d=%hd", 0, data->temp.temp[0]);
     for(int i = 1; i < MAX_TEMP_SENSORS; i++) {
         printf(",OW%d=%hd", i, data->temp.temp[i]);
     }
     printf("\r\n");
+    }
 
+    if (!(invalid & 0x18)) {
     printf("TOSS "
            "RTC=%u",
            data->toss.timestamp);
@@ -83,7 +116,9 @@ int main(int argc, char **argv) {
         printf(",PH%d=%hu", i+1, data->toss.photodiode[i]);
     }
     printf("\r\n");
+    }
 
+    if (!(invalid & 0x30)) {
     printf("SYS "
            "LOG_CNT=%hu,"
            "RTC_S=%hu,"
@@ -98,6 +133,7 @@ int main(int argc, char **argv) {
            data->system.log_ms,
            data->system.lock_wait_us,
            data->system.sensor_status);
+    }
 
     return 0;
 }
