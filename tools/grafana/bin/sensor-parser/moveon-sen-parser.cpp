@@ -43,12 +43,13 @@ int main(int argc, char **argv) {
     while((c = getchar()) != EOF) {
         buf[s++] = c;
     }
-    printf("DBG SIZE=%d EXP=%d\n", s, sizeof(SensorDataNoGps));
 
+    printf("DBG SIZE=%d EXP=%d", s, sizeof(SensorDataNoGps));
     if (argc == 2) {
         invalid = std::stoi(argv[1]);
+        printf(",CHK=%d", invalid);
     }
-    printf("DBG CHK=%d\n", invalid);
+    printf("\r\n");
 
     // Invalid byte to packet size
     int invalid_range_start[8] = {};
@@ -61,15 +62,15 @@ int main(int argc, char **argv) {
         }
     }
 
-    if (invalid_count > 3) {
-        printf("DBG Too many invalid chunks %d\n", invalid_count);
-        return 1;
-    }
+    //if (invalid_count > 3) {
+    //    printf("DBG Too many invalid chunks %d\n", invalid_count);
+    //    return 1;
+    //}
 
     // Cast to datastructure and print
     SensorDataNoGps* data = (SensorDataNoGps*) buf;
 
-    if (!(invalid & 0x01)) {
+    //if (!(invalid & 0x01)) {
     for (int i = 0; i < MAX_ENV_SENSORS; i++) {
         printf("ENV%d "
                "TEMP=%.2f,HUM=%.2f,PRES=%.2f,GAS=%.4f,"
@@ -83,9 +84,9 @@ int main(int argc, char **argv) {
                calculatePressure(data->env[i].pressure * 100),
                calculateDensity(data->env[i].pressure * 100, data->env[i].temperature));
     }
-    }
+    //}
 
-    if (!(invalid & 0x03)) {
+    //if (!(invalid & 0x03)) {
     printf("IMU "
            "ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
            "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
@@ -102,9 +103,9 @@ int main(int argc, char **argv) {
            //data->imu.quaternion.w, data->imu.quaternion.x, data->imu.quaternion.y, data->imu.quaternion.z,
            data->imu.temp_accel, //data->imu.temp_gyro,
            data->imu.resets);
-    }
+    //}
 
-    if (!(invalid & 0x0C)) {
+    //if (!(invalid & 0x0C)) {
     printf("ADCS "
            //"ACC_X=%.4f,ACC_Y=%.4f,ACC_Z=%.4f,"
            "GYRO_X=%.4f,GYRO_Y=%.4f,GYRO_Z=%.4f,"
@@ -119,17 +120,17 @@ int main(int argc, char **argv) {
            data->adcs.sun.x, data->adcs.sun.y, data->adcs.sun.z,
            data->adcs.temp[0], data->adcs.temp[1], data->adcs.temp[2],
            data->adcs.raw_sun[0], data->adcs.raw_sun[1], data->adcs.raw_sun[2], data->adcs.raw_sun[3]);
-    }
+    //}
 
-    if (!(invalid & 0x06)) {
+    //if (!(invalid & 0x06)) {
     printf("OWT OW%d=%hd", 0, data->temp.temp[0]);
     for(int i = 1; i < MAX_TEMP_SENSORS; i++) {
         printf(",OW%d=%hd", i, data->temp.temp[i]);
     }
     printf("\r\n");
-    }
+    //}
 
-    if (!(invalid & 0x18)) {
+    //if (!(invalid & 0x18)) {
     printf("TOSS "
            "RTC=%u",
            data->toss.timestamp);
@@ -140,9 +141,9 @@ int main(int argc, char **argv) {
         printf(",PH%d=%hu", i+1, data->toss.photodiode[i]);
     }
     printf("\r\n");
-    }
+    //}
 
-    if (!(invalid & 0x30)) {
+    //if (!(invalid & 0x30)) {
     printf("SYS "
            "LOG_CNT=%hu,"
            "RTC_S=%hu,"
@@ -157,7 +158,7 @@ int main(int argc, char **argv) {
            data->system.log_ms,
            data->system.lock_wait_us,
            data->system.sensor_status);
-    }
+    //}
 
     return 0;
 }
