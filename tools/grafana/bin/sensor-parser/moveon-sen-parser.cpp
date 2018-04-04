@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if (invalid_count > 2) {
+    if (invalid_count > 3) {
         printf("DBG Too many invalid chunks %d\n", invalid_count);
         return 1;
     }
