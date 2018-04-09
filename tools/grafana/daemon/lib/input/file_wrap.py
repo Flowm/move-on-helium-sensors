@@ -2,11 +2,12 @@ import logging
 
 
 class FileWrap():
-    def __init__(self, channel):
+    def __init__(self, channel, filename):
         self.channel = channel
+        self.filename = filename
 
     def get_packets(self):
-        with open("/opt/logs/com-parsed-mobile.log", "r") as file:
+        with open(self.filename, "r") as file:
             for line in file:
                 searchstr = "Sending to channel %d..." % self.channel
                 if searchstr in line:
