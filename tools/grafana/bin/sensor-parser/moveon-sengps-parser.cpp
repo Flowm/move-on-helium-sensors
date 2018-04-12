@@ -11,7 +11,7 @@ int main() {
     while((c = getchar()) != EOF) {
         buf[s++] = c;
     }
-    printf("DBG SIZE=%d\n", s);
+    printf("DBG SIZE=%d EXP=%d\n", s, sizeof(SensorDataGps));
 
     // Cast to datastructure and print
     SensorDataGps* data = (SensorDataGps*) buf;

@@ -30,8 +30,7 @@ class SenAsciiParse:
                 else:
                     data_dict[name] = str2digit(value)
                     yield ("sensors/%s/%s" % (type, name), value)
-            if type == "GPS":
-                yield ("sensors-processed/%s" % type, json.dumps(data_dict))
+            yield ("sensors-processed/%s" % type, json.dumps(data_dict))
         except ValueError:
             logging.info('Invalid data in packet: ' + packet)
             return
