@@ -233,7 +233,7 @@ At the end of a measurement period each sensor thread sleeps for the remaining t
 |   BME        | 1000       |
 | BNO055-IMU   | 200        |
 |  SidePanel   | 200        |
-|   TOSS       | 250        |
+|   TOSS       | 500        |
 |One Wire Temp | 2000       |
 
 
