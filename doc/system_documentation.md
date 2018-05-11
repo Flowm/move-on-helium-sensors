@@ -11,7 +11,7 @@ Members of the Sensor team are:
 * [System Architecture](https://gitlab.lrz.de/move-on/move-on_helium_sensors/blob/master/doc/system-architecture.png)
 * [Nucleo Firmware](https://gitlab.lrz.de/move-on/move-on_helium_sensors/tree/master/src)
 * [Hardware Schematics](https://gitlab.lrz.de/move-on/move-on_helium_sensors/tree/master/hardware)
-* [Live data visualization](https://move.frcy.org) (User: `moveon`, Password: `noevom`)
+* [Live data visualization](https://move.frcy.org)
 
 
 ## Mission Overview (MOVEON-GENERAL)
@@ -327,6 +327,7 @@ Concluding this status report the sensors team acknowledges potential for improv
 * [DS18B20 Temperature](https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf)
 * [MOVE-II ADCS SidePanel](https://redmine.move2space.de/projects/move2/wiki/Sidepanel_401)
 * [Open Log Datalogger](https://www.sparkfun.com/products/13712)
+
 #### Source Code
 * [MOVE-ON Helium Sensors](https://gitlab.lrz.de/move-on/move-on_helium_sensors/)
 * [MOVE-II ADCS](https://gitlab.lrz.de/move-ii/adcs_software)

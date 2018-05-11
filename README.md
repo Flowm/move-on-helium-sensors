@@ -1,7 +1,11 @@
 # MOVE-ON Helium Sensors
+Sensors subsystem for the MOVE-ON Helium high-altitude balloon mission.
+
+A detailed system description can be found in ![the system documentation](doc/system_documentation.md).
+
+![Grafana dashboard](doc/grafana-screenshot.png)
 
 ## Interfaces
-
 ### Micro USB
 The output from Micro USB can be read with the following command (MacOS):
 ```
@@ -9,9 +13,7 @@ picocom -b 115200 /dev/tty.usbmodem1453
 ```
 (`usbmodem1453` needs to be adjusted on your system)
 
-
 ## Setup
-
 ### Requirements
 - GNU Arm Embedded Toolchain
 - mbed-cli
