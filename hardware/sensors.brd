@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.6.0">
+<eagle version="9.0.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="yes"/>
@@ -384,6 +384,31 @@
 <pad name="VCC" x="6.35" y="0" drill="1" diameter="1.6764"/>
 <text x="-2.54" y="5.08" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 <text x="3.81" y="5.08" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+</package>
+<package name="UPUTRONICS-UBLOX-M8Q">
+<pad name="SDA" x="-8.89" y="0" drill="1" diameter="1.6764"/>
+<pad name="SCL" x="-6.35" y="0" drill="1" diameter="1.6764"/>
+<pad name="TXD" x="-3.81" y="0" drill="1" diameter="1.6764"/>
+<pad name="RXD" x="-1.27" y="0" drill="1" diameter="1.6764"/>
+<pad name="GND" x="6.35" y="0" drill="1" diameter="1.6764" shape="square"/>
+<pad name="VCC" x="8.89" y="0" drill="1" diameter="1.6764"/>
+<wire x1="-10.16" y1="-1.27" x2="-10.16" y2="19.05" width="0.127" layer="21"/>
+<wire x1="-10.16" y1="19.05" x2="-3.81" y2="19.05" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="19.05" x2="3.81" y2="19.05" width="0.127" layer="21"/>
+<wire x1="3.81" y1="19.05" x2="10.16" y2="19.05" width="0.127" layer="21"/>
+<wire x1="10.16" y1="19.05" x2="10.16" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="10.16" y1="-1.27" x2="-10.16" y2="-1.27" width="0.127" layer="21"/>
+<text x="5.08" y="3.81" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="7.62" y="3.81" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<wire x1="-8.89" y1="12.7" x2="1.27" y2="12.7" width="0.127" layer="21"/>
+<wire x1="1.27" y1="12.7" x2="1.27" y2="2.54" width="0.127" layer="21"/>
+<wire x1="1.27" y1="2.54" x2="-8.89" y2="2.54" width="0.127" layer="21"/>
+<wire x1="-8.89" y1="2.54" x2="-8.89" y2="12.7" width="0.127" layer="21"/>
+<pad name="TP1" x="1.27" y="0" drill="1" diameter="1.6764"/>
+<pad name="TP2" x="3.81" y="0" drill="1" diameter="1.6764"/>
+<wire x1="-3.81" y1="19.05" x2="-3.81" y2="25.4" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="25.4" x2="3.81" y2="25.4" width="0.127" layer="21"/>
+<wire x1="3.81" y1="25.4" x2="3.81" y2="19.05" width="0.127" layer="21"/>
 </package>
 </packages>
 </library>
@@ -1610,9 +1635,15 @@ for trimmer refence see : &lt;u&gt;www.electrospec-inc.com/cross_references/trim
 <packages3d>
 <package3d name="R2012" urn="urn:adsk.eagle:package:23543/2" type="model" library_version="3">
 <description>RESISTOR</description>
+<packageinstances>
+<packageinstance name="R2012"/>
+</packageinstances>
 </package3d>
 <package3d name="C2012" urn="urn:adsk.eagle:package:23625/2" type="model" library_version="3">
 <description>CAPACITOR</description>
+<packageinstances>
+<packageinstance name="C2012"/>
+</packageinstances>
 </package3d>
 </packages3d>
 </library>
@@ -1898,6 +1929,7 @@ Your Multi-CB Team
 <attribute name="SPICEPREFIX" value="C" x="27" y="74" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
 <element name="B6" library="Frcy" package="HUAMAO-HM-11" value="" x="57" y="14" rot="R270"/>
+<element name="B7" library="Frcy" package="UPUTRONICS-UBLOX-M8Q" value="UBLOX2" x="67" y="65"/>
 </elements>
 <signals>
 <signal name="5V">
@@ -2000,6 +2032,8 @@ Your Multi-CB Team
 <contactref element="B6" pad="VCC"/>
 <wire x1="57" y1="7.65" x2="54" y2="7.65" width="0.4064" layer="16"/>
 <via x="54" y="7.65" extent="1-16" drill="0.508"/>
+<contactref element="B7" pad="VCC"/>
+<wire x1="54" y1="7.65" x2="75.89" y2="65" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="GND">
 <contactref element="B1" pad="GND@2"/>
@@ -2035,6 +2069,8 @@ Your Multi-CB Team
 <contactref element="C9" pad="1"/>
 <contactref element="C10" pad="1"/>
 <contactref element="B6" pad="GND"/>
+<contactref element="B7" pad="GND"/>
+<wire x1="57" y1="10.19" x2="73.35" y2="65" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IMU-SDA">
 <contactref element="B2" pad="SDA"/>
@@ -2074,6 +2110,8 @@ Your Multi-CB Team
 <wire x1="48.67" y1="44.48" x2="48.67" y2="43.33" width="0.3048" layer="16"/>
 <wire x1="48.67" y1="43.33" x2="50" y2="42" width="0.3048" layer="16"/>
 <wire x1="50" y1="42" x2="64" y2="42" width="0.3048" layer="16"/>
+<contactref element="B7" pad="SDA"/>
+<wire x1="59.15" y1="61" x2="58.11" y2="65" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="GPS-SCL">
 <contactref element="B3" pad="SCL"/>
@@ -2089,6 +2127,8 @@ Your Multi-CB Team
 <wire x1="66.508" y1="43.789575" x2="66.508" y2="46.210425" width="0.3048" layer="16"/>
 <wire x1="62.932" y1="48.258" x2="61.19" y2="50" width="0.3048" layer="16"/>
 <wire x1="64.460425" y1="48.258" x2="62.932" y2="48.258" width="0.3048" layer="16"/>
+<contactref element="B7" pad="SCL"/>
+<wire x1="61.15" y1="57.25" x2="60.65" y2="65" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="LOG-TX">
 <contactref element="B4" pad="RXI"/>
@@ -2266,6 +2306,8 @@ Your Multi-CB Team
 <via x="53" y="52" extent="1-16" drill="0.508"/>
 <wire x1="53" y1="52" x2="49.27" y2="55.73" width="0.3048" layer="16"/>
 <wire x1="49.27" y1="55.73" x2="49.27" y2="59" width="0.3048" layer="16"/>
+<contactref element="B7" pad="TXD"/>
+<wire x1="63" y1="52" x2="63.19" y2="65" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="GPS-RX">
 <contactref element="B3" pad="RXD"/>
@@ -2277,6 +2319,8 @@ Your Multi-CB Team
 <wire x1="66.27" y1="53" x2="65.27" y2="54" width="0.3048" layer="16"/>
 <wire x1="53" y1="54" x2="51.81" y2="55.19" width="0.3048" layer="16"/>
 <wire x1="51.81" y1="55.19" x2="51.81" y2="59" width="0.3048" layer="16"/>
+<contactref element="B7" pad="RXD"/>
+<wire x1="65.27" y1="54" x2="65.73" y2="65" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="SPI-CS-SUN">
 <contactref element="B1" pad="D10"/>
@@ -2337,6 +2381,11 @@ Your Multi-CB Team
 <via x="23.62" y="26.62" extent="1-16" drill="0.508"/>
 <wire x1="26" y1="29" x2="23.62" y2="26.62" width="0.3048" layer="1"/>
 <wire x1="23.62" y1="26.62" x2="23.62" y2="24" width="0.3048" layer="16"/>
+</signal>
+<signal name="GPS-TP">
+<contactref element="B7" pad="TP1"/>
+<contactref element="B7" pad="TP2"/>
+<wire x1="70.81" y1="65" x2="68.27" y2="65" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
