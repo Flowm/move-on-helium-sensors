@@ -1929,7 +1929,7 @@ Your Multi-CB Team
 <attribute name="SPICEPREFIX" value="C" x="27" y="74" size="1.778" layer="28" rot="MR180" display="off"/>
 </element>
 <element name="B6-BLE" library="Frcy" package="HUAMAO-HM-11" value="" x="57" y="14" rot="R270"/>
-<element name="B7-UBLOXE" library="Frcy" package="UPUTRONICS-UBLOX-M8Q" value="" x="67.5" y="61"/>
+<element name="B7-UBLOXE" library="Frcy" package="UPUTRONICS-UBLOX-M8Q" value="" x="67.5" y="53"/>
 </elements>
 <signals>
 <signal name="5V">
@@ -2030,12 +2030,10 @@ Your Multi-CB Team
 <contactref element="B7-UBLOXE" pad="VCC"/>
 <wire x1="60.85" y1="39" x2="63" y2="39" width="0.3048" layer="16"/>
 <wire x1="60.85" y1="36" x2="63" y2="36" width="0.3048" layer="16"/>
-<wire x1="71.35" y1="50" x2="71.35" y2="48.35" width="0.3048" layer="16"/>
-<wire x1="71.35" y1="48.35" x2="71" y2="48" width="0.3048" layer="16"/>
-<via x="71" y="48" extent="1-16" drill="0.508"/>
-<wire x1="76.39" y1="61" x2="76.39" y2="59.39" width="0.3048" layer="16"/>
-<wire x1="76.39" y1="59.39" x2="76" y2="59" width="0.3048" layer="16"/>
-<via x="76" y="59" extent="1-16" drill="0.508"/>
+<wire x1="76.39" y1="53" x2="76.39" y2="51" width="0.3048" layer="16"/>
+<via x="76.39" y="51" extent="1-16" drill="0.508"/>
+<wire x1="71.35" y1="50" x2="71.35" y2="48" width="0.3048" layer="16"/>
+<via x="71.35" y="48" extent="1-16" drill="0.508"/>
 </signal>
 <signal name="GND">
 <contactref element="B1-NUCLEO" pad="GND@2"/>
@@ -2116,28 +2114,29 @@ Your Multi-CB Team
 <via x="57" y="40" extent="1-16" drill="0.508"/>
 <wire x1="57" y1="40" x2="58" y2="39" width="0.3048" layer="16"/>
 <wire x1="58" y1="39" x2="59.15" y2="39" width="0.3048" layer="16"/>
-<wire x1="58.65" y1="50" x2="58.65" y2="55.96" width="0.3048" layer="16"/>
-<wire x1="58.65" y1="55.96" x2="58.61" y2="61" width="0.3048" layer="16"/>
+<wire x1="58.65" y1="50" x2="58.65" y2="52.96" width="0.3048" layer="16"/>
+<wire x1="58.65" y1="52.96" x2="58.61" y2="53" width="0.3048" layer="16"/>
 </signal>
 <signal name="GPS-SCL">
 <contactref element="B3-UBLOX" pad="SCL"/>
 <contactref element="B1-NUCLEO" pad="D5"/>
 <contactref element="R5" pad="2"/>
 <wire x1="46.13" y1="44.48" x2="46.13" y2="42.87" width="0.3048" layer="16"/>
-<wire x1="66.508" y1="46.210425" x2="64.460425" y2="48.258" width="0.3048" layer="16"/>
+<wire x1="64.460425" y1="48.258" x2="66.508" y2="46.210425" width="0.3048" layer="16"/>
 <wire x1="66.508" y1="43.789575" x2="66.508" y2="46.210425" width="0.3048" layer="16"/>
-<wire x1="62.932" y1="48.258" x2="61.19" y2="50" width="0.3048" layer="16"/>
-<wire x1="64.460425" y1="48.258" x2="62.932" y2="48.258" width="0.3048" layer="16"/>
 <contactref element="B7-UBLOXE" pad="SCL"/>
 <wire x1="46.13" y1="42.87" x2="48" y2="41" width="0.3048" layer="16"/>
-<wire x1="48" y1="41" x2="56" y2="41" width="0.3048" layer="16"/>
-<wire x1="56" y1="41" x2="63.718425" y2="41" width="0.3048" layer="16"/>
+<wire x1="48" y1="41" x2="55" y2="41" width="0.3048" layer="16"/>
+<wire x1="55" y1="41" x2="63.718425" y2="41" width="0.3048" layer="16"/>
 <wire x1="63.718425" y1="41" x2="66.508" y2="43.789575" width="0.3048" layer="16"/>
-<wire x1="56" y1="41" x2="56" y2="37" width="0.3048" layer="16"/>
-<wire x1="56" y1="37" x2="57" y2="36" width="0.3048" layer="16"/>
-<wire x1="57" y1="36" x2="59.15" y2="36" width="0.3048" layer="16"/>
-<wire x1="61.19" y1="50" x2="61.19" y2="55.96" width="0.3048" layer="16"/>
-<wire x1="61.19" y1="55.96" x2="61.15" y2="61" width="0.3048" layer="16"/>
+<wire x1="59.15" y1="36" x2="57" y2="36" width="0.3048" layer="16"/>
+<wire x1="61.19" y1="50" x2="61.19" y2="48.81" width="0.3048" layer="16"/>
+<wire x1="61.19" y1="48.81" x2="61.742" y2="48.258" width="0.3048" layer="16"/>
+<wire x1="61.742" y1="48.258" x2="64.460425" y2="48.258" width="0.3048" layer="16"/>
+<wire x1="61.19" y1="50" x2="61.19" y2="52.96" width="0.3048" layer="16"/>
+<wire x1="61.19" y1="52.96" x2="61.15" y2="53" width="0.3048" layer="16"/>
+<wire x1="55" y1="38" x2="55" y2="41" width="0.3048" layer="16"/>
+<wire x1="57" y1="36" x2="55" y2="38" width="0.3048" layer="16"/>
 </signal>
 <signal name="LOG-TX">
 <contactref element="B4-OPENLOG" pad="RXI"/>
@@ -2288,10 +2287,9 @@ Your Multi-CB Team
 <contactref element="B1-NUCLEO" pad="A3"/>
 <wire x1="43.59" y1="29.24" x2="43.59" y2="37.41" width="0.3048" layer="16"/>
 <wire x1="43.59" y1="37.41" x2="39.788" y2="41.212" width="0.3048" layer="16"/>
-<wire x1="39.788" y1="51" x2="39.788" y2="41.212" width="0.3048" layer="16"/>
-<wire x1="44.19" y1="62" x2="44" y2="58.81" width="0.3048" layer="16"/>
-<wire x1="44" y1="55.212" x2="39.788" y2="51" width="0.3048" layer="16"/>
-<wire x1="44" y1="58.81" x2="44" y2="55.212" width="0.3048" layer="16"/>
+<wire x1="39.788" y1="41.212" x2="39.788" y2="51" width="0.3048" layer="16"/>
+<wire x1="39.788" y1="51" x2="44.19" y2="55.402" width="0.3048" layer="16"/>
+<wire x1="44.19" y1="55.402" x2="44.19" y2="62" width="0.3048" layer="16"/>
 </signal>
 <signal name="VIN">
 <contactref element="B1-NUCLEO" pad="VIN"/>
@@ -2299,29 +2297,26 @@ Your Multi-CB Team
 <signal name="GPS-TX">
 <contactref element="B3-UBLOX" pad="TXD"/>
 <contactref element="J3-GPSD" pad="2"/>
-<via x="53" y="53" extent="1-16" drill="0.508"/>
 <contactref element="B7-UBLOXE" pad="TXD"/>
-<wire x1="63.73" y1="50" x2="63.73" y2="53" width="0.3048" layer="16"/>
-<wire x1="63.73" y1="53" x2="63.73" y2="55.96" width="0.3048" layer="16"/>
-<wire x1="63.73" y1="55.96" x2="63.69" y2="61" width="0.3048" layer="16"/>
-<via x="63.73" y="53" extent="1-16" drill="0.508"/>
-<wire x1="53" y1="53" x2="63.73" y2="53" width="0.3048" layer="1"/>
-<wire x1="53" y1="53" x2="51" y2="53" width="0.3048" layer="16"/>
-<wire x1="51" y1="53" x2="49.27" y2="54.73" width="0.3048" layer="16"/>
-<wire x1="49.27" y1="54.73" x2="49.27" y2="62" width="0.3048" layer="16"/>
+<wire x1="49.27" y1="62" x2="49.27" y2="59" width="0.3048" layer="16"/>
+<wire x1="63.73" y1="50" x2="63.73" y2="52.96" width="0.3048" layer="16"/>
+<wire x1="63.73" y1="52.96" x2="63.69" y2="53" width="0.3048" layer="16"/>
+<wire x1="63.69" y1="53" x2="63.69" y2="59" width="0.3048" layer="16"/>
+<via x="63.69" y="59" extent="1-16" drill="0.508"/>
+<wire x1="63.69" y1="59" x2="49.27" y2="59" width="0.3048" layer="1"/>
+<via x="49.27" y="59" extent="1-16" drill="0.508"/>
 </signal>
 <signal name="GPS-RX">
 <contactref element="B3-UBLOX" pad="RXD"/>
 <contactref element="J3-GPSD" pad="1"/>
-<via x="53" y="54" extent="1-16" drill="0.508"/>
-<wire x1="53" y1="54" x2="51.81" y2="55.19" width="0.3048" layer="16"/>
-<wire x1="51.81" y1="55.19" x2="51.81" y2="62" width="0.3048" layer="16"/>
 <contactref element="B7-UBLOXE" pad="RXD"/>
-<wire x1="66.27" y1="50" x2="66.27" y2="54" width="0.3048" layer="16"/>
-<wire x1="66.27" y1="54" x2="66.27" y2="55.96" width="0.3048" layer="16"/>
-<wire x1="66.27" y1="55.96" x2="66.23" y2="61" width="0.3048" layer="16"/>
-<via x="66.27" y="54" extent="1-16" drill="0.508"/>
-<wire x1="53" y1="54" x2="66.27" y2="54" width="0.3048" layer="1"/>
+<wire x1="51.81" y1="62" x2="51.81" y2="57" width="0.3048" layer="16"/>
+<wire x1="66.27" y1="50" x2="66.27" y2="52.96" width="0.3048" layer="16"/>
+<wire x1="66.27" y1="52.96" x2="66.23" y2="53" width="0.3048" layer="16"/>
+<wire x1="66.23" y1="53" x2="66.23" y2="57" width="0.3048" layer="16"/>
+<via x="66.23" y="57" extent="1-16" drill="0.508"/>
+<wire x1="66.23" y1="57" x2="51.81" y2="57" width="0.3048" layer="1"/>
+<via x="51.81" y="57" extent="1-16" drill="0.508"/>
 </signal>
 <signal name="SPI-CS-SUN">
 <contactref element="B1-NUCLEO" pad="D10"/>
@@ -2390,18 +2385,16 @@ Your Multi-CB Team
 <contactref element="B1-NUCLEO" pad="A4"/>
 <wire x1="46.13" y1="29.24" x2="46.13" y2="36.87" width="0.3048" layer="16"/>
 <wire x1="46.13" y1="36.87" x2="42.328" y2="40.672" width="0.3048" layer="16"/>
-<wire x1="46.73" y1="55.73" x2="46.73" y2="62" width="0.3048" layer="16"/>
-<wire x1="42.328" y1="40.672" x2="42.328" y2="51.328" width="0.3048" layer="16"/>
-<wire x1="42.328" y1="51.328" x2="46.73" y2="55.73" width="0.3048" layer="16"/>
-<wire x1="46.73" y1="55.73" x2="50.46" y2="52" width="0.3048" layer="16"/>
-<wire x1="50.46" y1="52" x2="53" y2="52" width="0.3048" layer="16"/>
-<via x="53" y="52" extent="1-16" drill="0.508"/>
-<via x="68" y="52" extent="1-16" drill="0.508"/>
-<wire x1="53" y1="52" x2="68" y2="52" width="0.3048" layer="1"/>
-<wire x1="68" y1="52" x2="68.77" y2="52.77" width="0.3048" layer="16"/>
-<wire x1="68.77" y1="52.77" x2="68.77" y2="61" width="0.3048" layer="16"/>
-<wire x1="68" y1="52" x2="71.31" y2="55.31" width="0.3048" layer="16"/>
-<wire x1="71.31" y1="55.31" x2="71.31" y2="61" width="0.3048" layer="16"/>
+<wire x1="42.328" y1="40.672" x2="42.328" y2="50.598" width="0.3048" layer="16"/>
+<wire x1="68.77" y1="53" x2="68.77" y2="55" width="0.3048" layer="16"/>
+<wire x1="46.73" y1="62" x2="46.73" y2="55" width="0.3048" layer="16"/>
+<via x="68.77" y="55" extent="1-16" drill="0.508"/>
+<wire x1="68.77" y1="55" x2="46.73" y2="55" width="0.3048" layer="1"/>
+<via x="46.73" y="55" extent="1-16" drill="0.508"/>
+<wire x1="46.73" y1="55" x2="42.328" y2="50.598" width="0.3048" layer="16"/>
+<wire x1="68.77" y1="55" x2="70" y2="55" width="0.3048" layer="16"/>
+<wire x1="70" y1="55" x2="71.31" y2="53.69" width="0.3048" layer="16"/>
+<wire x1="71.31" y1="53.69" x2="71.31" y2="53" width="0.3048" layer="16"/>
 </signal>
 </signals>
 </board>
