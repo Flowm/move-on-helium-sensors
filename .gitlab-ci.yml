@@ -22,7 +22,7 @@ before_script:
 
 stages:
   - build
-  - deploy
+# - deploy
 
 build:
   stage: build
@@ -41,7 +41,8 @@ build:
   except:
     - rpi
 
-deploy-sens:
+# Deploy disabled
+.deploy-sens:
   stage: deploy
   script:
     - scp -P ${DEPLOY_PORT} artifacts/move-on_helium_sensors.hex ${DEPLOY_TARGET}:move-on_helium_sensors.hex
@@ -50,7 +51,8 @@ deploy-sens:
   except:
     - rpi
 
-deploy-rpi:
+# Deploy disabled
+.deploy-rpi:
   stage: deploy
   script:
     - ssh -p ${DEPLOY_PORT} ${DEPLOY_TARGET} "cd /opt/move-on_helium/SEN/ && git fetch && git reset --hard origin/rpi && tools/grafana/daemon/ser2mqtt/setup.sh"
