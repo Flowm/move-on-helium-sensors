@@ -1,20 +1,23 @@
-# MOVE-ON Helium Sensors IRR Documentation
-This is the IRR report from the Sensors subsystem of the MOVE-ON Helium mission.
+# MOVE-ON Helium Sensors System Documentation
+
+This report documents the sensors subsystem of the MOVE-ON Helium mission.
 
 Members of the Sensor team are:
+
 * Florian Mauracher (<florian.mauracher@tum.de>)
 * Tejas Kale (<tejas.kale@tum.de>)
 * Alexander Lill (<alexander.lill@tum.de>)
 
 ## Resources & TL;DR
+
 * [Repository](https://gitlab.lrz.de/move-on/move-on_helium_sensors)
 * [System Architecture](https://gitlab.lrz.de/move-on/move-on_helium_sensors/blob/master/doc/system-architecture.png)
 * [Nucleo Firmware](https://gitlab.lrz.de/move-on/move-on_helium_sensors/tree/master/src)
 * [Hardware Schematics](https://gitlab.lrz.de/move-on/move-on_helium_sensors/tree/master/hardware)
 * [Live data visualization](https://move.frcy.org)
 
-
 ## Mission Overview (MOVEON-GENERAL)
+
 The MOVE-ON project aims to develop and start a high altitude pseudo satellite (HAPS) on board of a high-altitude (stratospheric) balloon every half year. This serves as a platform for short-lived and cost-efficient experiments to verify and test spacecraft technologies.
 
 The expected mission duration for a high altitude balloon flight is 4 to 6 hours during which the balloon reaches an altitude up to 35 km.
@@ -26,6 +29,7 @@ Suitable scientific or technical payloads are developed by students, employees o
 MOVE-ON leverages existing knowledge from previous satellite missions of the chair and prepares the team as well as new technologies for upcoming satellite generations.
 
 ### Strategic Mission Goals (MOVEON-GENERAL)
+
 MOVE-ON is the follow-up mission of the [MOVE-II](https://www.move2space.de/MOVE-II) miniature satellite (CubeSat) that was developed by the LRT together with students of the WARR.
 
 The MOVE-ON missions are intended as a transitional project until the next satellite mission and aim to pass existing knowledge of the development of small satellites to a new generation of students and deepen their understanding of related technologies.
@@ -34,12 +38,13 @@ Besides distributing in-depth technical knowledge it also focuses on the upkeep 
 Leveraging the relatively short and repeated development cycles (in comparison to small satellites) it additionally aims to create an adapted strategy for the agile development of embedded systems on small satellites.
 
 ### Technical Goals (MOVEON-GENERAL)
+
 Existing technologies of previous and current satellite missions are intended to be used, extended and tested whenever possible.
 Additionally, the continuous in-house development of the central subsystems for small satellites improves the capabilities of the LRT and the WARR in the development, manufacturing and qualification of satellite technology.
 New strategies for the design and development of embedded systems can be tested rapidly with minimal cost and small associated risks.
 
-
 ## MOVE-ON Helium System Overview (MOVEON-HE-GENERAL)
+
 The MOVE-ON Helium mission consists of a balloon, connecting strings and a gondola with a payload mounted on top of the gondola. The gondola is a PVC box and consists of all the mission-critical components including power, communication and health monitoring systems. The box serves to insulate the electronics from the extremely cold temperatures in the stratosphere.
 
 The system is split into several key subsystems. Such a modular architecture allows for a structured development approach where each subsystem is developed and tested independently.
@@ -68,35 +73,39 @@ Payload (PL)
 
 Over the past 2 months, we have worked on developing the Sensors subsystem, starting from selecting commercially available components to integrating all of them on a single PCB. This subsystem is described in detail in the next section.
 
-## Sensors Subsystem
+## System Description
 
 The main responsibility of the sensors subsystem is to collect data from all connected sensors and provide this data to the CDH subsystem upon request. Simultaneously the collected data is stored locally at a higher data rate for later analysis.
-The figure below shows the key components of the subsystem and the connections between them.
 
-![](https://i.imgur.com/ZRtMqjd.png)
+![Key components of the sensors subsystem](system-architecture.png)
 
+The sensors subsystem consists of the following key components:
+<!--The figure below shows the key components of the subsystem and the connections between them.-->
 
-* Internal Board, containing
-    * Microcontroller (NUCLEO-L432KC)
-    * Storage Module (Adafruit OpenLog)
-    * GPS module (uBLOX MAX-M8C Pico)
-    * Motion sensor (BNO055)
-* External Boards, containing
-    * Environmental sensor (BME680)
-    * Sun Sensor (MOVE-II ADCS Sidepanel)
-    * Sun Sensor (TOSS Photodiode board)
+* Internal Board
+  * Microcontroller (NUCLEO-L432KC)
+  * Storage Module (Adafruit OpenLog)
+  * GPS module (uBLOX MAX-M8C Pico)
+  * Motion sensor (BNO055)
+* External Boards
+  * Environmental sensor (BME680)
+  * Sun Sensor (MOVE-II ADCS Sidepanel)
+  * Sun Sensor (TOSS Photodiode board)
 * Distributed on Gondola
-    * Temperature sensors (DS18B20)
+  * 4x Temperature sensors (DS18B20)
 
-The internal board is a self-developed PCB which is mounted on the inside of the gondola. The external board is mounted on the exterior of the gondola and is connected over SPI to the microcontroller. Multiple temperature sensors are placed near critical components of the gondola and also on the outside of the gondola.
+The internal board is a self-developed PCB which is mounted on the inside of the gondola. The external boards were mounted as described in the Structure chapter. They are connected over SPI to the microcontroller. Multiple temperature sensors are placed near critical components of the gondola and also on the outside of the gondola.
 
+During testing, it was found that the GPS does not work when wrapped with MLI. Due to this, the GPS module was mounted on a side wall with its antenna sticking out of the MLI insulation.
+<!--
 Each component is connected to the microcontroller using one of the  following communication buses, depending on what the sensor supports:
 * UART
 * I^2^C
 * SPI
-* OneWire
+* OneWire-->
 
 ### Hardware
+
 Since this is a proof of concept mission for the new sensors microcontroller, breakout boards are used for the majority of components. This enables fast prototyping and easy development.
 
 For the initial verification of all components and connections the breakout boards were combined on a single breadboard as visible on the image below.
@@ -104,10 +113,12 @@ For the initial verification of all components and connections the breakout boar
 
 After successful verification, a PCB was designed integrating all internal breakout boards and providing dedicated connectors for each external component. The hardware schematics are available in the [repository](https://gitlab.lrz.de/move-on/move-on_helium_sensors/tree/master/hardware).
 ![](https://i.imgur.com/00qKO5U.jpg)
+![](https://i.imgur.com/OP7P2kG.jpg)
 
 In the future all of the internal sensors could be integrated onto a single PCB which would significantly decrease the physical dimensions and weight of the board.
 
 #### Microcontroller (NUCLEO-L432KC)
+
 Our main computing module is a NUCLEO-L432KC development board with the following features:
 
 * STMicroelectronics STM32L432KC microcontroller in 32-pin package
@@ -117,14 +128,13 @@ Our main computing module is a NUCLEO-L432KC development board with the followin
 * Support for the ARM mbed OS Real-time operating system (RTOS)
 * On-board ST-LINK/V2-1 debugger/programmer
 
-The ARM Cortex M4 based microcontroller was chosen due to its low base power consumption with reduced clock frequency while still offering sufficient processing power for higher level abstractions and possible future data processing.
+The ARM Cortex-M4 based microcontroller was chosen due to its low base power consumption with reduced clock frequency while still offering sufficient processing power for higher level abstractions and possible future data processing.
 
 ### Software
 
 #### Operating System
-While the previously developed MOVE-II ADCS system is based on an Atmel ATxmega256A3U and was developed in a bare-metal fashion without existing libraries or an operating system, the MOVE-ON Sensor board is using the ARM Mbed OS real-time operating system.
 
-Mbed OS provides a convenient abstraction for the complexity of the underlying ARM Cortex-M4 microcontroller.
+The MOVE-ON Sensor board is using the ARM Mbed OS real-time operating system. Mbed OS provides a convenient abstraction for the complexity of the underlying ARM Cortex-M4 microcontroller.
 
 The RTOS functionality of Mbed OS with its priority based scheduling allows event-based actions with a guaranteed response rate and multiple concurrent threads with different priorities.
 
@@ -176,7 +186,6 @@ Sensors "1" -right- "*" SensorThread: "      "
 ```
 -->
 
-
 ```mermaid
 sequenceDiagram
     participant m as main
@@ -218,8 +227,8 @@ sequenceDiagram
     thread-->>-m:terminate()
 ```
 
-To gather the data from multiple different sensors, each sensor is implemented as a self-contained module in the form of a separate class containing all its dependencies.
-To support varying data refresh rates for each sensor each module runs in a separate thread relying on Mbed OS for scheduling between the threads.
+To gather the data from multiple different sensors, each sensor is implemented as a self-contained module in the form of a separate class with all its dependencies.
+Each sensor module is running as a separate thread with a set refresh rate, relying on Mbed OS for scheduling between the threads.
 
 Each sensor thread communicates with its respective sensor to initiate a measurement when required and gather the resulting data.The data is then stored in a shared data structure containing the latest measurements from each sensor. To ensure the data structure remains consistent at all times a mutex is used to lock the data structure immediately before storing the data and unlock it again right afterwards.
 
@@ -227,81 +236,98 @@ At the end of a measurement period each sensor thread sleeps for the remaining t
 
 #### Sensor Update Frequency
 
-| Sensor       | Update Frequency(ms) |
-| --------     | --------   |
-|   GPS        | 1000       |
-|   BME        | 1000       |
-| BNO055-IMU   | 200        |
-|  SidePanel   | 200        |
-|   TOSS       | 500        |
-|One Wire Temp | 2000       |
-
+| Sensor        | Update Frequency(ms) |
+| ------------- | ----------: |
+| GPS           | 1000        |
+| BME           | 1000        |
+| BNO055-IMU    | 200         |
+| SidePanel     | 200         |
+| TOSS          | 500         |
+| One Wire Temp | 2000        |
 
 #### CDH Communication
+
 CDH asks the sensors system for data every second over the UART link by sending a single command byte. The response is a mutually agreed upon data structure which contains the most recent sensor data. The content is verified with a CRC checksum to avoid data corruption.
 
 As GPS data is critical for real-time balloon tracking and time synchronization, responding to CDH data requests is handled with a high priority event queue. When a new request for data comes in from CDH (a byte is received on the UART RX line), an interrupt is generated by the UART peripheral on the microcontroller. The interrupt handler simply reads the command and queues an event onto the event queue for processing. The event callback is then executed when the responsible thread gets scheduled the next time. The command processor then responds with the sensor data on the UART TX line.
 
 #### Persistent Data Storage
+
 A UART data logger module is used to log data locally on the sensors subsystem. This is required because:
 
-- CDH cannot handle data at high frequency due to power budget constraints
-- Different sensors produce different amounts of data at different rates
-- In case of a CDH failure, we will still have a backup of the sensor data
+* CDH cannot handle data at high frequency due to power budget constraints
+* Different sensors produce different amounts of data at different rates
+* In case of a CDH failure, we will still have a backup of the sensor data
 
 This is implemented using the OpenLog module from [Sparkfun](https://www.sparkfun.com/products/13712). It is an Atmel Xmega 328p microcontroller which logs all data that it receives via UART to an SD card. The used SD card has a capacity of 32 GB and provides sufficient storage capacity for up to a month of continuous data storage ( `115200/8*60*60*24/1024/1024/1024` = 1.15 GB/day with 100% utilization of the UART line).
 
-
 ### Sensors
-The following sensor modules are integrated into the sensors subsystem:
+
+The following sensor modules are integrated into the sensors subsystem.
 
 #### GPS Module (uBLOX MAX-M8C Pico)
+
 The MAX-8 series of standard precision GNSS modules features the reliable performance of the u-blox 8 positioning engine, which receives GPS, GLONASS, QZSS and SBAS signals. The MAX-8 series delivers high sensitivity and minimal acquisition times in an ultra compact form factor. The MAX-8 series provides high sensitivity while featuring low power consumption. It also supports advanced Power Save Modes. It also provides message integrity protection, geofencing, spoofing detection, and odometer functionalities. The module also supports a high altitude mode which works up to 50 km in flight mode.
 
 The module is connected to the microcontroller over a dedicated I^2^C bus. It provides GPS data in the standard NMEA format. This raw NMEA is parsed to extract the time and real-time GPS position. Since NMEA also consists of other useful data, it is also logged in raw form.
 
 For configuration of the sensor module, the uBLOX supports a proprietary binary protocol. This protocol is currently neither used nor implemented, but instead configuration messages can be created using a software provided by uBLOX to generate these binary messages which can then be written to the module over I^2^C.
 
+For the flight the GPS was configured with the following settings:
+
+* Dynamic Model : Airborne 2g mode
+* Min SV elevation : 0
+* Fix Mode : 3D only
+
+The software is configured to write the UBX CFG message to the GPS chip on startup. Further, the GPS module always transmits the last known location in case there is no GPS lock.
+
 #### Motion Sensor (BNO055)
+
 The Bosch Sensortec BNO055 motion sensor implements an intelligent 9-axis Absolute Orientation Sensor, which includes sensors and sensor fusion in a single package. This sensor integrates a triaxial 14-bit accelerometer, a triaxial 16-bit gyroscope with a maximum range of ±2000 degrees per second, a triaxial geomagnetic sensor and a 32-bit microcontroller running the company's BSX3.0 FusionLib software. The BNO055 is connected over a second I^2^C bus.
 
 Attitude data from this sensor is used to measure the orientation of the gondola and also to test the effectiveness of a stabilization system developed by the structure team. This data is also used to mark the exact time when the balloon bursts and the gondola starts its free fall.
 
 #### Environmental Sensor (BME680)
+
 The Bosch Sensortec BME680 is described as an environmental sensor and provides, besides measurements of the temperature, humidity and pressure also an estimate of the current air quality in the form of a gas resistance measurement. The sensor provides an SPI interface for configuration and data retrieval.
 
-While there are multiple Arduino libraries available to communicate with the sensor, no resources were available for Mbed OS. After some refactoring and multiple upstream pull requests an [existing library from GitHub](https://github.com/Flowm/ClosedCube_BME680) was used to avoid reimplementing all necessary configuration and data processing steps.
+Temperature and pressure data from this sensor is combined on the ground to provide an additional altitude calculation based on a simple [atmospheric density model](tools/grafana/bin/sensor-parser/moveon-sen-parser.cpp).
 
 #### Sun Sensor (MOVE-II ADCS Sidepanel)
+
 Sun angle sensors used in the MOVE-II CubeSat are commercial-off-the-shelf components, which are not extensively tested for space operation. The MOVE-ON mission provides an excellent platform for testing the performance of these sensors in a space-like environment. One of the side panels from the MOVE-II CubeSat is attached to the exterior of the gondola to record data from the sun sensor attached to it. This panel also has an IMU and various temperature sensors. Data from these is also recorded.
 
-The sidepanel is connected over the same SPI bus that connects all the external components of the sensor subsystem. It operates as a SPI slave and responds to data requests from the Nucleo microcontroller. The sidepanel has the same software version as on the MOVE-II satellite.
+The Sidepanel is connected over the same SPI bus that connects all the external components of the sensor subsystem. It operates as a SPI slave and responds to data requests from the Nucleo microcontroller. The Sidepanel has the same software version as on the MOVE-II satellite.
 
 #### Sun Sensor (SFH 2430)
+
 A separate component with multiple photodiodes arranged in a spherical manner is being developed by students of the [*Practical Course on Astronautics*](https://www.lrt.mw.tum.de/index.php?id=172&L=1).
 
 This experimental payload aims to provide a primitive sun sensor by combining the measurements of the photodiodes and some supplemental temperature sensors. An [Atmel AtMega32u4 breakout](https://www.dfrobot.com/product-1075.html) combines these measurements and provides a calculated sun vector as well as the raw data over a SPI interface to the Nucleo sensor board.
 
 #### Temperature Sensors (DS18B20)
+
 The DS18B20 digital thermometer provides 9-bit to 12-bit Celsius temperature measurements from -55°C to +125°C with a 0.5°C accuracy from -10°C to +85°C. This sensor communicates over a 1-Wire bus that by definition requires only one data line (and ground). In addition, the DS18B20 can derive power directly from the data line ("parasite power"), eliminating the need for an external power supply. The 1-Wire protocol required for interfacing with this sensor is implemented in software using an mbed library.
 
 ### Development Environment
+
 While each team member has his own Nucleo board and the sensor he's currently working on, most sensors were only available twice during development. To allow regular testing of all components in a combined setup, we set up a continuous integration and deployment pipeline based on GitLab and the GitLab Runner.
 
-After every commit the GitLab Runner starts the docker container with the mbed-cli development environment, compiles the project and gathers the resulting firmware as an artifact. The next stage of the pipeline then uses this firmware image to flash the Nucleo microcontroller with all sensors attached which is connected to an Raspberry PI reachable from the build server. Additionally, debug output is captured over the USB serial port and logged in the build log.
+After every commit the GitLab Runner starts the docker container with the mbed-cli development environment, compiles the project and gathers the resulting firmware as an artifact. The next stage of the pipeline then uses this firmware image to flash the Nucleo microcontroller with all sensors attached which is connected to a Raspberry PI reachable from the build server. Additionally, debug output is captured over the USB serial port and logged in the build log.
 
 ### Data Visualization
 
-In the FlatBal (Flat Balloon) configuration, the Raspberry Pi logs data on the USB debug line of the Nucleo board, which is used by OpenLog in the flight configuration. This data is then parsed by a Python script, published over the messaging protocol MQTT and stored as time series in an InfluxDB database. The Grafana web frontend provides an interactive visualization of the stored data.
+In testing configuration, the Raspberry Pi logs data on the USB debug line of the Nucleo board, which is used by the OpenLog in the flight configuration. This data is then parsed by a Python script, published over the messaging protocol MQTT and stored as time series in an InfluxDB database. The Grafana web frontend provides an interactive visualization of the stored data.
 
-![](https://i.imgur.com/ehmGD1R.png)
+![Grafana screenshot](img/grafana-screenshot.png)
 
 InfluxDB supports multiple data sources and can easily be extended to accept data received over the COM link for live telemetry and tracking in flight.
 
 ### Power
+
 Currently the sensors subsystem with all sensors connected consumes an average of 326 mW. Although there are no hard power requirements for the power budget of the sensors system energy consumption was kept in mind throughout the component selection and development process.
 
-Nevertheless there are certain components that require significant amounts of energy making the overall consumption appear high:
+Nevertheless there are certain components that require significant amounts of energy impacting the total energy consumption:
 
 |Component | Consumption | Disclaimer |
 |- | - | - |
@@ -312,14 +338,78 @@ Nevertheless there are certain components that require significant amounts of en
 |Microcontroller + Sensors | *~72mW* | *Approximate value, naively calculated* | <!-- 326-74-70-60-50 -->
 |**Sum** | **326 mW** | |
 
+## Flight
 
-## Status
-All described sensors and components (except the TOSS board) are integrated and working. Data is provided to the CDH system on demand. The whole setup has been running in a FlatBal configuration for multiple weeks and reliably generates data which has been analyzed using the Grafana visualization.
+The sensors microcontroller gathered data continuously for the entire duration of the flight. It did not reset even at the low temperatures experienced during the transition through the upper parts of the troposphere. However not all sensors functioned correctly for the entire duration of the flight:
 
-Concluding this status report the sensors team acknowledges potential for improvement, but is sure that this system is "Go!".
+* GPS could not acquire a lock during most of the flight. This was most likely caused due to its close proximity to the MLI wrapping.
+* The FAT32 filesystem on the SD card was corrupted sometime during the final integration. Due to this, no data was recorded on the OpenLog SD card during the flight.
+
+### Flight Data
+
+Flight data was recovered from the CDH SD card after the gondola was recovered. This data is presented below.
+
+#### System Status
+
+#### Temperature
+
+The one wire temperature sensors were positioned on the gondola as follows:
+
+| SENSOR | POSITION|
+| ------ | -------- |
+|OW0     |EPS Board|
+|OW1     |U1 (Sensors Board)|
+|OW2     |U3 (Sensors Board)|
+|OW3     |Palyoad|
+|OW4     |GoPro|
+|OW5     |Battery Pack|
+|OW6     |U2 (Sensors Board)|
+
+Along with the 7 one wire temperature sensors of the sensors subsystem, the following other temperature sensors from other components were available:
+
+* 3 One wire temperature sensors on the ADCS Sidepanel
+* 4 One wire temperature sensors on the TOSS sunsensor board
+* One temperature sensor integrated into each BME680 chip
+* One temperature sensor on the BMX055 IMU.
+
+The following graph presents the temperature profile of the flight as seen by the various sensors. A clear gap is seen in the internal and the external temperatures.
+
+![Temperature profile](img/Temperature.png)
+
+#### Pressure and Altitude
+
+The following graph shows the pressure as recorded by the two BME680 sensors. The ENV0 sensor was placed outside while the ENV1 sensor was inside the gondola.
+
+![Pressure profile](img/Pressure.png)
+
+Altitude was calculated using two different methods:
+
+1. [Pressure Altitude](https://en.wikipedia.org/wiki/Pressure_altitude) is calculated using only the pressure.
+2. [Density Altitude](https://en.wikipedia.org/wiki/Density_altitude) is the Pressure altitude adjusted for temperature.
+
+The following graph shows the altitude of the flight:
+![Altitude profile](img/Altitude.png)
+
+#### Motion Data
+
+The BNO055 IMU recorded the gondola rotational speed, acceleration due to gravity, magnetic field data and the euler angles calculated onboard the sensor.
+
+The following graphs show the gyroscope, Accelerometer and magnetometer data over the flight duration.
+
+![Gyroscope profile](img/Gyroscope.png)
+![Accelerometer profile](img/Accelerometer.png)
+![Magnetometer profile](img/Magnetometer.png)
+
+#### ADCS Sidepanel Data
+
+The raw pad data from the ADCS sidepanel is shown below. The pads didnot exceed the ADC threshold of the sidepanel microcontroller.
+
+![Sun Raw profile](img/ADCS_Sun_Raw.png)
 
 ## References
-#### Sensor Modules
+
+### Sensor Modules
+
 * [Components List](https://docs.google.com/spreadsheets/d/1G8NeRl4uM_pISfbMc-lu1pe1I8vzOqsSfUeEpfeaWEo/edit#gid=0)
 * [GPS Ublox Max M8](https://store.uputronics.com/index.php?route=product/product&path=60_64&product_id=72)
 * [BNO055 IMU](https://www.adafruit.com/product/2472)
@@ -328,7 +418,8 @@ Concluding this status report the sensors team acknowledges potential for improv
 * [MOVE-II ADCS SidePanel](https://redmine.move2space.de/projects/move2/wiki/Sidepanel_401)
 * [Open Log Datalogger](https://www.sparkfun.com/products/13712)
 
-#### Source Code
+### Source Code
+
 * [MOVE-ON Helium Sensors](https://gitlab.lrz.de/move-on/move-on_helium_sensors/)
 * [MOVE-II ADCS](https://gitlab.lrz.de/move-ii/adcs_software)
 * [TOSS Sunsensor](https://gitlab.lrz.de/racoon-projects/thermal-sun-sensor)
