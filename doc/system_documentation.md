@@ -77,7 +77,7 @@ Over the past 2 months, we have worked on developing the Sensors subsystem, star
 
 The main responsibility of the sensors subsystem is to collect data from all connected sensors and provide this data to the CDH subsystem upon request. Simultaneously the collected data is stored locally at a higher data rate for later analysis.
 
-![Key components of the Sensors subsystem](https://i.imgur.com/ZRtMqjd.png)
+![Key components of the sensors subsystem](system-architecture.png)
 
 The sensors subsystem consists of the following key components:
 <!--The figure below shows the key components of the subsystem and the connections between them.-->
@@ -319,7 +319,7 @@ After every commit the GitLab Runner starts the docker container with the mbed-c
 
 In testing configuration, the Raspberry Pi logs data on the USB debug line of the Nucleo board, which is used by the OpenLog in the flight configuration. This data is then parsed by a Python script, published over the messaging protocol MQTT and stored as time series in an InfluxDB database. The Grafana web frontend provides an interactive visualization of the stored data.
 
-![](https://i.imgur.com/ehmGD1R.png)
+![Grafana screenshot](img/grafana-screenshot.png)
 
 InfluxDB supports multiple data sources and can easily be extended to accept data received over the COM link for live telemetry and tracking in flight.
 
@@ -374,13 +374,13 @@ Along with the 7 one wire temperature sensors of the sensors subsystem, the foll
 
 The following graph presents the temperature profile of the flight as seen by the various sensors. A clear gap is seen in the internal and the external temperatures.
 
-![Temperature profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/Temperature.png)
+![Temperature profile](img/Temperature.png)
 
 #### Pressure and Altitude
 
 The following graph shows the pressure as recorded by the two BME680 sensors. The ENV0 sensor was placed outside while the ENV1 sensor was inside the gondola.
 
-![Pressure profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/Pressure.png)
+![Pressure profile](img/Pressure.png)
 
 Altitude was calculated using two different methods:
 
@@ -388,7 +388,7 @@ Altitude was calculated using two different methods:
 2. [Density Altitude](https://en.wikipedia.org/wiki/Density_altitude) is the Pressure altitude adjusted for temperature.
 
 The following graph shows the altitude of the flight:
-![Altitude profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/Altitude.png)
+![Altitude profile](img/Altitude.png)
 
 #### Motion Data
 
@@ -396,15 +396,15 @@ The BNO055 IMU recorded the gondola rotational speed, acceleration due to gravit
 
 The following graphs show the gyroscope, Accelerometer and magnetometer data over the flight duration.
 
-![Gyroscope profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/Gyroscope.png)
-![Accelerometer profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/Accelerometer.png)
-![Magnetometer profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/Magnetometer.png)
+![Gyroscope profile](img/Gyroscope.png)
+![Accelerometer profile](img/Accelerometer.png)
+![Magnetometer profile](img/Magnetometer.png)
 
 #### ADCS Sidepanel Data
 
 The raw pad data from the ADCS sidepanel is shown below. The pads didnot exceed the ADC threshold of the sidepanel microcontroller.
 
-![Sun Raw profile](https://gitlab.lrz.de/move-on/move-on_helium_sensors/raw/a2ca58ae5a729a2fe4fdc291c0368b8c308b6630/doc/img/ADCS_Sun_Raw.png)
+![Sun Raw profile](img/ADCS_Sun_Raw.png)
 
 ## References
 
