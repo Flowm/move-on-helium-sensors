@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -8772,6 +8772,7 @@ Source: AVX .. aphvc.pdf</description>
 <part name="B6-BLE" library="Frcy" deviceset="HUAMAO-HM-11" device="BO"/>
 <part name="B7-UBLOXE" library="Frcy" deviceset="UPUTRONICS-UBLOX-M8Q" device="" value=""/>
 <part name="J8-I2C" library="con-molex-c-grid" deviceset="90136-1?04" device="" value=""/>
+<part name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C2012" package3d_urn="urn:adsk.eagle:package:23625/2" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -8829,6 +8830,7 @@ Source: AVX .. aphvc.pdf</description>
 <instance part="B6-BLE" gate="G$1" x="233.68" y="78.74"/>
 <instance part="B7-UBLOXE" gate="G$1" x="241.3" y="114.3"/>
 <instance part="J8-I2C" gate="G$1" x="134.62" y="53.34" rot="MR0"/>
+<instance part="C3" gate="G$1" x="142.24" y="40.64" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -8976,6 +8978,8 @@ Source: AVX .. aphvc.pdf</description>
 <pinref part="J8-I2C" gate="G$1" pin="4"/>
 <wire x1="139.7" y1="48.26" x2="147.32" y2="48.26" width="0.1524" layer="91"/>
 <label x="147.32" y="48.26" size="1.27" layer="95" xref="yes"/>
+<pinref part="C3" gate="G$1" pin="2"/>
+<wire x1="147.32" y1="40.64" x2="147.32" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -9113,6 +9117,9 @@ Source: AVX .. aphvc.pdf</description>
 <pinref part="J8-I2C" gate="G$1" pin="1"/>
 <wire x1="139.7" y1="55.88" x2="147.32" y2="55.88" width="0.1524" layer="91"/>
 <label x="147.32" y="55.88" size="1.27" layer="95" xref="yes"/>
+<pinref part="C3" gate="G$1" pin="1"/>
+<wire x1="139.7" y1="55.88" x2="139.7" y2="40.64" width="0.1524" layer="91"/>
+<junction x="139.7" y="55.88"/>
 </segment>
 </net>
 <net name="IMU-SDA" class="0">
